@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "sanity": {
+      "command": "npx",
+      "args": ["-y", "@sanity/mcp-server@latest"],
+      "env": {
+        "SANITY_PROJECT_ID": "iedths1l",
+        "SANITY_DATASET": "production",
+        "SANITY_API_TOKEN": "skVgGUF6HbMBzuOh6qr6N4BLPbQPuvMH6jvpkyIUuLPmkikf5mTVzMA4KI4rPnUQQX8Ugjj9v9N56unpR01TsLf5qRPF1iLYZZ2beUwfP79Pi7krs1GdRLWL3W4cA984M70xiu8LWiYv8CitpR1rXkgZV4IlTeULGzOhxIWKYQ67HCneDCoj",
+        "MCP_USER_ROLE": "developer"
+      }
+    }
+  }
+}
