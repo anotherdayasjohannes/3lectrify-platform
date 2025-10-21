@@ -66,10 +66,12 @@ export function HeroGradient({
           gradientDirection === 'left' ? 'left-[50px]' : 'right-[50px]'
         } ${
           gradientDirection === 'left' ? 'md:left-[40px]' : 'md:right-[40px]'
-        } w-[851px] md:w-[60%] h-full flex items-end py-[50px] md:py-10 z-[2] sm:relative sm:left-0 sm:right-0 sm:w-full sm:py-[30px] sm:bg-none`}
+        } w-[851px] md:w-[60%] h-full flex items-end py-[50px] md:py-10 z-[2] max-sm:relative max-sm:left-0 max-sm:right-0 max-sm:w-full max-sm:py-[30px]`}
         style={{
           background:
-            gradientDirection === 'left'
+            typeof window !== 'undefined' && window.innerWidth < 768
+              ? 'none'
+              : gradientDirection === 'left'
               ? 'linear-gradient(90deg, rgba(41, 54, 69, 1) 0%, rgba(41, 54, 69, 1) 39%, rgba(41, 54, 69, 0.5) 82%, transparent 100%)'
               : 'linear-gradient(270deg, rgba(41, 54, 69, 1) 0%, rgba(41, 54, 69, 1) 39%, rgba(41, 54, 69, 0.5) 82%, transparent 100%)',
         }}
