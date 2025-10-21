@@ -14,7 +14,7 @@ interface HeroGradientProps {
     };
   };
   gradientDirection?: 'left' | 'right';
-  height?: 'small' | 'medium' | 'large';
+  sectionHeight?: 'small' | 'medium' | 'large';
 }
 
 export function HeroGradient({
@@ -22,7 +22,7 @@ export function HeroGradient({
   subheadline,
   backgroundImage,
   gradientDirection = 'left',
-  height = 'medium',
+  sectionHeight = 'medium',
 }: HeroGradientProps) {
   const heightClasses = {
     small: 'h-[300px] md:h-[250px]',
@@ -35,9 +35,21 @@ export function HeroGradient({
     return `${(hotspot.x * 100).toFixed(0)}% ${(hotspot.y * 100).toFixed(0)}%`;
   };
 
+  // Gradient background based on direction
+  const gradientStyle =
+    gradientDirection === 'left'
+      ? {
+          background:
+            'linear-gradient(90deg, rgba(41, 54, 69, 1) 0%, rgba(41, 54, 69, 1) 39%, rgba(41, 54, 69, 0.5) 82%, transparent 100%)',
+        }
+      : {
+          background:
+            'linear-gradient(270deg, rgba(41, 54, 69, 1) 0%, rgba(41, 54, 69, 1) 39%, rgba(41, 54, 69, 0.5) 82%, transparent 100%)',
+        };
+
   return (
     <section
-      className={`relative w-full overflow-hidden bg-[#293645] ${heightClasses[height]} sm:min-h-[300px] sm:h-auto`}
+      className={`relative overflow-hidden bg-[#293645] ${heightClasses[sectionHeight]} sm:h-auto sm:min-h-[300px] w-full`}
     >
       {/* Background Image */}
       {backgroundImage?.url && (
@@ -46,7 +58,7 @@ export function HeroGradient({
           alt={backgroundImage.alt || ''}
           className={`absolute top-0 ${
             gradientDirection === 'left' ? 'right-0' : 'left-0'
-          } w-[1114px] md:w-[70%] sm:w-full sm:relative sm:h-[300px] h-full object-cover z-[1]`}
+          } w-[1114px] md:w-[70%] sm:w-full sm:relative sm:h-[300px] h-full object-cover z-[1] sm:right-auto sm:left-auto`}
           style={{ objectPosition: getFocalPoint(backgroundImage.hotspot) }}
           loading="eager"
         />
@@ -54,15 +66,12 @@ export function HeroGradient({
 
       {/* Gradient Overlay with Content */}
       <div
-        className={`absolute top-0 ${
+        className={`hero-gradient-overlay absolute top-0 ${
           gradientDirection === 'left' ? 'left-[50px]' : 'right-[50px]'
         } md:${
           gradientDirection === 'left' ? 'left-[40px]' : 'right-[40px]'
-        } w-[851px] md:w-[60%] sm:w-full sm:relative sm:left-0 sm:right-0 h-full flex items-end ${
-          gradientDirection === 'left'
-            ? 'bg-gradient-to-r'
-            : 'bg-gradient-to-l'
-        } from-[rgba(41,54,69,1)] from-0% via-[rgba(41,54,69,1)] via-39% via-[rgba(41,54,69,0.5)] via-82% to-transparent to-100% sm:bg-gradient-to-b sm:from-transparent sm:from-0% sm:via-[rgba(41,54,69,0.8)] sm:via-40% sm:to-[rgba(41,54,69,1)] sm:to-80% p-[50px_0] md:p-[40px_0] sm:p-[30px_20px] z-[2]`}
+        } w-[851px] md:w-[60%] sm:w-full sm:relative sm:left-0 sm:right-0 h-full flex items-end py-[50px] px-0 md:py-10 md:px-0 sm:py-[30px] sm:px-5 z-[2]`}
+        style={gradientStyle}
       >
         <div className="flex flex-col gap-4 max-w-[700px] sm:max-w-full w-full">
           {/* Headline */}
@@ -78,7 +87,21 @@ export function HeroGradient({
           )}
         </div>
       </div>
+
+      {/* Mobile Gradient Override via CSS */}
+      <style>{`
+        @media (max-width: 767px) {
+          .hero-gradient-overlay {
+            background: linear-gradient(
+              180deg,
+              transparent 0%,
+              rgba(41, 54, 69, 0.8) 40%,
+              rgba(41, 54, 69, 1) 80%,
+              rgba(41, 54, 69, 1) 100%
+            ) !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }
-
