@@ -33,27 +33,30 @@ interface TeamGridProps {
 export function TeamGrid({ heading, introText, teamMembers }: TeamGridProps) {
   return (
     <section className="bg-[#293645] pt-[50px] px-[50px] pb-[80px] md:pt-[40px] md:px-[40px] md:pb-[60px] sm:pt-[30px] sm:px-[20px] sm:pb-[50px]">
-      {/* Intro Section */}
-      {(heading || introText) && (
-        <div className="max-w-[900px] mb-[40px] flex flex-col gap-[25px] sm:mb-[30px]">
-          {heading && (
-            <h2 className="text-[36px] leading-[46px] font-light text-white tracking-[0.36px] m-0">
-              {heading}
-            </h2>
-          )}
-          {introText && (
-            <div className="text-[18px] leading-[26px] font-normal text-white tracking-[0.18px] [&_p]:m-0">
-              <PortableText value={introText} />
-            </div>
-          )}
-        </div>
-      )}
+      {/* Content Wrapper - Centered */}
+      <div className="flex flex-col items-center">
+        {/* Intro Section */}
+        {(heading || introText) && (
+          <div className="w-full max-w-[1165px] mb-[40px] flex flex-col gap-[25px] sm:mb-[30px]">
+            {heading && (
+              <h2 className="text-[36px] leading-[46px] font-light text-white tracking-[0.36px] m-0">
+                {heading}
+              </h2>
+            )}
+            {introText && (
+              <div className="text-[18px] leading-[26px] font-normal text-white tracking-[0.18px] [&_p]:m-0 max-w-[900px]">
+                <PortableText value={introText} />
+              </div>
+            )}
+          </div>
+        )}
 
-      {/* Team Grid */}
-      <div className="flex flex-wrap gap-[25px] md:gap-[20px] sm:gap-[20px] items-start justify-center">
-        {teamMembers.map((member) => (
-          <TeamCard key={member._id} member={member} />
-        ))}
+        {/* Team Grid */}
+        <div className="w-full max-w-[1165px] flex flex-wrap gap-[25px] md:gap-[20px] sm:gap-[20px] items-start sm:justify-center">
+          {teamMembers.map((member) => (
+            <TeamCard key={member._id} member={member} />
+          ))}
+        </div>
       </div>
     </section>
   );
