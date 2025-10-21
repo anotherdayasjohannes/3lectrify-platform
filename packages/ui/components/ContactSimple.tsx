@@ -143,19 +143,19 @@ export function ContactSimple({
   const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapsQuery)}`;
 
   return (
-    <section className="w-full bg-[#293645] py-[50px] md:py-10 sm:py-[30px]">
+    <section className="w-full bg-[#293645] py-[50px] md:py-10 max-sm:py-[30px]">
       {/* Use content-wrapper for global margins */}
       <div className="content-wrapper">
         {/* Optional Header */}
         {(headline || subheadline) && (
           <header className="mb-10 text-left">
             {headline && (
-              <h1 className="text-[48px] leading-[58px] md:text-[42px] md:leading-[52px] sm:text-[36px] sm:leading-[46px] tracking-[0.48px] font-light text-white m-0 mb-[25px]">
+              <h1 className="text-[48px] leading-[58px] md:text-[42px] md:leading-[52px] max-sm:text-[36px] max-sm:leading-[46px] tracking-[0.48px] font-light text-white m-0 mb-[25px]">
                 {headline}
               </h1>
             )}
             {subheadline && (
-              <p className="text-[18px] leading-[26px] sm:text-[16px] sm:leading-[24px] tracking-[0.18px] font-normal text-white m-0">
+              <p className="text-[18px] leading-[26px] max-sm:text-[16px] max-sm:leading-[24px] tracking-[0.18px] font-normal text-white m-0">
                 {subheadline}
               </p>
             )}
@@ -163,10 +163,10 @@ export function ContactSimple({
         )}
 
         {/* Two Column Layout - matches HubSpot kontakt-simple__content */}
-        <div className="flex gap-[50px] md:gap-10 sm:flex-col sm:gap-[50px] items-start">
+        <div className="flex gap-[50px] md:gap-10 max-sm:flex-col max-sm:gap-[50px] items-start">
           {/* Left Column: Form */}
           <div className="flex-1 min-w-0">
-            <h2 className="text-[36px] leading-[46px] md:text-[32px] md:leading-[42px] sm:text-[28px] sm:leading-[38px] tracking-[0.36px] font-light text-white m-0 mb-[25px]">
+            <h2 className="text-[36px] leading-[46px] md:text-[32px] md:leading-[42px] max-sm:text-[28px] max-sm:leading-[38px] tracking-[0.36px] font-light text-white m-0 mb-[25px]">
               {formHeadline}
             </h2>
 
@@ -384,7 +384,7 @@ export function ContactSimple({
 
           {/* Right Column: Address */}
           <aside className="flex-1 min-w-0">
-            <h2 className="text-[36px] leading-[46px] md:text-[32px] md:leading-[42px] sm:text-[28px] sm:leading-[38px] tracking-[0.36px] font-light text-white m-0 mb-[25px]">
+            <h2 className="text-[36px] leading-[46px] md:text-[32px] md:leading-[42px] max-sm:text-[28px] max-sm:leading-[38px] tracking-[0.36px] font-light text-white m-0 mb-[25px]">
               {address.headline}
             </h2>
             <address className="not-italic text-white text-[16px] leading-[24px] tracking-[0.16px]">
