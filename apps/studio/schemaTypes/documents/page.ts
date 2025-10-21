@@ -42,6 +42,7 @@ export default defineType({
           {type: 'cta'},
           {type: 'references'},
           {type: 'teamGrid'},
+          {type: 'contactSimple'},
           // Add more content types as you migrate modules
         ],
       }),

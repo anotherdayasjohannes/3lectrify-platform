@@ -13,3 +13,4 @@ export { default as ReferencesMarquee } from './components/ReferencesMarquee';
 export { TeamGrid } from './components/TeamGrid';
 export { HeroGradient } from './components/HeroGradient';
 export { LegalContent } from './components/LegalContent';
+export { ContactSimple } from './components/ContactSimple';

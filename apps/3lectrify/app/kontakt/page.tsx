@@ -1,0 +1,133 @@
+import { pageQuery } from '@3lectrify/sanity';
+import { client } from '@3lectrify/sanity/lib/client';
+import {
+  Hero,
+  HeroGradient,
+  ContactSimple,
+  GradientSpacer,
+  type PortableTextBlock,
+} from '@3lectrify/ui';
+
+interface Address {
+  headline: string;
+  companyName: string;
+  addressLine2?: string;
+  street: string;
+  postalCode: string;
+  city: string;
+  email: string;
+  phone: string;
+  mapsLinkText: string;
+}
+
+interface Labels {
+  firstname: string;
+  lastname: string;
+  company: string;
+  email: string;
+  phone: string;
+  message: string;
+  button: string;
+  privacy: string;
+  privacyLink: string;
+}
+
+interface SanityBlock {
+  _type: string;
+  // Hero Gradient
+  headline?: string;
+  subheadline?: string;
+  gradientDirection?: 'left' | 'right';
+  sectionHeight?: 'small' | 'medium' | 'large';
+  // Contact Simple
+  formHeadline?: string;
+  labels?: Labels;
+  address?: Address;
+  successMessage?: string;
+}
+
+interface PageData {
+  title: string;
+  description?: string;
+  content: SanityBlock[];
+}
+
+export default async function KontaktPage() {
+  const page: PageData = await client.fetch(pageQuery, { slug: 'kontakt' });
+
+  if (!page) {
+    return <div>Page not found</div>;
+  }
+
+  return (
+    <main>
+      {page.content?.map((block, index) => {
+        switch (block._type) {
+          case 'heroGradient':
+            return (
+              <HeroGradient
+                key={index}
+                headline={block.headline || ''}
+                subheadline={block.subheadline}
+                gradientDirection={block.gradientDirection}
+                sectionHeight={block.sectionHeight}
+              />
+            );
+
+          case 'contactSimple':
+            return (
+              <ContactSimple
+                key={index}
+                headline={block.headline}
+                subheadline={block.subheadline}
+                formHeadline={block.formHeadline}
+                labels={
+                  block.labels || {
+                    firstname: 'Vorname',
+                    lastname: 'Nachname',
+                    company: 'Unternehmen (optional)',
+                    email: 'E-Mail',
+                    phone: 'Telefon (optional)',
+                    message: 'Nachricht',
+                    button: 'Anfrage senden',
+                    privacy: 'Ich habe die Datenschutzerklärung gelesen und akzeptiere diese.',
+                    privacyLink: '/datenschutz',
+                  }
+                }
+                address={
+                  block.address || {
+                    headline: 'Adresse',
+                    companyName: '3lectrify',
+                    street: 'Kramergasse 32',
+                    postalCode: '82054',
+                    city: 'Sauerlach',
+                    email: 'kontakt@3lectrify.com',
+                    phone: '+49 8104 64709-299',
+                    mapsLinkText: 'In Google Maps öffnen',
+                  }
+                }
+                successMessage={block.successMessage}
+              />
+            );
+
+          default:
+            return null;
+        }
+      })}
+
+      {/* Gradient Spacer before Footer */}
+      <GradientSpacer />
+    </main>
+  );
+}
+
+// Generate metadata
+export async function generateMetadata() {
+  const page: PageData = await client.fetch(pageQuery, { slug: 'kontakt' });
+
+  return {
+    title: page?.title || 'Kontakt',
+    description: page?.description || 'Kontaktieren Sie uns',
+  };
+}
+

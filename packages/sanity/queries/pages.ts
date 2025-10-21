@@ -184,6 +184,34 @@ export const pageQuery = groq`
           linkedinUrl,
           email
         }
+      },
+      _type == "contactSimple" => {
+        headline,
+        subheadline,
+        formHeadline,
+        labels {
+          firstname,
+          lastname,
+          company,
+          email,
+          phone,
+          message,
+          button,
+          privacy,
+          privacyLink
+        },
+        address {
+          headline,
+          companyName,
+          addressLine2,
+          street,
+          postalCode,
+          city,
+          email,
+          phone,
+          mapsLinkText
+        },
+        successMessage
       }
     },
     publishedAt

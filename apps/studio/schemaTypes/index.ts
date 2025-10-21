@@ -16,6 +16,7 @@ import cta from './objects/cta'
 import featureShowcase from './objects/featureShowcase'
 import references from './objects/references'
 import teamGrid from './objects/teamGrid'
+import contactSimple from './objects/contactSimple'
 
 export const schemaTypes = [
   // Documents
@@ -36,4 +37,5 @@ export const schemaTypes = [
   featureShowcase,
   references,
   teamGrid,
+  contactSimple,
 ]
