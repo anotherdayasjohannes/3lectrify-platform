@@ -101,15 +101,11 @@ export default async function KontaktPage() {
             );
 
           case 'contactSimple':
-            // Get subheadline from heroGradient block (previous block)
-            const heroBlock = page.content[index - 1];
-            const heroSubheadline = heroBlock?._type === 'heroGradient' ? heroBlock.subheadline : undefined;
-            
             return (
               <ContactSimple
                 key={index}
                 headline={block.headline}
-                subheadline={heroSubheadline || block.subheadline}
+                subheadline={block.subheadline}
                 formHeadline={block.formHeadline}
                 labels={
                   block.labels || {

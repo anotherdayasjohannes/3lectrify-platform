@@ -146,17 +146,6 @@ export function ContactSimple({
     <section className="w-full bg-[#293645] py-[50px] md:py-10 max-sm:py-[30px]">
       {/* Use content-wrapper for global margins */}
       <div className="content-wrapper">
-        {/* Subheadline from HeroGradient - now at top of contact section */}
-        {(headline || subheadline) && (
-          <div className="mb-[50px] md:mb-10 max-sm:mb-[30px]">
-            {subheadline && (
-              <p className="text-[24px] leading-[34px] font-light tracking-[0.24px] text-white m-0 md:text-[20px] md:leading-[30px] max-sm:text-[18px] max-sm:leading-[26px]">
-                {subheadline}
-              </p>
-            )}
-          </div>
-        )}
-
         {/* Two Column Layout - matches HubSpot kontakt-simple__content */}
         <div className="flex gap-[50px] md:gap-10 max-sm:flex-col max-sm:gap-[50px] items-start">
           {/* Left Column: Form */}
