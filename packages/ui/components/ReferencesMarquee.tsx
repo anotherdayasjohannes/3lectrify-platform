@@ -62,23 +62,23 @@ export default function ReferencesMarquee({
   const doubledReferences = [...references, ...references];
 
   return (
-    <section className="py-gap-xlarge overflow-hidden bg-dark-bg-page">
-      <div className="mb-gap-large text-center">
-        <h2 className="text-h2 font-light text-white mb-gap-small">
+    <section className="py-[80px] overflow-hidden bg-[#293645] md:py-[60px]">
+      <div className="content-wrapper mb-[50px] text-center md:mb-[40px]">
+        <h2 className="text-[36px] leading-[46px] font-light text-white mb-[20px] tracking-[0.36px] md:text-[32px] md:leading-[42px]">
           Unsere Projekte im Überblick
         </h2>
-        <p className="text-body-regular text-white/70">
+        <p className="text-[18px] leading-[26px] text-white/70 font-light tracking-[0.18px]">
           Eine Auswahl unserer erfolgreich realisierten Referenzen
         </p>
       </div>
 
       <div className="relative">
         {/* Gradient Overlays */}
-        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-dark-bg-page to-transparent z-10" />
-        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-dark-bg-page to-transparent z-10" />
+        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#293645] to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#293645] to-transparent z-10 pointer-events-none" />
 
         {/* Marquee Container */}
-        <div ref={marqueeRef} className="flex gap-gap-medium">
+        <div ref={marqueeRef} className="flex gap-[25px]">
           {doubledReferences.map((reference, index) => (
             <MarqueeCard key={`${reference.id}-${index}`} reference={reference} />
           ))}
@@ -91,13 +91,13 @@ export default function ReferencesMarquee({
 function MarqueeCard({ reference }: { reference: Reference }) {
   return (
     <div className="flex-shrink-0 w-[320px] group cursor-pointer">
-      <div className="relative h-[240px] rounded-large overflow-hidden">
+      <div className="relative h-[240px] rounded-[20px] overflow-hidden">
         {/* Image */}
         <Image
           src={reference.image}
           alt={reference.name}
           fill
-          className="object-cover transition-transform duration-slow group-hover:scale-110"
+          className="object-cover transition-transform duration-700 group-hover:scale-110"
           sizes="320px"
         />
 
@@ -105,21 +105,21 @@ function MarqueeCard({ reference }: { reference: Reference }) {
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
 
         {/* Content */}
-        <div className="absolute inset-0 p-gap-standard flex flex-col justify-end z-10">
-          <div className="transform transition-transform duration-base group-hover:translate-y-[-4px]">
-            <h3 className="text-body-large font-light text-white mb-gap-tiny">
+        <div className="absolute inset-0 p-[25px] flex flex-col justify-end z-10">
+          <div className="transform transition-transform duration-300 group-hover:translate-y-[-4px]">
+            <h3 className="text-[20px] leading-[28px] font-light text-white mb-[10px] tracking-[0.2px]">
               {reference.name}
             </h3>
-            <div className="flex items-center gap-gap-small text-body-small text-white/70">
+            <div className="flex items-center gap-[10px] text-[16px] leading-[22px] text-white/70 font-light">
               <span>{reference.location}</span>
-              <span className="w-1 h-1 rounded-full bg-brand-green-mid" />
+              <span className="w-1 h-1 rounded-full bg-[#88C0B1]" />
               <span>{reference.units} Einheiten</span>
             </div>
           </div>
         </div>
 
         {/* Hover Overlay */}
-        <div className="absolute inset-0 bg-brand-green-mid/10 opacity-0 group-hover:opacity-100 transition-opacity duration-base" />
+        <div className="absolute inset-0 bg-[#88C0B1]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       </div>
     </div>
   );
