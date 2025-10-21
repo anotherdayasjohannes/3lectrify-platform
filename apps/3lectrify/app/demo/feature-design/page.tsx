@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import FeatureDesign from '@/components/FeatureDesign';
 
 export default function FeatureDesignDemo() {
@@ -72,12 +73,12 @@ export default function FeatureDesignDemo() {
             Integrate this component into your project and customize it to match your brand.
           </p>
           <div className="flex items-center justify-center gap-4">
-            <a
+            <Link
               href="/"
               className="px-6 py-3 bg-blue-500 text-white rounded-lg font-medium hover:bg-blue-600 transition-colors"
             >
               Go Home
-            </a>
+            </Link>
             <a
               href="https://github.com"
               className="px-6 py-3 bg-white/10 text-white rounded-lg font-medium hover:bg-white/20 transition-colors"

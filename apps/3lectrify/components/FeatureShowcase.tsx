@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { PortableText } from '@portabletext/react';
+import { PortableText, type PortableTextBlock } from '@portabletext/react';
 import Image from 'next/image';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -13,7 +13,7 @@ interface FeatureItem {
   number: string;
   title: string;
   heading: string;
-  description?: any; // Portable Text
+  description?: PortableTextBlock[];
   icon?: {
     url: string;
     alt: string;
@@ -22,7 +22,7 @@ interface FeatureItem {
 
 interface FeatureShowcaseProps {
   sectionHeadline?: string;
-  sectionIntro?: any; // Portable Text
+  sectionIntro?: PortableTextBlock[];
   features: FeatureItem[];
 }
 
