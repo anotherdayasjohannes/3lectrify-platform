@@ -228,7 +228,15 @@ export default async function UeberUnsPage() {
                 key={index}
                 headline={block.headline}
                 body={block.body}
-                quote={block.quote}
+                quote={block.quote ? {
+                  text: block.quote.text,
+                  author: block.quote.author,
+                  role: block.quote.role,
+                  icon: block.quote.icon?.asset ? {
+                    url: block.quote.icon.asset.url,
+                    alt: block.quote.icon.alt || '',
+                  } : undefined,
+                } : undefined}
                 image={
                   block.image?.asset
                     ? {
