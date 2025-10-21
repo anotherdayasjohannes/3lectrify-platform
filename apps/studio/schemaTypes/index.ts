@@ -7,6 +7,7 @@ import teamMember from './documents/teamMember'
 
 // Object types
 import hero from './objects/hero'
+import heroGradient from './objects/heroGradient'
 import featureCards from './objects/featureCards'
 import navigationItem from './objects/navigationItem'
 import stats from './objects/stats'
@@ -28,6 +29,7 @@ export const schemaTypes = [
 
   // Objects
   hero,
+  heroGradient,
   featureCards,
   navigationItem,
   stats,

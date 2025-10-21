@@ -34,6 +34,7 @@ export default defineType({
         type: 'array',
         of: [
           {type: 'hero'},
+          {type: 'heroGradient'},
           {type: 'featureCards'},
           {type: 'featureShowcase'},
           {type: 'textImage'},

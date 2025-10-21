@@ -27,6 +27,26 @@ export const pageQuery = groq`
         },
         imagePosition
       },
+      _type == "heroGradient" => {
+        headline,
+        subheadline,
+        backgroundImage {
+          asset-> {
+            url,
+            metadata {
+              dimensions {
+                width,
+                height
+              }
+            }
+          },
+          hotspot,
+          crop,
+          alt
+        },
+        gradientDirection,
+        sectionHeight
+      },
       _type == "featureCards" => {
         sectionHeadline,
         sectionDescription,
