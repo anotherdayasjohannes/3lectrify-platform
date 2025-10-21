@@ -74,6 +74,13 @@ export default async function KontaktPage() {
     return <div>Page not found</div>;
   }
 
+  // DEBUG: Log page data
+  console.log('🔍 Kontakt Page Data:', JSON.stringify(page, null, 2));
+  console.log('📦 Content blocks:', page.content?.length || 0);
+  page.content?.forEach((block, i) => {
+    console.log(`   ${i + 1}. ${block._type}`, block);
+  });
+
   return (
     <main>
       {page.content?.map((block, index) => {
