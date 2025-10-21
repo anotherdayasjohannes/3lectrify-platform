@@ -1,5 +1,5 @@
 import { client, pageQuery } from '@3lectrify/sanity';
-import { Hero, FeatureCards, FeatureShowcase, TextImage, SimpleTextImage, Stats, CTA, ReferencesGrid, ReferencesMarquee } from '@3lectrify/ui';
+import { Hero, FeatureCards, FeatureShowcase, TextImage, SimpleTextImage, Stats, CTA, ReferencesGrid, ReferencesMarquee, TeamGrid } from '@3lectrify/ui';
 import type { PortableTextBlock } from '@portabletext/react';
 
 interface SanityBlock {
@@ -140,6 +140,26 @@ interface SanityBlock {
   }>;
   theme?: 'light' | 'dark';
   showStats?: boolean;
+  // Team Grid
+  teamMembers?: Array<{
+    _id: string;
+    name: string;
+    title: string;
+    photo: {
+      url: string;
+      alt: string;
+      width: number;
+      height: number;
+      hotspot?: {
+        x: number;
+        y: number;
+      };
+    };
+    bio?: string;
+    linkedinUrl?: string;
+    email?: string;
+  }>;
+  introText?: PortableTextBlock[];
 }
 
 async function getHomePage() {
@@ -339,6 +359,16 @@ export default async function HomePage() {
                 key={index}
                 references={references}
                 theme={block.theme || 'dark'}
+              />
+            );
+
+          case 'teamGrid':
+            return (
+              <TeamGrid
+                key={index}
+                heading={block.heading}
+                introText={block.introText}
+                teamMembers={block.teamMembers || []}
               />
             );
 
