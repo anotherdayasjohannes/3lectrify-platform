@@ -41,8 +41,9 @@ export async function generateStaticParams() {
 }
 
 // Generate metadata for SEO
-export async function generateMetadata({ params }: { params: { slug: string } }) {
-  const page = await getLegalPage(params.slug);
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const page = await getLegalPage(slug);
   
   if (!page) {
     return {
@@ -56,8 +57,9 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   };
 }
 
-export default async function LegalPage({ params }: { params: { slug: string } }) {
-  const page = await getLegalPage(params.slug);
+export default async function LegalPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const page = await getLegalPage(slug);
 
   if (!page) {
     notFound();
