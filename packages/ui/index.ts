@@ -14,3 +14,4 @@ export { TeamGrid } from './components/TeamGrid';
 export { HeroGradient } from './components/HeroGradient';
 export { LegalContent } from './components/LegalContent';
 export { ContactSimple } from './components/ContactSimple';
+export { GradientSpacer } from './components/GradientSpacer';

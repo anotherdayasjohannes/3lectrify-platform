@@ -75,10 +75,52 @@ export function ContactSimple({
     setFormState('loading');
 
     try {
-      // TODO: Replace with actual HubSpot Forms API submission
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      // HubSpot Forms API Submission
+      const portalId = '146248871';
+      const formGuid = 'fd5fa1cf-b75e-4325-923a-41f7424f779f';
+      const hubspotUrl = `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formGuid}`;
 
-      console.log('Form data:', data);
+      // Map form data to HubSpot fields
+      const hubspotPayload = {
+        fields: [
+          { name: 'firstname', value: data.firstname },
+          { name: 'lastname', value: data.lastname },
+          { name: 'email', value: data.email },
+          { name: 'company', value: data.company || '' },
+          { name: 'phone', value: data.phone || '' },
+          { name: 'message', value: data.message },
+        ],
+        context: {
+          pageUri: typeof window !== 'undefined' ? window.location.href : '',
+          pageName: 'Kontakt',
+        },
+        legalConsentOptions: {
+          consent: {
+            consentToProcess: true,
+            text: labels.privacy,
+            communications: [
+              {
+                value: true,
+                subscriptionTypeId: 999,
+                text: labels.privacy,
+              },
+            ],
+          },
+        },
+      };
+
+      const response = await fetch(hubspotUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(hubspotPayload),
+      });
+
+      if (!response.ok) {
+        throw new Error('Form submission failed');
+      }
+
       setFormState('success');
 
       // Reset form after 5 seconds
