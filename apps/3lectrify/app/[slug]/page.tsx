@@ -357,7 +357,8 @@ export default async function DynamicPage({ params }: { params: Promise<{ slug: 
             return (
               <FeatureShowcase
                 key={index}
-                title={block.title || ''}
+                sectionHeadline={block.sectionHeadline}
+                sectionIntro={block.sectionIntro}
                 features={
                   block.features?.map((feature) => ({
                     _key: feature._key,
@@ -369,6 +370,7 @@ export default async function DynamicPage({ params }: { params: Promise<{ slug: 
                       : undefined,
                     number: feature.number,
                     title: feature.title,
+                    heading: feature.heading,
                     description: feature.description,
                     image: feature.image?.asset
                       ? {

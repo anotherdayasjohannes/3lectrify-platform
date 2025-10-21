@@ -1,10 +1,8 @@
 import { client, pageQuery } from '@3lectrify/sanity';
 import {
-  Hero,
   HeroGradient,
   ContactSimple,
   GradientSpacer,
-  type PortableTextBlock,
 } from '@3lectrify/ui';
 
 interface Address {

@@ -3,14 +3,12 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Image from 'next/image';
 
 gsap.registerPlugin(ScrollTrigger);
 
 interface FeatureDesignProps {
   title?: string;
   description?: string;
-  imageUrl?: string;
   avatars?: Array<{
     id: string;
     name: string;
@@ -21,7 +19,6 @@ interface FeatureDesignProps {
 export default function FeatureDesign({
   title = 'Design',
   description = 'Create stunning interfaces with our visual design tools',
-  imageUrl = '/images/ui-mockup.png',
   avatars = [
     { id: '1', name: 'Designer 1', imageUrl: '/images/avatar-1.png' },
     { id: '2', name: 'Designer 2', imageUrl: '/images/avatar-2.png' },
