@@ -143,13 +143,14 @@ export function ContactSimple({
   const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapsQuery)}`;
 
   return (
-    <section className="w-full bg-[#293645] py-[50px] lg:py-10 sm:py-[30px]">
-      <div className="w-full max-w-[1440px] mx-auto px-[50px] lg:px-10 sm:px-5">
+    <section className="w-full bg-[#293645] py-[50px] md:py-10 sm:py-[30px]">
+      {/* Use content-wrapper for global margins */}
+      <div className="content-wrapper">
         {/* Optional Header */}
         {(headline || subheadline) && (
           <header className="mb-10 text-left">
             {headline && (
-              <h1 className="text-[48px] leading-[58px] lg:text-[42px] lg:leading-[52px] sm:text-[36px] sm:leading-[46px] tracking-[0.48px] font-light text-white m-0 mb-[25px]">
+              <h1 className="text-[48px] leading-[58px] md:text-[42px] md:leading-[52px] sm:text-[36px] sm:leading-[46px] tracking-[0.48px] font-light text-white m-0 mb-[25px]">
                 {headline}
               </h1>
             )}
@@ -161,11 +162,11 @@ export function ContactSimple({
           </header>
         )}
 
-        {/* Two Column Layout */}
-        <div className="flex gap-[50px] lg:gap-10 sm:flex-col sm:gap-[50px] items-start">
+        {/* Two Column Layout - matches HubSpot kontakt-simple__content */}
+        <div className="flex gap-[50px] md:gap-10 sm:flex-col sm:gap-[50px] items-start">
           {/* Left Column: Form */}
           <div className="flex-1 min-w-0">
-            <h2 className="text-[36px] leading-[46px] lg:text-[32px] lg:leading-[42px] sm:text-[28px] sm:leading-[38px] tracking-[0.36px] font-light text-white m-0 mb-[25px]">
+            <h2 className="text-[36px] leading-[46px] md:text-[32px] md:leading-[42px] sm:text-[28px] sm:leading-[38px] tracking-[0.36px] font-light text-white m-0 mb-[25px]">
               {formHeadline}
             </h2>
 
@@ -276,11 +277,7 @@ export function ContactSimple({
                     aria-describedby={errors.email ? 'email-error' : undefined}
                   />
                   {errors.email && (
-                    <span
-                      id="email-error"
-                      role="alert"
-                      className="text-sm leading-5 text-[#d04227] mt-1"
-                    >
+                    <span id="email-error" role="alert" className="text-sm leading-5 text-[#d04227] mt-1">
                       {errors.email.message}
                     </span>
                   )}
@@ -314,7 +311,7 @@ export function ContactSimple({
                     {...register('message')}
                     id="message"
                     rows={5}
-                    className={`w-full px-4 py-3 text-[16px] leading-[24px] text-[#333] bg-white border rounded transition-all duration-200 resize-vertical min-h-[120px] focus:outline-none focus:border-[#88c0b1] focus:shadow-[0_0_0_3px_rgba(136,192,177,0.2)] hover:border-white/40 ${
+                    className={`w-full px-4 py-3 text-[16px] leading-[24px] text-[#333] bg-white border rounded transition-all duration-200 focus:outline-none focus:border-[#88c0b1] focus:shadow-[0_0_0_3px_rgba(136,192,177,0.2)] hover:border-white/40 resize-vertical min-h-[120px] ${
                       errors.message ? 'border-[#d04227]' : 'border-white/20'
                     }`}
                     aria-invalid={errors.message ? 'true' : 'false'}
@@ -332,16 +329,15 @@ export function ContactSimple({
                 </div>
 
                 {/* Privacy Checkbox */}
-                <div className="flex flex-col gap-2.5">
-                  <label className="flex items-start gap-3 cursor-pointer">
-                    <input
-                      {...register('privacy')}
-                      type="checkbox"
-                      id="privacy"
-                      className="w-5 h-5 min-w-[20px] mt-0.5 cursor-pointer accent-[#88c0b1]"
-                      aria-invalid={errors.privacy ? 'true' : 'false'}
-                      aria-describedby={errors.privacy ? 'privacy-error' : undefined}
-                    />
+                <div className="flex gap-3 items-start">
+                  <input
+                    {...register('privacy')}
+                    type="checkbox"
+                    id="privacy"
+                    className="mt-1.5 w-4 h-4 accent-[#88c0b1] cursor-pointer"
+                    aria-describedby={errors.privacy ? 'privacy-error' : undefined}
+                  />
+                  <label htmlFor="privacy" className="flex-1 cursor-pointer select-none">
                     <span
                       className="text-sm leading-5 tracking-[0.14px] font-normal text-white"
                       dangerouslySetInnerHTML={{
@@ -351,57 +347,25 @@ export function ContactSimple({
                         )} <span class="text-[#d04227]">*</span>`,
                       }}
                     />
+                    {errors.privacy && (
+                      <span
+                        id="privacy-error"
+                        role="alert"
+                        className="block text-sm leading-5 text-[#d04227] mt-1"
+                      >
+                        {errors.privacy.message}
+                      </span>
+                    )}
                   </label>
-                  {errors.privacy && (
-                    <span
-                      id="privacy-error"
-                      role="alert"
-                      className="text-sm leading-5 text-[#d04227] mt-1 ml-8"
-                    >
-                      {errors.privacy.message}
-                    </span>
-                  )}
                 </div>
 
                 {/* Submit Button */}
                 <button
                   type="submit"
                   disabled={formState === 'loading'}
-                  className="h-9 px-[10px_15px] inline-flex items-center justify-center gap-2.5 bg-[#C5E0D7] text-[#333] border-none rounded-[5px] text-[16px] font-bold leading-[26px] tracking-[0.16px] whitespace-nowrap cursor-pointer transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] hover:bg-[#b0d0c7] hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(0,0,0,0.15)] active:translate-y-0 active:shadow-[0_2px_6px_rgba(0,0,0,0.1)] focus:outline-2 focus:outline-[#88c0b1] focus:outline-offset-2 disabled:bg-[rgba(194,194,194,0.5)] disabled:text-[rgba(51,51,51,0.5)] disabled:cursor-not-allowed disabled:transform-none sm:w-full sm:justify-center"
+                  className="w-auto self-start px-8 py-3 bg-[#88c0b1] text-[#333] text-[16px] leading-[24px] font-medium tracking-[0.16px] rounded transition-all duration-200 hover:bg-[#c5e0d7] focus:outline-none focus:ring-2 focus:ring-[#88c0b1] focus:ring-offset-2 focus:ring-offset-[#293645] disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {formState === 'loading' ? 'Wird gesendet...' : labels.button}
-                  {formState !== 'loading' && (
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 20 20"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      aria-hidden="true"
-                    >
-                      <g clipPath="url(#clip0_kontakt_button)">
-                        <path
-                          d="M7.5 10L3.75 13.75L7.5 17.5"
-                          stroke="#333333"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                        <path
-                          d="M15 2.5V13.75H3.75"
-                          stroke="#333333"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </g>
-                      <defs>
-                        <clipPath id="clip0_kontakt_button">
-                          <rect width="20" height="20" fill="white" />
-                        </clipPath>
-                      </defs>
-                    </svg>
-                  )}
                 </button>
 
                 {/* Error Message */}
@@ -420,49 +384,46 @@ export function ContactSimple({
 
           {/* Right Column: Address */}
           <aside className="flex-1 min-w-0">
-            <h2 className="text-[36px] leading-[46px] lg:text-[32px] lg:leading-[42px] sm:text-[28px] sm:leading-[38px] tracking-[0.36px] font-light text-white m-0 mb-[25px]">
+            <h2 className="text-[36px] leading-[46px] md:text-[32px] md:leading-[42px] sm:text-[28px] sm:leading-[38px] tracking-[0.36px] font-light text-white m-0 mb-[25px]">
               {address.headline}
             </h2>
-
-            <address className="not-italic text-[18px] leading-[26px] tracking-[0.18px] font-normal text-white">
-              <p className="m-0 mb-1">{address.companyName}</p>
-              {address.addressLine2 && <p className="m-0 mb-1">{address.addressLine2}</p>}
-              <p className="m-0 mb-1">{address.street}</p>
-              <p className="m-0 mb-1">
+            <address className="not-italic text-white text-[16px] leading-[24px] tracking-[0.16px]">
+              <p className="mb-0">{address.companyName}</p>
+              {address.addressLine2 && <p className="mb-0">{address.addressLine2}</p>}
+              <p className="mb-0">{address.street}</p>
+              <p className="mb-4">
                 {address.postalCode} {address.city}
               </p>
-              <br />
-              <p className="m-0 mb-1">
+
+              <p className="mb-0">
                 <a
                   href={`mailto:${address.email}`}
-                  className="text-white no-underline transition-all hover:underline focus:outline-2 focus:outline-[#88c0b1] focus:outline-offset-2 focus:rounded-sm"
+                  className="text-[#88c0b1] underline hover:text-[#c5e0d7] transition-colors focus:outline-2 focus:outline-[#88c0b1] focus:outline-offset-2"
                 >
                   {address.email}
                 </a>
               </p>
-              <p className="m-0 mb-1">
+              <p className="mb-4">
                 <a
-                  href={`tel:${address.phone.replace(/\s|-/g, '')}`}
-                  className="text-white no-underline transition-all hover:underline focus:outline-2 focus:outline-[#88c0b1] focus:outline-offset-2 focus:rounded-sm"
+                  href={`tel:${address.phone.replace(/\s/g, '').replace(/-/g, '')}`}
+                  className="text-[#88c0b1] underline hover:text-[#c5e0d7] transition-colors focus:outline-2 focus:outline-[#88c0b1] focus:outline-offset-2"
                 >
                   {address.phone}
                 </a>
               </p>
-              <br />
-              <p className="m-0 mb-1">
+
+              <p>
                 <a
                   href={mapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-[#88c0b1] no-underline transition-colors hover:text-[#c5e0d7] hover:underline focus:outline-2 focus:outline-[#88c0b1] focus:outline-offset-2 focus:rounded-sm"
+                  className="text-[#88c0b1] underline hover:text-[#c5e0d7] transition-colors inline-flex items-center gap-1 focus:outline-2 focus:outline-[#88c0b1] focus:outline-offset-2"
                 >
                   {address.mapsLinkText}
                   <svg
-                    className="w-4 h-4 transition-transform group-hover:translate-x-0.5"
-                    width="16"
-                    height="16"
-                    viewBox="0 0 16 16"
+                    className="w-4 h-4"
                     fill="none"
+                    viewBox="0 0 16 16"
                     xmlns="http://www.w3.org/2000/svg"
                     aria-hidden="true"
                   >
@@ -497,4 +458,3 @@ export function ContactSimple({
     </section>
   );
 }
-
