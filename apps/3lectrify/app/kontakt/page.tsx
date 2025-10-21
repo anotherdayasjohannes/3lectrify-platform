@@ -37,6 +37,22 @@ interface SanityBlock {
   // Hero Gradient
   headline?: string;
   subheadline?: string;
+  backgroundImage?: {
+    asset?: {
+      url: string;
+      metadata?: {
+        dimensions: {
+          width: number;
+          height: number;
+        };
+      };
+    };
+    hotspot?: {
+      x: number;
+      y: number;
+    };
+    alt?: string;
+  };
   gradientDirection?: 'left' | 'right';
   sectionHeight?: 'small' | 'medium' | 'large';
   // Contact Simple
@@ -69,6 +85,17 @@ export default async function KontaktPage() {
                 key={index}
                 headline={block.headline || ''}
                 subheadline={block.subheadline}
+                backgroundImage={
+                  block.backgroundImage?.asset
+                    ? {
+                        url: block.backgroundImage.asset.url,
+                        alt: block.backgroundImage.alt || '',
+                        width: block.backgroundImage.asset.metadata?.dimensions.width,
+                        height: block.backgroundImage.asset.metadata?.dimensions.height,
+                        hotspot: block.backgroundImage.hotspot,
+                      }
+                    : undefined
+                }
                 gradientDirection={block.gradientDirection}
                 sectionHeight={block.sectionHeight}
               />
