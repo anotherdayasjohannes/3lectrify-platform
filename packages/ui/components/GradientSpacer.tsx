@@ -9,7 +9,7 @@ export function GradientSpacer() {
     <div
       className="w-full h-[100px] sm:h-[50px]"
       style={{
-        background: 'linear-gradient(180deg, #293645 0%, #f5f5f5 100%)',
+        background: 'linear-gradient(180deg, #1C242E 0%, #f5f5f5 100%)',
       }}
       aria-hidden="true"
     />
