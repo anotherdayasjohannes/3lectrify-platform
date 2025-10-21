@@ -54,47 +54,47 @@ export function FeatureCards({
   return (
     <section
       ref={containerRef}
-      className="py-[60px] bg-white lg:py-20"
+      className="py-[80px] pb-[100px] bg-[#293645] md:py-[60px] md:pb-[80px]"
     >
       <div className="content-wrapper">
         {sectionHeadline && (
-               <h2 className="text-[32px] leading-[40px] tracking-[0.36px] font-light text-center mb-[15px] text-[#333333] lg:text-[36px] lg:leading-[46px]">
+          <h2 className="text-[40px] leading-[50px] tracking-[0.4px] font-light text-left mb-[20px] text-white md:text-[32px] md:leading-[42px] md:mb-[15px]">
             {sectionHeadline}
           </h2>
         )}
         {sectionDescription && (
-          <p className="text-[18px] leading-[24px] tracking-[0.18px] font-normal text-center mb-[50px] text-[#666666] max-w-[800px] mx-auto sm:text-[16px] sm:leading-[26px] sm:mb-[40px]">
+          <p className="text-[18px] leading-[30px] tracking-[0.18px] font-light text-left mb-[60px] text-white max-w-[800px] md:text-[16px] md:leading-[26px] md:mb-[40px]">
             {sectionDescription}
           </p>
         )}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[25px] mt-[50px] md:gap-[25px] sm:gap-[25px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[30px] md:gap-[25px] max-md:gap-[20px]">
           {cards.map((card) => (
-            <div
+            <article
               key={card._key}
               data-card
-              className="p-[25px] rounded-[10px] bg-[#f4f4f5] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_12px_24px_rgba(0,0,0,0.1)] md:p-[25px] sm:p-[25px]"
+              className="bg-[#1C242E] rounded-[20px] p-[40px_30px] text-left transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.1)] md:p-[35px_25px]"
             >
               {card.icon && (
-                <div className="w-20 h-20 mb-[15px] flex items-center justify-center sm:w-[60px] sm:h-[60px]">
+                <div className="w-[100px] h-[100px] mb-[25px] flex items-center justify-center bg-gradient-to-br from-[#88C0B1] to-[#6BA896] rounded-full p-[20px] transition-transform duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] hover:scale-110 md:w-[80px] md:h-[80px] md:mb-[20px]">
                   <Image
                     src={card.icon.url}
                     alt={card.icon.alt || ''}
-                    width={80}
-                    height={80}
-                    className="w-full h-full object-contain"
+                    width={60}
+                    height={60}
+                    className="w-[60px] h-[60px] object-contain md:w-[50px] md:h-[50px]"
                   />
                 </div>
               )}
-                     <h3 className="text-[20px] leading-[28px] tracking-[0.24px] font-normal mb-[15px] text-[#333333] lg:text-[24px] lg:leading-[34px]">
+              <h3 className="text-[24px] leading-[32px] tracking-[0.24px] font-normal text-left mb-[15px] text-white md:text-[20px] md:leading-[28px]">
                 {card.title}
               </h3>
               {card.description && (
-                <p className="text-[16px] leading-[26px] tracking-[0.16px] font-light m-0 text-[#666666] sm:text-[15px] sm:leading-[22px]">
+                <p className="text-[16px] leading-[26px] tracking-[0.16px] font-light m-0 text-white text-left">
                   {card.description}
                 </p>
               )}
-            </div>
+            </article>
           ))}
         </div>
       </div>
