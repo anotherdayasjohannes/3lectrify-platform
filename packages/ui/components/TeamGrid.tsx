@@ -1,0 +1,175 @@
+'use client';
+
+import { useState } from 'react';
+import Image from 'next/image';
+import { PortableText, type PortableTextBlock } from '@portabletext/react';
+import { getFocalPoint } from '@3lectrify/sanity';
+
+interface TeamMember {
+  _id: string;
+  name: string;
+  title: string;
+  photo: {
+    url: string;
+    alt: string;
+    width: number;
+    height: number;
+    hotspot?: {
+      x: number;
+      y: number;
+    };
+  };
+  bio?: string;
+  linkedinUrl?: string;
+  email?: string;
+}
+
+interface TeamGridProps {
+  heading?: string;
+  introText?: PortableTextBlock[];
+  teamMembers: TeamMember[];
+}
+
+export function TeamGrid({ heading, introText, teamMembers }: TeamGridProps) {
+  return (
+    <section className="bg-[#293645] py-[50px] px-[50px] pb-[80px] md:py-[40px] md:px-[40px] md:pb-[60px] sm:py-[30px] sm:px-[20px] sm:pb-[50px]">
+      {/* Intro Section */}
+      {(heading || introText) && (
+        <div className="max-w-[900px] mb-[40px] text-left sm:mb-[30px]">
+          {heading && (
+            <h2 className="text-[36px] leading-[46px] lg:text-[32px] lg:leading-[40px] sm:text-[28px] sm:leading-[36px] font-light text-white tracking-[0.36px] mb-[25px] sm:mb-[20px]">
+              {heading}
+            </h2>
+          )}
+          {introText && (
+            <div className="text-[18px] leading-[26px] sm:text-[16px] sm:leading-[24px] font-normal text-white tracking-[0.18px] [&_p]:mb-4 [&_p:last-child]:mb-0">
+              <PortableText value={introText} />
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Team Grid */}
+      <div className="flex flex-wrap gap-[25px] md:gap-[20px] sm:gap-[30px] justify-center">
+        {teamMembers.map((member) => (
+          <TeamCard key={member._id} member={member} />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function TeamCard({ member }: { member: TeamMember }) {
+  const [isOverlayVisible, setIsOverlayVisible] = useState(false);
+
+  const handleMouseEnter = () => setIsOverlayVisible(true);
+  const handleMouseLeave = () => setIsOverlayVisible(false);
+
+  return (
+    <article className="w-[270px] md:w-[calc(50%-10px)] md:max-w-[270px] sm:w-full sm:max-w-[400px] sm:mx-auto flex-shrink-0">
+      <div className="flex flex-col gap-[15px] h-full">
+        {/* Photo Wrapper with Overlay */}
+        <div
+          className="relative w-full aspect-[0.675] rounded-[20px] overflow-hidden bg-white/5 cursor-pointer group"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          onFocus={() => setIsOverlayVisible(true)}
+          onBlur={() => setIsOverlayVisible(false)}
+          tabIndex={member.bio ? 0 : undefined}
+        >
+          {/* Photo */}
+          <div className="w-full h-full">
+            <Image
+              src={member.photo.url}
+              alt={member.photo.alt || `Portrait of ${member.name}`}
+              width={member.photo.width}
+              height={member.photo.height}
+              className="w-full h-full object-cover transition-transform duration-300 ease-out group-hover:scale-105"
+              style={{ objectPosition: getFocalPoint(member.photo.hotspot) }}
+              sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 270px"
+            />
+          </div>
+
+          {/* Hover Overlay */}
+          {member.bio && (
+            <div
+              className={`absolute inset-0 bg-[rgba(41,54,69,0.95)] backdrop-blur-[8px] flex items-center justify-center p-[25px] sm:p-[20px] transition-all duration-300 ease-out ${
+                isOverlayVisible ? 'opacity-100 visible' : 'opacity-0 invisible'
+              }`}
+            >
+              <div
+                className={`flex flex-col gap-[20px] w-full transition-transform duration-300 ease-out ${
+                  isOverlayVisible ? 'translate-y-0' : 'translate-y-5'
+                }`}
+              >
+                {/* Bio Text */}
+                <div className="text-[14px] leading-[20px] md:text-[13px] md:leading-[18px] sm:text-[14px] sm:leading-[20px] font-light text-white text-left overflow-y-auto max-h-[280px] sm:max-h-[240px]">
+                  {member.bio}
+                </div>
+
+                {/* Social Links */}
+                {(member.linkedinUrl || member.email) && (
+                  <div className="flex gap-[15px] items-center">
+                    {member.linkedinUrl && (
+                      <a
+                        href={member.linkedinUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center w-[40px] h-[40px] rounded-full bg-white/10 text-white opacity-80 hover:opacity-100 hover:bg-[#88C0B1] hover:text-[#293645] hover:scale-110 transition-all duration-300 focus-visible:outline-2 focus-visible:outline-[#88C0B1] focus-visible:outline-offset-2"
+                        aria-label={`LinkedIn profile of ${member.name}`}
+                      >
+                        <svg
+                          width="20"
+                          height="20"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
+                            fill="currentColor"
+                          />
+                        </svg>
+                      </a>
+                    )}
+                    {member.email && (
+                      <a
+                        href={`mailto:${member.email}`}
+                        className="flex items-center justify-center w-[40px] h-[40px] rounded-full bg-white/10 text-white opacity-80 hover:opacity-100 hover:bg-[#88C0B1] hover:text-[#293645] hover:scale-110 transition-all duration-300 focus-visible:outline-2 focus-visible:outline-[#88C0B1] focus-visible:outline-offset-2"
+                        aria-label={`Email ${member.name}`}
+                      >
+                        <svg
+                          width="20"
+                          height="20"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.713-9.518-7.713h19.036zm-19.518 14v-11.817l10 8.104 10-8.104v11.817h-20z"
+                            fill="currentColor"
+                          />
+                        </svg>
+                      </a>
+                    )}
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Info Section */}
+        <div className="flex flex-col gap-[5px] text-left">
+          <h3 className="text-[18px] leading-[26px] sm:text-[16px] sm:leading-[24px] font-normal tracking-[0.18px] text-white m-0 transition-colors duration-300 group-hover:text-[#88C0B1]">
+            {member.name}
+          </h3>
+          <p className="text-[16px] leading-[26px] sm:text-[14px] sm:leading-[22px] font-light tracking-[0.16px] text-white m-0">
+            {member.title}
+          </p>
+        </div>
+      </div>
+    </article>
+  );
+}
+

@@ -2,6 +2,7 @@
 import page from './documents/page'
 import siteSettings from './documents/siteSettings'
 import referenceProject from './documents/reference'
+import teamMember from './documents/teamMember'
 
 // Object types
 import hero from './objects/hero'
@@ -13,12 +14,14 @@ import simpleTextImage from './objects/simpleTextImage'
 import cta from './objects/cta'
 import featureShowcase from './objects/featureShowcase'
 import references from './objects/references'
+import teamGrid from './objects/teamGrid'
 
 export const schemaTypes = [
   // Documents
   page,
   siteSettings,
   referenceProject,
+  teamMember,
 
   // Objects
   hero,
@@ -30,4 +33,5 @@ export const schemaTypes = [
   cta,
   featureShowcase,
   references,
+  teamGrid,
 ]

@@ -41,6 +41,7 @@ export default defineType({
           {type: 'stats'},
           {type: 'cta'},
           {type: 'references'},
+          {type: 'teamGrid'},
           // Add more content types as you migrate modules
         ],
       }),

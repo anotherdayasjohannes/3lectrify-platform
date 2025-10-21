@@ -165,6 +165,25 @@ export const pageQuery = groq`
         variant,
         theme,
         showStats
+      },
+      _type == "teamGrid" => {
+        heading,
+        introText,
+        teamMembers[]-> {
+          _id,
+          name,
+          title,
+          "photo": {
+            "url": photo.asset->url,
+            "alt": photo.alt,
+            "width": photo.asset->metadata.dimensions.width,
+            "height": photo.asset->metadata.dimensions.height,
+            "hotspot": photo.hotspot
+          },
+          bio,
+          linkedinUrl,
+          email
+        }
       }
     },
     publishedAt
