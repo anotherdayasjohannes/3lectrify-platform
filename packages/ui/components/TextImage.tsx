@@ -147,7 +147,7 @@ export function TextImage({
             {/* Quote Block */}
             {quote && (
               <blockquote className="flex flex-col items-start gap-[15px] w-full">
-                {quote.icon && (
+                {quote.icon?.url && (
                   <Image
                     src={quote.icon.url}
                     alt={quote.icon.alt || 'Quote'}
