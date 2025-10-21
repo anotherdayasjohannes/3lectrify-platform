@@ -197,6 +197,7 @@ interface SanityBlock {
   introText?: PortableTextBlock[];
   // FeatureShowcase specific
   title?: string;
+  sectionIntro?: PortableTextBlock[];
   features?: Array<{
     _key: string;
     icon?: {
@@ -207,6 +208,7 @@ interface SanityBlock {
     };
     number?: string;
     title: string;
+    heading: string;
     description?: string;
     image?: {
       asset?: {
