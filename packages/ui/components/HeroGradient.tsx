@@ -55,14 +55,14 @@ export function HeroGradient({
     >
       {/* Full-width container that respects global margins */}
       <div className="content-wrapper relative h-full">
-        {/* Background Image - Absolute to viewport, not container */}
+        {/* Background Image - Absolute to section, right edge */}
         {backgroundImage?.url && (
           <img
             src={backgroundImage.url}
             alt={backgroundImage.alt || ''}
-            className={`fixed top-0 ${
+            className={`absolute top-0 ${
               gradientDirection === 'left' ? 'right-0' : 'left-0'
-            } w-[1114px] h-full object-cover z-[1] md:w-[70%] max-sm:w-full max-sm:relative max-sm:h-[300px] max-sm:right-auto max-sm:left-auto max-sm:fixed-none`}
+            } w-[1114px] h-full object-cover z-[1] md:w-[70%] max-sm:w-full max-sm:relative max-sm:h-[300px] max-sm:right-auto max-sm:left-auto`}
             style={{ objectPosition: getFocalPoint(backgroundImage.hotspot) }}
             loading="eager"
           />
@@ -123,17 +123,6 @@ export function HeroGradient({
 
           .gradient-overlay {
             background: none !important;
-          }
-        }
-
-        /* Fix image positioning */
-        img {
-          position: absolute;
-        }
-
-        @media (max-width: 767px) {
-          img {
-            position: relative;
           }
         }
       `}</style>
