@@ -82,7 +82,7 @@ export default async function LegalPage({ params }: { params: Promise<{ slug: st
             : undefined
         }
         gradientDirection={page.gradientDirection}
-        height={page.heroHeight}
+        sectionHeight={page.heroHeight}
       />
       <LegalContent iframeUrl={page.iframeUrl} />
     </main>
