@@ -43,15 +43,15 @@ export function HeroGradient({
     large: 'md:h-[450px]',
   };
 
-  // Gradient CSS - using styled-jsx for proper SSR
+  // Gradient CSS - using Figma exact values
   const gradientStyle =
     gradientDirection === 'left'
-      ? 'linear-gradient(90deg, rgba(41, 54, 69, 1) 0%, rgba(41, 54, 69, 1) 39%, rgba(41, 54, 69, 0.5) 82%, transparent 100%)'
-      : 'linear-gradient(270deg, rgba(41, 54, 69, 1) 0%, rgba(41, 54, 69, 1) 39%, rgba(41, 54, 69, 0.5) 82%, transparent 100%)';
+      ? 'linear-gradient(90deg, #1C242E 38.94%, rgba(28, 36, 46, 0.496063) 82.21%, rgba(28, 36, 46, 0) 100%)'
+      : 'linear-gradient(270deg, #1C242E 38.94%, rgba(28, 36, 46, 0.496063) 82.21%, rgba(28, 36, 46, 0) 100%)';
 
   return (
     <section
-      className={`relative w-full overflow-hidden bg-[#293645] ${heightClasses[sectionHeight]} ${tabletHeights[sectionHeight]} max-sm:h-auto max-sm:min-h-[300px]`}
+      className={`relative w-full overflow-hidden bg-[#1C242E] ${heightClasses[sectionHeight]} ${tabletHeights[sectionHeight]} max-sm:h-auto max-sm:min-h-[300px]`}
     >
       {/* Full-width container that respects global margins */}
       <div className="content-wrapper relative h-full">
@@ -68,15 +68,15 @@ export function HeroGradient({
           />
         )}
 
-        {/* Gradient Overlay - Positioned within content-wrapper */}
+        {/* Gradient Overlay - Positioned within content-wrapper - Figma exact values */}
         <div
-          className={`relative h-full flex items-end py-[50px] md:py-10 z-[2] w-[851px] md:w-[60%] max-sm:w-full max-sm:py-[30px] gradient-overlay ${
+          className={`relative h-full flex items-end pt-[50px] pr-0 pb-[50px] pl-[50px] md:py-10 md:px-0 z-[2] w-[851px] md:w-[60%] max-sm:w-full max-sm:py-[30px] max-sm:px-0 gradient-overlay ${
             gradientDirection === 'left' ? 'gradient-left' : 'gradient-right'
           }`}
         >
-          {/* Text Content */}
-          <div className="flex flex-col gap-4 max-w-[700px] w-full max-sm:max-w-full">
-            <h1 className="text-[48px] leading-[58px] font-light tracking-[0.48px] text-white m-0 md:text-[40px] md:leading-[50px] max-sm:text-[32px] max-sm:leading-[40px]">
+          {/* Text Content - Figma: width 900px, gap 25px */}
+          <div className="flex flex-col gap-[25px] max-w-[900px] w-full max-sm:max-w-full">
+            <h1 className="text-[48px] leading-[58px] font-light tracking-[0.01em] text-white m-0 md:text-[40px] md:leading-[50px] max-sm:text-[32px] max-sm:leading-[40px]">
               {headline}
             </h1>
 
@@ -113,9 +113,9 @@ export function HeroGradient({
             background: linear-gradient(
               180deg,
               transparent 0%,
-              rgba(41, 54, 69, 0.8) 40%,
-              rgba(41, 54, 69, 1) 80%,
-              rgba(41, 54, 69, 1) 100%
+              rgba(28, 36, 46, 0.8) 40%,
+              rgba(28, 36, 46, 1) 80%,
+              rgba(28, 36, 46, 1) 100%
             );
             z-index: 1;
             pointer-events: none;
