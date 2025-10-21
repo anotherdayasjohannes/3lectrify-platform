@@ -50,7 +50,7 @@ export function TeamGrid({ heading, introText, teamMembers }: TeamGridProps) {
       )}
 
       {/* Team Grid */}
-      <div className="flex flex-wrap gap-[25px] md:gap-[20px] sm:gap-[20px] items-start">
+      <div className="flex flex-wrap gap-[25px] md:gap-[20px] sm:gap-[20px] items-start justify-center">
         {teamMembers.map((member) => (
           <TeamCard key={member._id} member={member} />
         ))}
