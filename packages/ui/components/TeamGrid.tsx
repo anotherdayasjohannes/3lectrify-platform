@@ -32,17 +32,17 @@ interface TeamGridProps {
 
 export function TeamGrid({ heading, introText, teamMembers }: TeamGridProps) {
   return (
-    <section className="bg-[#293645] py-[50px] px-[50px] pb-[80px] md:py-[40px] md:px-[40px] md:pb-[60px] sm:py-[30px] sm:px-[20px] sm:pb-[50px]">
+    <section className="bg-[#293645] pt-[50px] px-[50px] pb-[80px] md:pt-[40px] md:px-[40px] md:pb-[60px] sm:pt-[30px] sm:px-[20px] sm:pb-[50px]">
       {/* Intro Section */}
       {(heading || introText) && (
-        <div className="max-w-[900px] mb-[40px] text-left sm:mb-[30px]">
+        <div className="max-w-[900px] mb-[40px] flex flex-col gap-[25px] sm:mb-[30px]">
           {heading && (
-            <h2 className="text-[36px] leading-[46px] lg:text-[32px] lg:leading-[40px] sm:text-[28px] sm:leading-[36px] font-light text-white tracking-[0.36px] mb-[25px] sm:mb-[20px]">
+            <h2 className="text-[36px] leading-[46px] font-light text-white tracking-[0.36px] m-0">
               {heading}
             </h2>
           )}
           {introText && (
-            <div className="text-[18px] leading-[26px] sm:text-[16px] sm:leading-[24px] font-normal text-white tracking-[0.18px] [&_p]:mb-4 [&_p:last-child]:mb-0">
+            <div className="text-[18px] leading-[26px] font-normal text-white tracking-[0.18px] [&_p]:m-0">
               <PortableText value={introText} />
             </div>
           )}
@@ -50,7 +50,7 @@ export function TeamGrid({ heading, introText, teamMembers }: TeamGridProps) {
       )}
 
       {/* Team Grid */}
-      <div className="flex flex-wrap gap-[25px] md:gap-[20px] sm:gap-[30px] justify-center">
+      <div className="flex flex-wrap gap-[25px] md:gap-[20px] sm:gap-[20px] items-start">
         {teamMembers.map((member) => (
           <TeamCard key={member._id} member={member} />
         ))}
@@ -66,11 +66,11 @@ function TeamCard({ member }: { member: TeamMember }) {
   const handleMouseLeave = () => setIsOverlayVisible(false);
 
   return (
-    <article className="w-[270px] md:w-[calc(50%-10px)] md:max-w-[270px] sm:w-full sm:max-w-[400px] sm:mx-auto flex-shrink-0">
-      <div className="flex flex-col gap-[15px] h-full">
+    <article className="w-[270px] md:w-[calc(50%-10px)] md:max-w-[270px] sm:w-full flex-shrink-0">
+      <div className="flex flex-col gap-[15px]">
         {/* Photo Wrapper with Overlay */}
         <div
-          className="relative w-full aspect-[0.675] rounded-[20px] overflow-hidden bg-white/5 cursor-pointer group"
+          className="relative w-full h-[400px] rounded-[20px] overflow-hidden bg-white/5 cursor-pointer group"
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
           onFocus={() => setIsOverlayVisible(true)}
@@ -103,7 +103,7 @@ function TeamCard({ member }: { member: TeamMember }) {
                 }`}
               >
                 {/* Bio Text */}
-                <div className="text-[14px] leading-[20px] md:text-[13px] md:leading-[18px] sm:text-[14px] sm:leading-[20px] font-light text-white text-left overflow-y-auto max-h-[280px] sm:max-h-[240px]">
+                <div className="text-[14px] leading-[20px] font-light text-white text-left overflow-y-auto max-h-[280px]">
                   {member.bio}
                 </div>
 
@@ -161,10 +161,10 @@ function TeamCard({ member }: { member: TeamMember }) {
 
         {/* Info Section */}
         <div className="flex flex-col gap-[5px] text-left">
-          <h3 className="text-[18px] leading-[26px] sm:text-[16px] sm:leading-[24px] font-normal tracking-[0.18px] text-white m-0 transition-colors duration-300 group-hover:text-[#88C0B1]">
+          <h3 className="text-[18px] leading-[26px] font-normal tracking-[0.18px] text-white m-0">
             {member.name}
           </h3>
-          <p className="text-[16px] leading-[26px] sm:text-[14px] sm:leading-[22px] font-light tracking-[0.16px] text-white m-0">
+          <p className="text-[16px] leading-[26px] font-light tracking-[0.16px] text-white m-0">
             {member.title}
           </p>
         </div>
