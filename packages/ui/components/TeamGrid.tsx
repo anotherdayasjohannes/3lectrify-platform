@@ -37,7 +37,7 @@ export function TeamGrid({ heading, introText, teamMembers }: TeamGridProps) {
       <div className="flex flex-col items-center">
         {/* Intro Section */}
         {(heading || introText) && (
-          <div className="w-full max-w-[1165px] mb-[40px] flex flex-col gap-[25px] sm:mb-[30px]">
+          <div className="w-full max-w-[1165px] mb-[40px] flex flex-col gap-[25px] sm:mb-[30px] pl-[5px]">
             {heading && (
               <h2 className="text-[36px] leading-[46px] font-light text-white tracking-[0.36px] m-0">
                 {heading}
