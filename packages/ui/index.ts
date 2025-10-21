@@ -11,3 +11,5 @@ export { CTA } from './components/CTA';
 export { default as ReferencesGrid } from './components/ReferencesGrid';
 export { default as ReferencesMarquee } from './components/ReferencesMarquee';
 export { TeamGrid } from './components/TeamGrid';
+export { HeroGradient } from './components/HeroGradient';
+export { LegalContent } from './components/LegalContent';

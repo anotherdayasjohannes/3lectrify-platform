@@ -1,6 +1,7 @@
 // Document types
 import page from './documents/page'
 import siteSettings from './documents/siteSettings'
+import legalPage from './documents/legalPage'
 import referenceProject from './documents/reference'
 import teamMember from './documents/teamMember'
 
@@ -20,6 +21,7 @@ export const schemaTypes = [
   // Documents
   page,
   siteSettings,
+  legalPage,
   referenceProject,
   teamMember,
 
