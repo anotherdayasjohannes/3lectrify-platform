@@ -5,6 +5,7 @@ import type { PortableTextBlock } from '@portabletext/react';
 interface SanityBlock {
   _type: string;
   headline?: string;
+  heading?: string;
   subtext?: PortableTextBlock[];
   body?: PortableTextBlock[];
   showImage?: boolean;
