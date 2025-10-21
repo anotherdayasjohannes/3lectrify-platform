@@ -188,6 +188,8 @@ interface SanityBlock {
       hotspot?: {
         x: number;
         y: number;
+        height: number;
+        width: number;
       };
     };
     bio?: string;
