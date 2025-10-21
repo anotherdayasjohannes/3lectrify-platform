@@ -64,10 +64,10 @@ export default function ReferencesMarquee({
   return (
     <section className="py-[80px] overflow-hidden bg-[#293645] md:py-[60px]">
       <div className="content-wrapper mb-[50px] text-center md:mb-[40px]">
-        <h2 className="text-[36px] leading-[46px] font-light text-white mb-[20px] tracking-[0.36px] md:text-[32px] md:leading-[42px]">
+        <h2 className="text-[40px] leading-[50px] font-light text-white mb-[20px] tracking-[0.4px] md:text-[32px] md:leading-[42px]">
           Unsere Projekte im Überblick
         </h2>
-        <p className="text-[18px] leading-[26px] text-white/70 font-light tracking-[0.18px]">
+        <p className="text-[18px] leading-[30px] text-white/70 font-light tracking-[0.18px]">
           Eine Auswahl unserer erfolgreich realisierten Referenzen
         </p>
       </div>
@@ -107,10 +107,10 @@ function MarqueeCard({ reference }: { reference: Reference }) {
         {/* Content */}
         <div className="absolute inset-0 p-[25px] flex flex-col justify-end z-10">
           <div className="transform transition-transform duration-300 group-hover:translate-y-[-4px]">
-            <h3 className="text-[20px] leading-[28px] font-light text-white mb-[10px] tracking-[0.2px]">
+            <h3 className="text-[24px] leading-[32px] font-normal text-white mb-[10px] tracking-[0.24px]">
               {reference.name}
             </h3>
-            <div className="flex items-center gap-[10px] text-[16px] leading-[22px] text-white/70 font-light">
+            <div className="flex items-center gap-[10px] text-[18px] leading-[26px] text-white/80 font-light">
               <span>{reference.location}</span>
               <span className="w-1 h-1 rounded-full bg-[#88C0B1]" />
               <span>{reference.units} Einheiten</span>
