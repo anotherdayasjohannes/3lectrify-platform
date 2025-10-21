@@ -133,3 +133,4 @@ pnpm dev
 
 The component is created and schemas are registered. Complete the GROQ query and page component updates above to make it fully functional!
 
+

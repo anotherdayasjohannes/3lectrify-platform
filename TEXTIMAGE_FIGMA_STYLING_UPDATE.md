@@ -197,3 +197,4 @@ The TextImage component now perfectly matches the Figma design and is ready to b
 
 **Next step:** Create content in Sanity Studio! 🎯✨
 
+

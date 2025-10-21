@@ -35,7 +35,7 @@ Solarbasierte Eigenenergieversorgung
 
 **Content Heading:**
 ```
-Maximale Rendite durch eigene Energieerzeugung
+Maxidurch eigene Energieerzeugungmale Rendite 
 ```
 
 **Description:**
@@ -94,4 +94,5 @@ Vereinfachen Sie Ihre Vermietung mit unserem Pauschalmiete-Modell. Mieter zahlen
 3. ✅ **Scroll down** to see the beautiful animated Feature Showcase! 🎬
 
 The cards will animate in as you scroll - that storytelling magic! ✨
+
 

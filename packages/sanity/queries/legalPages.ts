@@ -36,3 +36,4 @@ export const allLegalPagesQuery = groq`
   }
 `;
 
+

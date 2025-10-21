@@ -97,3 +97,4 @@ Replaced all custom tokens with standard Tailwind classes and explicit values:
 **Performance:** ✅ Optimized images with Next.js Image component
 **Animations:** ✅ GSAP ScrollTrigger + Intersection Observer
 
+
