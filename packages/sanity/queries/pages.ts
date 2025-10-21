@@ -137,6 +137,34 @@ export const pageQuery = groq`
             alt
           }
         }
+      },
+      _type == "references" => {
+        headline,
+        description,
+        selectedReferences[]-> {
+          _id,
+          name,
+          location,
+          "image": image.asset->url,
+          "imageAlt": image.alt,
+          "imageMetadata": image.asset->metadata {
+            dimensions {
+              width,
+              height
+            }
+          },
+          hotspot,
+          crop,
+          units,
+          year,
+          type,
+          featured,
+          description,
+          link
+        },
+        variant,
+        theme,
+        showStats
       }
     },
     publishedAt

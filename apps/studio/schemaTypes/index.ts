@@ -1,6 +1,7 @@
 // Document types
 import page from './documents/page'
 import siteSettings from './documents/siteSettings'
+import referenceProject from './documents/reference'
 
 // Object types
 import hero from './objects/hero'
@@ -11,11 +12,13 @@ import textImage from './objects/textImage'
 import simpleTextImage from './objects/simpleTextImage'
 import cta from './objects/cta'
 import featureShowcase from './objects/featureShowcase'
+import references from './objects/references'
 
 export const schemaTypes = [
   // Documents
   page,
   siteSettings,
+  referenceProject,
 
   // Objects
   hero,
@@ -26,4 +29,5 @@ export const schemaTypes = [
   simpleTextImage,
   cta,
   featureShowcase,
+  references,
 ]

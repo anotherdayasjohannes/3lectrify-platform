@@ -1,5 +1,5 @@
 import { client, pageQuery } from '@3lectrify/sanity';
-import { Hero, FeatureCards, TextImage, SimpleTextImage, Stats, CTA } from '@3lectrify/ui';
+import { Hero, FeatureCards, TextImage, SimpleTextImage, Stats, CTA, ReferencesGrid, ReferencesMarquee } from '@3lectrify/ui';
 import type { PortableTextBlock } from '@portabletext/react';
 
 interface SanityBlock {
@@ -93,6 +93,39 @@ interface SanityBlock {
   buttonText?: string;
   buttonLink?: string;
   openInNewTab?: boolean;
+  selectedReferences?: Array<{
+    _id: string;
+    name: string;
+    location: string;
+    image: string;
+    imageAlt?: string;
+    imageMetadata?: {
+      dimensions: {
+        width: number;
+        height: number;
+      };
+    };
+    hotspot?: {
+      x: number;
+      y: number;
+      height: number;
+      width: number;
+    };
+    crop?: {
+      top: number;
+      bottom: number;
+      left: number;
+      right: number;
+    };
+    units: number;
+    year: string;
+    type: 'residential' | 'commercial' | 'mixed';
+    featured?: boolean;
+    description?: string;
+    link?: string;
+  }>;
+  theme?: 'light' | 'dark';
+  showStats?: boolean;
 }
 
 async function getIhrVorteilPage() {
@@ -143,7 +176,7 @@ export default async function IhrVorteilPage() {
                       }
                     : undefined
                 }
-                imagePosition={block.imagePosition}
+                imagePosition={block.imagePosition as 'above' | 'side'}
               />
             );
 
@@ -249,6 +282,36 @@ export default async function IhrVorteilPage() {
               openInNewTab={block.openInNewTab}
             />
           );
+
+          case 'references':
+            const references = block.selectedReferences?.map((ref) => ({
+              id: ref._id,
+              name: ref.name,
+              location: ref.location,
+              image: ref.image,
+              units: ref.units,
+              year: ref.year,
+              type: ref.type,
+              featured: ref.featured,
+            })) || [];
+
+            if ((block.variant as 'grid' | 'marquee') === 'marquee') {
+              return (
+                <ReferencesMarquee
+                  key={index}
+                  references={references}
+                  speed="normal"
+                />
+              );
+            }
+
+            return (
+              <ReferencesGrid
+                key={index}
+                references={references}
+                theme={block.theme || 'dark'}
+              />
+            );
 
           default:
             return null;

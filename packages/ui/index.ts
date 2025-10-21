@@ -8,3 +8,5 @@ export { Stats } from './components/Stats';
 export { TextImage } from './components/TextImage';
 export { SimpleTextImage } from './components/SimpleTextImage';
 export { CTA } from './components/CTA';
+export { default as ReferencesGrid } from './components/ReferencesGrid';
+export { default as ReferencesMarquee } from './components/ReferencesMarquee';

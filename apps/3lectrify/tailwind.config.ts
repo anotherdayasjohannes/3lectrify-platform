@@ -26,6 +26,27 @@ const config: Config = {
         'h1': ['48px', '58px'],             // Already correct
         'h2': ['36px', '46px'],             // Already correct
       },
+      // Custom Animations for References Grid
+      animation: {
+        'marquee': 'marquee 40s linear infinite',
+        'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
+      },
+      keyframes: {
+        marquee: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
+        },
+        'pulse-glow': {
+          '0%, 100%': { 
+            opacity: '1',
+            boxShadow: '0 0 8px rgba(136, 192, 177, 0.6)',
+          },
+          '50%': { 
+            opacity: '0.8',
+            boxShadow: '0 0 16px rgba(136, 192, 177, 0.9)',
+          },
+        },
+      },
     },
   },
   plugins: [

@@ -40,6 +40,7 @@ export default defineType({
           {type: 'simpleTextImage'},
           {type: 'stats'},
           {type: 'cta'},
+          {type: 'references'},
           // Add more content types as you migrate modules
         ],
       }),

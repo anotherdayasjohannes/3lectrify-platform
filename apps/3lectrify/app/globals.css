@@ -76,3 +76,51 @@ p {
   white-space: nowrap;
   border-width: 0;
 }
+
+/* ============================================
+   REFERENCES GRID ANIMATIONS
+   ============================================ */
+
+/* Pulse Glow Animation for Stats Badge */
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 0 0 8px rgba(136, 192, 177, 0.6);
+  }
+  50% {
+    opacity: 0.8;
+    box-shadow: 0 0 16px rgba(136, 192, 177, 0.9);
+  }
+}
+
+/* 3D Transform optimization for Reference Cards */
+.reference-card {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform;
+}
+
+/* Infinite Marquee Animation */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Smooth scroll behavior (respects user preferences) */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
