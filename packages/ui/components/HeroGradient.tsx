@@ -24,74 +24,200 @@ export function HeroGradient({
   gradientDirection = 'left',
   sectionHeight = 'medium',
 }: HeroGradientProps) {
-  const heightClasses = {
-    small: 'h-[300px] md:h-[250px]',
-    medium: 'h-[400px] md:h-[350px]',
-    large: 'h-[500px] md:h-[450px]',
-  };
-
   const getFocalPoint = (hotspot?: { x: number; y: number }) => {
     if (!hotspot) return 'center';
     return `${(hotspot.x * 100).toFixed(0)}% ${(hotspot.y * 100).toFixed(0)}%`;
   };
 
-  // Gradient background based on direction
-  const gradientStyle =
-    gradientDirection === 'left'
-      ? {
-          background:
-            'linear-gradient(90deg, rgba(41, 54, 69, 1) 0%, rgba(41, 54, 69, 1) 39%, rgba(41, 54, 69, 0.5) 82%, transparent 100%)',
-        }
-      : {
-          background:
-            'linear-gradient(270deg, rgba(41, 54, 69, 1) 0%, rgba(41, 54, 69, 1) 39%, rgba(41, 54, 69, 0.5) 82%, transparent 100%)',
-        };
-
   return (
-    <section
-      className={`relative overflow-hidden bg-[#293645] ${heightClasses[sectionHeight]} sm:h-auto sm:min-h-[300px] w-full`}
-    >
+    <section className={`hero-gradient hero-gradient--${gradientDirection} hero-gradient--${sectionHeight}`}>
       {/* Background Image */}
       {backgroundImage?.url && (
         <img
           src={backgroundImage.url}
           alt={backgroundImage.alt || ''}
-          className={`absolute top-0 ${
-            gradientDirection === 'left' ? 'right-0' : 'left-0'
-          } w-[1114px] md:w-[70%] sm:w-full sm:relative sm:h-[300px] h-full object-cover z-[1] sm:right-auto sm:left-auto`}
+          className="hero-gradient__image"
           style={{ objectPosition: getFocalPoint(backgroundImage.hotspot) }}
           loading="eager"
         />
       )}
 
       {/* Gradient Overlay with Content */}
-      <div
-        className={`hero-gradient-overlay absolute top-0 ${
-          gradientDirection === 'left' ? 'left-[50px]' : 'right-[50px]'
-        } md:${
-          gradientDirection === 'left' ? 'left-[40px]' : 'right-[40px]'
-        } w-[851px] md:w-[60%] sm:w-full sm:relative sm:left-0 sm:right-0 h-full flex items-end py-[50px] px-0 md:py-10 md:px-0 sm:py-[30px] sm:px-5 z-[2]`}
-        style={gradientStyle}
-      >
-        <div className="flex flex-col gap-4 max-w-[700px] sm:max-w-full w-full">
+      <div className="hero-gradient__overlay">
+        <div className="hero-gradient__content">
           {/* Headline */}
-          <h1 className="text-[48px] leading-[58px] md:text-[40px] md:leading-[50px] sm:text-[32px] sm:leading-[40px] font-light tracking-[0.48px] text-white m-0">
-            {headline}
-          </h1>
+          <h1 className="hero-gradient__headline">{headline}</h1>
 
           {/* Optional Subheadline */}
-          {subheadline && (
-            <p className="text-[24px] leading-[34px] md:text-[20px] md:leading-[30px] sm:text-[18px] sm:leading-[26px] font-light tracking-[0.24px] text-white m-0">
-              {subheadline}
-            </p>
-          )}
+          {subheadline && <p className="hero-gradient__subheadline">{subheadline}</p>}
         </div>
       </div>
 
-      {/* Mobile Gradient Override via CSS */}
-      <style>{`
+      {/* Embedded CSS - Direct port from HubSpot */}
+      <style jsx>{`
+        .hero-gradient {
+          position: relative;
+          overflow: hidden;
+          background-color: #293645;
+          width: 100%;
+        }
+
+        /* Height Variants */
+        .hero-gradient--small {
+          height: 300px;
+        }
+
+        .hero-gradient--medium {
+          height: 400px;
+        }
+
+        .hero-gradient--large {
+          height: 500px;
+        }
+
+        /* Background Image */
+        .hero-gradient__image {
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 1114px;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+          display: block;
+          z-index: 1;
+        }
+
+        .hero-gradient--right .hero-gradient__image {
+          right: auto;
+          left: 0;
+        }
+
+        /* Gradient Overlay */
+        .hero-gradient__overlay {
+          position: absolute;
+          top: 0;
+          left: 50px;
+          width: 851px;
+          height: 100%;
+          display: flex;
+          align-items: flex-end;
+          padding: 50px 0;
+          z-index: 2;
+          background: linear-gradient(
+            90deg,
+            rgba(41, 54, 69, 1) 0%,
+            rgba(41, 54, 69, 1) 39%,
+            rgba(41, 54, 69, 0.5) 82%,
+            transparent 100%
+          );
+        }
+
+        .hero-gradient--right .hero-gradient__overlay {
+          left: auto;
+          right: 50px;
+          background: linear-gradient(
+            270deg,
+            rgba(41, 54, 69, 1) 0%,
+            rgba(41, 54, 69, 1) 39%,
+            rgba(41, 54, 69, 0.5) 82%,
+            transparent 100%
+          );
+        }
+
+        /* Content */
+        .hero-gradient__content {
+          max-width: 700px;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+        }
+
+        /* Headline */
+        .hero-gradient__headline {
+          font-family: 'Lato', sans-serif;
+          font-size: 48px;
+          font-weight: 300;
+          line-height: 58px;
+          letter-spacing: 0.48px;
+          color: #ffffff;
+          margin: 0;
+          text-align: left;
+        }
+
+        /* Subheadline */
+        .hero-gradient__subheadline {
+          font-family: 'Lato', sans-serif;
+          font-size: 24px;
+          font-weight: 300;
+          line-height: 34px;
+          letter-spacing: 0.24px;
+          color: #ffffff;
+          margin: 0;
+          text-align: left;
+        }
+
+        /* Tablet: 768px - 1199px */
+        @media (min-width: 768px) and (max-width: 1199px) {
+          .hero-gradient--small {
+            height: 250px;
+          }
+
+          .hero-gradient--medium {
+            height: 350px;
+          }
+
+          .hero-gradient--large {
+            height: 450px;
+          }
+
+          .hero-gradient__overlay {
+            left: 40px;
+            width: 60%;
+            padding: 40px 0;
+          }
+
+          .hero-gradient--right .hero-gradient__overlay {
+            left: auto;
+            right: 40px;
+          }
+
+          .hero-gradient__image {
+            width: 70%;
+          }
+
+          .hero-gradient__headline {
+            font-size: 40px;
+            line-height: 50px;
+          }
+
+          .hero-gradient__subheadline {
+            font-size: 20px;
+            line-height: 30px;
+          }
+        }
+
+        /* Mobile: max-width 767px */
         @media (max-width: 767px) {
-          .hero-gradient-overlay {
+          .hero-gradient {
+            height: auto !important;
+            min-height: 300px;
+          }
+
+          .hero-gradient__image {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            right: auto;
+            left: auto;
+          }
+
+          .hero-gradient__overlay {
+            position: relative;
+            left: 0;
+            width: 100%;
+            padding: 30px 20px;
             background: linear-gradient(
               180deg,
               transparent 0%,
@@ -99,6 +225,20 @@ export function HeroGradient({
               rgba(41, 54, 69, 1) 80%,
               rgba(41, 54, 69, 1) 100%
             ) !important;
+          }
+
+          .hero-gradient__content {
+            max-width: 100%;
+          }
+
+          .hero-gradient__headline {
+            font-size: 32px;
+            line-height: 40px;
+          }
+
+          .hero-gradient__subheadline {
+            font-size: 18px;
+            line-height: 26px;
           }
         }
       `}</style>
