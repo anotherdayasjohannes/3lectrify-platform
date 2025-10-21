@@ -206,7 +206,7 @@ interface SanityBlock {
       };
       alt?: string;
     };
-    number?: string;
+    number: string;
     title: string;
     heading: string;
     description?: string;
