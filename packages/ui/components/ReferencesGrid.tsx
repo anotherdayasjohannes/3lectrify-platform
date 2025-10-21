@@ -78,17 +78,17 @@ export default function ReferencesGrid({
       ref={sectionRef}
       data-theme={theme}
       className={`
-        py-gap-xlarge
-        ${theme === 'dark' ? 'bg-dark-bg-page' : 'bg-[var(--bg-page)]'}
+        py-20 md:py-32
+        ${theme === 'dark' ? 'bg-[#293645]' : 'bg-white'}
       `}
     >
       <div className="content-wrapper">
         {/* Section Header */}
-        <div className="text-center mb-gap-large">
-          <h2 className="text-h2 font-light text-white mb-gap-small">
+        <div className="mb-16">
+          <h2 className="text-[36px] leading-[46px] font-light text-white mb-4">
             Tausendfach bewährt.
           </h2>
-          <p className="text-body-large text-white/70 max-w-content-text mx-auto">
+          <p className="text-[20px] leading-[28px] text-white/70 max-w-[645px]">
             Über 1.400 energieautarke Wohneinheiten erfolgreich realisiert
           </p>
         </div>
@@ -96,7 +96,7 @@ export default function ReferencesGrid({
         {/* Bento Grid */}
         <div
           ref={gridRef}
-          className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-12 gap-gap-medium auto-rows-[250px]"
+          className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-12 gap-4 md:gap-6 auto-rows-[250px]"
         >
           {references.map((reference, index) => (
             <ReferenceCard
@@ -108,7 +108,7 @@ export default function ReferencesGrid({
         </div>
 
         {/* Stats Footer */}
-        <div className="mt-gap-large grid grid-cols-1 md:grid-cols-3 gap-gap-medium text-center">
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 text-center">
           <StatCard number="1.400+" label="Wohneinheiten" />
           <StatCard number="15+" label="Städte" />
           <StatCard number="100%" label="Zufriedenheit" />
@@ -193,7 +193,7 @@ function ReferenceCard({
         ${gridClass}
         relative
         overflow-hidden
-        rounded-large
+        rounded-2xl
         cursor-pointer
         group
         [transform-style:preserve-3d]
@@ -227,58 +227,58 @@ function ReferenceCard({
       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
 
       {/* Content */}
-      <div className="absolute inset-0 p-gap-standard flex flex-col justify-end z-10">
+      <div className="absolute inset-0 p-6 flex flex-col justify-end z-10">
         {/* Animated Stats Badge */}
         <div 
           className="
-            mb-gap-small 
+            mb-3
             opacity-0 
             group-hover:opacity-100 
             transform 
             translate-y-4 
             group-hover:translate-y-0
             transition-all 
-            duration-base
+            duration-300
           "
         >
-          <div className="inline-flex items-center gap-gap-tiny bg-brand-green-mid/20 backdrop-blur-sm px-gap-small py-gap-tiny rounded-medium border border-brand-green-mid/30">
-            <div className="w-2 h-2 rounded-full bg-brand-green-mid animate-pulse" />
-            <span className="text-body-small text-white font-bold">
+          <div className="inline-flex items-center gap-2 bg-[#88c0b1]/20 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-[#88c0b1]/30 animate-pulse-glow">
+            <div className="w-2 h-2 rounded-full bg-[#88c0b1] animate-pulse" />
+            <span className="text-[14px] leading-[20px] text-white font-bold">
               {reference.units} Einheiten
             </span>
           </div>
         </div>
 
         {/* Title */}
-        <h3 className="text-h3 font-light text-white mb-gap-tiny transform transition-transform duration-base group-hover:translate-x-2">
+        <h3 className="text-[28px] leading-[36px] font-light text-white mb-2 transform transition-transform duration-300 group-hover:translate-x-2">
           {reference.name}
         </h3>
 
         {/* Location & Year */}
-        <div className="flex items-center gap-gap-small text-body-small text-white/70">
+        <div className="flex items-center gap-3 text-[14px] leading-[20px] text-white/70">
           <span>{reference.location}</span>
-          <span className="w-1 h-1 rounded-full bg-brand-green-mid" />
+          <span className="w-1 h-1 rounded-full bg-[#88c0b1]" />
           <span>{reference.year}</span>
         </div>
 
         {/* Hover CTA */}
         <div 
           className="
-            mt-gap-small 
+            mt-3
             opacity-0 
             group-hover:opacity-100
             transform 
             translate-y-4 
             group-hover:translate-y-0
             transition-all 
-            duration-base 
+            duration-300
             delay-75
           "
         >
-          <div className="inline-flex items-center gap-gap-tiny text-brand-green-mid text-body-small font-bold">
+          <div className="inline-flex items-center gap-2 text-[#88c0b1] text-[14px] leading-[20px] font-bold">
             <span>Projekt ansehen</span>
             <svg 
-              className="w-4 h-4 transform transition-transform duration-fast group-hover:translate-x-1" 
+              className="w-4 h-4 transform transition-transform duration-200 group-hover:translate-x-1" 
               fill="none" 
               viewBox="0 0 24 24" 
               stroke="currentColor"
@@ -290,7 +290,7 @@ function ReferenceCard({
       </div>
 
       {/* Glassmorphism Overlay on Hover */}
-      <div className="absolute inset-0 bg-brand-blue-dark/10 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-slow" />
+      <div className="absolute inset-0 bg-[#3c5067]/10 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
     </div>
   );
 }
@@ -338,14 +338,14 @@ function StatCard({ number, label }: { number: string; label: string }) {
   return (
     <div
       ref={statRef}
-      className="p-gap-standard bg-dark-bg-section/50 backdrop-blur-sm rounded-large border border-brand-green-mid/20"
+      className="p-8 bg-[#3c5067]/50 backdrop-blur-sm rounded-2xl border border-[#88c0b1]/20"
     >
-      <div className="text-h2 font-light text-brand-green-mid mb-gap-tiny">
+      <div className="text-[36px] leading-[46px] font-light text-[#88c0b1] mb-2">
         {count}
         {number.includes('+') && '+'}
         {number.includes('%') && '%'}
       </div>
-      <div className="text-body-regular text-white/70">{label}</div>
+      <div className="text-[18px] leading-[24px] text-white/70">{label}</div>
     </div>
   );
 }
