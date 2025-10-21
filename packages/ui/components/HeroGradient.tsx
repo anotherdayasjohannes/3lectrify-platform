@@ -45,7 +45,7 @@ export function HeroGradient({
 
   return (
     <section
-      className={`relative w-full overflow-hidden bg-[#293645] ${heightClasses[sectionHeight]} ${tabletHeights[sectionHeight]} sm:h-auto sm:min-h-[300px]`}
+      className={`relative w-full overflow-hidden bg-[#293645] ${heightClasses[sectionHeight]} ${tabletHeights[sectionHeight]} max-sm:h-auto max-sm:min-h-[300px]`}
     >
       {/* Background Image - Absolute positioned, fixed width */}
       {backgroundImage?.url && (
@@ -54,7 +54,7 @@ export function HeroGradient({
           alt={backgroundImage.alt || ''}
           className={`absolute top-0 ${
             gradientDirection === 'left' ? 'right-0' : 'left-0'
-          } w-[1114px] h-full object-cover z-[1] md:w-[70%] sm:w-full sm:relative sm:h-[300px] sm:right-auto sm:left-auto`}
+          } w-[1114px] h-full object-cover z-[1] md:w-[70%] max-sm:w-full max-sm:relative max-sm:h-[300px] max-sm:right-auto max-sm:left-auto`}
           style={{ objectPosition: getFocalPoint(backgroundImage.hotspot) }}
           loading="eager"
         />
@@ -77,13 +77,13 @@ export function HeroGradient({
         }}
       >
         {/* Text Content */}
-        <div className="flex flex-col gap-4 max-w-[700px] w-full sm:max-w-full">
-          <h1 className="text-[48px] leading-[58px] font-light tracking-[0.48px] text-white m-0 md:text-[40px] md:leading-[50px] sm:text-[32px] sm:leading-[40px]">
+        <div className="flex flex-col gap-4 max-w-[700px] w-full max-sm:max-w-full">
+          <h1 className="text-[48px] leading-[58px] font-light tracking-[0.48px] text-white m-0 md:text-[40px] md:leading-[50px] max-sm:text-[32px] max-sm:leading-[40px]">
             {headline}
           </h1>
 
           {subheadline && (
-            <p className="text-[24px] leading-[34px] font-light tracking-[0.24px] text-white m-0 md:text-[20px] md:leading-[30px] sm:text-[18px] sm:leading-[26px]">
+            <p className="text-[24px] leading-[34px] font-light tracking-[0.24px] text-white m-0 md:text-[20px] md:leading-[30px] max-sm:text-[18px] max-sm:leading-[26px]">
               {subheadline}
             </p>
           )}
