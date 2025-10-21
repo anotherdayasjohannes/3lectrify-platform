@@ -21,11 +21,15 @@ interface Reference {
 interface ReferencesGridProps {
   references: Reference[];
   theme?: 'light' | 'dark';
+  headline?: string;
+  subtext?: string;
 }
 
 export default function ReferencesGrid({ 
   references, 
-  theme = 'dark' 
+  theme = 'dark',
+  headline,
+  subtext 
 }: ReferencesGridProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
@@ -84,14 +88,20 @@ export default function ReferencesGrid({
     >
       <div className="content-wrapper">
         {/* Section Header */}
-        <div className="mb-16">
-          <h2 className="text-[36px] leading-[46px] font-light text-white mb-4">
-            Tausendfach bewährt.
-          </h2>
-          <p className="text-[20px] leading-[28px] text-white/70 max-w-[645px]">
-            Über 1.400 energieautarke Wohneinheiten erfolgreich realisiert
-          </p>
-        </div>
+        {(headline || subtext) && (
+          <div className="mb-16">
+            {headline && (
+              <h2 className="text-[36px] leading-[46px] font-light text-white mb-4">
+                {headline}
+              </h2>
+            )}
+            {subtext && (
+              <p className="text-[20px] leading-[28px] text-white/70 max-w-[645px]">
+                {subtext}
+              </p>
+            )}
+          </div>
+        )}
 
         {/* Bento Grid */}
         <div
