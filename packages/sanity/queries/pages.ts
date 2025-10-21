@@ -1,0 +1,154 @@
+import { groq } from 'next-sanity';
+
+export const pageQuery = groq`
+  *[_type == "page" && slug.current == $slug][0] {
+    _id,
+    title,
+    description,
+    content[] {
+      _type,
+      _type == "hero" => {
+        headline,
+        subtext,
+        showImage,
+        heroImage {
+          asset-> {
+            url,
+            metadata {
+              dimensions {
+                width,
+                height
+              }
+            }
+          },
+          hotspot,
+          crop,
+          alt
+        },
+        imagePosition
+      },
+      _type == "featureCards" => {
+        sectionHeadline,
+        sectionDescription,
+        cards[] {
+          _key,
+          icon {
+            asset-> {
+              url
+            },
+            hotspot,
+            crop,
+            alt
+          },
+          title,
+          description
+        }
+      },
+      _type == "textImage" => {
+        headline,
+        body,
+        quote {
+          text,
+          author,
+          icon {
+            asset-> {
+              url
+            },
+            hotspot,
+            crop,
+            alt
+          }
+        },
+        stats[] {
+          _key,
+          value,
+          description,
+          accentColor
+        },
+        image {
+          asset-> {
+            url,
+            metadata {
+              dimensions {
+                width,
+                height
+              }
+            }
+          },
+          hotspot,
+          crop,
+          alt
+        },
+        imagePosition,
+        variant,
+        fullWidth
+      },
+      _type == "simpleTextImage" => {
+        headline,
+        body,
+        image {
+          asset-> {
+            url,
+            metadata {
+              dimensions {
+                width,
+                height
+              }
+            }
+          },
+          hotspot,
+          crop,
+          alt
+        },
+        variant
+      },
+      _type == "stats" => {
+        stats[] {
+          _key,
+          value,
+          description,
+          accentColor
+        },
+        layout,
+        variant
+      },
+      _type == "cta" => {
+        headline,
+        description,
+        buttonText,
+        buttonLink,
+        openInNewTab
+      },
+      _type == "featureShowcase" => {
+        sectionHeadline,
+        sectionIntro,
+        features[] {
+          _key,
+          number,
+          title,
+          heading,
+          description,
+          icon {
+            asset-> {
+              url
+            },
+            hotspot,
+            crop,
+            alt
+          }
+        }
+      }
+    },
+    publishedAt
+  }
+`;
+
+export const allPagesQuery = groq`
+  *[_type == "page"] | order(publishedAt desc) {
+    _id,
+    title,
+    "slug": slug.current,
+    description,
+    publishedAt
+  }
+`;

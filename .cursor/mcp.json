@@ -9,6 +9,14 @@
         "SANITY_API_TOKEN": "skVgGUF6HbMBzuOh6qr6N4BLPbQPuvMH6jvpkyIUuLPmkikf5mTVzMA4KI4rPnUQQX8Ugjj9v9N56unpR01TsLf5qRPF1iLYZZ2beUwfP79Pi7krs1GdRLWL3W4cA984M70xiu8LWiYv8CitpR1rXkgZV4IlTeULGzOhxIWKYQ67HCneDCoj",
         "MCP_USER_ROLE": "developer"
       }
+    },
+    "tailwindcss": {
+      "command": "npx",
+      "args": ["-y", "tailwindcss-mcp-server@latest"],
+      "env": {
+        "TAILWIND_CONFIG_PATH": "/Users/j.wild/Projects/3lectrify-platform/apps/3lectrify/tailwind.config.ts",
+        "CSS_PATH": "/Users/j.wild/Projects/3lectrify-platform/apps/3lectrify/app/globals.css"
+      }
     }
   }
 }

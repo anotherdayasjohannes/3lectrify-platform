@@ -45,6 +45,7 @@ pnpm dev
 - **CMS**: Sanity
 - **Monorepo**: Turborepo + pnpm
 - **Deployment**: Vercel
+- **Version**: 1.0.0
 
 ## 📝 Available Commands
 
@@ -141,6 +142,40 @@ pnpm install
 
 ---
 
-**Project ID**: iedths1l
-**Dataset**: production
+## 🚀 Deployment
+
+### Quick Deploy (15 minutes)
+```bash
+# 1. Push to GitHub
+git remote add origin https://github.com/YOUR_USERNAME/3lectrify-platform.git
+git push -u origin main
+
+# 2. Deploy to Vercel
+# Go to https://vercel.com/new
+# Import from GitHub → Select 3lectrify-platform
+# Build Command: pnpm build
+# Output Directory: apps/3lectrify/.next
+
+# 3. Add environment variables in Vercel:
+# NEXT_PUBLIC_SANITY_PROJECT_ID
+# NEXT_PUBLIC_SANITY_DATASET
+# SANITY_API_TOKEN
+```
+
+### Documentation
+- **Quick Start**: [QUICK_DEPLOY.md](./QUICK_DEPLOY.md) - 15-minute guide
+- **Full Guide**: [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md) - Complete manual
+- **Setup Status**: [DEPLOYMENT_SETUP_COMPLETE.md](./DEPLOYMENT_SETUP_COMPLETE.md)
+
+### Versioning
+- **Current Version**: 1.0.0
+- **Strategy**: Semantic Versioning (SemVer)
+- **Bump Version**: `npm version [patch|minor|major]`
+- **Create Tag**: `git tag -a v1.0.0 -m "Release v1.0.0"`
+
+---
+
+**Project ID**: iedths1l  
+**Dataset**: production  
+**Version**: 1.0.0  
 **Created**: October 2025

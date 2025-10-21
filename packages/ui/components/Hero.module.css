@@ -1,0 +1,144 @@
+/* Hero Dark Theme Module - Ported from HubSpot */
+
+.hero {
+  background-color: #293645;
+  padding: 50px 0 80px;
+  color: #ffffff;
+}
+
+/* Image wrapper - both above and side layouts */
+.hero__imageWrapper {
+  width: 100%;
+  margin-bottom: 50px;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.hero__image {
+  width: 100%;
+  height: auto;
+  max-height: 500px;
+  display: block;
+  object-fit: cover;
+  object-position: center center;
+}
+
+/* Container for side-by-side layout */
+.hero__container {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+/* Side by side layout */
+.hero--side .hero__container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 100px;
+  align-items: center;
+}
+
+.hero--side .hero__imageWrapper--side {
+  margin-bottom: 0;
+  max-height: 600px;
+}
+
+/* Text content */
+.hero__content {
+  max-width: 900px;
+  width: 100%;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.hero__headline {
+  font-family: 'Lato', sans-serif;
+  font-size: 48px;
+  line-height: 58px;
+  font-weight: 300;
+  letter-spacing: 0.48px;
+  color: #ffffff;
+  margin: 0;
+}
+
+.hero__subtext {
+  font-family: 'Lato', sans-serif;
+  font-size: 24px;
+  line-height: 34px;
+  font-weight: 300;
+  letter-spacing: 0.24px;
+  color: #ffffff;
+  margin: 0;
+}
+
+.hero__subtext p {
+  margin: 0 0 1em 0;
+  color: #ffffff;
+}
+
+.hero__subtext p:last-child {
+  margin-bottom: 0;
+}
+
+/* ====================================
+   Responsive Styles
+   ==================================== */
+
+/* Tablet: 768px - 1023px */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .hero {
+    padding: 40px 0 60px;
+  }
+
+  .hero__image {
+    max-height: 400px;
+  }
+
+  .hero--side .hero__container {
+    gap: 50px;
+  }
+
+  .hero__headline {
+    font-size: 40px;
+    line-height: 50px;
+  }
+
+  .hero__subtext {
+    font-size: 20px;
+    line-height: 30px;
+  }
+}
+
+/* Mobile: max-width 767px */
+@media (max-width: 767px) {
+  .hero {
+    padding: 30px 0 50px;
+  }
+
+  .hero__image {
+    max-height: 300px;
+  }
+
+  .hero__imageWrapper {
+    margin-bottom: 40px;
+    border-radius: 12px;
+  }
+
+  /* Stack side-by-side layout on mobile */
+  .hero--side .hero__container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .hero__headline {
+    font-size: 32px;
+    line-height: 40px;
+  }
+
+  .hero__subtext {
+    font-size: 18px;
+    line-height: 26px;
+  }
+}

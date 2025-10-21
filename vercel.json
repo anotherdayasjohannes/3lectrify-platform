@@ -1,0 +1,29 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "pnpm build",
+  "devCommand": "pnpm dev",
+  "installCommand": "pnpm install",
+  "framework": null,
+  "outputDirectory": "apps/3lectrify/.next",
+  "git": {
+    "deploymentEnabled": {
+      "main": true
+    }
+  },
+  "env": {
+    "NEXT_PUBLIC_SANITY_PROJECT_ID": "@sanity-project-id",
+    "NEXT_PUBLIC_SANITY_DATASET": "@sanity-dataset",
+    "SANITY_API_TOKEN": "@sanity-api-token"
+  },
+  "build": {
+    "env": {
+      "NEXT_PUBLIC_SANITY_PROJECT_ID": "@sanity-project-id",
+      "NEXT_PUBLIC_SANITY_DATASET": "@sanity-dataset",
+      "SANITY_API_TOKEN": "@sanity-api-token"
+    }
+  },
+  "regions": ["fra1"],
+  "cleanUrls": true,
+  "trailingSlash": false
+}
+
