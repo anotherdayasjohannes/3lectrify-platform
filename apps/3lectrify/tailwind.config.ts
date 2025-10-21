@@ -20,7 +20,7 @@ const config: Config = {
       },
       // Custom Font Sizes - Figma Design System
       fontSize: {
-        'body': ['18px', '24px'],           // General body text
+        'body': ['18px', '26px'],           // General body text (144.444% line-height)
         'body-hero': ['24px', '34px'],      // Hero body text
         'nav': ['18px', '24px'],            // Navigation links
         'h1': ['48px', '58px'],             // Already correct
