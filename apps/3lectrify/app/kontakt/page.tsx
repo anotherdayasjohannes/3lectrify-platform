@@ -1,5 +1,4 @@
-import { pageQuery } from '@3lectrify/sanity';
-import { client } from '@3lectrify/sanity/lib/client';
+import { client, pageQuery } from '@3lectrify/sanity';
 import {
   Hero,
   HeroGradient,
