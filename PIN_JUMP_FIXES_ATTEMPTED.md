@@ -93,28 +93,54 @@ style={{
 
 ---
 
-## 🔄 Attempt 5: GSAP `invalidateOnRefresh` (CURRENT - FROM OFFICIAL DOCS!)
+## ❌ Attempt 5: GSAP `invalidateOnRefresh`
 
-**What we're trying:**
+**What we tried:**
 ```tsx
 scrollTrigger: {
   // ... existing config
-  invalidateOnRefresh: true // ← GSAP official fix!
+  invalidateOnRefresh: true
 }
 ```
 
 **Theory (from GSAP docs):**
 > "invalidateOnRefresh: true forces the animation to recalculate its start/end values on every ScrollTrigger refresh, which can prevent layout shifts during pinning."
 
+**Result:** FAILED - Jump still present (testing showed no improvement)
+
+**Why it failed:** While it forces recalculation, it doesn't prevent the DOM manipulation that causes the jump in Next.js/React.
+
+---
+
+## 🔄 Attempt 6: `pinReparent: false` (CURRENT - NEXT.JS-SPECIFIC FIX!)
+
+**What we're trying:**
+```tsx
+scrollTrigger: {
+  // ... existing config
+  pinReparent: false, // ← THE KEY FIX for Next.js!
+  invalidateOnRefresh: true // ← Keep this too
+}
+```
+
+**The Discovery (from GSAP community + search results):**
+> "Pinned elements jump to the end of the container before pinning correctly" - This is a **Next.js/React-specific issue**!
+
 **Why this should work:**
-- Jump happens because browser recalculates layout before pin
-- GSAP's cached measurements become stale
-- `invalidateOnRefresh` ensures fresh calculations every time
-- No stale data = no unexpected position shifts
+- **The Problem:** By default, GSAP moves (reparents) the pinned element in the DOM to create the pin-spacer wrapper
+- **In Next.js:** This DOM manipulation triggers React's reconciliation, causing a 12px layout shift
+- **The Fix:** `pinReparent: false` tells GSAP to pin the element **in place** without moving it in the DOM
+- **Result:** No reparenting = No React reconciliation = No jump!
 
-**Status:** TESTING - Awaiting diagnostic results
+**Combined approach:**
+- `pinReparent: false` → Prevents DOM manipulation (THE KEY!)
+- `invalidateOnRefresh: true` → Ensures fresh measurements
+- `contain: 'layout'` → Isolates layout calculations
+- `isolation: 'isolate'` → Creates stacking context
 
-**Source:** Official GSAP documentation and community recommendations
+**Status:** TESTING - This is the most promising fix yet!
+
+**Source:** GSAP community discussions about Next.js pinning issues
 
 ---
 
