@@ -196,6 +196,7 @@ interface SanityBlock {
     linkedinUrl?: string;
     email?: string;
   }>;
+  heading?: string; // TeamGrid specific
   introText?: PortableTextBlock[];
   // FeatureShowcase specific
   title?: string;
@@ -507,7 +508,7 @@ export default async function DynamicPage({ params }: { params: Promise<{ slug: 
             return (
               <TeamGrid
                 key={index}
-                heading={block.headline}
+                heading={block.heading}
                 introText={block.introText}
                 teamMembers={block.teamMembers || []}
               />
