@@ -58,6 +58,33 @@ interface SanityBlock {
     alt?: string;
   };
   imagePosition?: 'above' | 'side' | 'left' | 'right';
+  enableParallax?: boolean;
+  parallaxImages?: Array<{
+    asset?: {
+      url: string;
+      metadata?: {
+        dimensions: {
+          width: number;
+          height: number;
+        };
+      };
+    };
+    hotspot?: {
+      x: number;
+      y: number;
+      height: number;
+      width: number;
+    };
+    crop?: {
+      top: number;
+      bottom: number;
+      left: number;
+      right: number;
+    };
+    alt?: string;
+    perspective?: string;
+  }>;
+  parallaxEffect?: 'mouse' | 'autoRotate' | 'layered';
   sectionHeadline?: string;
   sectionDescription?: string;
   cards?: Array<{
@@ -220,6 +247,20 @@ export default async function HomePage() {
                     : undefined
                 }
                 imagePosition={block.imagePosition as 'above' | 'side'}
+                enableParallax={block.enableParallax}
+                parallaxImages={
+                  block.enableParallax && block.parallaxImages
+                    ? block.parallaxImages.map((img) => ({
+                        url: img.asset?.url || '',
+                        alt: img.alt || '',
+                        width: img.asset?.metadata?.dimensions.width || 1200,
+                        height: img.asset?.metadata?.dimensions.height || 630,
+                        hotspot: img.hotspot,
+                        perspective: img.perspective || 'Center',
+                      }))
+                    : undefined
+                }
+                parallaxEffect={block.parallaxEffect}
               />
             );
 
@@ -431,3 +472,4 @@ export default async function HomePage() {
     </main>
   );
 }
+

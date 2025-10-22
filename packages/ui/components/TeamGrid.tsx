@@ -59,9 +59,10 @@ export function TeamGrid({ heading, introText, teamMembers }: TeamGridProps) {
               opacity: 1,
               x: 0,
               y: 0,
-              rotateY: 0,
-              rotateX: 0,
-              rotateZ: 0,
+              rotateY: 0, // Flat
+              rotateX: 0, // Level
+              rotateZ: 0, // Level
+              scale: 1,
             });
           }
         });
@@ -95,7 +96,7 @@ export function TeamGrid({ heading, introText, teamMembers }: TeamGridProps) {
           x: 1000, // Off-screen to the right
           y: -150, // Start higher (creates arc)
           opacity: 0,
-          rotateY: -45, // Angled away
+          rotateY: -360, // Start one full rotation behind (will spin forward to 0°)
           rotateX: 15, // Tilted up
           rotateZ: -10, // Slight tilt
           scale: 0.7, // Smaller start
@@ -117,19 +118,22 @@ export function TeamGrid({ heading, introText, teamMembers }: TeamGridProps) {
           y: 0, // Arc down (creates momentum)
           opacity: 1,
           scale: 1,
-          rotateY: 360, // Full 360° = back to flat (0°)
+          rotateY: 0, // End at 0° (flat) - from -360° = one full forward rotation
           rotateX: 0, // Completely level
           rotateZ: 0, // Completely level
           duration: 2,
           ease: EASINGS.smooth,
-          clearProps: 'rotateY,rotateX,rotateZ', // 🔧 Clear rotation props at end = perfectly flat
           onUpdate: function() {
             // Show overlay when card is "flipped" (between 90° and 270°)
             const currentRotation = gsap.getProperty(card, 'rotateY') as number;
             const cardEdge = card.querySelector('[data-card-edge]') as HTMLElement;
             
+            // Normalize angle to 0-360 range for consistent checks
+            const normalizedAngle = ((currentRotation % 360) + 360) % 360;
+            
             if (overlay) {
-              if (currentRotation > 90 && currentRotation < 270) {
+              // Show overlay when card is showing its back (around 180°)
+              if (normalizedAngle > 90 && normalizedAngle < 270) {
                 // Card is showing "back" - reveal overlay
                 overlay.style.opacity = '1';
                 overlay.style.visibility = 'visible';
@@ -144,7 +148,6 @@ export function TeamGrid({ heading, introText, teamMembers }: TeamGridProps) {
             if (cardEdge) {
               // Calculate edge visibility based on rotation angle
               // Most visible at 90° and 270° (side view), invisible at 0° and 180° (flat)
-              const normalizedAngle = currentRotation % 360;
               let edgeOpacity = 0;
               
               // Edge visible when card is turning (not flat)

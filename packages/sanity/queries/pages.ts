@@ -25,7 +25,24 @@ export const pageQuery = groq`
           crop,
           alt
         },
-        imagePosition
+        imagePosition,
+        enableParallax,
+        parallaxImages[] {
+          asset-> {
+            url,
+            metadata {
+              dimensions {
+                width,
+                height
+              }
+            }
+          },
+          hotspot,
+          crop,
+          alt,
+          perspective
+        },
+        parallaxEffect
       },
       _type == "heroGradient" => {
         headline,
