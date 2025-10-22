@@ -8,6 +8,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { PortableText, type PortableTextBlock } from '@portabletext/react';
 import { getFocalPoint } from '@3lectrify/sanity';
 import { Stats } from './Stats';
+import { useScrollTextReveal } from '@3lectrify/animations';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -56,6 +57,14 @@ export function TextImage({
   fullWidth = false,
 }: TextImageProps) {
   const containerRef = useRef<HTMLElement>(null);
+
+  // ✨ Scroll-triggered text reveal for headline
+  const headlineRef = useScrollTextReveal({
+    stagger: 0.05,
+    duration: 0.4,
+    yDistance: 15,
+    triggerStart: 'top 85%',
+  });
 
   useGSAP(
     () => {
@@ -139,7 +148,10 @@ export function TextImage({
             }`}
           >
             {headline && (
-              <h2 className="text-[32px] leading-[40px] tracking-[0.36px] font-light w-full lg:text-[36px] lg:leading-[46px]">
+              <h2 
+                ref={headlineRef as any}
+                className="text-[32px] leading-[40px] tracking-[0.36px] font-light w-full lg:text-[36px] lg:leading-[46px]"
+              >
                 {headline}
               </h2>
             )}

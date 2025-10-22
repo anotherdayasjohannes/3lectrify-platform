@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { PortableText } from '@portabletext/react';
+import { useScrollTextReveal } from '@3lectrify/animations';
 
 interface CTAProps {
   headline?: string;
@@ -18,6 +19,14 @@ export function CTA({
   buttonLink,
   openInNewTab = false,
 }: CTAProps) {
+  // ✨ Scroll-triggered text reveal for headline
+  const headlineRef = useScrollTextReveal({
+    stagger: 0.05,
+    duration: 0.4,
+    yDistance: 15,
+    triggerStart: 'top 85%',
+  });
+
   const isExternal = buttonLink.startsWith('http');
   
   const ButtonComponent = isExternal ? 'a' : Link;
@@ -36,7 +45,10 @@ export function CTA({
           {/* Header: Headline + Description */}
           <header className="flex flex-col items-center text-center gap-[25px] md:gap-5 sm:gap-4 max-w-[900px]">
             {headline && (
-              <h2 className="text-[36px] leading-[46px] lg:text-[32px] lg:leading-[40px] sm:text-[28px] sm:leading-[36px] tracking-[0.36px] font-light text-white m-0">
+              <h2 
+                ref={headlineRef as any}
+                className="text-[36px] leading-[46px] lg:text-[32px] lg:leading-[40px] sm:text-[28px] sm:leading-[36px] tracking-[0.36px] font-light text-white m-0"
+              >
                 {headline}
               </h2>
             )}

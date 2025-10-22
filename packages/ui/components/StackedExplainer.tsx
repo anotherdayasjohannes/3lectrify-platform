@@ -6,6 +6,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Image from 'next/image';
 import { PortableText, type PortableTextBlock } from '@portabletext/react';
+import { useScrollTextReveal } from '@3lectrify/animations';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -40,6 +41,14 @@ export function StackedExplainer({
 }: StackedExplainerProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+
+  // ✨ Scroll-triggered text reveal for headline
+  const headlineRef = useScrollTextReveal({
+    stagger: 0.05,
+    duration: 0.4,
+    yDistance: 15,
+    triggerStart: 'top 85%',
+  });
 
   // Check for reduced motion preference
   const shouldReduceMotion = typeof window !== 'undefined' 
@@ -133,7 +142,10 @@ export function StackedExplainer({
       {(sectionHeadline || sectionIntro) && (
         <div className="content-wrapper pt-[100px] pb-[30px] md:pt-[80px] md:pb-[20px]">
           {sectionHeadline && (
-            <h2 className="text-[40px] leading-[50px] tracking-[0.4px] font-light text-white mb-[20px] md:text-[36px] md:leading-[46px]">
+            <h2 
+              ref={headlineRef as any}
+              className="text-[40px] leading-[50px] tracking-[0.4px] font-light text-white mb-[20px] md:text-[36px] md:leading-[46px]"
+            >
               {sectionHeadline}
             </h2>
           )}

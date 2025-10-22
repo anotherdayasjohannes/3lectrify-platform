@@ -5,6 +5,7 @@ import { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useScrollTextReveal } from '@3lectrify/animations';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -30,6 +31,21 @@ export function FeatureCards({
   cards,
 }: FeatureCardsProps) {
   const containerRef = useRef<HTMLElement>(null);
+
+  // ✨ Scroll-triggered text reveal for headline
+  const headlineRef = useScrollTextReveal({
+    stagger: 0.05,
+    duration: 0.4,
+    yDistance: 15,
+    triggerStart: 'top 85%',
+  });
+
+  const descriptionRef = useScrollTextReveal({
+    stagger: 0.03,
+    duration: 0.4,
+    yDistance: 10,
+    triggerStart: 'top 85%',
+  });
 
   useGSAP(
     () => {
@@ -115,12 +131,18 @@ export function FeatureCards({
         {/* Section Header - Left Aligned */}
         <div className="mb-[60px] md:mb-[40px]">
           {sectionHeadline && (
-            <h2 className="text-[40px] leading-[50px] tracking-[0.4px] font-light mb-[20px] text-white text-left md:text-[32px] md:leading-[42px] md:mb-[15px]">
+            <h2 
+              ref={headlineRef as any}
+              className="text-[40px] leading-[50px] tracking-[0.4px] font-light mb-[20px] text-white text-left md:text-[32px] md:leading-[42px] md:mb-[15px]"
+            >
               {sectionHeadline}
             </h2>
           )}
           {sectionDescription && (
-            <p className="text-[18px] leading-[30px] tracking-[0.18px] font-light text-white text-left max-w-[800px] md:text-[16px] md:leading-[26px]">
+            <p 
+              ref={descriptionRef as any}
+              className="text-[18px] leading-[30px] tracking-[0.18px] font-light text-white text-left max-w-[800px] md:text-[16px] md:leading-[26px]"
+            >
               {sectionDescription}
             </p>
           )}

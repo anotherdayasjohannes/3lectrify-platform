@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Lato } from 'next/font/google';
 import { client, siteSettingsQuery } from '@3lectrify/sanity';
 import { Header, Footer } from '@3lectrify/ui';
+import { AnimationInit } from '../components/AnimationInit';
 import "./globals.css";
 
 const lato = Lato({
@@ -60,6 +61,9 @@ export default async function RootLayout({
   return (
     <html lang="de" className={lato.variable}>
       <body className="antialiased">
+        {/* Initialize 3lectrify custom animations */}
+        <AnimationInit />
+        
         <Header
           logo={settings?.logo ? {
             url: settings.logo.asset?.url,

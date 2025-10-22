@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
+import { EASINGS } from '../easings/custom';
 
 // Try to import SplitText, but provide fallback
 let SplitText: any = null;
@@ -44,7 +45,8 @@ export interface TextRevealOptions {
   
   /**
    * Easing function
-   * @default 'power3.out'
+   * Uses 3lectrifyCinematic if available, falls back to power3.out
+   * @default '3lectrifyCinematic' or 'power3.out'
    */
   ease?: string;
   
@@ -107,7 +109,7 @@ export function useTextReveal(options: TextRevealOptions = {}) {
     stagger = 0.08,
     duration = 0.6,
     yDistance = 30,
-    ease = 'power3.out',
+    ease = EASINGS.hero, // ✨ Uses 3lectrifyCinematic if available
     delay = 0.2,
     once = true,
   } = options;
