@@ -39,6 +39,10 @@ export function FeatureCards({
       // "The Spotlight" - Sequential focus animation with scroll pinning
       // Each card gets its moment: fade in → spotlight (scale + glow) → settle
       // The page "pauses" while the animation plays - Apple-style storytelling!
+      
+      // Store ScrollTrigger instance for cleanup
+      let scrollTriggerInstance: ScrollTrigger | null = null;
+      
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
@@ -51,26 +55,15 @@ export function FeatureCards({
           markers: process.env.NODE_ENV === 'development',
           scrub: false, // Time-based animation (not scroll-scrubbed)
           onRefresh: (self) => {
+            // Store reference for later cleanup
+            scrollTriggerInstance = self;
+            
             // CRITICAL: Set pin-spacer background to match our dark theme
             // GSAP creates a wrapper (.pin-spacer) around the pinned element
             // Without this, the spacer shows as white/light
             const pinSpacer = self.pin?.parentElement;
             if (pinSpacer && pinSpacer.classList.contains('pin-spacer')) {
               pinSpacer.style.backgroundColor = '#293645';
-            }
-          },
-          onComplete: (self) => {
-            // CLEANUP: Remove pin-spacer after animation completes
-            // This prevents the spacer from creating a gap when scrolling back up
-            // Since once: true, the animation won't replay, so we can safely remove it
-            const pinSpacer = self.pin?.parentElement;
-            if (pinSpacer && pinSpacer.classList.contains('pin-spacer')) {
-              // Unwrap: move the section out of the pin-spacer
-              const section = self.pin;
-              if (section && pinSpacer.parentNode) {
-                pinSpacer.parentNode.insertBefore(section, pinSpacer);
-                pinSpacer.remove();
-              }
             }
           }
         }
@@ -105,6 +98,24 @@ export function FeatureCards({
           ease: 'power2.out'
         }, delay + 1.2); // Adjusted timing
       });
+      
+      // CLEANUP: Add final step to remove pin-spacer after all animations complete
+      // This runs as part of the timeline, ensuring proper timing
+      tl.call(() => {
+        if (scrollTriggerInstance) {
+          const pinSpacer = scrollTriggerInstance.pin?.parentElement;
+          if (pinSpacer && pinSpacer.classList.contains('pin-spacer')) {
+            // Unwrap: move the section out of the pin-spacer
+            const section = scrollTriggerInstance.pin;
+            if (section && pinSpacer.parentNode) {
+              pinSpacer.parentNode.insertBefore(section, pinSpacer);
+              pinSpacer.remove();
+            }
+          }
+          // Kill the ScrollTrigger to fully clean up
+          scrollTriggerInstance.kill();
+        }
+      }, [], '+=0.5'); // Add 0.5s delay after last animation
     },
     { scope: containerRef }
   );
