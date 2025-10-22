@@ -42,8 +42,8 @@ export function FeatureCards({
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
-          start: 'top 15%', // Pin when section header is nicely positioned
-          end: '+=50%', // Pin for 50vh worth of scroll - enough for full animation
+          start: 'top 25%', // Start earlier - animation begins sooner
+          end: '+=100%', // End later - longer pin duration for comfortable viewing
           pin: true, // 🎬 THE MAGIC - freeze the page!
           pinSpacing: true, // Prevents next section from sliding underneath
           anticipatePin: 1, // Smoother pin start
@@ -57,6 +57,20 @@ export function FeatureCards({
             const pinSpacer = self.pin?.parentElement;
             if (pinSpacer && pinSpacer.classList.contains('pin-spacer')) {
               pinSpacer.style.backgroundColor = '#293645';
+            }
+          },
+          onComplete: (self) => {
+            // CLEANUP: Remove pin-spacer after animation completes
+            // This prevents the spacer from creating a gap when scrolling back up
+            // Since once: true, the animation won't replay, so we can safely remove it
+            const pinSpacer = self.pin?.parentElement;
+            if (pinSpacer && pinSpacer.classList.contains('pin-spacer')) {
+              // Unwrap: move the section out of the pin-spacer
+              const section = self.pin;
+              if (section && pinSpacer.parentNode) {
+                pinSpacer.parentNode.insertBefore(section, pinSpacer);
+                pinSpacer.remove();
+              }
             }
           }
         }
