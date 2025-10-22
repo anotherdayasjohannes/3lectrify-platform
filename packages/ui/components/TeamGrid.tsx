@@ -57,7 +57,7 @@ export function TeamGrid({ heading, introText, teamMembers }: TeamGridProps) {
           if (card) {
             gsap.set(card, { 
               opacity: 1,
-              y: 0,
+              x: 0,
               rotateY: 0,
             });
           }
@@ -86,13 +86,13 @@ export function TeamGrid({ heading, introText, teamMembers }: TeamGridProps) {
         },
       });
 
-      // Initial state: cards off-screen from top, rotated, invisible
+      // Initial state: cards off-screen from right, invisible
       cardElements.forEach((card, index) => {
         gsap.set(card, {
-          y: -800,
+          x: 1000, // Off-screen to the right
           opacity: 0,
           rotateY: 0,
-          scale: 0.5,
+          scale: 0.8, // Slightly larger start (more natural for "walking in")
         });
       });
 
@@ -105,12 +105,12 @@ export function TeamGrid({ heading, introText, teamMembers }: TeamGridProps) {
         // Find the overlay element inside this card
         const overlay = card.querySelector('[data-bio-overlay]') as HTMLElement;
 
-        // Fly in + spin + land
+        // Walk in from right + spin + land
         tl.to(card, {
-          y: 0,
+          x: 0, // Walk to final position
           opacity: 1,
           scale: 1,
-          rotateY: 360, // Full 360° spin!
+          rotateY: 360, // Full 360° spin while walking!
           duration: 2,
           ease: EASINGS.smooth,
           onUpdate: function() {
