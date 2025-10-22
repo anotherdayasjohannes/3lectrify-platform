@@ -43,7 +43,7 @@ export function FeatureCards({
         scrollTrigger: {
           trigger: containerRef.current,
           start: 'top 15%', // Pin when section header is nicely positioned
-          end: '+=100%', // Shorter pin duration to minimize white space
+          end: '+=0%', // No extra scroll distance - just pin during animation
           pin: true, // 🎬 THE MAGIC - freeze the page!
           pinSpacing: true, // Prevents next section from sliding underneath
           anticipatePin: 1, // Smoother pin start
