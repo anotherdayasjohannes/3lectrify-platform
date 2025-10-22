@@ -184,7 +184,7 @@ export function TextImage({
 
             {/* Stats */}
             {stats && stats.length > 0 && (
-              <Stats stats={stats} layout="horizontal" variant={variant} />
+              <Stats stats={stats} layout="horizontal" variant={variant} embedded />
             )}
           </article>
         </div>
