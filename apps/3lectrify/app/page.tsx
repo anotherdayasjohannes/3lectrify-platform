@@ -362,6 +362,8 @@ export default async function HomePage() {
                 key={index}
                 references={references}
                 theme={block.theme || 'dark'}
+                headline={block.headline}
+                subtext={block.description}
               />
             );
 
