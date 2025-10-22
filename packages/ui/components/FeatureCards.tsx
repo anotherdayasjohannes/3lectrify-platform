@@ -48,15 +48,15 @@ export function FeatureCards({
       });
 
       cardElements.forEach((card, index) => {
-        // Calculate stagger timing - slower for better storytelling
-        const delay = index * 0.5; // Increased from 0.25s to 0.5s
+        // Calculate stagger timing - much slower for comfortable reading
+        const delay = index * 0.8; // Increased from 0.5s to 0.8s - more breathing room
 
-        // Step 1: Fade in with slight scale - slower entrance
+        // Step 1: Fade in with slight scale - gentle entrance
         tl.from(card, {
           opacity: 0,
           scale: 0.9,
           y: 30,
-          duration: 0.6, // Increased from 0.4s
+          duration: 0.7, // Increased from 0.6s - more gradual
           ease: 'power2.out'
         }, delay);
 
@@ -64,17 +64,17 @@ export function FeatureCards({
         tl.to(card, {
           scale: 1.05,
           boxShadow: '0 20px 60px rgba(136, 192, 177, 0.3)',
-          duration: 0.5, // Increased from 0.3s
+          duration: 0.6, // Increased from 0.5s - longer spotlight
           ease: 'power2.inOut'
-        }, delay + 0.5); // Adjusted timing
+        }, delay + 0.6); // Adjusted timing
 
         // Step 3: Settle into final position
         tl.to(card, {
           scale: 1,
           boxShadow: '0 0 0 rgba(136, 192, 177, 0)',
-          duration: 0.4, // Increased from 0.3s
+          duration: 0.5, // Increased from 0.4s - gentle settle
           ease: 'power2.out'
-        }, delay + 1.0); // Adjusted timing
+        }, delay + 1.2); // Adjusted timing
       });
     },
     { scope: containerRef }
