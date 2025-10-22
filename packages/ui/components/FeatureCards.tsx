@@ -42,7 +42,7 @@ export function FeatureCards({
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
-          start: 'top -20px', // 🎯 Pin at -20px so headline (80px inside) sits at 60px from viewport
+          start: 'top top', // 🎯 Pin when section top hits viewport top (after previous section exits)
           end: '+=150%', // Animation completes after 150vh of scrolling - comfortable pace
           pin: true, // 🎬 Freeze the page while animation plays
           pinSpacing: true, // Prevents next section from sliding underneath
@@ -97,7 +97,7 @@ export function FeatureCards({
   return (
     <section
       ref={containerRef}
-      className="relative pt-[80px] pb-[100px] bg-[#293645] md:pt-[60px] md:pb-[80px]"
+      className="relative pt-[60px] pb-[100px] bg-[#293645] md:pt-[60px] md:pb-[80px]"
       style={{ zIndex: 100, backgroundColor: '#293645' }}
     >
       <div className="content-wrapper">
