@@ -43,7 +43,7 @@ export function FeatureCards({
         scrollTrigger: {
           trigger: containerRef.current,
           start: 'top 15%', // Pin when section header is nicely positioned
-          end: '+=0%', // No extra scroll distance - just pin during animation
+          end: '+=50%', // Pin for 50vh worth of scroll - enough for full animation
           pin: true, // 🎬 THE MAGIC - freeze the page!
           pinSpacing: true, // Prevents next section from sliding underneath
           anticipatePin: 1, // Smoother pin start
@@ -117,7 +117,7 @@ export function FeatureCards({
               style={{ opacity: 1 }}
             >
               {card.icon && (
-                <div className="w-[100px] h-[100px] mb-[25px] flex items-center justify-center bg-gradient-to-br from-[#88C0B1] to-[#6BA896] rounded-full p-[20px] transition-transform duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] hover:scale-110 md:w-[80px] md:h-[80px] md:mb-[20px] mx-auto">
+                <div className="w-[100px] h-[100px] mb-[25px] flex items-center justify-center bg-gradient-to-br from-[#88C0B1] to-[#6BA896] rounded-full p-[20px] transition-transform duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] hover:scale-110 md:w-[80px] md:h-[80px] md:mb-[20px]">
                   <Image
                     src={card.icon.url}
                     alt={card.icon.alt || ''}
