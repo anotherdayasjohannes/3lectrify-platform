@@ -46,7 +46,7 @@ export function FeatureCards({
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
-          start: 'top 50px', // 🎯 Pin when section top is 50px from viewport top
+          start: 'top 69px', // 🎯 DIAGNOSTIC FIX: Compensate for 19px ScrollTrigger miscalculation (50px + 19px)
           end: '+=150%', // Animation completes after 150vh of scrolling - comfortable pace
           pin: true, // 🎬 Freeze the page while animation plays
           pinSpacing: true, // Prevents next section from sliding underneath
