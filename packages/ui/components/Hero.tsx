@@ -1,6 +1,9 @@
+'use client';
+
 import Image from 'next/image';
 import { PortableText, type PortableTextBlock } from '@portabletext/react';
 import { getFocalPoint } from '@3lectrify/sanity';
+import { useTextReveal } from '@3lectrify/animations';
 
 interface HeroProps {
   headline?: string;
@@ -29,6 +32,23 @@ export function Hero({
   imagePosition = 'above',
 }: HeroProps) {
   const isSideLayout = showImage && heroImage && imagePosition === 'side';
+
+  // ✨ GSAP SplitText animations
+  const headlineRef = useTextReveal({ 
+    split: 'words', 
+    stagger: 0.08, 
+    duration: 0.6,
+    yDistance: 30,
+    delay: 0.3
+  });
+  
+  const subtextRef = useTextReveal({ 
+    split: 'words', 
+    stagger: 0.05, 
+    duration: 0.5,
+    yDistance: 20,
+    delay: 0.8  // Start after headline
+  });
 
   return (
     <section className="bg-[#293645] text-white pt-10 pb-[60px] lg:pt-[50px] lg:pb-20">
@@ -74,12 +94,18 @@ export function Hero({
           {/* Text Content */}
           <div className="max-w-[900px] w-full flex flex-col gap-[25px]">
             {headline && (
-              <h1 className="text-[40px] leading-[50px] tracking-[0.48px] font-light text-white m-0 lg:text-[48px] lg:leading-[58px]">
+              <h1 
+                ref={headlineRef as any}
+                className="text-[40px] leading-[50px] tracking-[0.48px] font-light text-white m-0 lg:text-[48px] lg:leading-[58px]"
+              >
                 {headline}
               </h1>
             )}
           {subtext && (
-            <div className="text-body-hero font-light tracking-[0.24px] text-white">
+            <div 
+              ref={subtextRef as any}
+              className="text-body-hero font-light tracking-[0.24px] text-white"
+            >
               <PortableText 
                 value={subtext}
                 components={{
