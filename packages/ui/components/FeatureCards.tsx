@@ -43,7 +43,7 @@ export function FeatureCards({
         scrollTrigger: {
           trigger: containerRef.current,
           start: 'top 25%', // Start earlier - animation begins sooner
-          end: '+=80%', // Balanced duration for animation + comfortable viewing
+          end: '+=50%', // Reduced spacer = minimal gap when scrolling back up
           pin: true, // 🎬 THE MAGIC - freeze the page!
           pinSpacing: true, // Prevents next section from sliding underneath
           anticipatePin: 1, // Smoother pin start
