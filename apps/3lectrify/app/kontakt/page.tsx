@@ -2,7 +2,6 @@ import { client, pageQuery } from '@3lectrify/sanity';
 import {
   HeroGradient,
   ContactSimple,
-  GradientSpacer,
 } from '@3lectrify/ui';
 
 interface Address {
@@ -138,9 +137,6 @@ export default async function KontaktPage() {
             return null;
         }
       })}
-
-      {/* Gradient Spacer before Footer */}
-      <GradientSpacer />
     </main>
   );
 }
