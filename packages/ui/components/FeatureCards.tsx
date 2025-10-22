@@ -46,7 +46,6 @@ export function FeatureCards({
           end: '+=150%', // Animation completes after 150vh of scrolling - comfortable pace
           pin: true, // 🎬 Freeze the page while animation plays
           pinSpacing: true, // Prevents next section from sliding underneath
-          anticipatePin: 1, // Smoother pin start
           scrub: 1, // Tie animation to scroll position (1s smooth lag)
           // No 'once' needed - scrub naturally handles forward/backward scroll
           markers: process.env.NODE_ENV === 'development',
