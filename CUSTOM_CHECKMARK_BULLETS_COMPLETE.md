@@ -227,3 +227,4 @@ The TextImage component now supports:
 **Ready to create the "Ihr Vorteil" page content!** 🚀✨
 
 
+

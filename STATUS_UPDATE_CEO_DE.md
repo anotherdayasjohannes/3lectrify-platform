@@ -224,3 +224,4 @@ Die neue Plattform ist bereit für den Live-Betrieb.
 
 *Erstellt: 21. Oktober 2025 | Status: Abgeschlossen | Nächster Schritt: Go-Live*
 
+

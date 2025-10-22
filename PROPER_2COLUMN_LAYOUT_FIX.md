@@ -191,3 +191,4 @@ The `.content-wrapper` class already has `padding: 0 50px`, so we don't need sec
 **The 2-column layout is now properly implemented! 🚀**
 
 
+

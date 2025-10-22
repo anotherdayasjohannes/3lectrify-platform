@@ -217,3 +217,4 @@ After fix, running the audit should show:
 **Responsive breakpoints are now correctly implemented! 🎯**
 
 
+

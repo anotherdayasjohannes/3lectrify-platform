@@ -90,3 +90,4 @@ The hero gradient section now **precisely matches** the Figma design:
 The component is now **pixel-perfect** with the Figma design. 🎉
 
 
+

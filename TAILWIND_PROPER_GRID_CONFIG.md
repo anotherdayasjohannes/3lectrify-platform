@@ -234,3 +234,4 @@ export default config;
 **The 2-column layout is now implemented THE PROPER TAILWIND WAY! 🚀**
 
 
+

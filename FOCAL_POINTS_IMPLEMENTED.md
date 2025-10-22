@@ -152,3 +152,4 @@ If needed, these can be updated using the same pattern.
 **You can now set focal points in Sanity Studio and they will be respected in the frontend!** 📸✨
 
 
+

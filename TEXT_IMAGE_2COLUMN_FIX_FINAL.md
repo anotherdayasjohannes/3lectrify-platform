@@ -155,3 +155,4 @@ Single column layout ✅
 **The 2-column layout is now PROPERLY implemented with custom CSS! 🚀**
 
 
+

@@ -259,3 +259,4 @@ Update components one-by-one to use `urlForImage()` or `getImageProps()` for aut
 You can start setting focal points in Sanity Studio right away. The data is already being fetched and stored - components can be updated gradually to use it.
 
 
+

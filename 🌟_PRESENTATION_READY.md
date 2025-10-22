@@ -238,3 +238,4 @@ Result: Production-ready platform
 
 *P.S. Make sure to have Vercel deployment URL and Sanity Studio URL ready for the demo!*
 
+
