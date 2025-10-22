@@ -102,8 +102,11 @@ export function FeatureCards({
         zIndex: 100, 
         backgroundColor: '#293645',
         willChange: 'transform',
-        transform: 'translateZ(0)',
-        backfaceVisibility: 'hidden'
+        transform: 'translate3d(0,0,0)',
+        transformOrigin: 'top left',
+        backfaceVisibility: 'hidden',
+        top: 0,
+        left: 0
       }}
     >
       <div className="content-wrapper">
