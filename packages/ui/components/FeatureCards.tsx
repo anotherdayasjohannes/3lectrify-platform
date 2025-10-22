@@ -47,6 +47,7 @@ export function FeatureCards({
           pin: true, // 🎬 Freeze the page while animation plays
           pinSpacing: true, // Prevents next section from sliding underneath
           scrub: 1, // Tie animation to scroll position (1s smooth lag)
+          invalidateOnRefresh: true, // 🔄 GSAP DOC FIX: Force recalculate on every refresh - prevents layout jumps
           // No 'once' needed - scrub naturally handles forward/backward scroll
           markers: process.env.NODE_ENV === 'development',
           onRefresh: (self) => {
