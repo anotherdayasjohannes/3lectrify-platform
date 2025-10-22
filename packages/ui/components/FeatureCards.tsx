@@ -42,7 +42,7 @@ export function FeatureCards({
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
-          start: 'top top', // 🎯 AD FIX: Pin starts AFTER previous section exits - no gap increase!
+          start: 'top 60px', // 🎯 AD FIX: 60px space between header and headline
           end: '+=150%', // Animation completes after 150vh of scrolling - comfortable pace
           pin: true, // 🎬 Freeze the page while animation plays
           pinSpacing: true, // Prevents next section from sliding underneath
