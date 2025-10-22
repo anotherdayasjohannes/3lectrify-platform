@@ -109,7 +109,7 @@ export function FeatureCards({
         left: 0
       }}
     >
-      <div className="content-wrapper">
+      <div className="content-wrapper overflow-hidden">
         {/* Section Header - Left Aligned */}
         <div className="mb-[60px] md:mb-[40px]">
           {sectionHeadline && (
