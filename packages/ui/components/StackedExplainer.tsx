@@ -52,11 +52,13 @@ export function StackedExplainer({
       
       if (!cardElements.length || shouldReduceMotion) {
         // Graceful degradation: Set final states immediately
-        cardElements.forEach((card) => {
+        cardElements.forEach((card, index) => {
           if (card) {
+            const xOffset = (index - (cardElements.length - 1) / 2) * 150; // Cascade horizontally even without animation
             gsap.set(card, { 
               opacity: 1, 
               scale: 1,
+              x: xOffset,
               rotation: 0
             });
           }
@@ -95,16 +97,19 @@ export function StackedExplainer({
         });
       });
 
-      // Animate cards flying in and stacking with rotation
+      // Animate cards flying in and stacking with rotation + horizontal offset
       cardElements.forEach((card, index) => {
         const rotation = (index - Math.floor(cardElements.length / 2)) * 3; // -3°, 0°, +3° etc.
+        // 🎯 Horizontal cascade: Cards arranged left-to-right (01, 02, 03)
+        // Formula centers them: Card 01 left, Card 02 center, Card 03 right
+        const xOffset = (index - (cardElements.length - 1) / 2) * 150;
         
         // Set opacity to 1 immediately when card starts animating
         tl.set(card, { opacity: 1 }, index * 0.8);
         
         // Then animate the fly-in (without opacity change)
         tl.to(card, {
-          x: 0,
+          x: xOffset, // 🎯 Horizontal offset so numbers are visible side-by-side!
           scale: 1,
           rotation: rotation, // Each card slightly angled
           duration: 1.2, // ⏱️ Slower fly-in
