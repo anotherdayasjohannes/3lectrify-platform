@@ -126,6 +126,7 @@ export function TeamGrid({ heading, introText, teamMembers }: TeamGridProps) {
           onUpdate: function() {
             // Show overlay when card is "flipped" (between 90° and 270°)
             const currentRotation = gsap.getProperty(card, 'rotateY') as number;
+            const cardEdge = card.querySelector('[data-card-edge]') as HTMLElement;
             
             if (overlay) {
               if (currentRotation > 90 && currentRotation < 270) {
@@ -138,6 +139,34 @@ export function TeamGrid({ heading, introText, teamMembers }: TeamGridProps) {
                 overlay.style.visibility = 'hidden';
               }
             }
+
+            // 🎨 Show card edge/thickness while turning
+            if (cardEdge) {
+              // Calculate edge visibility based on rotation angle
+              // Most visible at 90° and 270° (side view), invisible at 0° and 180° (flat)
+              const normalizedAngle = currentRotation % 360;
+              let edgeOpacity = 0;
+              
+              // Edge visible when card is turning (not flat)
+              if (normalizedAngle > 45 && normalizedAngle < 135) {
+                // Turning to show back (90° area)
+                edgeOpacity = Math.sin(((normalizedAngle - 45) / 90) * Math.PI);
+              } else if (normalizedAngle > 225 && normalizedAngle < 315) {
+                // Turning to show front (270° area)
+                edgeOpacity = Math.sin(((normalizedAngle - 225) / 90) * Math.PI);
+              }
+              
+              // Apply edge effect (thick border on right side = visible edge)
+              if (edgeOpacity > 0.1) {
+                cardEdge.style.boxShadow = `
+                  inset -${Math.floor(edgeOpacity * 8)}px 0 0 rgba(255,255,255,${edgeOpacity * 0.3}),
+                  inset ${Math.floor(edgeOpacity * 8)}px 0 0 rgba(0,0,0,${edgeOpacity * 0.4}),
+                  0 2px 10px rgba(0,0,0,0.2)
+                `;
+              } else {
+                cardEdge.style.boxShadow = '0 2px 10px rgba(0,0,0,0.2)';
+              }
+            }
           },
           onComplete: function() {
             // Reset overlay to be controlled by hover after animation
@@ -145,6 +174,13 @@ export function TeamGrid({ heading, introText, teamMembers }: TeamGridProps) {
               overlay.style.opacity = '';
               overlay.style.visibility = '';
             }
+            
+            // Reset card edge to normal shadow
+            const cardEdge = card.querySelector('[data-card-edge]') as HTMLElement;
+            if (cardEdge) {
+              cardEdge.style.boxShadow = '0 2px 10px rgba(0,0,0,0.2)';
+            }
+            
             // 🔧 Ensure card is perfectly flat and positioned
             gsap.set(card, {
               x: 0,
@@ -259,6 +295,7 @@ const TeamCard = forwardRef<HTMLElement, { member: TeamMember }>(({ member }, re
             // 🎨 Subtle shadow in rest state
             boxShadow: '0 2px 10px rgba(0,0,0,0.2)',
           }}
+          data-card-edge // Marker for finding this element
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
           onFocus={() => setIsOverlayVisible(true)}
