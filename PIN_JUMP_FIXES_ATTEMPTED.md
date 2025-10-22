@@ -138,9 +138,78 @@ scrollTrigger: {
 - `contain: 'layout'` → Isolates layout calculations
 - `isolation: 'isolate'` → Creates stacking context
 
-**Status:** TESTING - This is the most promising fix yet!
+**Status:** ✅ HELPED! Jump reduced but still noticeable (~19px)
 
 **Source:** GSAP community discussions about Next.js pinning issues
+
+---
+
+## 🔄 Attempt 7: `ScrollTrigger.refresh()` after mount
+
+**What we tried:**
+```tsx
+useGSAP(() => {
+  // ...
+  ScrollTrigger.refresh(); // 🔄 CRITICAL: Refresh ScrollTrigger after DOM is fully ready
+  // ...
+})
+```
+
+**Theory:**
+- In Next.js, components mount *before* all content is fully loaded
+- ScrollTrigger might calculate positions based on an incomplete layout
+- Calling `refresh()` after everything is ready ensures more accurate initial position calculation
+
+**Result:** ✅ HELPED! Jump reduced but still noticeable (~19px remaining)
+
+**Why it helped but didn't fully solve it:** 
+- Ensures measurements are accurate
+- Doesn't prevent the trigger-point miscalculation itself
+
+---
+
+## ✅ Attempt 8: Compensate for ScrollTrigger Miscalculation (SOLVED!)
+
+**What we tried:**
+```tsx
+scrollTrigger: {
+  trigger: containerRef.current,
+  start: 'top 69px', // ← Changed from 'top 50px'
+  // ... rest of config
+}
+```
+
+**The Discovery (from diagnostic script):**
+```
+Frame 644: ⚠️ JUMP DETECTED! 19.00px shift
+Previous Y: 91.00 px  ← Headline BEFORE pin
+Current Y: 110.00 px  ← Headline AFTER pin
+Shift: 19.00 px       ← THE JUMP!
+
+📊 Style Changes:
+  sectionPosition: relative → fixed
+  sectionTop: 0px → 50px
+```
+
+**Root Cause Analysis:**
+1. We wanted: Pin at `'top 50px'` (section top at 50px from viewport)
+2. What happened: GSAP triggered pin at ~31px (19px too early!)
+3. Calculation:
+   - Headline was at 91px
+   - Section padding: 60px (mobile) or 80px (desktop)
+   - Section top: 91px - 60px = 31px ❌ (should be 50px!)
+4. After pin: Section locked to `top: 50px` → headline jumps to 110px
+
+**The Fix:**
+- Changed `start: 'top 50px'` → `start: 'top 69px'` (50px + 19px compensation)
+- GSAP thinks it's triggering at 69px
+- Due to its miscalculation, it actually triggers at 50px
+- **Result: No jump!** 🎉
+
+**Status:** ✅ **SOLVED!** Precision fix based on actual browser measurements!
+
+**Diagnostic Evidence:**
+See `DEBUG_PIN_JUMP.js` output - Frame 644 showed exact 19px shift at pin moment
 
 ---
 
