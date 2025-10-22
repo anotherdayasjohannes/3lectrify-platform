@@ -86,15 +86,15 @@ export function FeatureCards({
       className="py-[80px] pb-[100px] bg-[#293645] md:py-[60px] md:pb-[80px]"
     >
       <div className="content-wrapper">
-        {/* Section Header - Centered */}
-        <div className="text-center mb-[60px] md:mb-[40px]">
+        {/* Section Header - Left Aligned */}
+        <div className="mb-[60px] md:mb-[40px]">
           {sectionHeadline && (
-            <h2 className="text-[40px] leading-[50px] tracking-[0.4px] font-light mb-[20px] text-white md:text-[32px] md:leading-[42px] md:mb-[15px]">
+            <h2 className="text-[40px] leading-[50px] tracking-[0.4px] font-light mb-[20px] text-white text-left md:text-[32px] md:leading-[42px] md:mb-[15px]">
               {sectionHeadline}
             </h2>
           )}
           {sectionDescription && (
-            <p className="text-[18px] leading-[30px] tracking-[0.18px] font-light text-white max-w-[800px] mx-auto md:text-[16px] md:leading-[26px]">
+            <p className="text-[18px] leading-[30px] tracking-[0.18px] font-light text-white text-left max-w-[800px] md:text-[16px] md:leading-[26px]">
               {sectionDescription}
             </p>
           )}
