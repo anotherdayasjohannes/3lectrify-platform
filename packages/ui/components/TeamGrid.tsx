@@ -73,6 +73,7 @@ export function TeamGrid({ heading, introText, teamMembers }: TeamGridProps) {
           end: '+=400%',
           pin: true,
           pinSpacing: true,
+          pinReparent: false, // 🔧 CRITICAL: Prevent DOM reparenting (fixes React conflict)
           scrub: 1.5,
           anticipatePin: 1,
           onRefresh: (self) => {
@@ -141,6 +142,15 @@ export function TeamGrid({ heading, introText, teamMembers }: TeamGridProps) {
       // Add delay at end before unpinning
       tl.to({}, { duration: 1 });
 
+      // Cleanup function
+      return () => {
+        tl.kill();
+        ScrollTrigger.getAll().forEach((trigger) => {
+          if (trigger.vars.trigger === sectionRef.current) {
+            trigger.kill();
+          }
+        });
+      };
     },
     { scope: sectionRef, dependencies: [teamMembers.length] }
   );
