@@ -97,19 +97,15 @@ export function FeatureCards({
   return (
     <section
       ref={containerRef}
-      className="relative pt-[80px] pb-[100px] bg-[#293645] md:pt-[60px] md:pb-[80px] overflow-hidden"
+      className="relative pt-[80px] pb-[100px] bg-[#293645] md:pt-[60px] md:pb-[80px]"
       style={{ 
         zIndex: 100, 
         backgroundColor: '#293645',
-        willChange: 'transform',
-        transform: 'translate3d(0,0,0)',
-        transformOrigin: 'top left',
-        backfaceVisibility: 'hidden',
-        top: 0,
-        left: 0
+        contain: 'layout',
+        isolation: 'isolate'
       }}
     >
-      <div className="content-wrapper overflow-hidden">
+      <div className="content-wrapper">
         {/* Section Header - Left Aligned */}
         <div className="mb-[60px] md:mb-[40px]">
           {sectionHeadline && (
