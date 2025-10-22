@@ -42,10 +42,10 @@ export function FeatureCards({
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
-          start: 'top 15%', // Pin when section header is nicely positioned (moved up slightly)
-          end: '+=250%', // More breathing room after animation (was +=150%)
+          start: 'top 15%', // Pin when section header is nicely positioned
+          end: '+=100%', // Shorter pin duration to minimize white space
           pin: true, // 🎬 THE MAGIC - freeze the page!
-          pinSpacing: false, // Prevent extra white space (changed from true)
+          pinSpacing: true, // Prevents next section from sliding underneath
           anticipatePin: 1, // Smoother pin start
           once: true, // Animation plays once
           markers: process.env.NODE_ENV === 'development',
