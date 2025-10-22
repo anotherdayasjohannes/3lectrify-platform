@@ -76,6 +76,7 @@ export function FeatureCards({
               key={card._key}
               data-card
               className="bg-[#1C242E] rounded-[20px] p-[40px_30px] text-left transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.1)] md:p-[35px_25px]"
+              style={{ opacity: 1 }}
             >
               {card.icon && (
                 <div className="w-[100px] h-[100px] mb-[25px] flex items-center justify-center bg-gradient-to-br from-[#88C0B1] to-[#6BA896] rounded-full p-[20px] transition-transform duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] hover:scale-110 md:w-[80px] md:h-[80px] md:mb-[20px]">
