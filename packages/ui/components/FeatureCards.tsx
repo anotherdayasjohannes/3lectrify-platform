@@ -45,6 +45,7 @@ export function FeatureCards({
         scrollTrigger: {
           trigger: containerRef.current,
           start: 'top 80%',
+          once: true, // Animation plays only once, prevents cards from staying hidden
         },
       });
     },
