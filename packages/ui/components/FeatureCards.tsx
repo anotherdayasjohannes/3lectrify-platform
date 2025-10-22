@@ -36,18 +36,45 @@ export function FeatureCards({
       const cardElements = containerRef.current?.querySelectorAll('[data-card]');
       if (!cardElements || cardElements.length === 0) return;
 
-      // Simple slide-in from right: No pinning, smooth animation on scroll
-      gsap.from(cardElements, {
-        x: 150, // Start 150px to the right
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.15, // Each card follows the previous one
-        ease: 'power3.out',
+      // "The Spotlight" - Sequential focus animation
+      // Each card gets its moment: fade in → spotlight (scale + glow) → settle
+      const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
-          start: 'top 75%', // Start when section is 75% down the viewport
-          once: true, // Animation plays only once
-        },
+          start: 'top 75%',
+          once: true,
+          markers: process.env.NODE_ENV === 'development'
+        }
+      });
+
+      cardElements.forEach((card, index) => {
+        // Calculate stagger timing
+        const delay = index * 0.25;
+
+        // Step 1: Fade in with slight scale
+        tl.from(card, {
+          opacity: 0,
+          scale: 0.9,
+          y: 30,
+          duration: 0.4,
+          ease: 'power2.out'
+        }, delay);
+
+        // Step 2: Spotlight moment - scale up + subtle glow effect
+        tl.to(card, {
+          scale: 1.05,
+          boxShadow: '0 20px 60px rgba(136, 192, 177, 0.3)',
+          duration: 0.3,
+          ease: 'power2.inOut'
+        }, delay + 0.3);
+
+        // Step 3: Settle into final position
+        tl.to(card, {
+          scale: 1,
+          boxShadow: '0 0 0 rgba(136, 192, 177, 0)',
+          duration: 0.3,
+          ease: 'power2.out'
+        }, delay + 0.6);
       });
     },
     { scope: containerRef }
