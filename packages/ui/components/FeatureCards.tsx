@@ -98,7 +98,7 @@ export function FeatureCards({
   return (
     <section
       ref={containerRef}
-      className="relative py-[80px] pb-[100px] bg-[#293645] md:py-[60px] md:pb-[80px]"
+      className="relative pt-[150px] pb-[100px] bg-[#293645] md:pt-[100px] md:pb-[80px]"
       style={{ zIndex: 100, backgroundColor: '#293645' }}
     >
       <div className="content-wrapper">
