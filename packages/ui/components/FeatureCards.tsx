@@ -42,12 +42,12 @@ export function FeatureCards({
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
-          start: 'top 20%', // Headline sits higher when animation starts (green marker moved up)
+          start: 'top top', // 🎯 AD FIX: Pin starts AFTER previous section exits - no gap increase!
           end: '+=150%', // Animation completes after 150vh of scrolling - comfortable pace
           pin: true, // 🎬 Freeze the page while animation plays
           pinSpacing: true, // Prevents next section from sliding underneath
           anticipatePin: 1, // Smoother pin start
-          scrub: 1, // 🎯 THE FIX: Tie animation to scroll position (1s smooth lag)
+          scrub: 1, // Tie animation to scroll position (1s smooth lag)
           // No 'once' needed - scrub naturally handles forward/backward scroll
           markers: process.env.NODE_ENV === 'development',
           onRefresh: (self) => {
@@ -98,7 +98,7 @@ export function FeatureCards({
   return (
     <section
       ref={containerRef}
-      className="relative pt-[10px] pb-[100px] bg-[#293645] md:pt-[10px] md:pb-[80px]"
+      className="relative pt-[80px] pb-[100px] bg-[#293645] md:pt-[60px] md:pb-[80px]"
       style={{ zIndex: 100, backgroundColor: '#293645' }}
     >
       <div className="content-wrapper">
