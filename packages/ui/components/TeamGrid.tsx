@@ -58,7 +58,10 @@ export function TeamGrid({ heading, introText, teamMembers }: TeamGridProps) {
             gsap.set(card, { 
               opacity: 1,
               x: 0,
+              y: 0,
               rotateY: 0,
+              rotateX: 0,
+              rotateZ: 0,
             });
           }
         });
@@ -90,9 +93,12 @@ export function TeamGrid({ heading, introText, teamMembers }: TeamGridProps) {
       cardElements.forEach((card, index) => {
         gsap.set(card, {
           x: 1000, // Off-screen to the right
+          y: -150, // Start higher (creates arc)
           opacity: 0,
-          rotateY: 0,
-          scale: 0.8, // Slightly larger start (more natural for "walking in")
+          rotateY: -45, // Angled away
+          rotateX: 15, // Tilted up
+          rotateZ: -10, // Slight tilt
+          scale: 0.7, // Smaller start
         });
       });
 
@@ -105,12 +111,15 @@ export function TeamGrid({ heading, introText, teamMembers }: TeamGridProps) {
         // Find the overlay element inside this card
         const overlay = card.querySelector('[data-bio-overlay]') as HTMLElement;
 
-        // Walk in from right + spin + land
+        // Fly in with arc + multi-axis spin + land
         tl.to(card, {
-          x: 0, // Walk to final position
+          x: 0, // Move to final position
+          y: 0, // Arc down (creates momentum)
           opacity: 1,
           scale: 1,
-          rotateY: 360, // Full 360° spin while walking!
+          rotateY: 405, // 360° + extra turn (more dramatic!)
+          rotateX: 0, // Level out
+          rotateZ: 0, // Level out
           duration: 2,
           ease: EASINGS.smooth,
           onUpdate: function() {
@@ -158,7 +167,7 @@ export function TeamGrid({ heading, introText, teamMembers }: TeamGridProps) {
   return (
     <section 
       ref={sectionRef}
-      className="bg-[#293645] pt-[50px] px-[50px] pb-[80px] md:pt-[40px] md:px-[40px] md:pb-[60px] sm:pt-[30px] sm:px-[20px] sm:pb-[50px]"
+      className="bg-[#293645] pt-[100px] px-[50px] pb-[80px] md:pt-[80px] md:px-[40px] md:pb-[60px] sm:pt-[60px] sm:px-[20px] sm:pb-[50px]"
       style={{ minHeight: '100vh' }}
     >
       {/* Content Wrapper - Centered */}
@@ -212,12 +221,18 @@ const TeamCard = forwardRef<HTMLElement, { member: TeamMember }>(({ member }, re
       style={{ 
         transformStyle: 'preserve-3d',
         backfaceVisibility: 'visible',
+        // 🎨 Add 3D depth/thickness
+        filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.4)) drop-shadow(0 0 0 3px rgba(255,255,255,0.05))',
       }}
     >
       <div className="flex flex-col gap-[15px]">
         {/* Photo Wrapper with Overlay */}
         <div
           className="relative w-full h-[400px] rounded-[20px] overflow-hidden bg-white/5 cursor-pointer group"
+          style={{
+            // 🎨 Add thickness border/edge
+            boxShadow: 'inset 0 0 0 2px rgba(255,255,255,0.1), 0 4px 20px rgba(0,0,0,0.3)',
+          }}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
           onFocus={() => setIsOverlayVisible(true)}
