@@ -65,7 +65,7 @@ export function Stats({
     <div
       ref={containerRef}
       className={`flex items-start gap-[25px] w-full ${
-        layout === 'grid' ? 'flex-wrap' : 'flex-nowrap overflow-x-auto'
+        layout === 'grid' ? 'flex-wrap' : 'flex-nowrap'
       }`}
     >
       {stats.map((stat) => {
