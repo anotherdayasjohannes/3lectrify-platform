@@ -111,17 +111,18 @@ export function TeamGrid({ heading, introText, teamMembers }: TeamGridProps) {
         // Find the overlay element inside this card
         const overlay = card.querySelector('[data-bio-overlay]') as HTMLElement;
 
-        // Fly in with arc + multi-axis spin + land
+        // Fly in with arc + multi-axis spin + land FLAT
         tl.to(card, {
           x: 0, // Move to final position
           y: 0, // Arc down (creates momentum)
           opacity: 1,
           scale: 1,
-          rotateY: 405, // 360° + extra turn (more dramatic!)
-          rotateX: 0, // Level out
-          rotateZ: 0, // Level out
+          rotateY: 360, // Full 360° = back to flat (0°)
+          rotateX: 0, // Completely level
+          rotateZ: 0, // Completely level
           duration: 2,
           ease: EASINGS.smooth,
+          clearProps: 'rotateY,rotateX,rotateZ', // 🔧 Clear rotation props at end = perfectly flat
           onUpdate: function() {
             // Show overlay when card is "flipped" (between 90° and 270°)
             const currentRotation = gsap.getProperty(card, 'rotateY') as number;
@@ -144,6 +145,16 @@ export function TeamGrid({ heading, introText, teamMembers }: TeamGridProps) {
               overlay.style.opacity = '';
               overlay.style.visibility = '';
             }
+            // 🔧 Ensure card is perfectly flat and positioned
+            gsap.set(card, {
+              x: 0,
+              y: 0,
+              rotateX: 0,
+              rotateY: 0,
+              rotateZ: 0,
+              scale: 1,
+              clearProps: 'transform', // Remove all transform inline styles
+            });
           }
         }, startTime);
       });
