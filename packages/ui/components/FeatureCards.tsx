@@ -36,6 +36,10 @@ export function FeatureCards({
       const cardElements = containerRef.current?.querySelectorAll('[data-card]');
       if (!cardElements || cardElements.length === 0) return;
 
+      // 🔄 CRITICAL: Refresh ScrollTrigger after DOM is fully ready
+      // This ensures accurate position calculations in Next.js
+      ScrollTrigger.refresh();
+
       // "The Spotlight" - Sequential focus animation with scroll pinning
       // Each card gets its moment: fade in → spotlight (scale + glow) → settle
       // The page "pauses" while the animation plays - Apple-style storytelling!
