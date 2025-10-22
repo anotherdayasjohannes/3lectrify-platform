@@ -42,14 +42,14 @@ export function FeatureCards({
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
-          start: 'top 25%', // Start earlier - animation begins sooner
-          end: '+=40%', // Sweet spot: comfortable viewing + reasonable gap (~320px)
-          pin: true, // 🎬 THE MAGIC - freeze the page!
+          start: 'top 25%', // Start when component enters viewport
+          end: '+=150%', // Animation completes after 150vh of scrolling - comfortable pace
+          pin: true, // 🎬 Freeze the page while animation plays
           pinSpacing: true, // Prevents next section from sliding underneath
           anticipatePin: 1, // Smoother pin start
-          once: true, // Animation plays once
+          scrub: 1, // 🎯 THE FIX: Tie animation to scroll position (1s smooth lag)
+          // No 'once' needed - scrub naturally handles forward/backward scroll
           markers: process.env.NODE_ENV === 'development',
-          scrub: false, // Time-based animation (not scroll-scrubbed)
           onRefresh: (self) => {
             // CRITICAL: Set pin-spacer background to match our dark theme
             // GSAP creates a wrapper (.pin-spacer) around the pinned element
