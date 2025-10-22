@@ -143,7 +143,7 @@ export function ContactSimple({
   const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapsQuery)}`;
 
   return (
-    <section className="w-full bg-[#293645] pt-[50px] pb-0 md:pt-10 md:pb-0 max-sm:pt-[30px] max-sm:pb-0">
+    <section className="w-full bg-[#293645] pt-[50px] pb-[80px] md:pt-10 md:pb-[60px] max-sm:pt-[30px] max-sm:pb-[50px]">
       {/* Use content-wrapper for global margins */}
       <div className="content-wrapper">
         {/* Two Column Layout - matches HubSpot kontakt-simple__content */}
