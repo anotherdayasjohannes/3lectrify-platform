@@ -1,9 +1,15 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, forwardRef } from 'react';
 import Image from 'next/image';
 import { PortableText, type PortableTextBlock } from '@portabletext/react';
 import { getFocalPoint } from '@3lectrify/sanity';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { EASINGS } from '@3lectrify/animations';
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface TeamMember {
   _id: string;
@@ -33,8 +39,118 @@ interface TeamGridProps {
 }
 
 export function TeamGrid({ heading, introText, teamMembers }: TeamGridProps) {
+  const sectionRef = useRef<HTMLElement>(null);
+  const cardsRef = useRef<(HTMLElement | null)[]>([]);
+
+  // Check for reduced motion preference
+  const shouldReduceMotion = typeof window !== 'undefined' 
+    ? window.matchMedia('(prefers-reduced-motion: reduce)').matches 
+    : false;
+
+  useGSAP(
+    () => {
+      const cardElements = cardsRef.current.filter(Boolean);
+      
+      if (!cardElements.length || shouldReduceMotion) {
+        // Graceful degradation: Set final states immediately
+        cardElements.forEach((card) => {
+          if (card) {
+            gsap.set(card, { 
+              opacity: 1,
+              y: 0,
+              rotateY: 0,
+            });
+          }
+        });
+        return;
+      }
+
+      // Create timeline with ScrollTrigger
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top top',
+          end: '+=400%',
+          pin: true,
+          pinSpacing: true,
+          scrub: 1.5,
+          anticipatePin: 1,
+          onRefresh: (self) => {
+            // Set pin-spacer background
+            const pinSpacer = self.pin?.parentElement;
+            if (pinSpacer && pinSpacer.classList.contains('pin-spacer')) {
+              pinSpacer.style.backgroundColor = '#293645';
+            }
+          },
+        },
+      });
+
+      // Initial state: cards off-screen from top, rotated, invisible
+      cardElements.forEach((card, index) => {
+        gsap.set(card, {
+          y: -800,
+          opacity: 0,
+          rotateY: 0,
+          scale: 0.5,
+        });
+      });
+
+      // Animate each card flying in, spinning, and landing
+      cardElements.forEach((card, index) => {
+        if (!card) return;
+        
+        const startTime = index * 0.5; // Stagger start times
+        
+        // Find the overlay element inside this card
+        const overlay = card.querySelector('[data-bio-overlay]') as HTMLElement;
+
+        // Fly in + spin + land
+        tl.to(card, {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          rotateY: 360, // Full 360° spin!
+          duration: 2,
+          ease: EASINGS.smooth,
+          onUpdate: function() {
+            // Show overlay when card is "flipped" (between 90° and 270°)
+            const currentRotation = gsap.getProperty(card, 'rotateY') as number;
+            
+            if (overlay) {
+              if (currentRotation > 90 && currentRotation < 270) {
+                // Card is showing "back" - reveal overlay
+                overlay.style.opacity = '1';
+                overlay.style.visibility = 'visible';
+              } else {
+                // Card is showing "front" - hide overlay
+                overlay.style.opacity = '0';
+                overlay.style.visibility = 'hidden';
+              }
+            }
+          },
+          onComplete: function() {
+            // Reset overlay to be controlled by hover after animation
+            if (overlay) {
+              overlay.style.opacity = '';
+              overlay.style.visibility = '';
+            }
+          }
+        }, startTime);
+      });
+
+      // Add delay at end before unpinning
+      tl.to({}, { duration: 1 });
+
+    },
+    { scope: sectionRef, dependencies: [teamMembers.length] }
+  );
+
   return (
-    <section className="bg-[#293645] pt-[50px] px-[50px] pb-[80px] md:pt-[40px] md:px-[40px] md:pb-[60px] sm:pt-[30px] sm:px-[20px] sm:pb-[50px]">
+    <section 
+      ref={sectionRef}
+      className="bg-[#293645] pt-[50px] px-[50px] pb-[80px] md:pt-[40px] md:px-[40px] md:pb-[60px] sm:pt-[30px] sm:px-[20px] sm:pb-[50px]"
+      style={{ minHeight: '100vh' }}
+    >
       {/* Content Wrapper - Centered */}
       <div className="flex flex-col items-center">
         {/* Intro Section */}
@@ -54,9 +170,18 @@ export function TeamGrid({ heading, introText, teamMembers }: TeamGridProps) {
         )}
 
         {/* Team Grid */}
-        <div className="w-full max-w-[1165px] flex flex-wrap gap-[25px] md:gap-[20px] sm:gap-[20px] items-start sm:justify-center">
-          {teamMembers.map((member) => (
-            <TeamCard key={member._id} member={member} />
+        <div 
+          className="w-full max-w-[1165px] flex flex-wrap gap-[25px] md:gap-[20px] sm:gap-[20px] items-start sm:justify-center"
+          style={{ perspective: '1500px' }} // Enable 3D perspective
+        >
+          {teamMembers.map((member, index) => (
+            <TeamCard 
+              key={member._id} 
+              member={member}
+              ref={(el) => {
+                cardsRef.current[index] = el;
+              }}
+            />
           ))}
         </div>
       </div>
@@ -64,14 +189,21 @@ export function TeamGrid({ heading, introText, teamMembers }: TeamGridProps) {
   );
 }
 
-function TeamCard({ member }: { member: TeamMember }) {
+const TeamCard = forwardRef<HTMLElement, { member: TeamMember }>(({ member }, ref) => {
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
 
   const handleMouseEnter = () => setIsOverlayVisible(true);
   const handleMouseLeave = () => setIsOverlayVisible(false);
 
   return (
-    <article className="w-[270px] md:w-[calc(50%-10px)] md:max-w-[270px] sm:w-full flex-shrink-0">
+    <article 
+      ref={ref}
+      className="w-[270px] md:w-[calc(50%-10px)] md:max-w-[270px] sm:w-full flex-shrink-0"
+      style={{ 
+        transformStyle: 'preserve-3d',
+        backfaceVisibility: 'visible',
+      }}
+    >
       <div className="flex flex-col gap-[15px]">
         {/* Photo Wrapper with Overlay */}
         <div
@@ -98,6 +230,7 @@ function TeamCard({ member }: { member: TeamMember }) {
           {/* Hover Overlay */}
           {member.bio && (
             <div
+              data-bio-overlay
               className={`absolute inset-0 bg-[rgba(41,54,69,0.95)] backdrop-blur-[8px] flex items-center justify-center p-[25px] sm:p-[20px] transition-all duration-300 ease-out ${
                 isOverlayVisible ? 'opacity-100 visible' : 'opacity-0 invisible'
               }`}
@@ -176,5 +309,7 @@ function TeamCard({ member }: { member: TeamMember }) {
       </div>
     </article>
   );
-}
+});
+
+TeamCard.displayName = 'TeamCard';
 
