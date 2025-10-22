@@ -42,7 +42,7 @@ export function FeatureCards({
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
-          start: 'top 35%', // Start earlier - animation begins when section is more visible
+          start: 'top 20%', // Headline sits higher when animation starts (green marker moved up)
           end: '+=150%', // Animation completes after 150vh of scrolling - comfortable pace
           pin: true, // 🎬 Freeze the page while animation plays
           pinSpacing: true, // Prevents next section from sliding underneath
