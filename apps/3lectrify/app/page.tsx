@@ -1,5 +1,5 @@
 import { client, pageQuery } from '@3lectrify/sanity';
-import { Hero, FeatureCards, FeatureShowcase, TextImage, SimpleTextImage, Stats, CTA, ReferencesGrid, ReferencesMarquee, TeamGrid } from '@3lectrify/ui';
+import { Hero, FeatureCards, FeatureShowcase, StackedExplainer, TextImage, SimpleTextImage, Stats, CTA, ReferencesGrid, ReferencesMarquee, TeamGrid } from '@3lectrify/ui';
 import type { PortableTextBlock } from '@portabletext/react';
 
 interface SanityBlock {
@@ -69,7 +69,22 @@ interface SanityBlock {
       alt?: string;
     };
     title: string;
-    description?: string;
+    description?: string | PortableTextBlock[];
+    // StackedExplainer additional fields (optional for FeatureCards)
+    number?: string;
+    heading?: string;
+    backgroundImage?: {
+      asset?: {
+        url: string;
+        metadata?: {
+          dimensions: {
+            width: number;
+            height: number;
+          };
+        };
+      };
+      alt?: string;
+    };
   }>;
   quote?: {
     text: string;
@@ -90,7 +105,7 @@ interface SanityBlock {
   layout?: 'horizontal' | 'grid';
   variant?: 'light' | 'dark';
   fullWidth?: boolean;
-  description?: PortableTextBlock[];
+  description?: string | PortableTextBlock[];
   buttonText?: string;
   buttonLink?: string;
   openInNewTab?: boolean;
@@ -224,7 +239,7 @@ export default async function HomePage() {
                         }
                       : undefined,
                     title: card.title,
-                    description: card.description,
+                    description: typeof card.description === 'string' ? card.description : undefined,
                   })) || []
                 }
               />
@@ -335,6 +350,38 @@ export default async function HomePage() {
               />
             );
 
+          case 'stackedExplainer':
+            return (
+              <StackedExplainer
+                key={index}
+                sectionHeadline={block.sectionHeadline}
+                sectionIntro={block.sectionIntro}
+                cards={
+                  block.cards?.map((card) => ({
+                    _key: card._key,
+                    number: card.number || '',
+                    title: card.title,
+                    heading: card.heading || '',
+                    description: Array.isArray(card.description) ? card.description : undefined,
+                    icon: card.icon?.asset
+                      ? {
+                          url: card.icon.asset.url,
+                          alt: card.icon.alt || '',
+                        }
+                      : undefined,
+                    backgroundImage: card.backgroundImage?.asset
+                      ? {
+                          url: card.backgroundImage.asset.url,
+                          alt: card.backgroundImage.alt || '',
+                          width: card.backgroundImage.asset.metadata?.dimensions.width || 1200,
+                          height: card.backgroundImage.asset.metadata?.dimensions.height || 800,
+                        }
+                      : undefined,
+                  })) || []
+                }
+              />
+            );
+
           case 'references':
             const references = block.selectedReferences?.map((ref) => ({
               id: ref._id,
@@ -363,7 +410,7 @@ export default async function HomePage() {
                 references={references}
                 theme={block.theme || 'dark'}
                 headline={block.headline}
-                subtext={block.description}
+                subtext={typeof block.description === 'string' ? block.description : undefined}
               />
             );
 

@@ -4,6 +4,7 @@ import {
   HeroGradient, 
   FeatureCards, 
   FeatureShowcase,
+  StackedExplainer,
   TextImage, 
   SimpleTextImage, 
   Stats, 
@@ -109,6 +110,7 @@ interface SanityBlock {
   imagePosition?: 'above' | 'side' | 'left' | 'right';
   sectionHeadline?: string;
   sectionDescription?: string;
+  // FeatureCards simple cards
   cards?: Array<{
     _key: string;
     icon?: {
@@ -118,7 +120,22 @@ interface SanityBlock {
       alt?: string;
     };
     title: string;
-    description?: string;
+    description?: string | PortableTextBlock[];
+    // StackedExplainer additional fields (optional for FeatureCards)
+    number?: string;
+    heading?: string;
+    backgroundImage?: {
+      asset?: {
+        url: string;
+        metadata?: {
+          dimensions: {
+            width: number;
+            height: number;
+          };
+        };
+      };
+      alt?: string;
+    };
   }>;
   quote?: {
     text: string;
@@ -352,7 +369,7 @@ export default async function DynamicPage({ params }: { params: Promise<{ slug: 
                         }
                       : undefined,
                     title: card.title,
-                    description: card.description,
+                    description: typeof card.description === 'string' ? card.description : undefined,
                   })) || []
                 }
               />
@@ -384,6 +401,38 @@ export default async function DynamicPage({ params }: { params: Promise<{ slug: 
                           width: feature.image.asset.metadata?.dimensions.width || 1200,
                           height: feature.image.asset.metadata?.dimensions.height || 630,
                           hotspot: feature.image.hotspot,
+                        }
+                      : undefined,
+                  })) || []
+                }
+              />
+            );
+
+          case 'stackedExplainer':
+            return (
+              <StackedExplainer
+                key={index}
+                sectionHeadline={block.sectionHeadline}
+                sectionIntro={block.sectionIntro}
+                cards={
+                  block.cards?.map((card) => ({
+                    _key: card._key,
+                    number: card.number || '',
+                    title: card.title,
+                    heading: card.heading || '',
+                    description: Array.isArray(card.description) ? card.description : undefined,
+                    icon: card.icon?.asset
+                      ? {
+                          url: card.icon.asset.url,
+                          alt: card.icon.alt || '',
+                        }
+                      : undefined,
+                    backgroundImage: card.backgroundImage?.asset
+                      ? {
+                          url: card.backgroundImage.asset.url,
+                          alt: card.backgroundImage.alt || '',
+                          width: card.backgroundImage.asset.metadata?.dimensions.width || 1200,
+                          height: card.backgroundImage.asset.metadata?.dimensions.height || 800,
                         }
                       : undefined,
                   })) || []

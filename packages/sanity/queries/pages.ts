@@ -158,6 +158,39 @@ export const pageQuery = groq`
           }
         }
       },
+      _type == "stackedExplainer" => {
+        sectionHeadline,
+        sectionIntro,
+        cards[] {
+          _key,
+          number,
+          title,
+          heading,
+          description,
+          icon {
+            asset-> {
+              url
+            },
+            hotspot,
+            crop,
+            alt
+          },
+          backgroundImage {
+            asset-> {
+              url,
+              metadata {
+                dimensions {
+                  width,
+                  height
+                }
+              }
+            },
+            hotspot,
+            crop,
+            alt
+          }
+        }
+      },
       _type == "references" => {
         headline,
         description,

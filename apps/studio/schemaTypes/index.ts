@@ -18,6 +18,7 @@ import featureShowcase from './objects/featureShowcase'
 import references from './objects/references'
 import teamGrid from './objects/teamGrid'
 import contactSimple from './objects/contactSimple'
+import stackedExplainer from './objects/stackedExplainer'
 
 export const schemaTypes = [
   // Documents
@@ -40,4 +41,5 @@ export const schemaTypes = [
   references,
   teamGrid,
   contactSimple,
+  stackedExplainer,
 ]

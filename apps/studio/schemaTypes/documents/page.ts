@@ -37,6 +37,7 @@ export default defineType({
           {type: 'heroGradient'},
           {type: 'featureCards'},
           {type: 'featureShowcase'},
+          {type: 'stackedExplainer'},
           {type: 'textImage'},
           {type: 'simpleTextImage'},
           {type: 'stats'},
