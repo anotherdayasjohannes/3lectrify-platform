@@ -1,0 +1,608 @@
+# @3lectrify/animations Package Rules
+# Shared Animation Utilities & Presets
+
+## 📚 Documentation Reference
+- GSAP: https://gsap.com/llms.txt
+- Parent rules: `../../.cursorrules`
+
+## 📦 Package Purpose
+Shared animation utilities, hooks, presets, and easings for the 3LECTRIFY platform.
+All components in `packages/ui/` and `apps/3lectrify/` should use these utilities.
+
+## 🏗️ Folder Structure
+```
+packages/animations/
+├── src/
+│   ├── hooks/           # React hooks (useScrollAnimation, useFadeIn)
+│   ├── utils/           # Utility functions (createStagger, killAll)
+│   ├── presets/         # Animation presets (fadeInUp, slideInRight)
+│   ├── easings/         # Custom easing functions
+│   ├── lenis/           # Lenis smooth scroll utilities
+│   └── index.ts         # Public API
+├── package.json
+├── tsconfig.json
+└── .cursorrules         # This file
+```
+
+## 🎯 What to Export
+**DO export**:
+- Reusable animation hooks
+- Animation presets (config objects)
+- Utility functions
+- Custom easings
+- Type definitions
+
+**DON'T export**:
+- Component-specific animations
+- One-off configurations
+- Internal helpers
+- Test utilities
+
+## 🪝 Hook Patterns
+
+### useScrollAnimation Hook
+```tsx
+// packages/animations/src/hooks/useScrollAnimation.ts
+import { useRef } from 'react';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
+
+interface ScrollAnimationOptions {
+  from: gsap.TweenVars;
+  to?: gsap.TweenVars;
+  trigger?: string;
+  start?: string;
+  end?: string;
+  scrub?: boolean | number;
+  pin?: boolean;
+  once?: boolean;
+}
+
+export function useScrollAnimation<T extends HTMLElement = HTMLDivElement>(
+  options: ScrollAnimationOptions
+) {
+  const ref = useRef<T>(null);
+
+  useGSAP(() => {
+    if (!ref.current) return;
+
+    const { from, to, trigger, start = 'top 75%', once = true, ...scrollOptions } = options;
+
+    gsap.from(ref.current, {
+      ...from,
+      ...to,
+      scrollTrigger: {
+        trigger: trigger || ref.current,
+        start,
+        once,
+        markers: process.env.NODE_ENV === 'development',
+        ...scrollOptions
+      }
+    });
+  }, { scope: ref });
+
+  return ref;
+}
+
+// Usage in components:
+// const ref = useScrollAnimation({ from: { opacity: 0, y: 50 } });
+// return <div ref={ref}>Content</div>;
+```
+
+### useFadeIn Hook
+```tsx
+// packages/animations/src/hooks/useFadeIn.ts
+import { useRef } from 'react';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+
+interface FadeInOptions {
+  duration?: number;
+  delay?: number;
+  ease?: string;
+  from?: 'top' | 'bottom' | 'left' | 'right';
+  distance?: number;
+}
+
+export function useFadeIn<T extends HTMLElement = HTMLDivElement>(
+  options: FadeInOptions = {}
+) {
+  const {
+    duration = 0.8,
+    delay = 0,
+    ease = 'power3.out',
+    from = 'bottom',
+    distance = 50
+  } = options;
+
+  const ref = useRef<T>(null);
+
+  useGSAP(() => {
+    if (!ref.current) return;
+
+    const direction = {
+      top: { y: -distance },
+      bottom: { y: distance },
+      left: { x: -distance },
+      right: { x: distance }
+    }[from];
+
+    gsap.from(ref.current, {
+      opacity: 0,
+      ...direction,
+      duration,
+      delay,
+      ease
+    });
+  }, { scope: ref });
+
+  return ref;
+}
+```
+
+### useStaggerAnimation Hook
+```tsx
+// packages/animations/src/hooks/useStaggerAnimation.ts
+import { useRef } from 'react';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+
+interface StaggerOptions {
+  selector: string;
+  from?: gsap.TweenVars;
+  to?: gsap.TweenVars;
+  stagger?: number;
+  duration?: number;
+  ease?: string;
+  scrollTrigger?: boolean;
+  once?: boolean;
+}
+
+export function useStaggerAnimation<T extends HTMLElement = HTMLDivElement>(
+  options: StaggerOptions
+) {
+  const {
+    selector,
+    from = { opacity: 0, y: 50 },
+    to,
+    stagger = 0.15,
+    duration = 0.8,
+    ease = 'power3.out',
+    scrollTrigger = true,
+    once = true
+  } = options;
+
+  const containerRef = useRef<T>(null);
+
+  useGSAP(() => {
+    if (!containerRef.current) return;
+
+    const elements = containerRef.current.querySelectorAll(selector);
+    if (!elements || elements.length === 0) return;
+
+    gsap.from(elements, {
+      ...from,
+      ...to,
+      duration,
+      stagger,
+      ease,
+      ...(scrollTrigger && {
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top 75%',
+          once,
+          markers: process.env.NODE_ENV === 'development'
+        }
+      })
+    });
+  }, { scope: containerRef });
+
+  return containerRef;
+}
+```
+
+## 🎨 Preset Patterns
+
+### Animation Presets
+```tsx
+// packages/animations/src/presets/index.ts
+export interface AnimationPreset {
+  from?: gsap.TweenVars;
+  to?: gsap.TweenVars;
+  duration?: number;
+  ease?: string;
+  stagger?: number;
+}
+
+// Fade animations
+export const fadeIn: AnimationPreset = {
+  from: { opacity: 0 },
+  to: { opacity: 1 },
+  duration: 0.8,
+  ease: 'power2.out'
+};
+
+export const fadeInUp: AnimationPreset = {
+  from: { opacity: 0, y: 50 },
+  to: { opacity: 1, y: 0 },
+  duration: 0.8,
+  ease: 'power3.out'
+};
+
+export const fadeInDown: AnimationPreset = {
+  from: { opacity: 0, y: -50 },
+  to: { opacity: 1, y: 0 },
+  duration: 0.8,
+  ease: 'power3.out'
+};
+
+// Slide animations
+export const slideInRight: AnimationPreset = {
+  from: { x: 100, opacity: 0 },
+  to: { x: 0, opacity: 1 },
+  duration: 0.8,
+  ease: 'power3.out'
+};
+
+export const slideInLeft: AnimationPreset = {
+  from: { x: -100, opacity: 0 },
+  to: { x: 0, opacity: 1 },
+  duration: 0.8,
+  ease: 'power3.out'
+};
+
+// Scale animations
+export const scaleIn: AnimationPreset = {
+  from: { scale: 0, opacity: 0 },
+  to: { scale: 1, opacity: 1 },
+  duration: 0.6,
+  ease: 'back.out(1.7)'
+};
+
+// Stagger presets
+export const staggerFadeIn: AnimationPreset = {
+  from: { opacity: 0, y: 30 },
+  duration: 0.6,
+  ease: 'power2.out',
+  stagger: 0.1
+};
+
+export const staggerCards: AnimationPreset = {
+  from: { opacity: 0, y: 50, scale: 0.95 },
+  duration: 0.8,
+  ease: 'power3.out',
+  stagger: 0.15
+};
+```
+
+## 🛠️ Utility Functions
+
+### createStagger
+```tsx
+// packages/animations/src/utils/createStagger.ts
+export interface StaggerConfig {
+  amount?: number;
+  from?: 'start' | 'center' | 'end' | number;
+  grid?: [number, number];
+  axis?: 'x' | 'y';
+  ease?: string;
+}
+
+export function createStagger(config: StaggerConfig = {}) {
+  const {
+    amount = 0.15,
+    from = 'start',
+    grid,
+    axis,
+    ease = 'none'
+  } = config;
+
+  return {
+    each: amount,
+    from,
+    ...(grid && { grid, axis }),
+    ease
+  };
+}
+
+// Usage:
+// stagger: createStagger({ amount: 0.2, from: 'center' })
+```
+
+### killAllAnimations
+```tsx
+// packages/animations/src/utils/killAll.ts
+import gsap from 'gsap';
+
+export function killAllAnimations(selector?: string) {
+  if (selector) {
+    gsap.killTweensOf(selector);
+  } else {
+    gsap.globalTimeline.clear();
+  }
+}
+
+export function killScrollTriggers() {
+  const ScrollTrigger = gsap.plugins.scrollTrigger;
+  if (ScrollTrigger) {
+    ScrollTrigger.getAll().forEach((st: any) => st.kill());
+  }
+}
+```
+
+### createResponsiveAnimation
+```tsx
+// packages/animations/src/utils/responsive.ts
+export interface ResponsiveAnimationConfig {
+  mobile?: gsap.TweenVars;
+  tablet?: gsap.TweenVars;
+  desktop?: gsap.TweenVars;
+}
+
+export function createResponsiveAnimation(config: ResponsiveAnimationConfig) {
+  const isMobile = window.innerWidth < 768;
+  const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
+  
+  if (isMobile && config.mobile) return config.mobile;
+  if (isTablet && config.tablet) return config.tablet;
+  return config.desktop || {};
+}
+
+// Usage:
+// const animConfig = createResponsiveAnimation({
+//   mobile: { opacity: 0, y: 30, duration: 0.5 },
+//   desktop: { opacity: 0, y: 50, duration: 0.8 }
+// });
+```
+
+## 🎵 Custom Easings
+
+```tsx
+// packages/animations/src/easings/index.ts
+
+// Lenis-inspired smooth
+export const smoothEase = (t: number) => 
+  Math.min(1, 1.001 - Math.pow(2, -10 * t));
+
+// Expo ease out (fast start, slow end)
+export const expoOut = (t: number) =>
+  t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+
+// Smooth in-out
+export const smoothInOut = (t: number) =>
+  t < 0.5
+    ? 4 * t * t * t
+    : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+// Custom cubic bezier
+export const customEase = 'cubic-bezier(0.4, 0, 0.2, 1)';
+```
+
+## 🌊 Lenis Utilities
+
+```tsx
+// packages/animations/src/lenis/index.ts
+import Lenis from '@studio-freight/lenis';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
+
+let lenisInstance: Lenis | null = null;
+
+export function initLenis() {
+  if (lenisInstance) return lenisInstance;
+
+  lenisInstance = new Lenis({
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    smoothWheel: true,
+    smoothTouch: false, // Disable on touch
+    wheelMultiplier: 1,
+    touchMultiplier: 2
+  });
+
+  // Sync with GSAP ScrollTrigger
+  lenisInstance.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add((time) => {
+    lenisInstance?.raf(time * 1000);
+  });
+  gsap.ticker.lagSmoothing(0);
+
+  return lenisInstance;
+}
+
+export function destroyLenis() {
+  if (!lenisInstance) return;
+  
+  lenisInstance.destroy();
+  gsap.ticker.remove(lenisInstance.raf);
+  lenisInstance = null;
+}
+
+export function toggleLenis(enabled: boolean) {
+  if (!lenisInstance) return;
+  
+  if (enabled) {
+    lenisInstance.start();
+  } else {
+    lenisInstance.stop();
+  }
+}
+
+export function scrollToElement(selector: string, options?: { offset?: number; duration?: number }) {
+  if (!lenisInstance) return;
+  
+  const element = document.querySelector(selector);
+  if (!element) return;
+  
+  lenisInstance.scrollTo(element, {
+    offset: options?.offset || 0,
+    duration: options?.duration || 1.2
+  });
+}
+```
+
+## ♿ Accessibility Helpers
+
+```tsx
+// packages/animations/src/utils/accessibility.ts
+export function shouldReduceMotion(): boolean {
+  if (typeof window === 'undefined') return false;
+  
+  const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  return mediaQuery.matches;
+}
+
+export function createAccessibleAnimation<T extends gsap.TweenTarget>(
+  target: T,
+  config: gsap.TweenVars
+): gsap.core.Tween | null {
+  if (shouldReduceMotion()) {
+    // Set final state immediately
+    gsap.set(target, {
+      opacity: 1,
+      x: 0,
+      y: 0,
+      scale: 1,
+      ...config.to
+    });
+    return null;
+  }
+  
+  return gsap.to(target, config);
+}
+
+export function withReducedMotionFallback<T>(
+  animationFn: () => T,
+  fallbackFn: () => void
+): T | void {
+  if (shouldReduceMotion()) {
+    return fallbackFn();
+  }
+  return animationFn();
+}
+```
+
+## 📤 Public API (index.ts)
+
+```tsx
+// packages/animations/src/index.ts
+
+// Hooks
+export { useScrollAnimation } from './hooks/useScrollAnimation';
+export { useFadeIn } from './hooks/useFadeIn';
+export { useStaggerAnimation } from './hooks/useStaggerAnimation';
+
+// Presets
+export * from './presets';
+
+// Utilities
+export { createStagger, type StaggerConfig } from './utils/createStagger';
+export { killAllAnimations, killScrollTriggers } from './utils/killAll';
+export { createResponsiveAnimation, type ResponsiveAnimationConfig } from './utils/responsive';
+
+// Easings
+export * from './easings';
+
+// Lenis
+export {
+  initLenis,
+  destroyLenis,
+  toggleLenis,
+  scrollToElement
+} from './lenis';
+
+// Accessibility
+export {
+  shouldReduceMotion,
+  createAccessibleAnimation,
+  withReducedMotionFallback
+} from './utils/accessibility';
+
+// Types
+export type { AnimationPreset } from './presets';
+```
+
+## 🧪 Testing Guidelines
+
+### Test Checklist
+- [ ] Works with SSR (no `window` errors)
+- [ ] Cleans up properly (no memory leaks)
+- [ ] Respects `prefers-reduced-motion`
+- [ ] Works on mobile (reduced complexity)
+- [ ] TypeScript types are correct
+- [ ] No console warnings in dev mode
+
+### Example Test Pattern
+```tsx
+// packages/animations/__tests__/useFadeIn.test.ts
+import { renderHook } from '@testing-library/react';
+import { useFadeIn } from '../src/hooks/useFadeIn';
+
+describe('useFadeIn', () => {
+  it('returns a ref', () => {
+    const { result } = renderHook(() => useFadeIn());
+    expect(result.current.current).toBeNull();
+  });
+
+  it('respects prefers-reduced-motion', () => {
+    Object.defineProperty(window, 'matchMedia', {
+      value: jest.fn(() => ({
+        matches: true // Reduced motion enabled
+      }))
+    });
+
+    const { result } = renderHook(() => useFadeIn());
+    // Animation should be instant
+  });
+});
+```
+
+## 🎯 Code Review Checklist
+
+Before merging:
+- [ ] Hook uses `useGSAP` (not `useEffect`)
+- [ ] Proper TypeScript types with generics
+- [ ] Works with SSR (no `window` on initial render)
+- [ ] Accessibility helper checks `prefers-reduced-motion`
+- [ ] Mobile-optimized (reduced complexity)
+- [ ] Exported from `index.ts`
+- [ ] No dependencies on specific components
+- [ ] Documented with JSDoc comments
+- [ ] Tested in isolation
+
+## 📚 Version Requirements
+
+```json
+{
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "gsap": "^3.13.0",
+    "@gsap/react": "^2.1.1",
+    "@studio-freight/lenis": "^1.3.0"
+  }
+}
+```
+
+## 🎓 Usage Philosophy
+
+**This package should provide**:
+1. Building blocks, not complete solutions
+2. Flexibility, not rigid constraints
+3. Performance, not complexity
+4. Accessibility, not exclusion
+
+**Users should be able to**:
+1. Compose animations from primitives
+2. Override any default
+3. Opt out of any feature
+4. Understand what's happening
+
+---
+
+**Remember**: This package makes animation easy, not opinionated. Provide the tools, let components decide the experience.
+
