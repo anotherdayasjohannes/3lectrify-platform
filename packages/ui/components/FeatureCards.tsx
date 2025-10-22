@@ -49,7 +49,16 @@ export function FeatureCards({
           anticipatePin: 1, // Smoother pin start
           once: true, // Animation plays once
           markers: process.env.NODE_ENV === 'development',
-          scrub: false // Time-based animation (not scroll-scrubbed)
+          scrub: false, // Time-based animation (not scroll-scrubbed)
+          onRefresh: (self) => {
+            // CRITICAL: Set pin-spacer background to match our dark theme
+            // GSAP creates a wrapper (.pin-spacer) around the pinned element
+            // Without this, the spacer shows as white/light
+            const pinSpacer = self.pin?.parentElement;
+            if (pinSpacer && pinSpacer.classList.contains('pin-spacer')) {
+              pinSpacer.style.backgroundColor = '#293645';
+            }
+          }
         }
       });
 
