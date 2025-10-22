@@ -72,9 +72,9 @@ style={{
 
 ---
 
-## 🔄 Attempt 4: CSS Layout Containment (CURRENT)
+## ❌ Attempt 4: CSS Layout Containment
 
-**What we're trying:**
+**What we tried:**
 ```tsx
 style={{ 
   contain: 'layout',
@@ -87,20 +87,38 @@ style={{
 - `isolation: isolate` → Creates new stacking context
 - When GSAP prepares for pin, layout recalculation stops at our boundary
 
+**Result:** FAILED - Jump still noticeable, cards are now fully visible again (good!)
+
+**Why it failed:** CSS containment doesn't prevent GSAP's internal position caching issues.
+
+---
+
+## 🔄 Attempt 5: GSAP `invalidateOnRefresh` (CURRENT - FROM OFFICIAL DOCS!)
+
+**What we're trying:**
+```tsx
+scrollTrigger: {
+  // ... existing config
+  invalidateOnRefresh: true // ← GSAP official fix!
+}
+```
+
+**Theory (from GSAP docs):**
+> "invalidateOnRefresh: true forces the animation to recalculate its start/end values on every ScrollTrigger refresh, which can prevent layout shifts during pinning."
+
+**Why this should work:**
+- Jump happens because browser recalculates layout before pin
+- GSAP's cached measurements become stale
+- `invalidateOnRefresh` ensures fresh calculations every time
+- No stale data = no unexpected position shifts
+
 **Status:** TESTING - Awaiting diagnostic results
+
+**Source:** Official GSAP documentation and community recommendations
 
 ---
 
 ## 🔮 Next Attempts If This Fails:
-
-### Option 5: GSAP invalidateOnRefresh
-```tsx
-scrollTrigger: {
-  // ... existing config
-  invalidateOnRefresh: true
-}
-```
-Force GSAP to recalculate all values on every scroll refresh.
 
 ### Option 6: Manual position locking with GSAP
 ```tsx
@@ -111,8 +129,15 @@ gsap.set(containerRef.current, {
 });
 ```
 
-### Option 7: Accept the micro-jump
-If < 2px, might be browser sub-pixel rounding - acceptable for production.
+### Option 7: Adjust ScrollTrigger start/end timing
+```tsx
+// Ensure pin starts exactly when previous section exits
+start: 'top top',
+end: 'bottom top'
+```
+
+### Option 8: Accept the micro-jump
+If < 2px after all attempts, might be browser sub-pixel rounding - acceptable for production.
 
 ---
 
