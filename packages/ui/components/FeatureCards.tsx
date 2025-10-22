@@ -36,14 +36,20 @@ export function FeatureCards({
       const cardElements = containerRef.current?.querySelectorAll('[data-card]');
       if (!cardElements || cardElements.length === 0) return;
 
-      // "The Spotlight" - Sequential focus animation
+      // "The Spotlight" - Sequential focus animation with scroll pinning
       // Each card gets its moment: fade in → spotlight (scale + glow) → settle
+      // The page "pauses" while the animation plays - Apple-style storytelling!
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
-          start: 'top 50%', // Start later - when section is centered in viewport
-          once: true,
-          markers: process.env.NODE_ENV === 'development'
+          start: 'top 20%', // Pin when section header is nicely positioned
+          end: '+=150%', // Unpin after animation completes (~4.2s of animation + buffer)
+          pin: true, // 🎬 THE MAGIC - freeze the page!
+          pinSpacing: true, // Maintain natural scroll flow after unpin
+          anticipatePin: 1, // Smoother pin start
+          once: true, // Animation plays once
+          markers: process.env.NODE_ENV === 'development',
+          scrub: false // Time-based animation (not scroll-scrubbed)
         }
       });
 
