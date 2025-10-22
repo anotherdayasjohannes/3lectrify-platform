@@ -36,16 +36,20 @@ export function FeatureCards({
       const cardElements = containerRef.current?.querySelectorAll('[data-card]');
       if (!cardElements || cardElements.length === 0) return;
 
+      // Scroll-pinning animation: Cards slide in from right while page is pinned
       gsap.from(cardElements, {
+        x: 200, // Start 200px to the right (off-screen)
         opacity: 0,
-        y: 50,
-        duration: 0.8,
-        stagger: 0.15,
-        ease: 'power2.out',
+        duration: 1,
+        stagger: 0.2, // Each card follows the previous one
+        ease: 'power3.out',
         scrollTrigger: {
           trigger: containerRef.current,
-          start: 'top 80%',
-          once: true, // Animation plays only once, prevents cards from staying hidden
+          start: 'top top', // Pin when section reaches top of viewport
+          end: '+=150%', // Animation duration: 150% of viewport height scroll
+          pin: true, // Pin the section while animating
+          scrub: 1, // Tie animation to scroll position (smooth: 1 second lag)
+          anticipatePin: 1, // Smooth pin behavior
         },
       });
     },
