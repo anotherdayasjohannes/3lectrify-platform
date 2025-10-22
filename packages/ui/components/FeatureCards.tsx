@@ -41,22 +41,22 @@ export function FeatureCards({
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
-          start: 'top 75%',
+          start: 'top 50%', // Start later - when section is centered in viewport
           once: true,
           markers: process.env.NODE_ENV === 'development'
         }
       });
 
       cardElements.forEach((card, index) => {
-        // Calculate stagger timing
-        const delay = index * 0.25;
+        // Calculate stagger timing - slower for better storytelling
+        const delay = index * 0.5; // Increased from 0.25s to 0.5s
 
-        // Step 1: Fade in with slight scale
+        // Step 1: Fade in with slight scale - slower entrance
         tl.from(card, {
           opacity: 0,
           scale: 0.9,
           y: 30,
-          duration: 0.4,
+          duration: 0.6, // Increased from 0.4s
           ease: 'power2.out'
         }, delay);
 
@@ -64,17 +64,17 @@ export function FeatureCards({
         tl.to(card, {
           scale: 1.05,
           boxShadow: '0 20px 60px rgba(136, 192, 177, 0.3)',
-          duration: 0.3,
+          duration: 0.5, // Increased from 0.3s
           ease: 'power2.inOut'
-        }, delay + 0.3);
+        }, delay + 0.5); // Adjusted timing
 
         // Step 3: Settle into final position
         tl.to(card, {
           scale: 1,
           boxShadow: '0 0 0 rgba(136, 192, 177, 0)',
-          duration: 0.3,
+          duration: 0.4, // Increased from 0.3s
           ease: 'power2.out'
-        }, delay + 0.6);
+        }, delay + 1.0); // Adjusted timing
       });
     },
     { scope: containerRef }
@@ -106,7 +106,7 @@ export function FeatureCards({
             <article
               key={card._key}
               data-card
-              className="bg-[#1C242E] rounded-[20px] p-[40px_30px] text-center transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.1)] md:p-[35px_25px] w-full"
+              className="bg-[#1C242E] rounded-[20px] p-[40px_30px] transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.1)] md:p-[35px_25px] w-full"
               style={{ opacity: 1 }}
             >
               {card.icon && (
@@ -120,11 +120,11 @@ export function FeatureCards({
                   />
                 </div>
               )}
-              <h3 className="text-[24px] leading-[32px] tracking-[0.24px] font-normal mb-[15px] text-white md:text-[20px] md:leading-[28px]">
+              <h3 className="text-[24px] leading-[32px] tracking-[0.24px] font-normal mb-[15px] text-white text-left md:text-[20px] md:leading-[28px]">
                 {card.title}
               </h3>
               {card.description && (
-                <p className="text-[16px] leading-[26px] tracking-[0.16px] font-light m-0 text-white">
+                <p className="text-[16px] leading-[26px] tracking-[0.16px] font-light m-0 text-white text-left">
                   {card.description}
                 </p>
               )}
