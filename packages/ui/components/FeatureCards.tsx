@@ -97,12 +97,12 @@ export function FeatureCards({
   return (
     <section
       ref={containerRef}
-      className="relative pt-[80px] pb-[100px] bg-[#293645] md:pt-[60px] md:pb-[80px]"
+      className="relative pb-[100px] bg-[#293645] md:pb-[80px]"
       style={{ zIndex: 100, backgroundColor: '#293645' }}
     >
       <div className="content-wrapper">
         {/* Section Header - Left Aligned */}
-        <div className="mb-[60px] md:mb-[40px]">
+        <div className="mt-[60px] mb-[60px] md:mt-[60px] md:mb-[40px]">
           {sectionHeadline && (
             <h2 className="text-[40px] leading-[50px] tracking-[0.4px] font-light mb-[20px] text-white text-left md:text-[32px] md:leading-[42px] md:mb-[15px]">
               {sectionHeadline}
