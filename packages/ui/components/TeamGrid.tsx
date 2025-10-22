@@ -217,21 +217,36 @@ const TeamCard = forwardRef<HTMLElement, { member: TeamMember }>(({ member }, re
   return (
     <article 
       ref={ref}
-      className="w-[270px] md:w-[calc(50%-10px)] md:max-w-[270px] sm:w-full flex-shrink-0"
+      className="w-[270px] md:w-[calc(50%-10px)] md:max-w-[270px] sm:w-full flex-shrink-0 transition-all duration-500 ease-out hover:scale-[1.02]"
       style={{ 
         transformStyle: 'preserve-3d',
         backfaceVisibility: 'visible',
-        // 🎨 Add 3D depth/thickness
-        filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.4)) drop-shadow(0 0 0 3px rgba(255,255,255,0.05))',
+      }}
+      onMouseMove={(e) => {
+        // 🎨 3D tilt on hover based on mouse position
+        const card = e.currentTarget;
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left; // Mouse X in card
+        const y = e.clientY - rect.top;  // Mouse Y in card
+        
+        // Calculate rotation (-10 to +10 degrees)
+        const rotateY = ((x / rect.width) - 0.5) * 20;  // Horizontal tilt
+        const rotateX = ((y / rect.height) - 0.5) * -20; // Vertical tilt
+        
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+      }}
+      onMouseLeave={(e) => {
+        // Reset to flat state
+        e.currentTarget.style.transform = '';
       }}
     >
       <div className="flex flex-col gap-[15px]">
         {/* Photo Wrapper with Overlay */}
         <div
-          className="relative w-full h-[400px] rounded-[20px] overflow-hidden bg-white/5 cursor-pointer group"
+          className="relative w-full h-[400px] rounded-[20px] overflow-hidden bg-white/5 cursor-pointer group transition-all duration-300 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)]"
           style={{
-            // 🎨 Add thickness border/edge
-            boxShadow: 'inset 0 0 0 2px rgba(255,255,255,0.1), 0 4px 20px rgba(0,0,0,0.3)',
+            // 🎨 Subtle shadow in rest state
+            boxShadow: '0 2px 10px rgba(0,0,0,0.2)',
           }}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
