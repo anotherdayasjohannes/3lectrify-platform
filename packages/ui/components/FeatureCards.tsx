@@ -46,6 +46,7 @@ export function FeatureCards({
           end: '+=150%', // Animation completes after 150vh of scrolling - comfortable pace
           pin: true, // 🎬 Freeze the page while animation plays
           pinSpacing: true, // Prevents next section from sliding underneath
+          pinReparent: false, // 🔑 CRITICAL: Don't move element in DOM - prevents Next.js jump!
           scrub: 1, // Tie animation to scroll position (1s smooth lag)
           invalidateOnRefresh: true, // 🔄 GSAP DOC FIX: Force recalculate on every refresh - prevents layout jumps
           // No 'once' needed - scrub naturally handles forward/backward scroll
