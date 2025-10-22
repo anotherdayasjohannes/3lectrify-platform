@@ -98,7 +98,13 @@ export function FeatureCards({
     <section
       ref={containerRef}
       className="relative pt-[80px] pb-[100px] bg-[#293645] md:pt-[60px] md:pb-[80px] overflow-hidden"
-      style={{ zIndex: 100, backgroundColor: '#293645' }}
+      style={{ 
+        zIndex: 100, 
+        backgroundColor: '#293645',
+        willChange: 'transform',
+        transform: 'translateZ(0)',
+        backfaceVisibility: 'hidden'
+      }}
     >
       <div className="content-wrapper">
         {/* Section Header - Left Aligned */}
