@@ -3,7 +3,7 @@ import {structureTool} from 'sanity/structure'
 import {visionTool} from '@sanity/vision'
 import {schemaTypes} from './schemaTypes'
 
-export default defineConfig({
+const config = defineConfig({
   name: 'default',
   title: '3lectrify Platform',
 
@@ -15,4 +15,8 @@ export default defineConfig({
   schema: {
     types: schemaTypes,
   },
+  
+  basePath: '/',
 })
+
+export default config
