@@ -25,10 +25,10 @@ Du kannst:
 
 ### **1. Zugang zum Studio**
 
-**URL:** `studio.3lectrify.com` (oder die URL, die du von Lars bekommst)
+**URL:** https://electrify-studio.sanity.studio/
 
 **Login:**
-1. Öffne die Studio-URL im Browser
+1. Öffne die Studio-URL im Browser: https://electrify-studio.sanity.studio/
 2. Klicke auf "Sign in"
 3. Verwende deine Sanity-Zugangsdaten (hast du per E-Mail erhalten)
 4. Fertig!
@@ -493,13 +493,13 @@ Media → Upload → Mehrere Dateien auswählen
 ## 🚀 Schnellstart für Ungeduldige
 
 ```
-1. Gehe zu studio.3lectrify.com
+1. Gehe zu https://electrify-studio.sanity.studio/
 2. Login
 3. Links: Wähle "Pages"
 4. Klicke auf "Homepage"
 5. Ändere eine Überschrift
 6. Klicke "Publish"
-7. Gehe zu 3lectrify.com
+7. Gehe zu https://3lectrify.vercel.app
 8. Deine Änderung ist live! 🎉
 
 Gratulation! Du bist jetzt Content Manager! 💪
