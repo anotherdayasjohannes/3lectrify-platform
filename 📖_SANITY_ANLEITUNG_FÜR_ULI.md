@@ -424,7 +424,7 @@ Media → Upload → Mehrere Dateien auswählen
 - Keine Panik! 😊
 - Verlauf öffnen (Uhr-Symbol)
 - Alte Version wiederherstellen
-- Oder Lars fragen → Er kann helfen!
+- Oder Johannes fragen → Er kann helfen!
 
 ---
 
@@ -432,11 +432,10 @@ Media → Upload → Mehrere Dateien auswählen
 
 ### **Fragen?**
 
-**Erste Anlaufstelle:** Lars
-- Slack: @lars
-- E-Mail: lars@3lectrify.com
+**Erste Anlaufstelle:** Johannes
+- Direkt ansprechen oder E-Mail schreiben
 
-**Technische Docs (für Lars):**
+**Technische Docs (für Entwickler):**
 - Sanity Docs: https://www.sanity.io/docs
 - Support: support@sanity.io
 
@@ -473,7 +472,7 @@ Media → Upload → Mehrere Dateien auswählen
 - Testumgebung zum Ausprobieren
 
 ### **Unsere Interne Doku:**
-- `📚_SANITY_STUDIO_DEPLOYMENT.md` (technisch, für Lars)
+- `📚_SANITY_STUDIO_DEPLOYMENT.md` (technisch, für Entwickler)
 - Dieser Guide (für dich!)
 
 ---
@@ -512,7 +511,7 @@ Gratulation! Du bist jetzt Content Manager! 💪
 **Dieser Guide ist für dich!**
 
 Wenn etwas unklar ist oder fehlt:
-→ Sag Lars Bescheid
+→ Sag Johannes Bescheid
 → Wir verbessern den Guide
 
 **Viel Erfolg beim Content Management!** ✨
@@ -521,5 +520,5 @@ Wenn etwas unklar ist oder fehlt:
 
 *Version 1.0 - Oktober 2025*  
 *Erstellt für das 3lectrify Team*  
-*Bei Fragen: Lars kontaktieren* 😊
+*Bei Fragen: Johannes kontaktieren* 😊
 
