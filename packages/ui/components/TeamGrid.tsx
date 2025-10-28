@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, forwardRef } from 'react';
+import { useState, useRef } from 'react';
 import Image from 'next/image';
 import { PortableText, type PortableTextBlock } from '@portabletext/react';
 import { getFocalPoint } from '@3lectrify/sanity';
@@ -40,7 +40,7 @@ interface TeamGridProps {
 
 export function TeamGrid({ heading, introText, teamMembers }: TeamGridProps) {
   const sectionRef = useRef<HTMLElement>(null);
-  const cardsRef = useRef<(HTMLElement | null)[]>([]);
+  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
   // Check for reduced motion preference
   const shouldReduceMotion = typeof window !== 'undefined' 
@@ -247,7 +247,7 @@ export function TeamGrid({ heading, introText, teamMembers }: TeamGridProps) {
             <TeamCard 
               key={member._id} 
               member={member}
-              ref={(el) => {
+              refCallback={(el) => {
                 cardsRef.current[index] = el;
               }}
             />
@@ -258,15 +258,15 @@ export function TeamGrid({ heading, introText, teamMembers }: TeamGridProps) {
   );
 }
 
-const TeamCard = forwardRef<HTMLElement, { member: TeamMember }>(({ member }, ref) => {
+function TeamCard({ member, refCallback }: { member: TeamMember; refCallback?: (el: HTMLDivElement | null) => void }) {
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
 
   const handleMouseEnter = () => setIsOverlayVisible(true);
   const handleMouseLeave = () => setIsOverlayVisible(false);
 
   return (
-    <article 
-      ref={ref}
+    <article
+      ref={refCallback}
       className="w-[270px] md:w-[calc(50%-10px)] md:max-w-[270px] sm:w-full flex-shrink-0 transition-all duration-500 ease-out hover:scale-[1.02]"
       style={{ 
         transformStyle: 'preserve-3d',
@@ -400,7 +400,5 @@ const TeamCard = forwardRef<HTMLElement, { member: TeamMember }>(({ member }, re
       </div>
     </article>
   );
-});
-
-TeamCard.displayName = 'TeamCard';
+}
 
