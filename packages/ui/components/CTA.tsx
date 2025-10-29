@@ -54,7 +54,7 @@ export function CTA({
             )}
             
             {description && (
-              <div className="text-[24px] leading-[34px] md:text-[20px] md:leading-[30px] sm:text-[18px] sm:leading-[26px] tracking-[0.24px] font-light text-white">
+              <div className="text-[24px] leading-[34px] md:text-[20px] md:leading-[30px] sm:text-[18px] sm:leading-[26px] tracking-[0.24px] font-normal text-white">
                 <PortableText 
                   value={description}
                   components={{
