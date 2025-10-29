@@ -262,14 +262,14 @@ export function Hero({
             {subtext && (
               <div 
                 ref={subtextRef as any}
-                className="text-body-hero font-light tracking-[0.24px] text-white"
+                className="text-body-hero font-normal tracking-[0.24px] text-white"
               >
                 <PortableText 
                   value={subtext}
                   components={{
                     block: {
                       normal: ({children}) => (
-                        <p className="text-body-hero font-light tracking-[0.24px] text-white mb-[1em] last:mb-0">
+                        <p className="text-body-hero font-normal tracking-[0.24px] text-white mb-[1em] last:mb-0">
                           {children}
                         </p>
                       )
