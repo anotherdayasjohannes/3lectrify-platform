@@ -141,7 +141,7 @@ export function FeatureCards({
           {sectionDescription && (
             <p 
               ref={descriptionRef as any}
-              className="text-[18px] leading-[30px] tracking-[0.18px] font-light text-white text-left max-w-[800px] md:text-[16px] md:leading-[26px]"
+              className="text-[18px] leading-[30px] tracking-[0.18px] font-normal text-white text-left max-w-[800px] md:text-[16px] md:leading-[26px]"
             >
               {sectionDescription}
             </p>
@@ -172,7 +172,7 @@ export function FeatureCards({
                 {card.title}
               </h3>
               {card.description && (
-                <p className="text-[16px] leading-[26px] tracking-[0.16px] font-light m-0 text-white text-left">
+                <p className="text-[16px] leading-[26px] tracking-[0.16px] font-normal m-0 text-white text-left">
                   {card.description}
                 </p>
               )}
