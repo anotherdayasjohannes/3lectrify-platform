@@ -150,7 +150,7 @@ export function StackedExplainer({
             </h2>
           )}
           {sectionIntro && (
-            <div className="text-[18px] leading-[26px] tracking-[0.18px] font-light text-white max-w-[900px] prose prose-invert prose-p:my-0 prose-p:mb-[1em] prose-p:last:mb-0">
+            <div className="text-[18px] leading-[26px] tracking-[0.18px] font-normal text-white max-w-[900px] prose prose-invert prose-p:my-0 prose-p:mb-[1em] prose-p:last:mb-0">
               <PortableText value={sectionIntro} />
             </div>
           )}
@@ -228,7 +228,7 @@ export function StackedExplainer({
 
                 {/* Description */}
                 {card.description && (
-                  <div className="text-[18px] leading-[26px] md:text-[16px] md:leading-[24px] font-light text-white/90 prose prose-invert prose-p:my-0 prose-p:mb-[1em] prose-p:last:mb-0 prose-ul:my-0 prose-ul:list-none prose-ul:pl-0 prose-ul:flex prose-ul:flex-col prose-ul:gap-[15px] prose-li:flex prose-li:gap-[12px] prose-li:items-start prose-li:leading-[22px] prose-li:before:content-[''] prose-li:before:flex-shrink-0 prose-li:before:w-[22px] prose-li:before:h-[22px] prose-li:before:bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjIiIGhlaWdodD0iMjIiIHZpZXdCb3g9IjAgMCAyMiAyMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cGF0aCBkPSJNOSAxNi4xN0w0LjgzIDEybC0xLjQyIDEuNDFMOSAxOSAyMSA3bC0xLjQxLTEuNDF6IiBmaWxsPSIjODhDMEIxIi8+Cjwvc3ZnPgo=')] prose-li:before:bg-no-repeat prose-li:before:bg-center prose-li:before:bg-contain">
+                  <div className="text-[18px] leading-[26px] md:text-[16px] md:leading-[24px] font-normal text-white/90 prose prose-invert prose-p:my-0 prose-p:mb-[1em] prose-p:last:mb-0 prose-ul:my-0 prose-ul:list-none prose-ul:pl-0 prose-ul:flex prose-ul:flex-col prose-ul:gap-[15px] prose-li:flex prose-li:gap-[12px] prose-li:items-start prose-li:leading-[22px] prose-li:before:content-[''] prose-li:before:flex-shrink-0 prose-li:before:w-[22px] prose-li:before:h-[22px] prose-li:before:bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjIiIGhlaWdodD0iMjIiIHZpZXdCb3g9IjAgMCAyMiAyMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cGF0aCBkPSJNOSAxNi4xN0w0LjgzIDEybC0xLjQyIDEuNDFMOSAxOSAyMSA3bC0xLjQxLTEuNDF6IiBmaWxsPSIjODhDMEIxIi8+Cjwvc3ZnPgo=')] prose-li:before:bg-no-repeat prose-li:before:bg-center prose-li:before:bg-contain">
                     <PortableText value={card.description} />
                   </div>
                 )}
