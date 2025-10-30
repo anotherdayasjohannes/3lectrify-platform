@@ -92,7 +92,7 @@ export function LottieAnimation({
           {/* Lottie Animation */}
           <div 
             ref={containerRef}
-            className="w-full flex justify-center"
+            className="w-full flex justify-center bg-white rounded-[20px] overflow-hidden"
             style={{ maxWidth }}
           >
             <Lottie
