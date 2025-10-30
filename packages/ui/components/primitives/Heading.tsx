@@ -1,4 +1,4 @@
-import React, { type CSSProperties, forwardRef, type Ref } from 'react';
+import { type CSSProperties } from 'react';
 import { typography, colors, type TypographyVariant } from '../../theme';
 
 /**
@@ -92,49 +92,41 @@ const colorMap: Record<HeadingColor, string> = {
 
 /**
  * Heading Component Implementation
- * 
- * Supports refs for animation libraries (GSAP, Framer Motion, etc.)
  */
-export const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(
-  function Heading(
-    {
-      variant = 'h2',
-      color = 'white',
-      children,
-      className = '',
-      style = {},
-    }: HeadingProps,
-    ref: Ref<HTMLHeadingElement>
-  ) {
-    // Get typography specs from theme for the selected variant
-    const typo = typography[variant as TypographyVariant];
-    
-    // Select the appropriate HTML element
-    const Component = variant;
-    
-    // Construct inline styles from Figma design tokens
-    const inlineStyles: CSSProperties = {
-      fontSize: typo.fontSize,
-      fontWeight: typo.fontWeight,
-      lineHeight: typo.lineHeight,
-      letterSpacing: typo.letterSpacing,
-      fontFamily: typo.fontFamily,
-      color: colorMap[color],
-      margin: 0, // Reset default margins for consistency
-      ...style, // Allow custom style overrides
-    };
-    
-    return (
-      <Component 
-        ref={ref}
-        style={inlineStyles}
-        className={className}
-      >
-        {children}
-      </Component>
-    );
-  }
-);
+export function Heading({
+  variant = 'h2',
+  color = 'white',
+  children,
+  className = '',
+  style = {},
+}: HeadingProps) {
+  // Get typography specs from theme for the selected variant
+  const typo = typography[variant as TypographyVariant];
+  
+  // Select the appropriate HTML element
+  const Component = variant;
+  
+  // Construct inline styles from Figma design tokens
+  const inlineStyles: CSSProperties = {
+    fontSize: typo.fontSize,
+    fontWeight: typo.fontWeight,
+    lineHeight: typo.lineHeight,
+    letterSpacing: typo.letterSpacing,
+    fontFamily: typo.fontFamily,
+    color: colorMap[color],
+    margin: 0, // Reset default margins for consistency
+    ...style, // Allow custom style overrides
+  };
+  
+  return (
+    <Component 
+      style={inlineStyles}
+      className={className}
+    >
+      {children}
+    </Component>
+  );
+}
 
 /**
  * Type guard to check if a string is a valid HeadingVariant
