@@ -34,7 +34,7 @@ export function SimpleTextImage({
   const textColor = variant === 'dark' ? 'text-white' : 'text-[#333333]';
 
   return (
-    <section className={`${bgColor} ${textColor} py-[50px] lg:py-20`}
+    <section className={`${bgColor} ${textColor} pt-[40px] pb-[40px] md:pt-[50px] md:pb-[50px]`}
     >
       <div className="content-wrapper">
         <div className="max-w-[645px] mx-auto flex flex-col items-start gap-[50px] md:gap-10 sm:gap-[30px]">

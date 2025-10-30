@@ -282,9 +282,34 @@ export const colors = {
  */
 export const spacing = {
   /**
-   * Section padding (vertical)
-   * Top: 80px, Bottom: 100px on desktop
-   * Reduces on mobile via Tailwind responsive classes
+   * Section vertical spacing (NEW STANDARD)
+   * Ensures consistent 100px gaps between sections
+   * Formula: 50px bottom (section A) + 50px top (section B) = 100px gap
+   * 
+   * Mobile: 40px + 40px = 80px between sections
+   * Tablet/Desktop: 50px + 50px = 100px between sections
+   * 
+   * Usage: Apply to ALL section components (Hero, FeatureCards, TextImage, etc.)
+   * Header/Footer have their own padding rules and are excluded
+   */
+  sectionSpacing: {
+    mobile: {
+      top: '40px',
+      bottom: '40px',
+    },
+    tablet: {
+      top: '50px',
+      bottom: '50px',
+    },
+    desktop: {
+      top: '50px',
+      bottom: '50px',
+    },
+  },
+  
+  /**
+   * @deprecated Use sectionSpacing instead
+   * Legacy section padding - kept for reference during migration
    */
   section: {
     paddingTop: '80px',

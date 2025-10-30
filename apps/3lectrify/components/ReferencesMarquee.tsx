@@ -62,7 +62,7 @@ export default function ReferencesMarquee({
   const doubledReferences = [...references, ...references];
 
   return (
-    <section className="py-[80px] overflow-hidden bg-[#293645] md:py-[60px]">
+    <section className="pt-[40px] pb-[40px] md:pt-[50px] md:pb-[50px] overflow-hidden bg-[#293645]">
       <div className="content-wrapper mb-[50px] text-center md:mb-[40px]">
         <h2 className="text-[40px] leading-[50px] font-light text-white mb-[20px] tracking-[0.4px] md:text-[32px] md:leading-[42px]">
           Unsere Projekte im Überblick

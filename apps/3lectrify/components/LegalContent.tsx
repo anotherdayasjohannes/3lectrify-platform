@@ -39,7 +39,7 @@ export function LegalContent({ iframeUrl }: LegalContentProps) {
   }, [iframeUrl]);
 
   return (
-    <section className="bg-[#293645] py-[60px] pb-[80px] md:py-[50px] md:pb-[70px] sm:py-[40px] sm:pb-[60px] min-h-[60vh]">
+    <section className="bg-[#293645] pt-[40px] pb-[40px] md:pt-[50px] md:pb-[50px] min-h-[60vh]">
       <div className="content-wrapper">
         <div
           ref={containerRef}
