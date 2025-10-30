@@ -546,6 +546,8 @@ export default async function DynamicPage({ params }: { params: Promise<{ slug: 
                   key={index}
                   references={references}
                   speed="normal"
+                  headline={block.headline}
+                  subtext={typeof block.description === 'string' ? block.description : undefined}
                 />
               );
             }

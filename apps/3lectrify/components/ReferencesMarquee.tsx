@@ -18,11 +18,15 @@ interface Reference {
 interface ReferencesMarqueeProps {
   references: Reference[];
   speed?: 'slow' | 'normal' | 'fast';
+  headline?: string;
+  subtext?: string;
 }
 
 export default function ReferencesMarquee({ 
   references, 
-  speed = 'normal' 
+  speed = 'normal',
+  headline = 'Unsere Projekte im Überblick',
+  subtext = 'Eine Auswahl unserer erfolgreich realisierten Referenzen'
 }: ReferencesMarqueeProps) {
   const marqueeRef = useRef<HTMLDivElement>(null);
 
@@ -64,20 +68,26 @@ export default function ReferencesMarquee({
 
   return (
     <section className="pt-[40px] pb-[40px] md:pt-[50px] md:pb-[50px] overflow-hidden bg-[#293645]">
-      <div className="content-wrapper mb-[50px] md:mb-[40px]">
-        <h2 
-          className="text-white mb-[20px]"
-          style={typography.h2}
-        >
-          Unsere Projekte im Überblick
-        </h2>
-        <p 
-          className="text-white/70"
-          style={typography.body}
-        >
-          Eine Auswahl unserer erfolgreich realisierten Referenzen
-        </p>
-      </div>
+      {(headline || subtext) && (
+        <div className="content-wrapper mb-[50px] md:mb-[40px]">
+          {headline && (
+            <h2 
+              className="text-white mb-[20px]"
+              style={typography.h2}
+            >
+              {headline}
+            </h2>
+          )}
+          {subtext && (
+            <p 
+              className="text-white"
+              style={typography.body}
+            >
+              {subtext}
+            </p>
+          )}
+        </div>
+      )}
 
       <div className="relative">
         {/* Gradient Overlays */}

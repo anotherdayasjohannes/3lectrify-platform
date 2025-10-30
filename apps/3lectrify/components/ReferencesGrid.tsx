@@ -101,7 +101,7 @@ export default function ReferencesGrid({
             )}
             {subtext && (
               <p 
-                className="text-white/70 max-w-[645px]"
+                className="text-white max-w-[645px]"
                 style={typography.body}
               >
                 {subtext}

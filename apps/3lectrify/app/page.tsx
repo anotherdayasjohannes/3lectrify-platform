@@ -448,6 +448,8 @@ export default async function HomePage() {
                   key={index}
                   references={references}
                   speed="normal"
+                  headline={block.headline}
+                  subtext={typeof block.description === 'string' ? block.description : undefined}
                 />
               );
             }
