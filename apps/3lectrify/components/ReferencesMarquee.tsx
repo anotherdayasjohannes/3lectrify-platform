@@ -73,7 +73,7 @@ export default function ReferencesMarquee({
         </h2>
         <p 
           className="text-white/70"
-          style={typography.intro}
+          style={typography.body}
         >
           Eine Auswahl unserer erfolgreich realisierten Referenzen
         </p>

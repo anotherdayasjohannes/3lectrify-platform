@@ -102,7 +102,7 @@ export default function ReferencesGrid({
             {subtext && (
               <p 
                 className="text-white/70 max-w-[645px]"
-                style={typography.intro}
+                style={typography.body}
               >
                 {subtext}
               </p>
