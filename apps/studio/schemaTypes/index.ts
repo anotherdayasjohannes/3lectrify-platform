@@ -19,6 +19,8 @@ import references from './objects/references'
 import teamGrid from './objects/teamGrid'
 import contactSimple from './objects/contactSimple'
 import stackedExplainer from './objects/stackedExplainer'
+import lottieAnimation from './objects/lottieAnimation'
+import videoAnimation from './objects/videoAnimation'
 
 export const schemaTypes = [
   // Documents
@@ -42,4 +44,6 @@ export const schemaTypes = [
   teamGrid,
   contactSimple,
   stackedExplainer,
+  lottieAnimation,
+  videoAnimation,
 ]

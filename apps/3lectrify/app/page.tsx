@@ -1,5 +1,5 @@
 import { client, pageQuery } from '@3lectrify/sanity';
-import { Hero, FeatureCards, FeatureShowcase, StackedExplainer, TextImage, SimpleTextImage, Stats, CTA, ReferencesGrid, ReferencesMarquee, TeamGrid } from '@/components';
+import { Hero, FeatureCards, FeatureShowcase, StackedExplainer, TextImage, SimpleTextImage, Stats, CTA, ReferencesGrid, ReferencesMarquee, TeamGrid, LottieAnimationWrapper, VideoAnimation } from '@/components';
 import type { PortableTextBlock } from '@portabletext/react';
 
 interface SanityBlock {
@@ -471,6 +471,43 @@ export default async function HomePage() {
                 heading={block.heading}
                 introText={block.introText}
                 teamMembers={block.teamMembers || []}
+              />
+            );
+
+          case 'lottieAnimation':
+            // Fetch the animation JSON data
+            const animationUrl = block.animationFile?.asset?.url;
+            if (!animationUrl) return null;
+
+            return (
+              <LottieAnimationWrapper
+                key={index}
+                headline={block.headline}
+                description={block.description}
+                animationUrl={animationUrl}
+                loop={block.loop !== false}
+                speed={block.speed || 1}
+                maxWidth={block.maxWidth || '800px'}
+                variant={(block.variant as 'light' | 'dark') || 'dark'}
+              />
+            );
+
+          case 'videoAnimation':
+            const videoUrl = block.videoFile?.asset?.url;
+            if (!videoUrl) return null;
+
+            return (
+              <VideoAnimation
+                key={index}
+                headline={block.headline}
+                description={block.description}
+                videoUrl={videoUrl}
+                posterUrl={block.posterImage?.asset?.url}
+                posterAlt={block.posterImage?.alt || ''}
+                loop={block.loop !== false}
+                muted={block.muted !== false}
+                maxWidth={block.maxWidth || '800px'}
+                variant={(block.variant as 'light' | 'dark') || 'dark'}
               />
             );
 
