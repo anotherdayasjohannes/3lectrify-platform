@@ -50,11 +50,11 @@ export function H1Animator() {
           scrollTrigger: {
             trigger: h1,
             start: 'top 80%',
-            once: true,
-            onComplete: () => {
-              // Clean up SplitText wrappers after animation
-              split.revert();
-            }
+            once: true
+          },
+          onComplete: () => {
+            // Clean up SplitText wrappers after animation
+            split.revert();
           }
         });
       });
