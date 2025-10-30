@@ -521,7 +521,7 @@ export default async function HomePage() {
               <LottieAnimationWrapper
                 key={index}
                 headline={block.headline}
-                description={block.description}
+                description={typeof block.description === 'string' ? block.description : undefined}
                 animationUrl={animationUrl}
                 loop={block.loop !== false}
                 speed={block.speed || 1}
@@ -538,7 +538,7 @@ export default async function HomePage() {
               <VideoAnimation
                 key={index}
                 headline={block.headline}
-                description={block.description}
+                description={typeof block.description === 'string' ? block.description : undefined}
                 videoUrl={videoUrl}
                 posterUrl={block.posterImage?.asset?.url}
                 posterAlt={block.posterImage?.alt || ''}
