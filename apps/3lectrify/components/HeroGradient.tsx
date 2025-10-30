@@ -1,7 +1,5 @@
 'use client';
 
-import { useTextReveal } from '@3lectrify/animations';
-
 interface HeroGradientProps {
   headline: string;
   subheadline?: string;
@@ -26,23 +24,6 @@ export function HeroGradient({
   gradientDirection = 'left',
   sectionHeight = 'medium',
 }: HeroGradientProps) {
-  // ✨ GSAP SplitText animations
-  const headlineRef = useTextReveal({ 
-    split: 'words', 
-    stagger: 0.08, 
-    duration: 0.6,
-    yDistance: 30,
-    delay: 0.3
-  });
-  
-  const subheadlineRef = useTextReveal({ 
-    split: 'words', 
-    stagger: 0.05, 
-    duration: 0.5,
-    yDistance: 20,
-    delay: 0.8  // Start after headline
-  });
-
   const getFocalPoint = (hotspot?: { x: number; y: number }) => {
     if (!hotspot) return 'center';
     return `${(hotspot.x * 100).toFixed(0)}% ${(hotspot.y * 100).toFixed(0)}%`;
@@ -96,7 +77,6 @@ export function HeroGradient({
           {/* Text Content - Figma: width 900px, gap 25px */}
           <div className="flex flex-col gap-[25px] max-w-[900px] w-full max-sm:max-w-full">
             <h1 
-              ref={headlineRef as any}
               className="text-[48px] leading-[58px] font-light tracking-[0.01em] text-white m-0 md:text-[40px] md:leading-[50px] max-sm:text-[32px] max-sm:leading-[40px]"
             >
               {headline}
@@ -104,7 +84,6 @@ export function HeroGradient({
 
             {subheadline && (
               <p 
-                ref={subheadlineRef as any}
                 className="text-[24px] leading-[34px] font-light tracking-[0.24px] text-white m-0 md:text-[20px] md:leading-[30px] max-sm:text-[18px] max-sm:leading-[26px]"
               >
                 {subheadline}
