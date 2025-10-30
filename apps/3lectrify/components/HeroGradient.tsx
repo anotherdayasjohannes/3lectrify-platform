@@ -1,5 +1,7 @@
 'use client';
 
+import { typography } from './theme';
+
 interface HeroGradientProps {
   headline: string;
   subheadline?: string;
@@ -51,44 +53,49 @@ export function HeroGradient({
 
   return (
     <section
-      className={`relative w-full overflow-hidden bg-[#1C242E] ${heightClasses[sectionHeight]} ${tabletHeights[sectionHeight]} max-sm:h-auto max-sm:min-h-[300px]`}
+      className="relative w-full overflow-hidden bg-[#1C242E] pt-[40px] pb-[40px] md:pt-[50px] md:pb-[50px]"
     >
-      {/* Full-width container that respects global margins */}
-      <div className="content-wrapper relative h-full">
-        {/* Background Image - Absolute to section, right edge */}
-        {backgroundImage?.url && (
-          <img
-            src={backgroundImage.url}
-            alt={backgroundImage.alt || ''}
-            className={`absolute top-0 ${
-              gradientDirection === 'left' ? 'right-0' : 'left-0'
-            } w-[1114px] h-full object-cover z-[1] md:w-[70%] max-sm:w-full max-sm:relative max-sm:h-[300px] max-sm:right-auto max-sm:left-auto`}
-            style={{ objectPosition: getFocalPoint(backgroundImage.hotspot) }}
-            loading="eager"
-          />
-        )}
+      {/* Centered container using content-wrapper */}
+      <div className="content-wrapper">
+        {/* Fixed-width image container with rounded right corners */}
+        <div className="relative w-full max-w-[1390px] h-[400px] mx-auto overflow-hidden rounded-br-[20px] rounded-tr-[20px]">
+          {/* Background Image - positioned absolutely within container */}
+          {backgroundImage?.url && (
+            <div className="absolute left-[191px] top-[-361px] w-[1680px] h-[1121px]">
+              <img
+                src={backgroundImage.url}
+                alt={backgroundImage.alt || ''}
+                className="absolute inset-0 w-full h-full object-cover object-center"
+                style={{ objectPosition: getFocalPoint(backgroundImage.hotspot) }}
+                loading="eager"
+              />
+            </div>
+          )}
 
-        {/* Gradient Overlay - Positioned within content-wrapper - Figma exact values */}
-        <div
-          className={`relative h-full flex items-end pt-[50px] pr-0 pb-[50px] pl-[50px] md:py-10 md:px-0 z-[2] w-[851px] md:w-[60%] max-sm:w-full max-sm:py-[30px] max-sm:px-0 gradient-overlay ${
-            gradientDirection === 'left' ? 'gradient-left' : 'gradient-right'
-          }`}
-        >
-          {/* Text Content - Figma: width 900px, gap 25px */}
-          <div className="flex flex-col gap-[25px] max-w-[900px] w-full max-sm:max-w-full">
-            <h1 
-              className="text-[48px] leading-[58px] font-light tracking-[0.01em] text-white m-0 md:text-[40px] md:leading-[50px] max-sm:text-[32px] max-sm:leading-[40px]"
-            >
-              {headline}
-            </h1>
-
-            {subheadline && (
-              <p 
-                className="text-[24px] leading-[34px] font-light tracking-[0.24px] text-white m-0 md:text-[20px] md:leading-[30px] max-sm:text-[18px] max-sm:leading-[26px]"
+          {/* Gradient Overlay - Figma exact dimensions: 842px */}
+          <div
+            className={`relative h-full flex items-end pl-[50px] pr-0 py-[50px] z-[2] w-[842px] max-sm:w-full max-sm:p-[30px] gradient-overlay ${
+              gradientDirection === 'left' ? 'gradient-left' : 'gradient-right'
+            }`}
+          >
+            {/* Text Content */}
+            <div className="flex flex-col gap-[25px] w-full">
+              <h1 
+                className="text-white m-0"
+                style={typography.h1}
               >
-                {subheadline}
-              </p>
-            )}
+                {headline}
+              </h1>
+
+              {subheadline && (
+                <p 
+                  className="text-white m-0"
+                  style={typography.intro}
+                >
+                  {subheadline}
+                </p>
+              )}
+            </div>
           </div>
         </div>
       </div>
