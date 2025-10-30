@@ -7,6 +7,8 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { PortableText, type PortableTextBlock } from '@portabletext/react';
 import { getFocalPoint } from '@3lectrify/sanity';
+import { Heading } from './primitives/Heading';
+import { BodyText } from './primitives/BodyText';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -93,15 +95,23 @@ export function SimpleTextImage({
               className="flex flex-col items-start gap-[32px] sm:gap-[32px] w-full"
             >
               {headline && (
-                <h2 className="text-h2 font-light m-0 text-left w-full">
+                <Heading
+                  variant="h2"
+                  color={variant === 'dark' ? 'white' : 'dark'}
+                  className="text-left w-full"
+                >
                   {headline}
-                </h2>
+                </Heading>
               )}
 
               {body && (
-                <div className="text-[18px] leading-[26px] tracking-[0.18px] font-normal text-left w-full prose prose-invert prose-p:my-0 prose-p:mb-[26px] prose-p:last:mb-0 md:text-[16px] md:leading-[24px] sm:text-[16px] sm:leading-[24px]">
+                <BodyText
+                  as="div"
+                  color={variant === 'dark' ? 'white' : 'dark'}
+                  className="text-left w-full prose prose-invert prose-p:my-0 prose-p:mb-[26px] prose-p:last:mb-0 md:text-[16px] md:leading-[24px] sm:text-[16px] sm:leading-[24px]"
+                >
                   <PortableText value={body} />
-                </div>
+                </BodyText>
               )}
             </article>
           )}

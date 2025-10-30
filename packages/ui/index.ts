@@ -1,4 +1,21 @@
-// Shared UI components
+// ===== Design System =====
+// Theme tokens (typography, colors, spacing)
+export * from './theme';
+
+// ===== Primitives (Atomic Components) =====
+export { Heading, getHeadingStyles, isHeadingVariant } from './components/primitives/Heading';
+export type { HeadingProps, HeadingVariant, HeadingColor } from './components/primitives/Heading';
+
+export { BodyText, getBodyTextStyles } from './components/primitives/BodyText';
+export type { BodyTextProps, BodyTextVariant, BodyTextColor, BodyTextElement } from './components/primitives/BodyText';
+
+export { IntroText, getIntroTextStyles } from './components/primitives/IntroText';
+export type { IntroTextProps, IntroTextColor, IntroTextElement } from './components/primitives/IntroText';
+
+export { StatNumber, getStatNumberStyles, statColorPresets } from './components/primitives/StatNumber';
+export type { StatNumberProps } from './components/primitives/StatNumber';
+
+// ===== Shared UI Components =====
 export { Button } from './components/Button';
 export { Hero } from './components/Hero';
 export { FeatureCards } from './components/FeatureCards';

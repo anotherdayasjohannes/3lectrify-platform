@@ -3,6 +3,8 @@
 import { PortableText } from '@portabletext/react';
 import { useScrollTextReveal } from '@3lectrify/animations';
 import { Button } from './Button';
+import { Heading } from './primitives/Heading';
+import { IntroText } from './primitives/IntroText';
 
 interface CTAProps {
   headline?: string;
@@ -35,29 +37,35 @@ export function CTA({
           {/* Header: Headline + Description */}
           <header className="flex flex-col items-center text-center gap-[32px] md:gap-[32px] sm:gap-[32px] max-w-[900px]">
             {headline && (
-              <h2 
+              <Heading
                 ref={headlineRef as any}
-                className="text-[36px] leading-[46px] lg:text-[32px] lg:leading-[40px] sm:text-[28px] sm:leading-[36px] tracking-[0.36px] font-light text-white m-0"
+                variant="h2"
+                color="white"
+                className="lg:text-[32px] lg:leading-[40px] sm:text-[28px] sm:leading-[36px]"
               >
                 {headline}
-              </h2>
+              </Heading>
             )}
             
             {description && (
-              <div className="text-[24px] leading-[34px] md:text-[20px] md:leading-[30px] sm:text-[18px] sm:leading-[26px] tracking-[0.24px] font-normal text-white">
+              <IntroText
+                color="white"
+                as="div"
+                className="md:text-[20px] md:leading-[30px] sm:text-[18px] sm:leading-[26px]"
+              >
                 <PortableText 
                   value={description}
                   components={{
                     block: {
                       normal: ({children}) => (
-                        <p className="mb-[26px] last:mb-0 text-white">
+                        <p className="mb-[26px] last:mb-0">
                           {children}
                         </p>
                       )
                     }
                   }}
                 />
-              </div>
+              </IntroText>
             )}
           </header>
           
