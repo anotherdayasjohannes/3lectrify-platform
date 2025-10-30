@@ -98,8 +98,8 @@ export function FeatureCards({
 
         // Step 2: Spotlight moment - scale up + subtle glow effect
         tl.to(card, {
-          scale: 1.05,
-          boxShadow: '0 20px 60px rgba(136, 192, 177, 0.3)',
+          scale: 1.0,
+          boxShadow: '0 20px 60px rgba(255, 255, 255, 0.3)',
           duration: 0.6, // Increased from 0.5s - longer spotlight
           ease: 'power2.inOut'
         }, delay + 0.6); // Adjusted timing
@@ -107,7 +107,7 @@ export function FeatureCards({
         // Step 3: Settle into final position
         tl.to(card, {
           scale: 1,
-          boxShadow: '0 0 0 rgba(136, 192, 177, 0)',
+          boxShadow: '0 0 0 rgba(255, 255, 255, 0)',
           duration: 0.5, // Increased from 0.4s - gentle settle
           ease: 'power2.out'
         }, delay + 1.2); // Adjusted timing
@@ -131,9 +131,9 @@ export function FeatureCards({
         {/* Section Header - Left Aligned */}
         <div className="mb-[60px] md:mb-[40px]">
           {sectionHeadline && (
-            <h2 
+            <h2
               ref={headlineRef as any}
-              className="text-[40px] leading-[50px] tracking-[0.4px] font-light mb-[20px] text-white text-left md:text-[32px] md:leading-[42px] md:mb-[15px]"
+              className="text-[40px] leading-[50px] tracking-[0.4px] font-light mb-[32px] text-white text-left md:text-[32px] md:leading-[42px] md:mb-[32px]"
             >
               {sectionHeadline}
             </h2>
@@ -141,7 +141,7 @@ export function FeatureCards({
           {sectionDescription && (
             <p 
               ref={descriptionRef as any}
-              className="text-[18px] leading-[30px] tracking-[0.18px] font-light text-white text-left max-w-[800px] md:text-[16px] md:leading-[26px]"
+              className="text-[18px] leading-[30px] tracking-[0.18px] font-normal text-white text-left max-w-[800px] md:text-[16px] md:leading-[26px]"
             >
               {sectionDescription}
             </p>
@@ -154,17 +154,17 @@ export function FeatureCards({
             <article
               key={card._key}
               data-card
-              className="bg-[#1C242E] rounded-[20px] p-[40px_30px] transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.1)] md:p-[35px_25px] w-full"
+              className="bg-[#3C5067] rounded-[20px] p-[40px_30px] transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.1)] md:p-[35px_25px] w-full"
               style={{ opacity: 1 }}
             >
               {card.icon && (
-                <div className="w-[100px] h-[100px] mb-[25px] flex items-center justify-center bg-gradient-to-br from-[#88C0B1] to-[#6BA896] rounded-full p-[20px] transition-transform duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] hover:scale-110 md:w-[80px] md:h-[80px] md:mb-[20px]">
+                <div className="mb-[25px] transition-transform duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] hover:scale-110 md:mb-[20px]">
                   <Image
                     src={card.icon.url}
                     alt={card.icon.alt || ''}
-                    width={60}
-                    height={60}
-                    className="w-[60px] h-[60px] object-contain md:w-[50px] md:h-[50px]"
+                    width={80}
+                    height={80}
+                    className="w-[80px] h-[80px] object-contain md:w-[70px] md:h-[70px]"
                   />
                 </div>
               )}
@@ -172,7 +172,7 @@ export function FeatureCards({
                 {card.title}
               </h3>
               {card.description && (
-                <p className="text-[16px] leading-[26px] tracking-[0.16px] font-light m-0 text-white text-left">
+                <p className="text-[16px] leading-[26px] tracking-[0.16px] font-normal m-0 text-white text-left">
                   {card.description}
                 </p>
               )}

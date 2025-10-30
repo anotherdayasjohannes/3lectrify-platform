@@ -1,4 +1,5 @@
 // Shared UI components
+export { Button } from './components/Button';
 export { Hero } from './components/Hero';
 export { FeatureCards } from './components/FeatureCards';
 export { FeatureShowcase } from './components/FeatureShowcase';
