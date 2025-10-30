@@ -1,13 +1,14 @@
 'use client';
 
+import React from 'react';
 import Link from 'next/link';
-import { ComponentPropsWithoutRef, ReactNode } from 'react';
+import type { ComponentPropsWithoutRef } from 'react';
 
 type ButtonVariant = 'primary' | 'secondary';
 
 interface BaseButtonProps {
   variant?: ButtonVariant;
-  children: ReactNode;
+  children: React.ReactNode;
   className?: string;
   disabled?: boolean;
 }
