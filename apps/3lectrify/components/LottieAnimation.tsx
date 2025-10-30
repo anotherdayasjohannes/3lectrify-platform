@@ -31,12 +31,22 @@ export function LottieAnimation({
   const textColor = variant === 'dark' ? 'text-white' : 'text-[#333333]';
 
   useEffect(() => {
+    // Set speed when lottie is ready
+    if (lottieRef.current) {
+      lottieRef.current.setSpeed(speed);
+    }
+  }, [speed]);
+
+  useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           // Trigger when 80% of the animation is visible
           if (entry.isIntersecting && entry.intersectionRatio >= 0.8 && !hasPlayed) {
-            lottieRef.current?.play();
+            if (lottieRef.current) {
+              lottieRef.current.setSpeed(speed);
+              lottieRef.current.play();
+            }
             setHasPlayed(true);
             
             // If loop is false, stop observing after first play
@@ -61,7 +71,7 @@ export function LottieAnimation({
         observer.unobserve(containerRef.current);
       }
     };
-  }, [hasPlayed, loop]);
+  }, [hasPlayed, loop, speed]);
 
   return (
     <section
@@ -100,7 +110,6 @@ export function LottieAnimation({
               animationData={animationData}
               loop={loop}
               autoplay={false} // We control play via Intersection Observer
-              speed={speed}
               style={{ width: '100%', height: 'auto' }}
             />
           </div>
