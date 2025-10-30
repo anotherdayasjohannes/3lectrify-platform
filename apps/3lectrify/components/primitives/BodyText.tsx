@@ -1,5 +1,5 @@
 import { type CSSProperties, type ElementType } from 'react';
-import { typography, colors } from '../../theme';
+import { typography, colors } from '../theme';
 
 /**
  * BodyText Component - Figma Design System

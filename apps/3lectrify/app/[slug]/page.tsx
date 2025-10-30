@@ -13,7 +13,7 @@ import {
   ReferencesMarquee, 
   TeamGrid,
   LegalContent 
-} from '@3lectrify/ui';
+} from '@/components';
 import { notFound } from 'next/navigation';
 import type { PortableTextBlock } from '@portabletext/react';
 

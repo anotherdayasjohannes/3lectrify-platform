@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Lato } from 'next/font/google';
 import { client, siteSettingsQuery } from '@3lectrify/sanity';
-import { Header, Footer } from '@3lectrify/ui';
+import { Header, Footer } from '@/components';
 import { AnimationInit } from '../components/AnimationInit';
 import "./globals.css";
 

@@ -2,7 +2,7 @@ import { client, pageQuery } from '@3lectrify/sanity';
 import {
   HeroGradient,
   ContactSimple,
-} from '@3lectrify/ui';
+} from '@/components';
 
 interface Address {
   headline: string;

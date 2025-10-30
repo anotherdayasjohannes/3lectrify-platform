@@ -1,5 +1,5 @@
 import { client, pageQuery } from '@3lectrify/sanity';
-import { Hero, FeatureCards, FeatureShowcase, StackedExplainer, TextImage, SimpleTextImage, Stats, CTA, ReferencesGrid, ReferencesMarquee, TeamGrid } from '@3lectrify/ui';
+import { Hero, FeatureCards, FeatureShowcase, StackedExplainer, TextImage, SimpleTextImage, Stats, CTA, ReferencesGrid, ReferencesMarquee, TeamGrid } from '@/components';
 import type { PortableTextBlock } from '@portabletext/react';
 
 interface SanityBlock {

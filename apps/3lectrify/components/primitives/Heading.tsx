@@ -1,5 +1,5 @@
 import { type CSSProperties } from 'react';
-import { typography, colors, type TypographyVariant } from '../../theme';
+import { typography, colors, type TypographyVariant } from '../theme';
 
 /**
  * Heading Component - Figma Design System

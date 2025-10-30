@@ -1,5 +1,5 @@
 import { type CSSProperties } from 'react';
-import { typography, colors } from '../../theme';
+import { typography, colors } from '../theme';
 
 /**
  * StatNumber Component - Figma Design System
