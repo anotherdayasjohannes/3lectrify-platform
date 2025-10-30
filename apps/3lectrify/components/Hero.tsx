@@ -59,7 +59,7 @@ export function Hero({
           width={displayImage.width}
           height={displayImage.height}
           priority
-          className="w-full h-auto max-h-[500px] object-cover md:max-h-[400px] sm:max-h-[300px]"
+          className="w-full h-[700px] min-h-[500px] object-cover md:h-[600px] sm:h-[500px]"
           style={{ objectPosition: getFocalPoint(displayImage.hotspot) }}
           sizes="(max-width: 767px) 100vw, (max-width: 1440px) 90vw, 1440px"
         />
