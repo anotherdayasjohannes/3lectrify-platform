@@ -298,6 +298,33 @@ export const pageQuery = groq`
         speed,
         maxWidth,
         variant
+      },
+      _type == "videoAnimation" => {
+        headline,
+        description,
+        videoFile {
+          asset-> {
+            url
+          }
+        },
+        posterImage {
+          asset-> {
+            url,
+            metadata {
+              dimensions {
+                width,
+                height
+              }
+            }
+          },
+          hotspot,
+          crop,
+          alt
+        },
+        loop,
+        muted,
+        maxWidth,
+        variant
       }
     },
     publishedAt

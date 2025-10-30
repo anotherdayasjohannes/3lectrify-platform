@@ -36,5 +36,6 @@ export { GradientSpacer } from './GradientSpacer';
 export { StackedExplainer } from './StackedExplainer';
 export { LottieAnimation } from './LottieAnimation';
 export { LottieAnimationWrapper } from './LottieAnimationWrapper';
+export { VideoAnimation } from './VideoAnimation';
 
 

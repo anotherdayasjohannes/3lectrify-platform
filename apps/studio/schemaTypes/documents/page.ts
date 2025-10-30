@@ -46,6 +46,7 @@ export default defineType({
           {type: 'teamGrid'},
           {type: 'contactSimple'},
           {type: 'lottieAnimation'},
+          {type: 'videoAnimation'},
           // Add more content types as you migrate modules
         ],
       }),

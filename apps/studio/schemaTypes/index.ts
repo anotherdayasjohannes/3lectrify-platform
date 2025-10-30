@@ -20,6 +20,7 @@ import teamGrid from './objects/teamGrid'
 import contactSimple from './objects/contactSimple'
 import stackedExplainer from './objects/stackedExplainer'
 import lottieAnimation from './objects/lottieAnimation'
+import videoAnimation from './objects/videoAnimation'
 
 export const schemaTypes = [
   // Documents
@@ -44,4 +45,5 @@ export const schemaTypes = [
   contactSimple,
   stackedExplainer,
   lottieAnimation,
+  videoAnimation,
 ]
