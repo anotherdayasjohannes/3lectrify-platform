@@ -318,6 +318,124 @@ export const spacing = {
 } as const;
 
 /**
+ * Icon Sizes
+ * 
+ * Standardized icon dimensions for consistent visual hierarchy
+ */
+export const iconSizes = {
+  /**
+   * Small icons
+   * Usage: Inline icons, bullet points
+   */
+  small: {
+    width: '24px',
+    height: '24px',
+  },
+  
+  /**
+   * Medium icons
+   * Usage: Card icons, feature icons
+   */
+  medium: {
+    width: '48px',
+    height: '48px',
+  },
+  
+  /**
+   * Large icons
+   * Usage: Main feature cards, stacked explainer cards
+   * Matches Figma: 80x80px
+   */
+  large: {
+    width: '80px',
+    height: '80px',
+  },
+} as const;
+
+/**
+ * Card Styling
+ * 
+ * Reusable card style primitives matching Figma design
+ */
+export const cardStyles = {
+  /**
+   * Border radius for cards
+   * Matches Figma rounded corners
+   */
+  borderRadius: {
+    default: '20px',
+    large: '24px',
+  },
+  
+  /**
+   * Card shadows
+   * Elevated card appearance
+   */
+  shadow: {
+    default: '0px 15px 60px 0px rgba(0, 0, 0, 0.3)',
+    hover: '0px 20px 40px rgba(0, 0, 0, 0.1)',
+  },
+  
+  /**
+   * Card padding
+   * Interior spacing for card content
+   */
+  padding: {
+    default: {
+      mobile: '25px',
+      tablet: '30px',
+      desktop: '35px 30px',
+    },
+    large: {
+      mobile: '30px',
+      tablet: '35px',
+      desktop: '40px 30px',
+    },
+  },
+} as const;
+
+/**
+ * Animations & Transitions
+ * 
+ * Reusable animation primitives for consistent interactions
+ */
+export const animations = {
+  /**
+   * Standard easing function
+   * Smooth, natural motion
+   */
+  easing: {
+    default: 'cubic-bezier(0.4, 0, 0.2, 1)',
+    smooth: 'ease-in-out',
+  },
+  
+  /**
+   * Transition durations
+   */
+  duration: {
+    fast: '150ms',
+    default: '300ms',
+    slow: '500ms',
+  },
+  
+  /**
+   * Card hover effects
+   * Matches FeatureCards component
+   */
+  cardHover: {
+    translateY: '-8px',
+    scale: 1.02,
+  },
+  
+  /**
+   * Icon hover effects
+   */
+  iconHover: {
+    scale: 1.1,
+  },
+} as const;
+
+/**
  * Responsive Breakpoints
  * 
  * Matches Tailwind's default breakpoints
@@ -339,6 +457,9 @@ export const breakpoints = {
 export type TypographyVariant = keyof typeof typography;
 export type ColorKey = keyof typeof colors;
 export type SpacingKey = keyof typeof spacing;
+export type IconSize = keyof typeof iconSizes;
+export type CardStyleKey = keyof typeof cardStyles;
+export type AnimationKey = keyof typeof animations;
 
 /**
  * Helper function to get typography styles as CSS-in-JS object
