@@ -109,8 +109,8 @@ export function BodyText({
   // Select typography spec based on variant
   const typo = variant === 'small' ? typography.bodySmall : typography.body;
   
-  // Select HTML element
-  const Component = as as ElementType;
+  // Select HTML element (cast to any to avoid React 18/19 type conflicts)
+  const Component = as as any;
   
   // Construct inline styles from Figma design tokens
   const inlineStyles: CSSProperties = {

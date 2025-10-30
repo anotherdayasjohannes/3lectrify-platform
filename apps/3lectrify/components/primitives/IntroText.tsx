@@ -93,7 +93,8 @@ export function IntroText({
   const typo = typography.intro;
   
   // Select HTML element
-  const Component = as as ElementType;
+  // Cast to any to avoid React 18/19 type conflicts
+  const Component = as as any;
   
   // Construct inline styles from Figma design tokens
   const inlineStyles: CSSProperties = {
