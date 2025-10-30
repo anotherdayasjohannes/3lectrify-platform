@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Lato } from 'next/font/google';
 import { client, siteSettingsQuery } from '@3lectrify/sanity';
-import { Header, Footer } from '@/components';
+import { Header, Footer, H1Animator } from '@/components';
 import { AnimationInit } from '../components/AnimationInit';
 import "./globals.css";
 
@@ -63,6 +63,9 @@ export default async function RootLayout({
       <body className="antialiased">
         {/* Initialize 3lectrify custom animations */}
         <AnimationInit />
+        
+        {/* Animate all H1 headlines with line-by-line reveals */}
+        <H1Animator />
         
         <Header
           logo={settings?.logo ? {

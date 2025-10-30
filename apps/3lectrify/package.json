@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@gsap/react": "^2.1.2",
     "@hookform/resolvers": "^5.2.2",
     "@portabletext/react": "^4.0.3",
     "@sanity/image-url": "^1.2.0",
