@@ -84,7 +84,7 @@ export function SimpleTextImage({
       className={`${bgColor} ${textColor} py-[50px] lg:py-20`}
     >
       <div className="content-wrapper">
-        <div className="max-w-[645px] flex flex-col items-start gap-[50px] md:gap-10 sm:gap-[30px]">
+        <div className="max-w-[645px] mx-auto flex flex-col items-start gap-[50px] md:gap-10 sm:gap-[30px]">
           
           {/* Text Content */}
           {(headline || body) && (

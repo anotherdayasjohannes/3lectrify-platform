@@ -51,14 +51,13 @@ export function Button({
   const combinedClassName = `${baseStyles} ${variantStyles[variant]} ${className}`.trim();
 
   if ('href' in props && props.href) {
-    const { openInNewTab, ...linkProps } = props as LinkButtonProps;
+    const { openInNewTab } = props as LinkButtonProps;
     return (
       <Link
         href={props.href}
         className={combinedClassName}
         target={openInNewTab ? '_blank' : undefined}
         rel={openInNewTab ? 'noopener noreferrer' : undefined}
-        {...(linkProps as ComponentPropsWithoutRef<typeof Link>)}
       >
         {children}
       </Link>
@@ -71,7 +70,6 @@ export function Button({
       onClick={(props as ActionButtonProps).onClick}
       disabled={disabled}
       className={combinedClassName}
-      {...props}
     >
       {children}
     </button>
