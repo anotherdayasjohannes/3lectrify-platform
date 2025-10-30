@@ -74,12 +74,12 @@ export function HeroGradient({
 
           {/* Gradient Overlay - Figma exact dimensions: 842px */}
           <div
-            className={`relative h-full flex items-end pl-[50px] pr-0 py-[50px] z-[2] w-[842px] max-sm:w-full max-sm:p-[30px] gradient-overlay ${
+            className={`relative h-full flex items-end pr-0 py-[50px] z-[2] w-[842px] max-sm:w-full max-sm:p-[30px] gradient-overlay ${
               gradientDirection === 'left' ? 'gradient-left' : 'gradient-right'
             }`}
           >
             {/* Text Content */}
-            <div className="flex flex-col gap-[25px] w-full">
+            <div className="flex flex-col gap-[25px] w-full pl-[50px] max-sm:pl-0">
               <h1 
                 className="text-white m-0"
                 style={typography.h1}
