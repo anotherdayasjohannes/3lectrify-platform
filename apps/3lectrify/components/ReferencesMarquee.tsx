@@ -4,6 +4,7 @@ import { useRef } from 'react';
 import Image from 'next/image';
 import { useEffect } from 'react';
 import { gsap } from 'gsap';
+import { typography } from './theme';
 
 interface Reference {
   id: string;
@@ -64,10 +65,16 @@ export default function ReferencesMarquee({
   return (
     <section className="pt-[40px] pb-[40px] md:pt-[50px] md:pb-[50px] overflow-hidden bg-[#293645]">
       <div className="content-wrapper mb-[50px] text-center md:mb-[40px]">
-        <h2 className="text-[40px] leading-[50px] font-light text-white mb-[20px] tracking-[0.4px] md:text-[32px] md:leading-[42px]">
+        <h2 
+          className="text-white mb-[20px]"
+          style={typography.h2}
+        >
           Unsere Projekte im Überblick
         </h2>
-        <p className="text-[18px] leading-[30px] text-white/70 font-light tracking-[0.18px]">
+        <p 
+          className="text-white/70"
+          style={typography.intro}
+        >
           Eine Auswahl unserer erfolgreich realisierten Referenzen
         </p>
       </div>
@@ -107,10 +114,16 @@ function MarqueeCard({ reference }: { reference: Reference }) {
         {/* Content */}
         <div className="absolute inset-0 p-[25px] flex flex-col justify-end z-10">
           <div className="transform transition-transform duration-300 group-hover:translate-y-[-4px]">
-            <h3 className="text-[24px] leading-[32px] font-normal text-white mb-[10px] tracking-[0.24px]">
+            <h3 
+              className="text-white mb-[10px]"
+              style={typography.intro}
+            >
               {reference.name}
             </h3>
-            <div className="flex items-center gap-[10px] text-[18px] leading-[26px] text-white/80 font-light">
+            <div 
+              className="flex items-center gap-[10px] text-white/80"
+              style={typography.body}
+            >
               <span>{reference.location}</span>
               <span className="w-1 h-1 rounded-full bg-[#88C0B1]" />
               <span>{reference.units} Einheiten</span>
