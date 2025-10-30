@@ -137,6 +137,10 @@ interface SanityBlock {
   buttonLink?: string;
   openInNewTab?: boolean;
   sectionIntro?: PortableTextBlock[];
+  // StackedExplainer CTA fields
+  ctaText?: string;
+  ctaButtonLabel?: string;
+  ctaButtonLink?: string;
   features?: Array<{
     _key: string;
     number: string;
@@ -420,6 +424,9 @@ export default async function HomePage() {
                       : undefined,
                   })) || []
                 }
+                ctaText={block.ctaText}
+                ctaButtonLabel={block.ctaButtonLabel}
+                ctaButtonLink={block.ctaButtonLink}
               />
             );
 

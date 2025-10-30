@@ -218,6 +218,10 @@ interface SanityBlock {
   // FeatureShowcase specific
   title?: string;
   sectionIntro?: PortableTextBlock[];
+  // StackedExplainer CTA fields
+  ctaText?: string;
+  ctaButtonLabel?: string;
+  ctaButtonLink?: string;
   features?: Array<{
     _key: string;
     icon?: {
@@ -437,6 +441,9 @@ export default async function DynamicPage({ params }: { params: Promise<{ slug: 
                       : undefined,
                   })) || []
                 }
+                ctaText={block.ctaText}
+                ctaButtonLabel={block.ctaButtonLabel}
+                ctaButtonLink={block.ctaButtonLink}
               />
             );
 

@@ -105,6 +105,24 @@ export default defineType({
       validation: (Rule) => Rule.min(2).max(6).required(),
       description: 'Add 2-6 explainer cards (optimal for scroll effect)',
     }),
+    defineField({
+      name: 'ctaText',
+      title: 'CTA Text',
+      type: 'string',
+      description: 'Optional call-to-action text below the cards (e.g., "Dieser dreistufige Prozess ist der Motor für Ihren wirtschaftlichen Erfolg.")',
+    }),
+    defineField({
+      name: 'ctaButtonLabel',
+      title: 'CTA Button Label',
+      type: 'string',
+      description: 'Optional button text (e.g., "Entdecken Sie Ihren Vorteil als Investor")',
+    }),
+    defineField({
+      name: 'ctaButtonLink',
+      title: 'CTA Button Link',
+      type: 'string',
+      description: 'Optional link URL for the CTA button (e.g., "/contact" or "#section")',
+    }),
   ],
   preview: {
     select: {
