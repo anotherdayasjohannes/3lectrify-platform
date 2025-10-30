@@ -12,7 +12,8 @@ import {
   ReferencesGrid, 
   ReferencesMarquee, 
   TeamGrid,
-  LegalContent 
+  LegalContent,
+  LottieAnimationWrapper 
 } from '@/components';
 import { notFound } from 'next/navigation';
 import type { PortableTextBlock } from '@portabletext/react';
@@ -569,6 +570,24 @@ export default async function DynamicPage({ params }: { params: Promise<{ slug: 
                 heading={block.heading}
                 introText={block.introText}
                 teamMembers={block.teamMembers || []}
+              />
+            );
+
+          case 'lottieAnimation':
+            // Fetch the animation JSON data
+            const animationUrl = block.animationFile?.asset?.url;
+            if (!animationUrl) return null;
+
+            return (
+              <LottieAnimationWrapper
+                key={index}
+                headline={block.headline}
+                description={block.description}
+                animationUrl={animationUrl}
+                loop={block.loop !== false}
+                speed={block.speed || 1}
+                maxWidth={block.maxWidth || '800px'}
+                variant={(block.variant as 'light' | 'dark') || 'dark'}
               />
             );
 

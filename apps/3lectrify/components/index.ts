@@ -34,5 +34,7 @@ export { LegalContent } from './LegalContent';
 export { ContactSimple } from './ContactSimple';
 export { GradientSpacer } from './GradientSpacer';
 export { StackedExplainer } from './StackedExplainer';
+export { LottieAnimation } from './LottieAnimation';
+export { LottieAnimationWrapper } from './LottieAnimationWrapper';
 
 

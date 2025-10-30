@@ -285,6 +285,19 @@ export const pageQuery = groq`
           mapsLinkText
         },
         successMessage
+      },
+      _type == "lottieAnimation" => {
+        headline,
+        description,
+        animationFile {
+          asset-> {
+            url
+          }
+        },
+        loop,
+        speed,
+        maxWidth,
+        variant
       }
     },
     publishedAt
