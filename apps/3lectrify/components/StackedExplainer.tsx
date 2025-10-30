@@ -170,10 +170,10 @@ export function StackedExplainer({
       {/* Optional CTA Section */}
       {(ctaText || ctaButtonLabel) && (
         <div className="content-wrapper mt-[40px] md:mt-[50px]">
-          <div className="flex flex-col items-center gap-[25px]">
+          <div className="flex flex-col items-start gap-[25px]">
             {/* CTA Text */}
             {ctaText && (
-              <div className="text-center">
+              <div>
                 <p 
                   style={{
                     ...typography.h3,
