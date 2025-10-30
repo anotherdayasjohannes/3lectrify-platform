@@ -58,7 +58,6 @@ export function TextImage({
 
   return (
     <section
-      ref={containerRef}
       className={`${bgColor} ${textColor} pt-10 pb-[60px] lg:pt-[50px] lg:pb-20`}
     >
       <div className={contentWrapper}>
@@ -68,7 +67,6 @@ export function TextImage({
           {/* Image */}
           {image && (
             <figure
-              data-image
               className={`w-full h-[430px] rounded-[20px] overflow-hidden md:h-auto md:aspect-[1.5] ${
                 imagePosition === 'right' ? 'order-2' : 'order-1'
               }`}
@@ -87,14 +85,12 @@ export function TextImage({
 
           {/* Text Content */}
           <article
-            data-text
             className={`flex flex-col items-start justify-center gap-[40px] w-full ${
               imagePosition === 'right' ? 'order-1' : 'order-2'
             }`}
           >
             {headline && (
               <h2 
-                ref={headlineRef as any}
                 className="text-[32px] leading-[40px] tracking-[0.36px] font-light w-full lg:text-[36px] lg:leading-[46px]"
               >
                 {headline}
