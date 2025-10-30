@@ -206,7 +206,10 @@ export const pageQuery = groq`
             crop,
             alt
           }
-        }
+        },
+        ctaText,
+        ctaButtonLabel,
+        ctaButtonLink
       },
       _type == "references" => {
         headline,
