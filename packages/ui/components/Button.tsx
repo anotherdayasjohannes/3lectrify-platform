@@ -1,6 +1,5 @@
 'use client';
 
-import React, { type PropsWithChildren } from 'react';
 import Link from 'next/link';
 
 type ButtonVariant = 'primary' | 'secondary';
@@ -9,16 +8,17 @@ interface BaseButtonProps {
   variant?: ButtonVariant;
   className?: string;
   disabled?: boolean;
+  children?: any; // Use 'any' to avoid React type conflicts between versions
 }
 
-interface LinkButtonProps extends PropsWithChildren<BaseButtonProps> {
+interface LinkButtonProps extends BaseButtonProps {
   href: string;
   openInNewTab?: boolean;
   onClick?: never;
   type?: never;
 }
 
-interface ActionButtonProps extends PropsWithChildren<BaseButtonProps> {
+interface ActionButtonProps extends BaseButtonProps {
   href?: never;
   onClick?: () => void;
   type?: 'button' | 'submit';
