@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { typography, colors } from './theme';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -348,14 +349,27 @@ function StatCard({ number, label }: { number: string; label: string }) {
   return (
     <div
       ref={statRef}
-      className="p-8 bg-[#3c5067]/50 backdrop-blur-sm rounded-2xl border border-[#88c0b1]/20"
+      className="p-8 bg-[#3c5067]/50 backdrop-blur-sm rounded-2xl"
     >
-      <div className="text-[36px] leading-[46px] font-light text-[#88c0b1] mb-2">
+      <div 
+        className="mb-2"
+        style={{
+          ...typography.numbers,
+          color: colors.middleGreen,
+        }}
+      >
         {count}
         {number.includes('+') && '+'}
         {number.includes('%') && '%'}
       </div>
-      <div className="text-[18px] leading-[24px] text-white/70">{label}</div>
+      <div 
+        className="text-white/70"
+        style={{
+          ...typography.body,
+        }}
+      >
+        {label}
+      </div>
     </div>
   );
 }
