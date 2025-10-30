@@ -58,7 +58,7 @@ export function TextImage({
 
   return (
     <section
-      className={`${bgColor} ${textColor} pt-10 pb-[60px] lg:pt-[50px] lg:pb-20`}
+      className={`${bgColor} ${textColor} pt-[40px] pb-[40px] md:pt-[50px] md:pb-[50px]`}
     >
       <div className={contentWrapper}>
         <div

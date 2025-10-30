@@ -325,3 +325,4 @@ Alternatively, custom responsive variants can be added to the component implemen
 **Last Updated:** 2025-10-30  
 **Maintained By:** Development Team + Marion (Design)
 
+

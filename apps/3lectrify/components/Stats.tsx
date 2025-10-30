@@ -74,7 +74,7 @@ export function Stats({
 
   // If standalone, wrap in section with padding + content-wrapper
   return (
-    <section className="w-full py-[80px] max-md:py-[60px] max-sm:py-[40px]">
+    <section className="w-full pt-[40px] pb-[40px] md:pt-[50px] md:pb-[50px]">
       <div className="content-wrapper">
         {statsContainer}
       </div>

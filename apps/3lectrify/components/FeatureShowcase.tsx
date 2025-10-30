@@ -30,7 +30,7 @@ export function FeatureShowcase({
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <section className="relative py-[50px] lg:py-20 bg-[#293645]">
+    <section className="relative pt-[40px] pb-[40px] md:pt-[50px] md:pb-[50px] bg-[#293645]">
       <div className="content-wrapper">
         {/* Section Header */}
         {(sectionHeadline || sectionIntro) && (

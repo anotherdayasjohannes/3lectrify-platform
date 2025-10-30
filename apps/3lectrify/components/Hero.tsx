@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { PortableText, type PortableTextBlock } from '@portabletext/react';
 import { getFocalPoint } from '@3lectrify/sanity';
+import { spacing, colors } from './theme';
 
 interface HeroImageData {
   url: string;
@@ -68,7 +69,12 @@ export function Hero({
   };
 
   return (
-    <section className="bg-[#293645] text-white pt-10 pb-[60px] lg:pt-[50px] lg:pb-20">
+    <section 
+      className="text-white pt-[40px] pb-[40px] md:pt-[50px] md:pb-[50px]"
+      style={{
+        backgroundColor: colors.deepBlue,
+      }}
+    >
       <div className="content-wrapper">
         {/* Image Above Layout */}
         {showImage && imagePosition === 'above' && renderImage()}

@@ -37,7 +37,7 @@ export function StackedExplainer({
 
   return (
     <section 
-      className="relative w-full py-[50px] md:py-[60px] lg:py-[80px]"
+      className="relative w-full pt-[40px] pb-[40px] md:pt-[50px] md:pb-[50px]"
       style={{ backgroundColor: colors.deepBlue }}
     >
       {/* Section Header */}

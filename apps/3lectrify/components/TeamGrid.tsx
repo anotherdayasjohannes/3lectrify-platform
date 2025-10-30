@@ -35,7 +35,7 @@ interface TeamGridProps {
 export function TeamGrid({ heading, introText, teamMembers }: TeamGridProps) {
 
   return (
-    <section className="bg-[#293645] pt-[100px] px-[50px] pb-[80px] md:pt-[80px] md:px-[40px] md:pb-[60px] sm:pt-[60px] sm:px-[20px] sm:pb-[50px]"
+    <section className="bg-[#293645] pt-[40px] pb-[40px] md:pt-[50px] md:pb-[50px] px-[50px] md:px-[40px] sm:px-[20px]"
     >
       {/* Content Wrapper - Centered */}
       <div className="flex flex-col items-center">

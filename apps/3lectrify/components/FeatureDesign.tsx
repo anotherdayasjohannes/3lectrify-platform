@@ -123,7 +123,7 @@ export default function FeatureDesign({
     <section
       ref={sectionRef}
       id="feat-design"
-      className="relative min-h-screen flex items-center justify-center px-4 py-20 overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center px-4 pt-[40px] pb-[40px] md:pt-[50px] md:pb-[50px] overflow-hidden"
       style={{ willChange: 'transform' }}
     >
       {/* Background gradient */}

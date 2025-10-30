@@ -25,7 +25,7 @@ export function FeatureCards({
 }: FeatureCardsProps) {
 
   return (
-    <section className="relative pt-[80px] pb-[100px] bg-[#293645] md:pt-[60px] md:pb-[80px]"
+    <section className="relative pt-[40px] pb-[40px] md:pt-[50px] md:pb-[50px] bg-[#293645]"
     >
       <div className="content-wrapper">
         {/* Section Header - Left Aligned */}

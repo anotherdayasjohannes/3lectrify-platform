@@ -83,7 +83,7 @@ export default function ReferencesGrid({
       ref={sectionRef}
       data-theme={theme}
       className={`
-        py-20 md:py-32
+        pt-[40px] pb-[40px] md:pt-[50px] md:pb-[50px]
         ${theme === 'dark' ? 'bg-[#293645]' : 'bg-white'}
       `}
     >

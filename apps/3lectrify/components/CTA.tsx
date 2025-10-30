@@ -22,7 +22,7 @@ export function CTA({
 }: CTAProps) {
 
   return (
-    <section className="w-full bg-[#293645] py-[50px] lg:py-20 flex justify-center items-center px-[50px] md:px-[40px] sm:px-[20px]">
+    <section className="w-full bg-[#293645] pt-[40px] pb-[40px] md:pt-[50px] md:pb-[50px] flex justify-center items-center px-[50px] md:px-[40px] sm:px-[20px]">
       <div className="w-full max-w-[1165px]">
         <article className="bg-[#3c5067] rounded-[20px] px-[80px] py-[60px] md:px-[60px] md:py-[50px] sm:px-[30px] sm:py-10 flex flex-col items-center gap-10 md:gap-8 sm:gap-7 shadow-[0_4px_20px_rgba(0,0,0,0.15)]">
           
