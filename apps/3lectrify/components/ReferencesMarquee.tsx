@@ -64,7 +64,7 @@ export default function ReferencesMarquee({
 
   return (
     <section className="pt-[40px] pb-[40px] md:pt-[50px] md:pb-[50px] overflow-hidden bg-[#293645]">
-      <div className="content-wrapper mb-[50px] text-center md:mb-[40px]">
+      <div className="content-wrapper mb-[50px] md:mb-[40px]">
         <h2 
           className="text-white mb-[20px]"
           style={typography.h2}
