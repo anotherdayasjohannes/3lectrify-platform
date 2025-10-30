@@ -1,15 +1,9 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 import { PortableText, type PortableTextBlock } from '@portabletext/react';
 import { getFocalPoint } from '@3lectrify/sanity';
-import { useGSAP } from '@gsap/react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { EASINGS } from '@3lectrify/animations';
-
-gsap.registerPlugin(ScrollTrigger);
 
 interface TeamMember {
   _id: string;
@@ -39,186 +33,9 @@ interface TeamGridProps {
 }
 
 export function TeamGrid({ heading, introText, teamMembers }: TeamGridProps) {
-  const sectionRef = useRef<HTMLElement>(null);
-  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
-
-  // Check for reduced motion preference
-  const shouldReduceMotion = typeof window !== 'undefined' 
-    ? window.matchMedia('(prefers-reduced-motion: reduce)').matches 
-    : false;
-
-  useGSAP(
-    () => {
-      const cardElements = cardsRef.current.filter(Boolean);
-      
-      if (!cardElements.length || shouldReduceMotion) {
-        // Graceful degradation: Set final states immediately
-        cardElements.forEach((card) => {
-          if (card) {
-            gsap.set(card, { 
-              opacity: 1,
-              x: 0,
-              y: 0,
-              rotateY: 0, // Flat
-              rotateX: 0, // Level
-              rotateZ: 0, // Level
-              scale: 1,
-            });
-          }
-        });
-        return;
-      }
-
-      // Create timeline with ScrollTrigger
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top top',
-          end: '+=400%',
-          pin: true,
-          pinSpacing: true,
-          pinReparent: false, // 🔧 CRITICAL: Prevent DOM reparenting (fixes React conflict)
-          scrub: 1.5,
-          anticipatePin: 1,
-          onRefresh: (self) => {
-            // Set pin-spacer background
-            const pinSpacer = self.pin?.parentElement;
-            if (pinSpacer && pinSpacer.classList.contains('pin-spacer')) {
-              pinSpacer.style.backgroundColor = '#293645';
-            }
-          },
-        },
-      });
-
-      // Initial state: cards off-screen from right, invisible
-      cardElements.forEach((card, index) => {
-        gsap.set(card, {
-          x: 1000, // Off-screen to the right
-          y: -150, // Start higher (creates arc)
-          opacity: 0,
-          rotateY: -360, // Start one full rotation behind (will spin forward to 0°)
-          rotateX: 15, // Tilted up
-          rotateZ: -10, // Slight tilt
-          scale: 0.7, // Smaller start
-        });
-      });
-
-      // Animate each card flying in, spinning, and landing
-      cardElements.forEach((card, index) => {
-        if (!card) return;
-        
-        const startTime = index * 0.5; // Stagger start times
-        
-        // Find the overlay element inside this card
-        const overlay = card.querySelector('[data-bio-overlay]') as HTMLElement;
-
-        // Fly in with arc + multi-axis spin + land FLAT
-        tl.to(card, {
-          x: 0, // Move to final position
-          y: 0, // Arc down (creates momentum)
-          opacity: 1,
-          scale: 1,
-          rotateY: 0, // End at 0° (flat) - from -360° = one full forward rotation
-          rotateX: 0, // Completely level
-          rotateZ: 0, // Completely level
-          duration: 2,
-          ease: EASINGS.smooth,
-          onUpdate: function() {
-            // Show overlay when card is "flipped" (between 90° and 270°)
-            const currentRotation = gsap.getProperty(card, 'rotateY') as number;
-            const cardEdge = card.querySelector('[data-card-edge]') as HTMLElement;
-            
-            // Normalize angle to 0-360 range for consistent checks
-            const normalizedAngle = ((currentRotation % 360) + 360) % 360;
-            
-            if (overlay) {
-              // Show overlay when card is showing its back (around 180°)
-              if (normalizedAngle > 90 && normalizedAngle < 270) {
-                // Card is showing "back" - reveal overlay
-                overlay.style.opacity = '1';
-                overlay.style.visibility = 'visible';
-              } else {
-                // Card is showing "front" - hide overlay
-                overlay.style.opacity = '0';
-                overlay.style.visibility = 'hidden';
-              }
-            }
-
-            // 🎨 Show card edge/thickness while turning
-            if (cardEdge) {
-              // Calculate edge visibility based on rotation angle
-              // Most visible at 90° and 270° (side view), invisible at 0° and 180° (flat)
-              let edgeOpacity = 0;
-              
-              // Edge visible when card is turning (not flat)
-              if (normalizedAngle > 45 && normalizedAngle < 135) {
-                // Turning to show back (90° area)
-                edgeOpacity = Math.sin(((normalizedAngle - 45) / 90) * Math.PI);
-              } else if (normalizedAngle > 225 && normalizedAngle < 315) {
-                // Turning to show front (270° area)
-                edgeOpacity = Math.sin(((normalizedAngle - 225) / 90) * Math.PI);
-              }
-              
-              // Apply edge effect (thick border on right side = visible edge)
-              if (edgeOpacity > 0.1) {
-                cardEdge.style.boxShadow = `
-                  inset -${Math.floor(edgeOpacity * 8)}px 0 0 rgba(255,255,255,${edgeOpacity * 0.3}),
-                  inset ${Math.floor(edgeOpacity * 8)}px 0 0 rgba(0,0,0,${edgeOpacity * 0.4}),
-                  0 2px 10px rgba(0,0,0,0.2)
-                `;
-              } else {
-                cardEdge.style.boxShadow = '0 2px 10px rgba(0,0,0,0.2)';
-              }
-            }
-          },
-          onComplete: function() {
-            // Reset overlay to be controlled by hover after animation
-            if (overlay) {
-              overlay.style.opacity = '';
-              overlay.style.visibility = '';
-            }
-            
-            // Reset card edge to normal shadow
-            const cardEdge = card.querySelector('[data-card-edge]') as HTMLElement;
-            if (cardEdge) {
-              cardEdge.style.boxShadow = '0 2px 10px rgba(0,0,0,0.2)';
-            }
-            
-            // 🔧 Ensure card is perfectly flat and positioned
-            gsap.set(card, {
-              x: 0,
-              y: 0,
-              rotateX: 0,
-              rotateY: 0,
-              rotateZ: 0,
-              scale: 1,
-              clearProps: 'transform', // Remove all transform inline styles
-            });
-          }
-        }, startTime);
-      });
-
-      // Add delay at end before unpinning
-      tl.to({}, { duration: 1 });
-
-      // Cleanup function
-      return () => {
-        tl.kill();
-        ScrollTrigger.getAll().forEach((trigger) => {
-          if (trigger.vars.trigger === sectionRef.current) {
-            trigger.kill();
-          }
-        });
-      };
-    },
-    { scope: sectionRef, dependencies: [teamMembers.length] }
-  );
 
   return (
-    <section 
-      ref={sectionRef}
-      className="bg-[#293645] pt-[100px] px-[50px] pb-[80px] md:pt-[80px] md:px-[40px] md:pb-[60px] sm:pt-[60px] sm:px-[20px] sm:pb-[50px]"
-      style={{ minHeight: '100vh' }}
+    <section className="bg-[#293645] pt-[100px] px-[50px] pb-[80px] md:pt-[80px] md:px-[40px] md:pb-[60px] sm:pt-[60px] sm:px-[20px] sm:pb-[50px]"
     >
       {/* Content Wrapper - Centered */}
       <div className="flex flex-col items-center">
@@ -247,9 +64,6 @@ export function TeamGrid({ heading, introText, teamMembers }: TeamGridProps) {
             <TeamCard 
               key={member._id} 
               member={member}
-              refCallback={(el) => {
-                cardsRef.current[index] = el;
-              }}
             />
           ))}
         </div>
@@ -265,9 +79,7 @@ function TeamCard({ member, refCallback }: { member: TeamMember; refCallback?: (
   const handleMouseLeave = () => setIsOverlayVisible(false);
 
   return (
-    <article
-      ref={refCallback}
-      className="w-[270px] md:w-[calc(50%-10px)] md:max-w-[270px] sm:w-full flex-shrink-0 transition-all duration-500 ease-out hover:scale-[1.02]"
+    <article className="w-[270px] md:w-[calc(50%-10px)] md:max-w-[270px] sm:w-full flex-shrink-0 transition-all duration-500 ease-out hover:scale-[1.02]"
       style={{ 
         transformStyle: 'preserve-3d',
         backfaceVisibility: 'visible',
@@ -298,7 +110,6 @@ function TeamCard({ member, refCallback }: { member: TeamMember; refCallback?: (
             // 🎨 Subtle shadow in rest state
             boxShadow: '0 2px 10px rgba(0,0,0,0.2)',
           }}
-          data-card-edge // Marker for finding this element
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
           onFocus={() => setIsOverlayVisible(true)}
@@ -320,9 +131,7 @@ function TeamCard({ member, refCallback }: { member: TeamMember; refCallback?: (
 
           {/* Hover Overlay */}
           {member.bio && (
-            <div
-              data-bio-overlay
-              className={`absolute inset-0 bg-[rgba(41,54,69,0.95)] backdrop-blur-[8px] flex items-center justify-center p-[25px] sm:p-[20px] transition-all duration-300 ease-out ${
+            <div className={`absolute inset-0 bg-[rgba(41,54,69,0.95)] backdrop-blur-[8px] flex items-center justify-center p-[25px] sm:p-[20px] transition-all duration-300 ease-out ${
                 isOverlayVisible ? 'opacity-100 visible' : 'opacity-0 invisible'
               }`}
             >

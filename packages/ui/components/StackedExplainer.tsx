@@ -1,14 +1,7 @@
 'use client';
 
-import { useRef } from 'react';
-import { useGSAP } from '@gsap/react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Image from 'next/image';
 import { PortableText, type PortableTextBlock } from '@portabletext/react';
-import { useScrollTextReveal } from '@3lectrify/animations';
-
-gsap.registerPlugin(ScrollTrigger);
 
 interface ExplainerCard {
   _key: string;
@@ -39,113 +32,15 @@ export function StackedExplainer({
   sectionIntro, 
   cards 
 }: StackedExplainerProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
-
-  // ✨ Scroll-triggered text reveal for headline
-  const headlineRef = useScrollTextReveal({
-    stagger: 0.05,
-    duration: 0.4,
-    yDistance: 15,
-    triggerStart: 'top 85%',
-  });
-
-  // Check for reduced motion preference
-  const shouldReduceMotion = typeof window !== 'undefined' 
-    ? window.matchMedia('(prefers-reduced-motion: reduce)').matches 
-    : false;
-
-  useGSAP(
-    () => {
-      const cardElements = cardsRef.current.filter(Boolean);
-      
-      if (!cardElements.length || shouldReduceMotion) {
-        // Graceful degradation: Set final states immediately
-        cardElements.forEach((card, index) => {
-          if (card) {
-            const xOffset = (index - (cardElements.length - 1) / 2) * 150; // Cascade horizontally even without animation
-            gsap.set(card, { 
-              opacity: 1, 
-              scale: 1,
-              x: xOffset,
-              rotation: 0
-            });
-          }
-        });
-        return;
-      }
-
-      // 🎬 THE SHOWCASE: Cards fly in and stack with rotation
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: 'top top', // Pin when section reaches top of viewport
-          end: '+=500%', // ⏱️ Much longer duration (was 300%) - gives time to read each card
-          pin: true, // 🎯 Freeze the page
-          pinSpacing: true, // Maintain flow
-          scrub: 1.5, // ⏱️ Slightly slower scrub for more control (was 1)
-          anticipatePin: 1,
-          invalidateOnRefresh: true, // 🔄 Force recalculate on every refresh - prevents layout jumps
-          markers: process.env.NODE_ENV === 'development',
-          onRefresh: (self) => {
-            // Ensure pin-spacer has correct background
-            const pinSpacer = self.pin?.parentElement;
-            if (pinSpacer && pinSpacer.classList.contains('pin-spacer')) {
-              pinSpacer.style.backgroundColor = '#293645';
-            }
-          }
-        }
-      });
-
-      // Set initial states: Cards off-screen to the right
-      cardElements.forEach((card, index) => {
-        gsap.set(card, {
-          x: 1000, // Start off-screen right
-          opacity: 0, // Start invisible
-          scale: 0.8,
-          rotation: 0
-        });
-      });
-
-      // Animate cards flying in and stacking with rotation + horizontal offset
-      cardElements.forEach((card, index) => {
-        const rotation = (index - Math.floor(cardElements.length / 2)) * 3; // -3°, 0°, +3° etc.
-        // 🎯 Horizontal cascade: Cards arranged left-to-right (01, 02, 03)
-        // Formula centers them: Card 01 left, Card 02 center, Card 03 right
-        const xOffset = (index - (cardElements.length - 1) / 2) * 150;
-        
-        // Set opacity to 1 immediately when card starts animating
-        tl.set(card, { opacity: 1 }, index * 0.8);
-        
-        // Then animate the fly-in (without opacity change)
-        tl.to(card, {
-          x: xOffset, // 🎯 Horizontal offset so numbers are visible side-by-side!
-          scale: 1,
-          rotation: rotation, // Each card slightly angled
-          duration: 1.2, // ⏱️ Slower fly-in
-          ease: 'power2.out'
-        }, index * 0.8); // ⏱️ Longer stagger between cards
-      });
-
-      // Add brief pause at the end before unpinning
-      tl.to({}, { duration: 0.5 }); // ⏱️ Brief pause to see all cards stacked, then continue
-    },
-    { scope: containerRef } // Auto cleanup!
-  );
 
   return (
-    <section 
-      ref={containerRef} 
-      className="relative w-full bg-[#293645]"
-      style={{ zIndex: 10, minHeight: '100vh' }}
+    <section className="relative w-full bg-[#293645] py-[80px] md:py-[60px]"
     >
-      {/* Fixed Headline - Stays visible during animation */}
+      {/* Section Header */}
       {(sectionHeadline || sectionIntro) && (
-        <div className="content-wrapper pt-[100px] pb-[30px] md:pt-[80px] md:pb-[20px]">
+        <div className="content-wrapper mb-[60px] md:mb-[40px]">
           {sectionHeadline && (
-            <h2
-              ref={headlineRef as any}
-              className="text-[40px] leading-[50px] tracking-[0.4px] font-light text-white mb-[32px] md:text-[36px] md:leading-[46px]"
+            <h2 className="text-[40px] leading-[50px] tracking-[0.4px] font-light text-white mb-[32px] md:text-[36px] md:leading-[46px]"
             >
               {sectionHeadline}
             </h2>
@@ -158,20 +53,14 @@ export function StackedExplainer({
         </div>
       )}
 
-      {/* Cards Container - Centered vertically in viewport */}
-      <div className="relative w-full flex items-center justify-center" style={{ height: 'calc(100vh - 250px)' }}>
-        {cards.map((card, index) => (
-          <div
-            key={card._key}
-            ref={(el) => {
-              cardsRef.current[index] = el;
-            }}
-            className="absolute w-full h-full flex items-center justify-center p-[2rem] md:p-[1.5rem] sm:p-[1rem]"
-            style={{ 
-              zIndex: index + 1, // Stack order: later cards on top
-              opacity: 1 // ✅ Explicit default for graceful degradation
-            }}
-          >
+      {/* Cards Container */}
+      <div className="content-wrapper">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[30px] md:gap-[25px]">
+          {cards.map((card) => (
+            <div
+              key={card._key}
+              className="flex items-center justify-center p-[2rem] md:p-[1.5rem] sm:p-[1rem]"
+            >
             {/* Card Content */}
             <div className="relative w-full max-w-[800px] h-[450px] md:h-[400px] sm:h-[350px] rounded-[24px] overflow-hidden bg-[#1C242E] shadow-[0_20px_60px_rgba(0,0,0,0.5)] transition-transform duration-300 hover:translate-y-[-4px] hover:shadow-[0_24px_80px_rgba(0,0,0,0.6)]">
               {/* Background Image (if provided) */}

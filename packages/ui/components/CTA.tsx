@@ -1,7 +1,6 @@
 'use client';
 
 import { PortableText } from '@portabletext/react';
-import { useScrollTextReveal } from '@3lectrify/animations';
 import { Button } from './Button';
 import { Heading } from './primitives/Heading';
 import { IntroText } from './primitives/IntroText';
@@ -21,13 +20,6 @@ export function CTA({
   buttonLink,
   openInNewTab = false,
 }: CTAProps) {
-  // ✨ Scroll-triggered text reveal for headline
-  const headlineRef = useScrollTextReveal({
-    stagger: 0.05,
-    duration: 0.4,
-    yDistance: 15,
-    triggerStart: 'top 85%',
-  });
 
   return (
     <section className="w-full bg-[#293645] py-[50px] lg:py-20 flex justify-center items-center px-[50px] md:px-[40px] sm:px-[20px]">
@@ -38,7 +30,6 @@ export function CTA({
           <header className="flex flex-col items-center text-center gap-[32px] md:gap-[32px] sm:gap-[32px] max-w-[900px]">
             {headline && (
               <Heading
-                ref={headlineRef as any}
                 variant="h2"
                 color="white"
                 className="lg:text-[32px] lg:leading-[40px] sm:text-[28px] sm:leading-[36px]"

@@ -1,12 +1,5 @@
 'use client';
 
-import { useRef } from 'react';
-import { useGSAP } from '@gsap/react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
-
 interface StatCard {
   _key: string;
   value: string;
@@ -34,37 +27,13 @@ export function Stats({
   variant = 'dark',
   embedded = false,
 }: StatsProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useGSAP(
-    () => {
-      const statElements = containerRef.current?.querySelectorAll('[data-stat]');
-      if (!statElements || statElements.length === 0) return;
-
-      gsap.from(statElements, {
-        opacity: 0,
-        y: 30,
-        duration: 0.6,
-        stagger: 0.15,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: 'top 80%',
-          once: true,
-        },
-      });
-    },
-    { scope: containerRef }
-  );
 
   const bgColor = variant === 'dark' ? 'bg-[#3c5067]' : 'bg-white';
   const textColor = variant === 'dark' ? 'text-[#c2c2c2]' : 'text-[#666666]';
 
   // Stats container (reusable)
   const statsContainer = (
-    <div
-      ref={containerRef}
-      className={`flex items-start gap-[25px] w-full ${
+    <div className={`flex items-start gap-[25px] w-full ${
         layout === 'grid' ? 'flex-wrap' : 'flex-nowrap'
       }`}
     >
@@ -76,11 +45,9 @@ export function Stats({
         return (
           <div
             key={stat._key}
-            data-stat
             className={`inline-flex flex-col items-center gap-2.5 px-[30px] py-[15px] ${bgColor} rounded-[10px] overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_20px_rgba(0,0,0,0.15)] ${
               layout === 'grid' ? 'flex-1 min-w-[200px]' : 'flex-[0_0_auto]'
             }`}
-            style={{ opacity: 1 }}
           >
             <div
               className="font-normal text-[36px] tracking-[0.36px] leading-[46px] whitespace-nowrap"

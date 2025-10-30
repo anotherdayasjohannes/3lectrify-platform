@@ -1,16 +1,10 @@
 'use client';
 
 import Image from 'next/image';
-import { useRef } from 'react';
-import { useGSAP } from '@gsap/react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { PortableText, type PortableTextBlock } from '@portabletext/react';
 import { getFocalPoint } from '@3lectrify/sanity';
 import { Heading } from './primitives/Heading';
 import { BodyText } from './primitives/BodyText';
-
-gsap.registerPlugin(ScrollTrigger);
 
 interface SimpleTextImageProps {
   headline?: string;
@@ -36,63 +30,18 @@ export function SimpleTextImage({
   image,
   variant = 'dark',
 }: SimpleTextImageProps) {
-  const containerRef = useRef<HTMLElement>(null);
-
-  useGSAP(
-    () => {
-      const contentEl = containerRef.current?.querySelector('[data-content]');
-      const imageEl = containerRef.current?.querySelector('[data-image]');
-
-      if (!contentEl && !imageEl) return;
-
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: 'top 75%',
-        },
-      });
-
-      if (contentEl) {
-        tl.from(contentEl, {
-          opacity: 0,
-          y: 30,
-          duration: 0.8,
-          ease: 'power2.out',
-        });
-      }
-
-      if (imageEl) {
-        tl.from(
-          imageEl,
-          {
-            opacity: 0,
-            y: 40,
-            duration: 0.8,
-            ease: 'power2.out',
-          },
-          '-=0.4'
-        );
-      }
-    },
-    { scope: containerRef }
-  );
-
   const bgColor = variant === 'dark' ? 'bg-[#293645]' : 'bg-white';
   const textColor = variant === 'dark' ? 'text-white' : 'text-[#333333]';
 
   return (
-    <section
-      ref={containerRef}
-      className={`${bgColor} ${textColor} py-[50px] lg:py-20`}
+    <section className={`${bgColor} ${textColor} py-[50px] lg:py-20`}
     >
       <div className="content-wrapper">
         <div className="max-w-[645px] mx-auto flex flex-col items-start gap-[50px] md:gap-10 sm:gap-[30px]">
           
           {/* Text Content */}
           {(headline || body) && (
-            <article
-              data-content
-              className="flex flex-col items-start gap-[32px] sm:gap-[32px] w-full"
+            <article className="flex flex-col items-start gap-[32px] sm:gap-[32px] w-full"
             >
               {headline && (
                 <Heading
@@ -118,9 +67,7 @@ export function SimpleTextImage({
 
           {/* Image */}
           {image && (
-            <figure
-              data-image
-              className="w-full aspect-[215/143] rounded-[20px] overflow-hidden bg-[#D9D9D9]"
+            <figure className="w-full aspect-[215/143] rounded-[20px] overflow-hidden bg-[#D9D9D9]"
             >
               <Image
                 src={image.url}

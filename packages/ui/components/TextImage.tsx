@@ -1,16 +1,9 @@
 'use client';
 
 import Image from 'next/image';
-import { useRef } from 'react';
-import { useGSAP } from '@gsap/react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { PortableText, type PortableTextBlock } from '@portabletext/react';
 import { getFocalPoint } from '@3lectrify/sanity';
 import { Stats } from './Stats';
-import { useScrollTextReveal } from '@3lectrify/animations';
-
-gsap.registerPlugin(ScrollTrigger);
 
 interface TextImageProps {
   headline?: string;
@@ -56,54 +49,6 @@ export function TextImage({
   variant = 'dark',
   fullWidth = false,
 }: TextImageProps) {
-  const containerRef = useRef<HTMLElement>(null);
-
-  // ✨ Scroll-triggered text reveal for headline
-  const headlineRef = useScrollTextReveal({
-    stagger: 0.05,
-    duration: 0.4,
-    yDistance: 15,
-    triggerStart: 'top 85%',
-  });
-
-  useGSAP(
-    () => {
-      const imageEl = containerRef.current?.querySelector('[data-image]');
-      const textEl = containerRef.current?.querySelector('[data-text]');
-
-      if (!imageEl && !textEl) return;
-
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: 'top 75%',
-        },
-      });
-
-      if (imageEl) {
-        tl.from(imageEl, {
-          opacity: 0,
-          x: imagePosition === 'left' ? -50 : 50,
-          duration: 0.8,
-          ease: 'power2.out',
-        });
-      }
-
-      if (textEl) {
-        tl.from(
-          textEl,
-          {
-            opacity: 0,
-            x: imagePosition === 'left' ? 50 : -50,
-            duration: 0.8,
-            ease: 'power2.out',
-          },
-          '-=0.6'
-        );
-      }
-    },
-    { scope: containerRef }
-  );
 
   const bgColor = variant === 'dark' ? 'bg-[#293645]' : 'bg-white';
   const textColor = variant === 'dark' ? 'text-white' : 'text-[#333333]';
