@@ -1,8 +1,8 @@
 'use client';
 
-import Link from 'next/link';
 import { PortableText } from '@portabletext/react';
 import { useScrollTextReveal } from '@3lectrify/animations';
+import { Button } from './Button';
 
 interface CTAProps {
   headline?: string;
@@ -26,16 +26,6 @@ export function CTA({
     yDistance: 15,
     triggerStart: 'top 85%',
   });
-
-  const isExternal = buttonLink.startsWith('http');
-  
-  const ButtonComponent = isExternal ? 'a' : Link;
-  const buttonProps = isExternal
-    ? {
-        href: buttonLink,
-        ...(openInNewTab && { target: '_blank', rel: 'noopener noreferrer' }),
-      }
-    : { href: buttonLink };
 
   return (
     <section className="w-full bg-[#293645] py-[50px] lg:py-20 flex justify-center items-center px-[50px] md:px-[40px] sm:px-[20px]">
@@ -71,37 +61,37 @@ export function CTA({
             )}
           </header>
           
-          {/* Button (reuses Footer button style) */}
-          <div className="flex justify-center items-center">
-            <ButtonComponent
-              {...buttonProps}
-              className="pl-[20px] pr-[15px] py-[10px] inline-flex items-center justify-center gap-[10px] bg-[#c5e0d7] rounded-[5px] cursor-pointer hover:bg-[#88c0b1] hover:-translate-y-0.5 transition-all duration-300 group"
-              aria-label={buttonText}
+          {/* Button */}
+          <Button
+            variant="primary"
+            href={buttonLink}
+            openInNewTab={openInNewTab}
+            className="group"
+            aria-label={buttonText}
+          >
+            <span className="font-normal text-[#333333] text-[18px] tracking-[0.18px] leading-[26px] whitespace-nowrap">
+              {buttonText}
+            </span>
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+              className="transition-transform duration-300 group-hover:translate-x-0.5"
             >
-              <span className="font-normal text-[#333333] text-[18px] tracking-[0.18px] leading-[26px] whitespace-nowrap">
-                {buttonText}
-              </span>
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 20 20"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true"
-                className="transition-transform duration-300 group-hover:translate-x-0.5"
-              >
-                <g clipPath="url(#clip0_cta)">
-                  <path d="M7.5 10L3.75 13.75L7.5 17.5" stroke="#333333" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M15 2.5V13.75H3.75" stroke="#333333" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </g>
-                <defs>
-                  <clipPath id="clip0_cta">
-                    <rect width="20" height="20" fill="white"/>
-                  </clipPath>
-                </defs>
-              </svg>
-            </ButtonComponent>
-          </div>
+              <g clipPath="url(#clip0_cta)">
+                <path d="M7.5 10L3.75 13.75L7.5 17.5" stroke="#333333" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M15 2.5V13.75H3.75" stroke="#333333" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </g>
+              <defs>
+                <clipPath id="clip0_cta">
+                  <rect width="20" height="20" fill="white"/>
+                </clipPath>
+              </defs>
+            </svg>
+          </Button>
           
         </article>
       </div>

@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Button } from './Button';
 
 interface NavigationItem {
   label: string;
@@ -114,37 +115,38 @@ export function Footer({
                     )}
                   </div>
 
-                  <button
+                  <Button
                     type="submit"
+                    variant="primary"
                     disabled={isSubmitting || submitSuccess}
-                    className="h-9 pl-[15px] pr-2.5 py-0 inline-flex items-center justify-center gap-2.5 bg-[#c5e0d7] rounded-[5px] cursor-pointer hover:bg-[#88c0b1] hover:-translate-y-0.5 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="h-9 px-[15px] py-0"
                     aria-label="Newsletter abonnieren"
                   >
-                    <span className="font-bold text-[#333333] text-[16px] tracking-[0.16px] leading-[26px] whitespace-nowrap">
+                    <span className="font-normal text-[#333333] text-[16px] tracking-[0.16px] leading-[26px] whitespace-nowrap">
                       {submitSuccess ? '✓ Angemeldet' : newsletter.buttonText}
                     </span>
                     {!submitSuccess && (
-                      <svg 
-                        width="20" 
-                        height="20" 
-                        viewBox="0 0 20 20" 
-                        fill="none" 
-                        xmlns="http://www.w3.org/2000/svg" 
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 20 20"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
                         aria-hidden="true"
-                        className="transition-transform duration-300 group-hover:translate-x-0.5"
+                        className="transition-transform duration-300"
                       >
-                        <g clipPath="url(#clip0_433_45)">
+                        <g clipPath="url(#clip0_footer)">
                           <path d="M7.5 10L3.75 13.75L7.5 17.5" stroke="#333333" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                           <path d="M15 2.5V13.75H3.75" stroke="#333333" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                         </g>
                         <defs>
-                          <clipPath id="clip0_433_45">
+                          <clipPath id="clip0_footer">
                             <rect width="20" height="20" fill="white"/>
                           </clipPath>
                         </defs>
                       </svg>
                     )}
-                  </button>
+                  </Button>
                 </form>
               </div>
             )}

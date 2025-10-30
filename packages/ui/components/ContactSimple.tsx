@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
+import { Button } from './Button';
 
 // Validation schema
 const contactSchema = z.object({
@@ -344,13 +345,14 @@ export function ContactSimple({
                 </div>
 
                 {/* Submit Button */}
-                <button
+                <Button
                   type="submit"
+                  variant="secondary"
                   disabled={formState === 'loading'}
-                  className="w-auto self-start px-8 py-3 bg-[#88c0b1] text-[#333] text-[16px] leading-[24px] font-medium tracking-[0.16px] rounded transition-all duration-200 hover:bg-[#c5e0d7] focus:outline-none focus:ring-2 focus:ring-[#88c0b1] focus:ring-offset-2 focus:ring-offset-[#293645] disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-auto self-start px-8 py-3 text-[16px] leading-[24px] font-normal tracking-[0.16px] focus:outline-none focus:ring-2 focus:ring-[#88c0b1] focus:ring-offset-2 focus:ring-offset-[#293645]"
                 >
                   {formState === 'loading' ? 'Wird gesendet...' : labels.button}
-                </button>
+                </Button>
 
                 {/* Error Message */}
                 {formState === 'error' && (
