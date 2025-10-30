@@ -1,6 +1,3 @@
-'use client';
-
-import { useEffect, useState } from 'react';
 import { LottieAnimation } from './LottieAnimation';
 
 interface LottieAnimationWrapperProps {
@@ -13,7 +10,7 @@ interface LottieAnimationWrapperProps {
   variant?: 'light' | 'dark';
 }
 
-export function LottieAnimationWrapper({
+export async function LottieAnimationWrapper({
   headline,
   description,
   animationUrl,
@@ -22,48 +19,36 @@ export function LottieAnimationWrapper({
   maxWidth = '800px',
   variant = 'dark',
 }: LottieAnimationWrapperProps) {
-  const [animationData, setAnimationData] = useState<object | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  // Server-side fetch of the Lottie JSON data
+  try {
+    const res = await fetch(animationUrl, {
+      cache: 'force-cache', // Cache the animation data
+    });
 
-  useEffect(() => {
-    fetch(animationUrl)
-      .then((res) => {
-        if (!res.ok) throw new Error('Failed to load animation');
-        return res.json();
-      })
-      .then((data) => setAnimationData(data))
-      .catch((err) => {
-        console.error('Error loading Lottie animation:', err);
-        setError('Failed to load animation');
-      });
-  }, [animationUrl]);
+    if (!res.ok) {
+      throw new Error(`Failed to load animation: ${res.status}`);
+    }
 
-  if (error) {
+    const animationData = await res.json();
+
+    return (
+      <LottieAnimation
+        headline={headline}
+        description={description}
+        animationData={animationData}
+        loop={loop}
+        speed={speed}
+        maxWidth={maxWidth}
+        variant={variant}
+      />
+    );
+  } catch (err) {
+    console.error('Error loading Lottie animation:', err);
     return (
       <section className="py-[50px] text-center text-red-500">
-        <p>{error}</p>
+        <p>Failed to load animation</p>
       </section>
     );
   }
-
-  if (!animationData) {
-    return (
-      <section className="py-[50px] text-center">
-        <p className="text-white">Loading animation...</p>
-      </section>
-    );
-  }
-
-  return (
-    <LottieAnimation
-      headline={headline}
-      description={description}
-      animationData={animationData}
-      loop={loop}
-      speed={speed}
-      maxWidth={maxWidth}
-      variant={variant}
-    />
-  );
 }
 
