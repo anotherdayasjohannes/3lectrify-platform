@@ -57,7 +57,7 @@ export interface IntroTextProps {
   /**
    * Text content
    */
-  children: React.ReactNode;
+  children?: any;
   
   /**
    * Additional CSS classes

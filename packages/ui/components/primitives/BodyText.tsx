@@ -72,7 +72,7 @@ export interface BodyTextProps {
   /**
    * Text content
    */
-  children: React.ReactNode;
+  children?: any;
   
   /**
    * Additional CSS classes

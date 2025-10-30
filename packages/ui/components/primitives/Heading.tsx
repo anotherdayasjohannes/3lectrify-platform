@@ -64,7 +64,7 @@ export interface HeadingProps {
   /**
    * Heading text content
    */
-  children: React.ReactNode;
+  children?: any;
   
   /**
    * Additional CSS classes for customization
