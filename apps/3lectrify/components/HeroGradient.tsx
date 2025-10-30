@@ -79,7 +79,7 @@ export function HeroGradient({
             }`}
           >
             {/* Text Content */}
-            <div className="flex flex-col gap-[25px] w-full pl-[50px] max-sm:pl-0">
+            <div className="flex flex-col gap-[25px] w-full">
               <h1 
                 className="text-white m-0"
                 style={typography.h1}
