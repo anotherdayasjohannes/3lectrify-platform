@@ -92,12 +92,18 @@ export default function ReferencesGrid({
         {(headline || subtext) && (
           <div className="mb-16">
             {headline && (
-              <h2 className="text-[36px] leading-[46px] font-light text-white mb-4">
+              <h2 
+                className="text-white mb-4"
+                style={typography.h2}
+              >
                 {headline}
               </h2>
             )}
             {subtext && (
-              <p className="text-[20px] leading-[28px] text-white/70 max-w-[645px]">
+              <p 
+                className="text-white/70 max-w-[645px]"
+                style={typography.h3}
+              >
                 {subtext}
               </p>
             )}
@@ -254,19 +260,28 @@ function ReferenceCard({
         >
           <div className="inline-flex items-center gap-2 bg-[#88c0b1]/20 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-[#88c0b1]/30 animate-pulse-glow">
             <div className="w-2 h-2 rounded-full bg-[#88c0b1] animate-pulse" />
-            <span className="text-[14px] leading-[20px] text-white font-bold">
+            <span 
+              className="text-white"
+              style={typography.captionBold}
+            >
               {reference.units} Einheiten
             </span>
           </div>
         </div>
 
         {/* Title */}
-        <h3 className="text-[28px] leading-[36px] font-light text-white mb-2 transform transition-transform duration-300 group-hover:translate-x-2">
+        <h3 
+          className="text-white mb-2 transform transition-transform duration-300 group-hover:translate-x-2"
+          style={typography.cardTitle}
+        >
           {reference.name}
         </h3>
 
         {/* Location & Year */}
-        <div className="flex items-center gap-3 text-[14px] leading-[20px] text-white/70">
+        <div 
+          className="flex items-center gap-3 text-white/70"
+          style={typography.caption}
+        >
           <span>{reference.location}</span>
           <span className="w-1 h-1 rounded-full bg-[#88c0b1]" />
           <span>{reference.year}</span>
@@ -286,7 +301,13 @@ function ReferenceCard({
             delay-75
           "
         >
-          <div className="inline-flex items-center gap-2 text-[#88c0b1] text-[14px] leading-[20px] font-bold">
+          <div 
+            className="inline-flex items-center gap-2"
+            style={{
+              ...typography.captionBold,
+              color: colors.middleGreen,
+            }}
+          >
             <span>Projekt ansehen</span>
             <svg 
               className="w-4 h-4 transform transition-transform duration-200 group-hover:translate-x-1" 

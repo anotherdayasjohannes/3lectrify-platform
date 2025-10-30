@@ -124,6 +124,45 @@ export const typography = {
     letterSpacing: '0.36px',
     fontFamily: 'var(--font-lato), Lato, Helvetica, sans-serif',
   },
+  
+  /**
+   * Caption text (14px)
+   * Usage: Very small text, badges, metadata, micro-copy
+   * Example: Card badges, labels, timestamps
+   */
+  caption: {
+    fontSize: '14px',
+    fontWeight: 400,
+    lineHeight: '20px',
+    letterSpacing: '0.14px',
+    fontFamily: 'var(--font-lato), Lato, Helvetica, sans-serif',
+  },
+  
+  /**
+   * Caption text bold variant
+   * Usage: Bold badges, emphasized small text
+   * Example: "15 Einheiten" badge, CTA micro-copy
+   */
+  captionBold: {
+    fontSize: '14px',
+    fontWeight: 700,
+    lineHeight: '20px',
+    letterSpacing: '0.14px',
+    fontFamily: 'var(--font-lato), Lato, Helvetica, sans-serif',
+  },
+  
+  /**
+   * Card title (28px)
+   * Usage: Bento grid card titles, medium-sized headlines
+   * Example: Reference card project names
+   */
+  cardTitle: {
+    fontSize: '28px',
+    fontWeight: 300,
+    lineHeight: '36px',
+    letterSpacing: '0.28px',
+    fontFamily: 'var(--font-lato), Lato, Helvetica, sans-serif',
+  },
 } as const;
 
 /**
