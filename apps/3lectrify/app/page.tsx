@@ -209,6 +209,44 @@ interface SanityBlock {
     email?: string;
   }>;
   introText?: PortableTextBlock[];
+  // Lottie Animation fields
+  animationFile?: {
+    asset?: {
+      url: string;
+    };
+  };
+  speed?: number;
+  // Video Animation fields
+  videoFile?: {
+    asset?: {
+      url: string;
+    };
+  };
+  posterImage?: {
+    asset?: {
+      url: string;
+      metadata?: {
+        dimensions: {
+          width: number;
+          height: number;
+        };
+      };
+    };
+    hotspot?: {
+      x: number;
+      y: number;
+    };
+    crop?: {
+      top: number;
+      bottom: number;
+      left: number;
+      right: number;
+    };
+    alt?: string;
+  };
+  loop?: boolean;
+  muted?: boolean;
+  maxWidth?: string;
 }
 
 async function getHomePage() {
