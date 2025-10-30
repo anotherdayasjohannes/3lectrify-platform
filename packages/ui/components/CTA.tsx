@@ -33,7 +33,7 @@ export function CTA({
         <article className="bg-[#3c5067] rounded-[20px] px-[80px] py-[60px] md:px-[60px] md:py-[50px] sm:px-[30px] sm:py-10 flex flex-col items-center gap-10 md:gap-8 sm:gap-7 shadow-[0_4px_20px_rgba(0,0,0,0.15)]">
           
           {/* Header: Headline + Description */}
-          <header className="flex flex-col items-center text-center gap-[25px] md:gap-5 sm:gap-4 max-w-[900px]">
+          <header className="flex flex-col items-center text-center gap-[32px] md:gap-[32px] sm:gap-[32px] max-w-[900px]">
             {headline && (
               <h2 
                 ref={headlineRef as any}
@@ -50,7 +50,7 @@ export function CTA({
                   components={{
                     block: {
                       normal: ({children}) => (
-                        <p className="mb-4 last:mb-0 text-white">
+                        <p className="mb-[26px] last:mb-0 text-white">
                           {children}
                         </p>
                       )

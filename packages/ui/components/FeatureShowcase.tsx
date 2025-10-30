@@ -358,7 +358,7 @@ export function FeatureShowcase({
 
                 {/* Description */}
                 {feature.description && (
-                  <div className="text-white/80 text-lg leading-relaxed prose prose-invert prose-lg max-w-none [&_p]:mb-4 [&_p]:last:mb-0 [&_p]:text-white/80">
+                  <div className="text-white/80 text-lg leading-relaxed prose prose-invert prose-lg max-w-none [&_p]:mb-[26px] [&_p]:last:mb-0 [&_p]:text-white/80">
                     <PortableText value={feature.description} />
                   </div>
                 )}

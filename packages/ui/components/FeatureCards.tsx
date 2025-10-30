@@ -131,9 +131,9 @@ export function FeatureCards({
         {/* Section Header - Left Aligned */}
         <div className="mb-[60px] md:mb-[40px]">
           {sectionHeadline && (
-            <h2 
+            <h2
               ref={headlineRef as any}
-              className="text-[40px] leading-[50px] tracking-[0.4px] font-light mb-[20px] text-white text-left md:text-[32px] md:leading-[42px] md:mb-[15px]"
+              className="text-[40px] leading-[50px] tracking-[0.4px] font-light mb-[32px] text-white text-left md:text-[32px] md:leading-[42px] md:mb-[32px]"
             >
               {sectionHeadline}
             </h2>

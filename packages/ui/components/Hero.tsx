@@ -250,7 +250,7 @@ export function Hero({
           )}
 
           {/* Text Content */}
-          <div className="max-w-[900px] w-full flex flex-col gap-[25px]">
+          <div className="max-w-[900px] w-full flex flex-col gap-[32px]">
             {headline && (
               <h1 
                 ref={headlineRef as any}
@@ -269,7 +269,7 @@ export function Hero({
                   components={{
                     block: {
                       normal: ({children}) => (
-                        <p className="text-body-hero font-normal tracking-[0.24px] text-white mb-[1em] last:mb-0">
+                        <p className="text-body-hero font-normal tracking-[0.24px] text-white mb-[34px] last:mb-0">
                           {children}
                         </p>
                       )

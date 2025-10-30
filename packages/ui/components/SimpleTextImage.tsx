@@ -84,13 +84,13 @@ export function SimpleTextImage({
       className={`${bgColor} ${textColor} py-[50px] lg:py-20`}
     >
       <div className="content-wrapper">
-        <div className="max-w-[645px] mx-auto flex flex-col items-start gap-[50px] md:gap-10 sm:gap-[30px]">
+        <div className="max-w-[645px] flex flex-col items-start gap-[50px] md:gap-10 sm:gap-[30px]">
           
           {/* Text Content */}
           {(headline || body) && (
             <article
               data-content
-              className="flex flex-col items-start gap-[25px] sm:gap-5 w-full"
+              className="flex flex-col items-start gap-[32px] sm:gap-[32px] w-full"
             >
               {headline && (
                 <h2 className="text-h2 font-light m-0 text-left w-full">
@@ -99,7 +99,7 @@ export function SimpleTextImage({
               )}
 
               {body && (
-                <div className="text-[18px] leading-[26px] tracking-[0.18px] font-normal text-left w-full prose prose-invert prose-p:my-0 prose-p:mb-4 prose-p:last:mb-0 md:text-[16px] md:leading-[24px] sm:text-[16px] sm:leading-[24px]">
+                <div className="text-[18px] leading-[26px] tracking-[0.18px] font-normal text-left w-full prose prose-invert prose-p:my-0 prose-p:mb-[26px] prose-p:last:mb-0 md:text-[16px] md:leading-[24px] sm:text-[16px] sm:leading-[24px]">
                   <PortableText value={body} />
                 </div>
               )}
