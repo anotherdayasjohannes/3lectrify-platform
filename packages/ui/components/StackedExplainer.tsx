@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import Image from 'next/image';
 import { PortableText, type PortableTextBlock } from '@portabletext/react';
 
@@ -126,6 +127,7 @@ export function StackedExplainer({
             </div>
           </div>
         ))}
+        </div>
       </div>
 
       {/* Bottom Spacing */}
