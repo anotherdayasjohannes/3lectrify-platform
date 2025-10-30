@@ -1,4 +1,4 @@
-import { type ReactNode, type CSSProperties, type ElementType } from 'react';
+import React, { type CSSProperties, type ElementType } from 'react';
 import { typography, colors } from '../../theme';
 
 /**
@@ -57,7 +57,7 @@ export interface IntroTextProps {
   /**
    * Text content
    */
-  children: ReactNode;
+  children: React.ReactNode;
   
   /**
    * Additional CSS classes

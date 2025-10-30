@@ -60,7 +60,7 @@ export function Button({
         target={openInNewTab ? '_blank' : undefined}
         rel={openInNewTab ? 'noopener noreferrer' : undefined}
       >
-        {children}
+        {children as React.ReactNode}
       </Link>
     );
   }
@@ -72,7 +72,7 @@ export function Button({
       disabled={disabled}
       className={combinedClassName}
     >
-      {children}
+      {children as React.ReactNode}
     </button>
   );
 }

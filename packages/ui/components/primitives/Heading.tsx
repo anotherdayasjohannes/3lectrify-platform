@@ -1,4 +1,4 @@
-import { type ReactNode, type CSSProperties, forwardRef, type Ref } from 'react';
+import React, { type CSSProperties, forwardRef, type Ref } from 'react';
 import { typography, colors, type TypographyVariant } from '../../theme';
 
 /**
@@ -64,7 +64,7 @@ export interface HeadingProps {
   /**
    * Heading text content
    */
-  children: ReactNode;
+  children: React.ReactNode;
   
   /**
    * Additional CSS classes for customization
