@@ -14,7 +14,8 @@ import {
   TeamGrid,
   LegalContent,
   LottieAnimationWrapper,
-  VideoAnimation 
+  VideoAnimation,
+  ContactSimple
 } from '@/components';
 import { notFound } from 'next/navigation';
 import type { PortableTextBlock } from '@portabletext/react';
@@ -613,6 +614,42 @@ export default async function DynamicPage({ params }: { params: Promise<{ slug: 
                 heading={block.heading}
                 introText={block.introText}
                 teamMembers={block.teamMembers || []}
+              />
+            );
+
+          case 'contactSimple':
+            return (
+              <ContactSimple
+                key={index}
+                headline={block.headline}
+                subheadline={block.subheadline}
+                formHeadline={block.formHeadline}
+                labels={
+                  block.labels || {
+                    firstname: 'Vorname',
+                    lastname: 'Nachname',
+                    company: 'Unternehmen (optional)',
+                    email: 'E-Mail',
+                    phone: 'Telefon (optional)',
+                    message: 'Nachricht',
+                    button: 'Anfrage senden',
+                    privacy: 'Ich habe die Datenschutzerklärung gelesen und akzeptiere diese.',
+                    privacyLink: '/datenschutz',
+                  }
+                }
+                address={
+                  block.address || {
+                    headline: 'Adresse',
+                    companyName: '3lectrify',
+                    street: 'Kramergasse 32',
+                    postalCode: '82054',
+                    city: 'Sauerlach',
+                    email: 'kontakt@3lectrify.com',
+                    phone: '+49 8104 64709-299',
+                    mapsLinkText: 'In Google Maps öffnen',
+                  }
+                }
+                successMessage={block.successMessage}
               />
             );
 
