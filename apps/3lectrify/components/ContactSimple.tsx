@@ -147,11 +147,11 @@ export function ContactSimple({
     <section className="w-full bg-[#293645] pt-[40px] pb-[40px] md:pt-[50px] md:pb-[50px]">
       {/* Use content-wrapper for global margins */}
       <div className="content-wrapper">
-        {/* Two Column Layout - matches HubSpot kontakt-simple__content */}
-        <div className="flex gap-[50px] md:gap-10 max-sm:flex-col max-sm:gap-[50px] items-start">
+        {/* Mobile: Stack vertically → md: Two columns side-by-side */}
+        <div className="flex flex-col md:flex-row gap-8 md:gap-10 lg:gap-[50px] items-start">
           {/* Left Column: Form */}
-          <div className="flex-1 min-w-0">
-            <h2 className="text-[36px] leading-[46px] md:text-[32px] md:leading-[42px] max-sm:text-[28px] max-sm:leading-[38px] tracking-[0.36px] font-light text-white m-0 mb-[25px]">
+          <div className="flex-1 min-w-0 w-full">
+            <h2 className="text-[24px] leading-[32px] tracking-[0.24px] md:text-[28px] md:leading-[38px] md:tracking-[0.28px] lg:text-[32px] lg:leading-[42px] lg:tracking-[0.32px] font-light text-white m-0 mb-6 md:mb-[25px]">
               {formHeadline}
             </h2>
 
@@ -181,7 +181,7 @@ export function ContactSimple({
                     {...register('firstname')}
                     type="text"
                     id="firstname"
-                    className={`w-full px-4 py-3 text-[16px] leading-[24px] text-[#333] bg-white border rounded transition-all duration-200 focus:outline-none focus:border-[#88c0b1] focus:shadow-[0_0_0_3px_rgba(136,192,177,0.2)] hover:border-white/40 ${
+                    className={`w-full px-4 py-3 min-h-[44px] text-[16px] leading-[24px] text-[#333] bg-white border rounded transition-all duration-200 focus:outline-none focus:border-[#88c0b1] focus:shadow-[0_0_0_3px_rgba(136,192,177,0.2)] hover:border-white/40 touch-manipulation ${
                       errors.firstname ? 'border-[#d04227]' : 'border-white/20'
                     }`}
                     aria-invalid={errors.firstname ? 'true' : 'false'}
@@ -210,7 +210,7 @@ export function ContactSimple({
                     {...register('lastname')}
                     type="text"
                     id="lastname"
-                    className={`w-full px-4 py-3 text-[16px] leading-[24px] text-[#333] bg-white border rounded transition-all duration-200 focus:outline-none focus:border-[#88c0b1] focus:shadow-[0_0_0_3px_rgba(136,192,177,0.2)] hover:border-white/40 ${
+                    className={`w-full px-4 py-3 min-h-[44px] text-[16px] leading-[24px] text-[#333] bg-white border rounded transition-all duration-200 focus:outline-none focus:border-[#88c0b1] focus:shadow-[0_0_0_3px_rgba(136,192,177,0.2)] hover:border-white/40 touch-manipulation ${
                       errors.lastname ? 'border-[#d04227]' : 'border-white/20'
                     }`}
                     aria-invalid={errors.lastname ? 'true' : 'false'}
@@ -239,7 +239,7 @@ export function ContactSimple({
                     {...register('company')}
                     type="text"
                     id="company"
-                    className="w-full px-4 py-3 text-[16px] leading-[24px] text-[#333] bg-white border border-white/20 rounded transition-all duration-200 focus:outline-none focus:border-[#88c0b1] focus:shadow-[0_0_0_3px_rgba(136,192,177,0.2)] hover:border-white/40"
+                    className="w-full px-4 py-3 min-h-[44px] text-[16px] leading-[24px] text-[#333] bg-white border border-white/20 rounded transition-all duration-200 focus:outline-none focus:border-[#88c0b1] focus:shadow-[0_0_0_3px_rgba(136,192,177,0.2)] hover:border-white/40 touch-manipulation"
                   />
                 </div>
 
@@ -255,7 +255,7 @@ export function ContactSimple({
                     {...register('email')}
                     type="email"
                     id="email"
-                    className={`w-full px-4 py-3 text-[16px] leading-[24px] text-[#333] bg-white border rounded transition-all duration-200 focus:outline-none focus:border-[#88c0b1] focus:shadow-[0_0_0_3px_rgba(136,192,177,0.2)] hover:border-white/40 ${
+                    className={`w-full px-4 py-3 min-h-[44px] text-[16px] leading-[24px] text-[#333] bg-white border rounded transition-all duration-200 focus:outline-none focus:border-[#88c0b1] focus:shadow-[0_0_0_3px_rgba(136,192,177,0.2)] hover:border-white/40 touch-manipulation ${
                       errors.email ? 'border-[#d04227]' : 'border-white/20'
                     }`}
                     aria-invalid={errors.email ? 'true' : 'false'}
@@ -280,7 +280,7 @@ export function ContactSimple({
                     {...register('phone')}
                     type="tel"
                     id="phone"
-                    className="w-full px-4 py-3 text-[16px] leading-[24px] text-[#333] bg-white border border-white/20 rounded transition-all duration-200 focus:outline-none focus:border-[#88c0b1] focus:shadow-[0_0_0_3px_rgba(136,192,177,0.2)] hover:border-white/40"
+                    className="w-full px-4 py-3 min-h-[44px] text-[16px] leading-[24px] text-[#333] bg-white border border-white/20 rounded transition-all duration-200 focus:outline-none focus:border-[#88c0b1] focus:shadow-[0_0_0_3px_rgba(136,192,177,0.2)] hover:border-white/40 touch-manipulation"
                   />
                 </div>
 
@@ -296,7 +296,7 @@ export function ContactSimple({
                     {...register('message')}
                     id="message"
                     rows={5}
-                    className={`w-full px-4 py-3 text-[16px] leading-[24px] text-[#333] bg-white border rounded transition-all duration-200 focus:outline-none focus:border-[#88c0b1] focus:shadow-[0_0_0_3px_rgba(136,192,177,0.2)] hover:border-white/40 resize-vertical min-h-[120px] ${
+                    className={`w-full px-4 py-3 text-[16px] leading-[24px] text-[#333] bg-white border rounded transition-all duration-200 focus:outline-none focus:border-[#88c0b1] focus:shadow-[0_0_0_3px_rgba(136,192,177,0.2)] hover:border-white/40 resize-vertical min-h-[120px] touch-manipulation ${
                       errors.message ? 'border-[#d04227]' : 'border-white/20'
                     }`}
                     aria-invalid={errors.message ? 'true' : 'false'}
@@ -369,8 +369,8 @@ export function ContactSimple({
           </div>
 
           {/* Right Column: Address */}
-          <aside className="flex-1 min-w-0">
-            <h2 className="text-[36px] leading-[46px] md:text-[32px] md:leading-[42px] max-sm:text-[28px] max-sm:leading-[38px] tracking-[0.36px] font-light text-white m-0 mb-[25px]">
+          <aside className="flex-1 min-w-0 w-full">
+            <h2 className="text-[24px] leading-[32px] tracking-[0.24px] md:text-[28px] md:leading-[38px] md:tracking-[0.28px] lg:text-[32px] lg:leading-[42px] lg:tracking-[0.32px] font-light text-white m-0 mb-6 md:mb-[25px]">
               {address.headline}
             </h2>
             <address className="not-italic text-white text-[16px] leading-[24px] tracking-[0.16px]">
