@@ -77,6 +77,26 @@ export default async function KontaktPage() {
 
   return (
     <main>
+      {/* DEBUG: Show what blocks we're rendering */}
+      <div style={{ 
+        padding: '20px', 
+        background: '#ffd70020', 
+        border: '2px solid #ffd700',
+        margin: '20px',
+        fontFamily: 'monospace',
+        fontSize: '14px'
+      }}>
+        <h3 style={{ margin: '0 0 10px 0' }}>🐛 DEBUG INFO (Kontakt Page)</h3>
+        <p><strong>Total blocks:</strong> {page.content?.length || 0}</p>
+        <p><strong>Block types:</strong> {page.content?.map(b => b._type).join(', ') || 'none'}</p>
+        <details>
+          <summary style={{ cursor: 'pointer', padding: '5px' }}>View full page data</summary>
+          <pre style={{ background: '#333', color: '#0f0', padding: '10px', overflow: 'auto' }}>
+            {JSON.stringify(page, null, 2)}
+          </pre>
+        </details>
+      </div>
+
       {page.content?.map((block, index) => {
         console.log(`Rendering block ${index}:`, block._type);
         switch (block._type) {
