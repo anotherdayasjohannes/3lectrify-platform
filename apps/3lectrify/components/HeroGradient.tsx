@@ -76,12 +76,12 @@ export function HeroGradient({
 
           {/* Gradient Overlay - Full width mobile, constrained desktop */}
           <div
-            className={`relative h-full flex items-end px-0 py-6 sm:py-8 md:pr-0 md:py-[50px] z-[2] w-full md:w-[842px] gradient-overlay ${
+            className={`relative h-full flex items-end py-6 sm:py-8 md:pr-0 md:py-[50px] z-[2] w-full md:w-[842px] gradient-overlay ${
               gradientDirection === 'left' ? 'gradient-left' : 'gradient-right'
             }`}
           >
-            {/* Text Content - Responsive typography */}
-            <div className="flex flex-col gap-4 md:gap-6 lg:gap-[25px] w-full">
+            {/* Text Content - Responsive typography with content-wrapper padding */}
+            <div className="flex flex-col gap-4 md:gap-6 lg:gap-[25px] w-full px-[20px] md:px-[40px] lg:px-[50px]">
               <h1 
                 className="text-white m-0 text-[28px] leading-[36px] tracking-[0.28px] md:text-[40px] md:leading-[50px] md:tracking-[0.4px] lg:text-[48px] lg:leading-[58px] lg:tracking-[0.48px] font-light"
               >
