@@ -123,22 +123,22 @@ export default function FeatureDesign({
     <section
       ref={sectionRef}
       id="feat-design"
-      className="relative min-h-screen flex items-center justify-center px-4 pt-[40px] pb-[40px] md:pt-[50px] md:pb-[50px] overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center px-4 md:px-6 pt-[40px] pb-[40px] md:pt-[50px] md:pb-[50px] overflow-hidden"
       style={{ willChange: 'transform' }}
     >
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-black via-neutral-950 to-black pointer-events-none" />
 
-      {/* Radial gradient spotlight */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
+      {/* Radial gradient spotlight - Responsive size */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] md:w-[600px] md:h-[600px] lg:w-[800px] lg:h-[800px] bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
 
       {/* Main content card */}
       <div
         ref={cardRef}
-        className="relative max-w-4xl w-full bg-neutral-950/80 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden shadow-2xl"
+        className="relative max-w-4xl w-full bg-neutral-950/80 backdrop-blur-xl border border-white/10 rounded-xl md:rounded-2xl overflow-hidden shadow-2xl"
       >
-        {/* Top Bar */}
-        <div className="border-b border-white/8 bg-neutral-950/50 px-6 py-4">
+        {/* Top Bar - Mobile-first */}
+        <div className="border-b border-white/8 bg-neutral-950/50 px-4 py-3 md:px-6 md:py-4">
           <div className="flex items-center justify-between">
             {/* Left side - traffic lights */}
             <div className="flex items-center gap-2">
@@ -147,23 +147,23 @@ export default function FeatureDesign({
               <div className="w-3 h-3 rounded-full bg-green-500/80" />
             </div>
 
-            {/* Center - title */}
+            {/* Center - title - Responsive */}
             <div className="flex-1 flex justify-center">
-              <span className="text-sm text-white/60 font-medium">
+              <span className="text-xs md:text-sm text-white/60 font-medium truncate px-2">
                 {title}
               </span>
             </div>
 
-            {/* Right side - team avatars */}
-            <div className="flex -space-x-2">
+            {/* Right side - team avatars - Responsive */}
+            <div className="flex -space-x-1 md:-space-x-2">
               {avatars.slice(0, 3).map((avatar, index) => (
                 <div
                   key={avatar.id}
-                  className="avatar-item w-8 h-8 rounded-lg bg-neutral-800 ring-2 ring-neutral-900 overflow-hidden relative"
+                  className="avatar-item w-6 h-6 md:w-8 md:h-8 rounded-md md:rounded-lg bg-neutral-800 ring-1 md:ring-2 ring-neutral-900 overflow-hidden relative"
                   style={{ zIndex: avatars.length - index }}
                 >
                   <div className="w-full h-full bg-gradient-to-br from-blue-500 to-purple-600" />
-                  <div className="absolute inset-0 flex items-center justify-center text-white text-xs font-bold">
+                  <div className="absolute inset-0 flex items-center justify-center text-white text-[10px] md:text-xs font-bold">
                     {avatar.name.charAt(0)}
                   </div>
                 </div>
@@ -172,9 +172,9 @@ export default function FeatureDesign({
           </div>
         </div>
 
-        {/* Content Area */}
-        <div className="relative p-8">
-          {/* Grid background */}
+        {/* Content Area - Mobile-first padding */}
+        <div className="relative p-5 md:p-6 lg:p-8">
+          {/* Grid background - Responsive grid size */}
           <div className="absolute inset-0 opacity-20">
             <div
               className="w-full h-full"
@@ -183,26 +183,29 @@ export default function FeatureDesign({
                   linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
                   linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)
                 `,
-                backgroundSize: '32px 32px',
+                backgroundSize: '20px 20px',
               }}
             />
           </div>
 
           {/* Main content */}
           <div className="relative z-10">
-            <h3 className="text-3xl font-bold text-white mb-4">
+            {/* Responsive heading: 20px mobile → 24px tablet → 32px desktop */}
+            <h3 className="text-[20px] leading-[28px] md:text-2xl lg:text-3xl font-bold text-white mb-3 md:mb-4">
               {title}
             </h3>
-            <p className="text-white/60 text-lg mb-8 max-w-2xl">
+            {/* Responsive description: 14px mobile → 16px tablet → 18px desktop */}
+            <p className="text-white/60 text-[14px] leading-[22px] md:text-base md:leading-[24px] lg:text-lg lg:leading-[28px] mb-6 md:mb-8 max-w-2xl">
               {description}
             </p>
 
-            {/* Feature mockup placeholder */}
-            <div className="bg-neutral-900/50 border border-white/5 rounded-xl p-6 h-64 flex items-center justify-center">
+            {/* Feature mockup placeholder - Responsive height */}
+            <div className="bg-neutral-900/50 border border-white/5 rounded-lg md:rounded-xl p-4 md:p-6 h-48 md:h-56 lg:h-64 flex items-center justify-center">
               <div className="text-center">
-                <div className="w-16 h-16 mx-auto mb-4 bg-blue-500/20 rounded-2xl flex items-center justify-center">
+                {/* Responsive icon: 48px mobile → 64px desktop */}
+                <div className="w-12 h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 mx-auto mb-3 md:mb-4 bg-blue-500/20 rounded-xl md:rounded-2xl flex items-center justify-center">
                   <svg
-                    className="w-8 h-8 text-blue-400"
+                    className="w-6 h-6 md:w-7 md:h-7 lg:w-8 lg:h-8 text-blue-400"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -215,17 +218,17 @@ export default function FeatureDesign({
                     />
                   </svg>
                 </div>
-                <p className="text-white/40 text-sm">
+                <p className="text-white/40 text-xs md:text-sm">
                   Replace with your design mockup
                 </p>
               </div>
             </div>
           </div>
 
-          {/* Animated cursor */}
+          {/* Animated cursor - Hide on mobile, show on desktop */}
           <div
             ref={cursorRef}
-            className="absolute top-32 right-20 pointer-events-none"
+            className="hidden lg:block absolute top-32 right-20 pointer-events-none"
             style={{ willChange: 'transform, filter' }}
           >
             {/* Cursor pointer SVG */}
@@ -249,16 +252,16 @@ export default function FeatureDesign({
           </div>
         </div>
 
-        {/* Bottom bar with stats */}
-        <div className="border-t border-white/8 bg-neutral-950/50 px-6 py-3">
-          <div className="flex items-center justify-between text-xs text-white/40">
-            <span>Last edited 2 min ago</span>
-            <div className="flex items-center gap-4">
-              <span className="flex items-center gap-1">
+        {/* Bottom bar with stats - Mobile-first */}
+        <div className="border-t border-white/8 bg-neutral-950/50 px-4 py-2 md:px-6 md:py-3">
+          <div className="flex items-center justify-between text-[10px] md:text-xs text-white/40 gap-2">
+            <span className="truncate">Last edited 2 min ago</span>
+            <div className="flex items-center gap-2 md:gap-4 flex-shrink-0">
+              <span className="hidden sm:flex items-center gap-1">
                 <div className="w-2 h-2 rounded-full bg-green-500" />
                 Auto-save on
               </span>
-              <span>{avatars.length} collaborators</span>
+              <span className="whitespace-nowrap">{avatars.length} collaborators</span>
             </div>
           </div>
         </div>
