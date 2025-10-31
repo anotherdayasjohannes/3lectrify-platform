@@ -30,10 +30,10 @@ export const metadata: Metadata = {
     siteName: '3lectrify',
     images: [
       {
-        url: '/logo.png',
+        url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: '3lectrify Logo',
+        alt: '3lectrify - Wir elektrifizieren die Zukunft des Bauens',
       },
     ],
   },
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: '3lectrify - Wir elektrifizieren die Zukunft des Bauens',
     description: 'Unser Antrieb ist es, die Immobilienbranche zu transformieren und eine nachhaltige, elektrifizierte Zukunft zu gestalten.',
-    images: ['/logo.png'],
+    images: ['/og-image.png'],
   },
   icons: {
     icon: '/favicon.ico',
