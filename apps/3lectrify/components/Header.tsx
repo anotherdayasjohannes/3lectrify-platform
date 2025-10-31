@@ -146,7 +146,7 @@ export function Header({ logo, navigation }: HeaderProps) {
         {/* Mobile Menu - Scrollable if content overflows */}
         {isMobileMenuOpen && (
           <div className="md:hidden bg-[#3c5067] border-t border-[#5f8299] max-h-[calc(100vh-72px)] overflow-y-auto">
-            <ul className="flex flex-col px-5 py-4 gap-1">
+            <ul className="flex flex-col px-5 py-4 gap-1 max-w-[1440px] mx-auto">
               {navigation.map((item, index) => (
                 <li key={index}>
                   {item.isExternal ? (
