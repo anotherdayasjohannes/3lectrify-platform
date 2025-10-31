@@ -85,9 +85,9 @@ export function Footer({
       <footer className="pt-[30px] pb-[50px] bg-[#293645]">
         <div className="content-wrapper">
         {/* Mobile: Stack vertically → md: Two columns side by side */}
-        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-8 md:gap-[50px] lg:gap-[100px] w-full">
+        <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8 lg:gap-[50px] xl:gap-[100px] w-full">
           {/* Left Column: Headline & Newsletter - Full width mobile, flex-1 desktop */}
-          <div className="flex flex-col items-start justify-between w-full md:flex-1 md:max-w-[700px] gap-8 md:gap-10">
+          <div className="flex flex-col items-start justify-between w-full lg:flex-1 lg:max-w-[700px] gap-8 md:gap-10">
             {/* Responsive headline: mobile → desktop */}
             <h2 className="font-light text-white text-[24px] leading-[32px] tracking-[0.24px] md:text-[32px] md:leading-[40px] md:tracking-[0.32px] lg:text-[36px] lg:leading-[48px] lg:tracking-[0.36px]">
               {headline}
@@ -157,7 +157,7 @@ export function Footer({
 
           {/* Right Column: Navigation - Full width mobile, auto width desktop */}
           <nav
-            className="flex flex-col items-start gap-3 md:gap-[15px] w-full md:w-auto md:flex-shrink-0"
+            className="flex flex-col items-start gap-3 md:gap-[15px] w-full lg:w-auto lg:flex-shrink-0 lg:min-w-[200px]"
             aria-label="Footer Navigation"
           >
             {footerNavigation.map((link, index) => (
