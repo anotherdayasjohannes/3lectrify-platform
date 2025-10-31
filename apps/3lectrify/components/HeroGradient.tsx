@@ -76,7 +76,7 @@ export function HeroGradient({
 
           {/* Gradient Overlay - Full width mobile, constrained desktop */}
           <div
-            className={`relative h-full flex items-end p-6 sm:p-8 md:pr-0 md:py-[50px] z-[2] w-full md:w-[842px] gradient-overlay ${
+            className={`relative h-full flex items-end px-0 py-6 sm:py-8 md:pr-0 md:py-[50px] z-[2] w-full md:w-[842px] gradient-overlay ${
               gradientDirection === 'left' ? 'gradient-left' : 'gradient-right'
             }`}
           >
