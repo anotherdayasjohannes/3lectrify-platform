@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { typography, colors } from './theme';
+import { typography, responsiveTypography, colors } from './theme';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -88,32 +88,26 @@ export default function ReferencesGrid({
       `}
     >
       <div className="content-wrapper">
-        {/* Section Header */}
+        {/* Section Header - Mobile-first */}
         {(headline || subtext) && (
-          <div className="mb-16">
+          <div className="mb-8 md:mb-12 lg:mb-16">
             {headline && (
-              <h2 
-                className="text-white mb-4"
-                style={typography.h2}
-              >
+              <h2 className="text-white mb-4 md:mb-6 text-[24px] leading-[32px] tracking-[0.24px] md:text-[32px] md:leading-[42px] md:tracking-[0.32px] lg:text-[36px] lg:leading-[46px] lg:tracking-[0.36px] font-light">
                 {headline}
               </h2>
             )}
             {subtext && (
-              <p 
-                className="text-white max-w-[645px]"
-                style={typography.body}
-              >
+              <p className="text-white max-w-[645px] text-[16px] leading-[24px] tracking-[0.16px] md:text-[18px] md:leading-[26px] md:tracking-[0.18px] font-normal">
                 {subtext}
               </p>
             )}
           </div>
         )}
 
-        {/* Bento Grid */}
+        {/* Bento Grid - Responsive row height */}
         <div
           ref={gridRef}
-          className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-12 gap-4 md:gap-6 auto-rows-[250px]"
+          className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-12 gap-4 md:gap-6 auto-rows-[200px] sm:auto-rows-[220px] md:auto-rows-[250px]"
         >
           {references.map((reference, index) => (
             <ReferenceCard
@@ -124,11 +118,11 @@ export default function ReferencesGrid({
           ))}
         </div>
 
-        {/* Stats Footer */}
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 text-center">
+        {/* Stats Footer - Mobile-first */}
+        <div className="mt-8 md:mt-12 lg:mt-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 text-center">
           <StatCard number="1.400+" label="Wohneinheiten" />
           <StatCard number="15+" label="Städte" />
-          <StatCard number="100%" label="Zufriedenheit" />
+          <StatCard number="100%" label="Zufriedenheit" className="sm:col-span-2 md:col-span-1" />
         </div>
       </div>
     </section>
@@ -243,8 +237,8 @@ function ReferenceCard({
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
 
-      {/* Content */}
-      <div className="absolute inset-0 p-6 flex flex-col justify-end z-10">
+      {/* Content - Mobile-first padding */}
+      <div className="absolute inset-0 p-4 md:p-5 lg:p-6 flex flex-col justify-end z-10">
         {/* Animated Stats Badge */}
         <div 
           className="
@@ -327,7 +321,7 @@ function ReferenceCard({
   );
 }
 
-function StatCard({ number, label }: { number: string; label: string }) {
+function StatCard({ number, label, className }: { number: string; label: string; className?: string }) {
   const [count, setCount] = useState(0);
   const [hasAnimated, setHasAnimated] = useState(false);
   const statRef = useRef<HTMLDivElement>(null);
@@ -370,25 +364,19 @@ function StatCard({ number, label }: { number: string; label: string }) {
   return (
     <div
       ref={statRef}
-      className="p-8 bg-[#3c5067]/50 backdrop-blur-sm rounded-2xl"
+      className={`p-6 md:p-8 bg-[#3c5067]/50 backdrop-blur-sm rounded-2xl ${className || ''}`}
     >
+      {/* Responsive number typography: 28px mobile → 48px desktop */}
       <div 
-        className="mb-2"
-        style={{
-          ...typography.numbers,
-          color: colors.middleGreen,
-        }}
+        className="mb-2 text-[28px] leading-[36px] tracking-[0.28px] md:text-[36px] md:leading-[46px] md:tracking-[0.36px] lg:text-[48px] lg:leading-[58px] lg:tracking-[0.48px] font-light"
+        style={{ color: colors.middleGreen }}
       >
         {count}
         {number.includes('+') && '+'}
         {number.includes('%') && '%'}
       </div>
-      <div 
-        className="text-white/70"
-        style={{
-          ...typography.body,
-        }}
-      >
+      {/* Responsive label typography: 14px mobile → 18px desktop */}
+      <div className="text-white/70 text-[14px] leading-[22px] tracking-[0.14px] md:text-[16px] md:leading-[26px] md:tracking-[0.16px] lg:text-[18px] lg:leading-[26px] lg:tracking-[0.18px] font-normal">
         {label}
       </div>
     </div>
