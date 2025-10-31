@@ -45,7 +45,7 @@ export async function LottieAnimationWrapper({
   } catch (err) {
     console.error('Error loading Lottie animation:', err);
     return (
-      <section className="py-[50px] text-center text-red-500">
+      <section className="pt-[40px] pb-[40px] md:pt-[50px] md:pb-[50px] text-center text-red-500">
         <p>Failed to load animation</p>
       </section>
     );

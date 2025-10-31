@@ -78,23 +78,18 @@ export function LottieAnimation({
       className={`${bgColor} ${textColor} pt-[40px] pb-[40px] md:pt-[50px] md:pb-[50px]`}
     >
       <div className="content-wrapper">
-        <div className="flex flex-col items-center gap-[40px] w-full">
-          {/* Headline */}
+        {/* Mobile-first gap: gap-6 → md:gap-8 → lg:gap-[40px] */}
+        <div className="flex flex-col items-center gap-6 md:gap-8 lg:gap-[40px] w-full">
+          {/* Headline - Responsive */}
           {headline && (
-            <h2 
-              className={`${textColor} text-center w-full`}
-              style={typography.h2}
-            >
+            <h2 className={`${textColor} text-center w-full text-[24px] leading-[32px] tracking-[0.24px] md:text-[32px] md:leading-[42px] md:tracking-[0.32px] lg:text-[36px] lg:leading-[46px] lg:tracking-[0.36px] font-light`}>
               {headline}
             </h2>
           )}
 
-          {/* Description */}
+          {/* Description - Responsive */}
           {description && (
-            <p 
-              className={`${textColor} text-center max-w-[800px]`}
-              style={typography.body}
-            >
+            <p className={`${textColor} text-center max-w-[800px] text-[16px] leading-[24px] tracking-[0.16px] md:text-[18px] md:leading-[26px] md:tracking-[0.18px] font-normal`}>
               {description}
             </p>
           )}
