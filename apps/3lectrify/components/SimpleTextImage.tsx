@@ -34,20 +34,19 @@ export function SimpleTextImage({
   const textColor = variant === 'dark' ? 'text-white' : 'text-[#333333]';
 
   return (
-    <section className={`${bgColor} ${textColor} pt-[40px] pb-[40px] md:pt-[50px] md:pb-[50px]`}
-    >
+    <section className={`${bgColor} ${textColor} pt-[40px] pb-[40px] md:pt-[50px] md:pb-[50px]`}>
       <div className="content-wrapper">
-        <div className="max-w-[645px] mx-auto flex flex-col items-start gap-[50px] md:gap-10 sm:gap-[30px]">
+        {/* Mobile-first: gap-6 → md:gap-10 → lg:gap-[50px] */}
+        <div className="max-w-[645px] mx-auto flex flex-col items-start gap-6 md:gap-10 lg:gap-[50px]">
           
-          {/* Text Content */}
+          {/* Text Content - Mobile-first */}
           {(headline || body) && (
-            <article className="flex flex-col items-start gap-[32px] sm:gap-[32px] w-full"
-            >
+            <article className="flex flex-col items-start gap-6 md:gap-8 w-full">
               {headline && (
                 <Heading
                   variant="h2"
                   color={variant === 'dark' ? 'white' : 'dark'}
-                  className="text-left w-full"
+                  className="text-left w-full text-[24px] leading-[32px] tracking-[0.24px] md:text-[28px] md:leading-[36px] md:tracking-[0.28px] lg:text-[32px] lg:leading-[42px] lg:tracking-[0.32px]"
                 >
                   {headline}
                 </Heading>
@@ -57,7 +56,7 @@ export function SimpleTextImage({
                 <BodyText
                   as="div"
                   color={variant === 'dark' ? 'white' : 'dark'}
-                  className="text-left w-full prose prose-invert prose-p:my-0 prose-p:mb-[26px] prose-p:last:mb-0 md:text-[16px] md:leading-[24px] sm:text-[16px] sm:leading-[24px]"
+                  className="text-left w-full prose prose-invert prose-p:my-0 prose-p:mb-5 md:prose-p:mb-[26px] prose-p:last:mb-0 text-[16px] leading-[24px] tracking-[0.16px] md:text-[18px] md:leading-[26px] md:tracking-[0.18px]"
                 >
                   <PortableText value={body} />
                 </BodyText>
@@ -67,8 +66,7 @@ export function SimpleTextImage({
 
           {/* Image */}
           {image && (
-            <figure className="w-full aspect-[215/143] rounded-[20px] overflow-hidden bg-[#D9D9D9]"
-            >
+            <figure className="w-full aspect-[215/143] rounded-[20px] overflow-hidden bg-[#D9D9D9]">
               <Image
                 src={image.url}
                 alt={image.alt || ''}
