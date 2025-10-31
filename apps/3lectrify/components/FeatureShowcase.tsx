@@ -36,7 +36,7 @@ export function FeatureShowcase({
         {(sectionHeadline || sectionIntro) && (
           <div className="text-center mb-8 md:mb-10 lg:mb-[60px] max-w-[1200px] mx-auto">
             {sectionHeadline && (
-              <h2 className="text-[28px] leading-[36px] tracking-[0.28px] md:text-[36px] md:leading-[46px] md:tracking-[0.36px] lg:text-[48px] lg:leading-[58px] lg:tracking-[0.48px] font-light text-white mb-4 md:mb-6">
+              <h2 className="text-[28px] leading-[36px] tracking-[0.28px] md:text-[36px] md:leading-[46px] md:tracking-[0.36px] lg:text-[48px] lg:leading-[58px] lg:tracking-[0.48px] font-light text-white mb-6 md:mb-8">
                 {sectionHeadline}
               </h2>
             )}

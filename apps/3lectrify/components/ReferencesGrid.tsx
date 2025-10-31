@@ -92,7 +92,7 @@ export default function ReferencesGrid({
         {(headline || subtext) && (
           <div className="mb-8 md:mb-12 lg:mb-16">
             {headline && (
-              <h2 className="text-white mb-4 md:mb-6 text-[24px] leading-[32px] tracking-[0.24px] md:text-[32px] md:leading-[42px] md:tracking-[0.32px] lg:text-[36px] lg:leading-[46px] lg:tracking-[0.36px] font-light">
+              <h2 className="text-white mb-6 md:mb-8 text-[24px] leading-[32px] tracking-[0.24px] md:text-[32px] md:leading-[42px] md:tracking-[0.32px] lg:text-[36px] lg:leading-[46px] lg:tracking-[0.36px] font-light">
                 {headline}
               </h2>
             )}

@@ -68,21 +68,23 @@ export default function ReferencesMarquee({
 
   return (
     <section className="pt-[40px] pb-[40px] md:pt-[50px] md:pb-[50px] overflow-hidden bg-[#293645]">
-      {/* Header - Mobile-first */}
-      {(headline || subtext) && (
-        <div className="content-wrapper mb-8 md:mb-10 lg:mb-[50px]">
-          {headline && (
-            <h2 className="text-white mb-4 md:mb-5 lg:mb-[20px] text-[24px] leading-[32px] tracking-[0.24px] md:text-[32px] md:leading-[42px] md:tracking-[0.32px] lg:text-[36px] lg:leading-[46px] lg:tracking-[0.36px] font-light">
-              {headline}
-            </h2>
-          )}
-          {subtext && (
-            <p className="text-white text-[16px] leading-[24px] tracking-[0.16px] md:text-[18px] md:leading-[26px] md:tracking-[0.18px] font-normal">
-              {subtext}
-            </p>
-          )}
-        </div>
-      )}
+      <div className="content-wrapper">
+        {/* Header - Mobile-first */}
+        {(headline || subtext) && (
+          <div className="mb-8 md:mb-10 lg:mb-[50px]">
+            {headline && (
+              <h2 className="text-white mb-4 md:mb-5 lg:mb-[20px] text-[24px] leading-[32px] tracking-[0.24px] md:text-[32px] md:leading-[42px] md:tracking-[0.32px] lg:text-[36px] lg:leading-[46px] lg:tracking-[0.36px] font-light">
+                {headline}
+              </h2>
+            )}
+            {subtext && (
+              <p className="text-white text-[16px] leading-[24px] tracking-[0.16px] md:text-[18px] md:leading-[26px] md:tracking-[0.18px] font-normal">
+                {subtext}
+              </p>
+            )}
+          </div>
+        )}
+      </div>
 
       <div className="relative">
         {/* Gradient Overlays - Responsive width */}

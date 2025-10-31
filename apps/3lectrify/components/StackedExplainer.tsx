@@ -40,29 +40,29 @@ export function StackedExplainer({
       className="relative w-full pt-[40px] pb-[40px] md:pt-[50px] md:pb-[50px]"
       style={{ backgroundColor: colors.deepBlue }}
     >
-      {/* Section Header - Mobile-first typography */}
-      {(sectionHeadline || sectionIntro) && (
-        <div className="content-wrapper mb-8 md:mb-10 lg:mb-[50px]">
-          {sectionHeadline && (
-            <h2 
-              className="text-[24px] leading-[32px] tracking-[0.24px] md:text-[32px] md:leading-[42px] md:tracking-[0.32px] lg:text-[36px] lg:leading-[46px] lg:tracking-[0.36px] font-light mb-6 md:mb-[32px] text-white"
-            >
-              {sectionHeadline}
-            </h2>
-          )}
-          {sectionIntro && (
-            <div 
-              className="max-w-[900px] text-[16px] leading-[24px] tracking-[0.16px] md:text-[18px] md:leading-[26px] md:tracking-[0.18px] font-normal prose prose-invert prose-p:my-0 prose-p:mb-5 md:prose-p:mb-[26px] prose-p:last:mb-0 text-white"
-            >
-              <PortableText value={sectionIntro} />
-            </div>
-          )}
-        </div>
-      )}
-
-      {/* Cards Grid - Mobile-first: 1 col → sm: 2 cols → lg: 3 cols */}
       <div className="content-wrapper">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6 lg:gap-[30px]">
+        {/* Section Header - Mobile-first typography */}
+        {(sectionHeadline || sectionIntro) && (
+          <div className="mb-8 md:mb-10 lg:mb-[50px]">
+            {sectionHeadline && (
+              <h2 
+                className="text-[24px] leading-[32px] tracking-[0.24px] md:text-[32px] md:leading-[42px] md:tracking-[0.32px] lg:text-[36px] lg:leading-[46px] lg:tracking-[0.36px] font-light mb-6 md:mb-8 text-white"
+              >
+                {sectionHeadline}
+              </h2>
+            )}
+            {sectionIntro && (
+              <div 
+                className="max-w-[900px] text-[16px] leading-[24px] tracking-[0.16px] md:text-[18px] md:leading-[26px] md:tracking-[0.18px] font-normal prose prose-invert prose-p:my-0 prose-p:mb-5 md:prose-p:mb-[26px] prose-p:last:mb-0 text-white"
+              >
+                <PortableText value={sectionIntro} />
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Cards Grid - Conditional spacing when CTA exists */}
+        <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6 lg:gap-[30px] ${(ctaText || ctaButtonLabel) ? 'mb-8 md:mb-10 lg:mb-[50px]' : ''}`}>
           {cards.map((card) => (
             <article
               key={card._key}
@@ -144,11 +144,9 @@ export function StackedExplainer({
             </article>
           ))}
         </div>
-      </div>
 
-      {/* Optional CTA Section - Mobile-first */}
-      {(ctaText || ctaButtonLabel) && (
-        <div className="content-wrapper mt-8 md:mt-10 lg:mt-[50px]">
+        {/* Optional CTA Section - Mobile-first */}
+        {(ctaText || ctaButtonLabel) && (
           <div className="flex flex-col items-start gap-5 md:gap-6 lg:gap-[25px]">
             {/* CTA Text - Responsive typography */}
             {ctaText && (
@@ -161,11 +159,11 @@ export function StackedExplainer({
               </div>
             )}
 
-            {/* CTA Button - 44px touch target */}
+            {/* CTA Button - Full width on mobile, auto on desktop */}
             {ctaButtonLabel && (
               <a
                 href={ctaButtonLink || '#'}
-                className="inline-flex items-center justify-center gap-[10px] px-5 py-[10px] min-h-[44px] md:min-h-[40px] rounded-[5px] transition-all touch-manipulation text-[16px] leading-[24px] tracking-[0.16px] md:text-[18px] md:leading-[26px] md:tracking-[0.18px] font-normal"
+                className="w-full md:w-auto inline-flex items-center justify-center gap-[10px] px-5 py-[10px] min-h-[44px] md:min-h-[40px] rounded-[5px] transition-all touch-manipulation text-[16px] leading-[24px] tracking-[0.16px] md:text-[18px] md:leading-[26px] md:tracking-[0.18px] font-normal"
                 style={{
                   backgroundColor: colors.lightGreen,
                   color: colors.darkGrey,
@@ -206,8 +204,8 @@ export function StackedExplainer({
               </a>
             )}
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </section>
   );
 }

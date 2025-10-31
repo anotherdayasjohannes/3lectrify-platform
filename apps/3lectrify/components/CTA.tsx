@@ -2,8 +2,6 @@
 
 import { PortableText } from '@portabletext/react';
 import { Button } from './Button';
-import { Heading } from './primitives/Heading';
-import { IntroText } from './primitives/IntroText';
 
 interface CTAProps {
   headline?: string;
@@ -27,24 +25,16 @@ export function CTA({
         {/* Mobile-first card padding: mobile → tablet → desktop */}
         <article className="bg-[#3c5067] rounded-[20px] px-6 py-8 sm:px-8 sm:py-10 md:px-[60px] md:py-[50px] lg:px-[80px] lg:py-[60px] flex flex-col items-center gap-6 md:gap-8 lg:gap-10 shadow-[0_4px_20px_rgba(0,0,0,0.15)]">
           
-          {/* Header: Headline + Description - Mobile-first */}
+          {/* Header: Headline + Description - Mobile-first responsive typography */}
           <header className="flex flex-col items-center text-center gap-6 md:gap-8 max-w-[900px]">
             {headline && (
-              <Heading
-                variant="h2"
-                color="white"
-                className="text-[24px] leading-[32px] tracking-[0.24px] md:text-[28px] md:leading-[36px] md:tracking-[0.28px] lg:text-[32px] lg:leading-[40px] lg:tracking-[0.32px]"
-              >
+              <h2 className="text-white text-[24px] leading-[32px] tracking-[0.24px] md:text-[32px] md:leading-[42px] md:tracking-[0.32px] lg:text-[36px] lg:leading-[46px] lg:tracking-[0.36px] font-light m-0">
                 {headline}
-              </Heading>
+              </h2>
             )}
             
             {description && (
-              <IntroText
-                color="white"
-                as="div"
-                className="text-[16px] leading-[24px] tracking-[0.16px] md:text-[18px] md:leading-[26px] md:tracking-[0.18px] lg:text-[20px] lg:leading-[30px] lg:tracking-[0.2px]"
-              >
+              <div className="text-white text-[16px] leading-[24px] tracking-[0.16px] md:text-[18px] md:leading-[26px] md:tracking-[0.18px] lg:text-[20px] lg:leading-[34px] lg:tracking-[0.2px] font-normal">
                 <PortableText 
                   value={description}
                   components={{
@@ -57,19 +47,19 @@ export function CTA({
                     }
                   }}
                 />
-              </IntroText>
+              </div>
             )}
           </header>
           
-          {/* Button - Already mobile-optimized from Button component */}
+          {/* Button - Full width on mobile, auto on desktop */}
           <Button
             variant="primary"
             href={buttonLink}
             openInNewTab={openInNewTab}
-            className="group"
+            className="w-full sm:w-auto group"
             aria-label={buttonText}
           >
-            <span className="font-normal text-[#333333] text-[16px] md:text-[18px] tracking-[0.16px] md:tracking-[0.18px] leading-[24px] md:leading-[26px] whitespace-nowrap">
+            <span className="whitespace-nowrap">
               {buttonText}
             </span>
             <svg

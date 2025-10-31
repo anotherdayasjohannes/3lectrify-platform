@@ -665,6 +665,61 @@ export const responsiveSpacing = {
 } as const;
 
 /**
+ * SECTION SPACING STANDARDS
+ * 
+ * All section components should follow this pattern:
+ * 
+ * <section className="pt-[40px] pb-[40px] md:pt-[50px] md:pb-[50px]">
+ *   <div className="content-wrapper">
+ *     
+ *     {header && (
+ *       <div className="mb-8 md:mb-10 lg:mb-[50px]">
+ *         <h2 className="mb-6 md:mb-8">Headline</h2>
+ *         <p>Description</p>
+ *       </div>
+ *     )}
+ *     
+ *     <div className={ctaExists ? 'mb-8 md:mb-10 lg:mb-[50px]' : ''}>
+ *       Main Content
+ *     </div>
+ *     
+ *     {cta && (
+ *       <div>CTA Content</div>
+ *     )}
+ *     
+ *   </div>
+ * </section>
+ * 
+ * SPACING RULES:
+ * - Single content-wrapper per section
+ * - Header to Content: mb-8 md:mb-10 lg:mb-[50px]
+ * - Content to CTA: mb-8 md:mb-10 lg:mb-[50px] (conditional)
+ * - Headline to Description: mb-6 md:mb-8
+ */
+export const sectionSpacing = {
+  /**
+   * Spacing between major section elements (header → content, content → cta)
+   * Mobile: 32px (8 * 4) → Tablet: 40px (10 * 4) → Desktop: 50px (12.5 * 4)
+   * Tailwind: mb-8 md:mb-10 lg:mb-[50px]
+   */
+  betweenElements: {
+    mobile: '32px',
+    tablet: '40px', 
+    desktop: '50px',
+  },
+  
+  /**
+   * Spacing for section header when followed by description
+   * Mobile: 24px (6 * 4) → Tablet: 32px (8 * 4)
+   * Tailwind: mb-6 md:mb-8
+   */
+  headerToDescription: {
+    mobile: '24px',
+    tablet: '32px',
+  },
+} as const;
+
+/**
  * Interaction & Touch Targets (Mobile-First)
  * 
  * Ensures accessibility standards for mobile devices

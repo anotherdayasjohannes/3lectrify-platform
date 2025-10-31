@@ -40,9 +40,9 @@ export function TeamGrid({ heading, introText, teamMembers }: TeamGridProps) {
       <div className="flex flex-col items-center">
         {/* Intro Section - Mobile-first */}
         {(heading || introText) && (
-          <div className="w-full max-w-[1165px] mb-8 md:mb-10 lg:mb-[40px] flex flex-col gap-5 md:gap-6 lg:gap-[25px]">
+          <div className="w-full max-w-[1165px] mb-8 md:mb-10 lg:mb-[40px]">
             {heading && (
-              <h2 className="text-[28px] leading-[36px] tracking-[0.28px] md:text-[32px] md:leading-[42px] md:tracking-[0.32px] lg:text-[36px] lg:leading-[46px] lg:tracking-[0.36px] font-light text-white m-0">
+              <h2 className="text-[28px] leading-[36px] tracking-[0.28px] md:text-[32px] md:leading-[42px] md:tracking-[0.32px] lg:text-[36px] lg:leading-[46px] lg:tracking-[0.36px] font-light text-white m-0 mb-6 md:mb-8">
                 {heading}
               </h2>
             )}
@@ -54,9 +54,9 @@ export function TeamGrid({ heading, introText, teamMembers }: TeamGridProps) {
           </div>
         )}
 
-        {/* Team Grid - Mobile-first: 1 col → 2 cols → 3 cols */}
+        {/* Team Grid - Flexbox layout with fixed card width */}
         <div 
-          className="w-full max-w-[1165px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6 lg:gap-[25px]"
+          className="w-full max-w-[1165px] flex flex-wrap gap-5 md:gap-[20px] lg:gap-[25px] items-start"
           style={{ perspective: '1500px' }} // Enable 3D perspective
         >
           {teamMembers.map((member, index) => (
@@ -78,7 +78,7 @@ function TeamCard({ member, refCallback }: { member: TeamMember; refCallback?: (
   const handleMouseLeave = () => setIsOverlayVisible(false);
 
   return (
-    <article className="w-full transition-all duration-500 ease-out hover:scale-[1.02]"
+    <article className="w-full sm:w-[calc(50%-10px)] lg:w-[270px] lg:max-w-[270px] transition-all duration-500 ease-out hover:scale-[1.02]"
       style={{ 
         transformStyle: 'preserve-3d',
         backfaceVisibility: 'visible',
@@ -126,7 +126,7 @@ function TeamCard({ member, refCallback }: { member: TeamMember; refCallback?: (
               height={member.photo.height}
               className="w-full h-full object-cover transition-transform duration-300 ease-out group-hover:scale-105"
               style={{ objectPosition: getFocalPoint(member.photo.hotspot) }}
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 270px"
             />
           </div>
 

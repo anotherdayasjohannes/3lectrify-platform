@@ -344,14 +344,33 @@ export function ContactSimple({
                   </label>
                 </div>
 
-                {/* Submit Button */}
+                {/* Submit Button - Full width on mobile, auto on desktop */}
                 <Button
                   type="submit"
-                  variant="secondary"
+                  variant="primary"
                   disabled={formState === 'loading'}
-                  className="w-auto self-start px-8 py-3 text-[16px] leading-[24px] font-normal tracking-[0.16px] focus:outline-none focus:ring-2 focus:ring-[#88c0b1] focus:ring-offset-2 focus:ring-offset-[#293645]"
+                  className="w-full md:w-auto self-start focus:outline-none focus:ring-2 focus:ring-[#88c0b1] focus:ring-offset-2 focus:ring-offset-[#293645]"
                 >
-                  {formState === 'loading' ? 'Wird gesendet...' : labels.button}
+                  <span>
+                    {formState === 'loading' ? 'Wird gesendet...' : labels.button}
+                  </span>
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                    className="transition-transform duration-300"
+                  >
+                    <path
+                      d="M7.5 5L12.5 10L7.5 15"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
                 </Button>
 
                 {/* Error Message */}
