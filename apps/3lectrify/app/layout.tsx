@@ -18,8 +18,35 @@ const lato = Lato({
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://3lectrify.com'),
   title: "3lectrify - Wir elektrifizieren die Zukunft des Bauens",
   description: "Unser Antrieb ist es, die Immobilienbranche zu transformieren und eine nachhaltige, elektrifizierte Zukunft zu gestalten.",
+  openGraph: {
+    type: 'website',
+    locale: 'de_DE',
+    url: 'https://3lectrify.com',
+    title: '3lectrify - Wir elektrifizieren die Zukunft des Bauens',
+    description: 'Unser Antrieb ist es, die Immobilienbranche zu transformieren und eine nachhaltige, elektrifizierte Zukunft zu gestalten.',
+    siteName: '3lectrify',
+    images: [
+      {
+        url: '/logo.png',
+        width: 1200,
+        height: 630,
+        alt: '3lectrify Logo',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: '3lectrify - Wir elektrifizieren die Zukunft des Bauens',
+    description: 'Unser Antrieb ist es, die Immobilienbranche zu transformieren und eine nachhaltige, elektrifizierte Zukunft zu gestalten.',
+    images: ['/logo.png'],
+  },
+  icons: {
+    icon: '/favicon.ico',
+    apple: '/logo.png',
+  },
 };
 
 async function getSiteSettings() {
