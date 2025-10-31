@@ -31,10 +31,12 @@ export function Stats({
   const bgColor = variant === 'dark' ? 'bg-[#3c5067]' : 'bg-white';
   const textColor = variant === 'dark' ? 'text-[#c2c2c2]' : 'text-[#666666]';
 
-  // Stats container (reusable)
+  // Stats container (reusable) - Mobile-first responsive
   const statsContainer = (
-    <div className={`flex items-start gap-[25px] w-full ${
-        layout === 'grid' ? 'flex-wrap' : 'flex-nowrap'
+    <div className={`flex items-start gap-4 md:gap-5 lg:gap-[25px] w-full ${
+        layout === 'grid' 
+          ? 'flex-wrap justify-center' 
+          : 'flex-col sm:flex-row sm:flex-nowrap overflow-x-auto'
       }`}
     >
       {stats.map((stat) => {
@@ -45,19 +47,23 @@ export function Stats({
         return (
           <div
             key={stat._key}
-            className={`inline-flex flex-col items-center gap-2.5 px-[30px] py-[15px] ${bgColor} rounded-[10px] overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_20px_rgba(0,0,0,0.15)] ${
-              layout === 'grid' ? 'flex-1 min-w-[200px]' : 'flex-[0_0_auto]'
+            className={`inline-flex flex-col items-center gap-2 md:gap-2.5 px-5 py-3 md:px-6 md:py-4 lg:px-[30px] lg:py-[15px] ${bgColor} rounded-[10px] overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_20px_rgba(0,0,0,0.15)] ${
+              layout === 'grid' 
+                ? 'flex-1 min-w-[160px] max-w-[220px]' 
+                : 'flex-[0_0_auto] w-full sm:w-auto'
             }`}
           >
+            {/* Responsive number: 28px mobile → 36px desktop */}
             <div
-              className="font-normal text-[36px] tracking-[0.36px] leading-[46px] whitespace-nowrap"
+              className="font-normal text-[28px] leading-[36px] tracking-[0.28px] md:text-[32px] md:leading-[42px] md:tracking-[0.32px] lg:text-[36px] lg:leading-[46px] lg:tracking-[0.36px] text-center"
               style={{ color }}
             >
               {stat.value}
             </div>
 
+            {/* Responsive description: 14px mobile → 16px desktop */}
             <div
-              className={`font-normal text-[16px] text-center tracking-[0.16px] leading-[26px] whitespace-nowrap ${textColor}`}
+              className={`font-normal text-[14px] leading-[22px] tracking-[0.14px] md:text-[16px] md:leading-[26px] md:tracking-[0.16px] text-center ${textColor}`}
             >
               {stat.description}
             </div>
