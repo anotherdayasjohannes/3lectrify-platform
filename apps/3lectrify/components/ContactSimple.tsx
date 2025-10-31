@@ -82,6 +82,7 @@ export function ContactSimple({
       const hubspotUrl = `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formGuid}`;
 
       // Map form data to HubSpot fields
+      // Note: All fields must exist in the HubSpot form configuration
       const hubspotPayload = {
         fields: [
           { name: 'firstname', value: data.firstname },
@@ -89,7 +90,7 @@ export function ContactSimple({
           { name: 'email', value: data.email },
           { name: 'company', value: data.company || '' },
           { name: 'phone', value: data.phone || '' },
-          { name: 'message', value: data.message },
+          { name: 'message', value: data.message }, // Ensure this field exists in your HubSpot form
         ],
         context: {
           pageUri: typeof window !== 'undefined' ? window.location.href : '',
@@ -119,6 +120,8 @@ export function ContactSimple({
       });
 
       if (!response.ok) {
+        const errorText = await response.text();
+        console.error('HubSpot API Error:', errorText);
         throw new Error('Form submission failed');
       }
 
