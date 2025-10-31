@@ -184,8 +184,8 @@ export function Footer({
           </nav>
         </div>
 
-        {/* Bottom Section: Mobile stack → sm: side by side */}
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between w-full border-t border-[#c2c2c2] mt-8 md:mt-10 pt-5 gap-4 sm:gap-0">
+        {/* Bottom Section: LinkedIn + Legal Links */}
+        <div className="flex flex-col w-full border-t border-[#c2c2c2] mt-8 md:mt-10 pt-5 gap-4">
           {/* LinkedIn Icon - 44px touch target */}
           <a
             href="https://www.linkedin.com/company/3lectrify/"
@@ -195,23 +195,23 @@ export function Footer({
             className="hover:opacity-80 transition-opacity w-11 h-11 flex items-center justify-start touch-manipulation"
           >
             <svg 
-              width="24" 
-              height="24" 
+              width="48" 
+              height="48" 
               viewBox="0 0 24 24" 
               fill="none" 
               xmlns="http://www.w3.org/2000/svg"
             >
               <path 
                 d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" 
-                fill="#c5e0d7"
+                fill="#9DB3C1"
               />
             </svg>
           </a>
 
           {/* Legal Links + Copyright - Wrap on mobile */}
-          <div className="flex items-center gap-3 md:gap-[15px] flex-wrap text-sm">
+          <div className="flex items-center gap-2 md:gap-3 flex-wrap text-sm">
             {legalLinks.map((link, index) => (
-              <span key={index} className="flex items-center gap-3 md:gap-[15px]">
+              <span key={index} className="flex items-center gap-2 md:gap-3">
                 {link.isExternal ? (
                   <a
                     href={link.href}
@@ -229,12 +229,9 @@ export function Footer({
                     {link.label}
                   </Link>
                 )}
-                {index < legalLinks.length - 1 && (
-                  <span className="text-[#c2c2c2]">•</span>
-                )}
+                <span className="text-[#c2c2c2]">•</span>
               </span>
             ))}
-            {legalLinks.length > 0 && <span className="text-[#c2c2c2]">•</span>}
             <span className="font-normal text-[#c2c2c2] text-[14px] tracking-[0.14px] leading-[22px]">
               {copyrightText}
             </span>
