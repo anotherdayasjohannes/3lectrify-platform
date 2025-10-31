@@ -296,6 +296,32 @@ interface SanityBlock {
   loop?: boolean;
   muted?: boolean;
   maxWidth?: string;
+  // ContactSimple fields
+  subheadline?: string;
+  formHeadline?: string;
+  labels?: {
+    firstname: string;
+    lastname: string;
+    company: string;
+    email: string;
+    phone: string;
+    message: string;
+    button: string;
+    privacy: string;
+    privacyLink: string;
+  };
+  address?: {
+    headline: string;
+    companyName: string;
+    addressLine2?: string;
+    street: string;
+    postalCode: string;
+    city: string;
+    email: string;
+    phone: string;
+    mapsLinkText: string;
+  };
+  successMessage?: string;
 }
 
 type PageData = LegalPageData | ContentPageData | null;
