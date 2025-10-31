@@ -46,6 +46,7 @@ export function Footer({
 }: FooterProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
 
   const {
     register,
@@ -58,46 +59,65 @@ export function Footer({
 
   const onSubmit = async (data: NewsletterFormData) => {
     setIsSubmitting(true);
+    setSubmitError(false);
+    
     try {
       // HubSpot Forms API submission
       const portalId = '146248871';
       const formGuid = '26937f36-a8c0-4b4d-9031-8c65a462e1e6';
       const hubspotUrl = `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formGuid}`;
 
+      console.log('📧 Newsletter submission:', {
+        email: data.email,
+        url: hubspotUrl,
+        formGuid,
+      });
+
+      const payload = {
+        fields: [
+          {
+            name: 'email',
+            value: data.email,
+          },
+        ],
+        context: {
+          pageUri: typeof window !== 'undefined' ? window.location.href : '',
+          pageName: 'Footer Newsletter',
+        },
+      };
+
+      console.log('📤 Sending payload:', JSON.stringify(payload, null, 2));
+
       const response = await fetch(hubspotUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          fields: [
-            {
-              name: 'email',
-              value: data.email,
-            },
-          ],
-          context: {
-            pageUri: typeof window !== 'undefined' ? window.location.href : '',
-            pageName: 'Footer Newsletter',
-          },
-        }),
+        body: JSON.stringify(payload),
       });
+
+      console.log('📥 Response status:', response.status, response.statusText);
 
       if (!response.ok) {
         const errorText = await response.text();
-        console.error('HubSpot Newsletter API Error:', errorText);
-        throw new Error('Newsletter subscription failed');
+        console.error('❌ HubSpot Newsletter API Error:', {
+          status: response.status,
+          statusText: response.statusText,
+          body: errorText,
+        });
+        throw new Error(`Newsletter subscription failed: ${response.status} ${errorText}`);
       }
+
+      const responseData = await response.json();
+      console.log('✅ HubSpot Success Response:', responseData);
 
       setSubmitSuccess(true);
       reset();
-      setTimeout(() => setSubmitSuccess(false), 3000);
+      setTimeout(() => setSubmitSuccess(false), 5000);
     } catch (error) {
-      console.error('Newsletter subscription error:', error);
-      // Still show success to user (better UX) but log error for debugging
-      setSubmitSuccess(true);
-      reset();
-      setTimeout(() => setSubmitSuccess(false), 3000);
+      console.error('❌ Newsletter subscription error:', error);
+      setSubmitError(true);
+      setTimeout(() => setSubmitError(false), 5000);
     } finally {
       setIsSubmitting(false);
     }
@@ -157,9 +177,9 @@ export function Footer({
                     aria-label="Newsletter abonnieren"
                   >
                     <span className="font-normal text-[#333333] text-[16px] tracking-[0.16px] leading-[26px] whitespace-nowrap">
-                      {submitSuccess ? '✓ Angemeldet' : newsletter.buttonText}
+                      {submitSuccess ? '✓ Angemeldet' : submitError ? '✗ Fehler' : newsletter.buttonText}
                     </span>
-                    {!submitSuccess && (
+                    {!submitSuccess && !submitError && (
                       <svg
                         width="20"
                         height="20"
