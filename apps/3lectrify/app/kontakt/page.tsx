@@ -71,9 +71,14 @@ export default async function KontaktPage() {
     return <div>Page not found</div>;
   }
 
+  // DEBUG: Log what we're getting from Sanity
+  console.log('Kontakt page data:', JSON.stringify(page, null, 2));
+  console.log('Content blocks:', page.content?.map(b => b._type));
+
   return (
     <main>
       {page.content?.map((block, index) => {
+        console.log(`Rendering block ${index}:`, block._type);
         switch (block._type) {
           case 'heroGradient':
             return (
@@ -134,7 +139,13 @@ export default async function KontaktPage() {
             );
 
           default:
-            return null;
+            console.warn('Unknown block type:', block._type);
+            return (
+              <div key={index} style={{ padding: '20px', background: '#ff000020', margin: '10px' }}>
+                <strong>DEBUG: Unknown block type: {block._type}</strong>
+                <pre>{JSON.stringify(block, null, 2)}</pre>
+              </div>
+            );
         }
       })}
     </main>
