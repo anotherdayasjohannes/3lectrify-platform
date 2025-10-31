@@ -22,17 +22,18 @@ export function CTA({
 }: CTAProps) {
 
   return (
-    <section className="w-full bg-[#293645] pt-[40px] pb-[40px] md:pt-[50px] md:pb-[50px] flex justify-center items-center px-[50px] md:px-[40px] sm:px-[20px]">
+    <section className="w-full bg-[#293645] pt-[40px] pb-[40px] md:pt-[50px] md:pb-[50px] flex justify-center items-center px-5 md:px-10 lg:px-[50px]">
       <div className="w-full max-w-[1165px]">
-        <article className="bg-[#3c5067] rounded-[20px] px-[80px] py-[60px] md:px-[60px] md:py-[50px] sm:px-[30px] sm:py-10 flex flex-col items-center gap-10 md:gap-8 sm:gap-7 shadow-[0_4px_20px_rgba(0,0,0,0.15)]">
+        {/* Mobile-first card padding: mobile → tablet → desktop */}
+        <article className="bg-[#3c5067] rounded-[20px] px-6 py-8 sm:px-8 sm:py-10 md:px-[60px] md:py-[50px] lg:px-[80px] lg:py-[60px] flex flex-col items-center gap-6 md:gap-8 lg:gap-10 shadow-[0_4px_20px_rgba(0,0,0,0.15)]">
           
-          {/* Header: Headline + Description */}
-          <header className="flex flex-col items-center text-center gap-[32px] md:gap-[32px] sm:gap-[32px] max-w-[900px]">
+          {/* Header: Headline + Description - Mobile-first */}
+          <header className="flex flex-col items-center text-center gap-6 md:gap-8 max-w-[900px]">
             {headline && (
               <Heading
                 variant="h2"
                 color="white"
-                className="lg:text-[32px] lg:leading-[40px] sm:text-[28px] sm:leading-[36px]"
+                className="text-[24px] leading-[32px] tracking-[0.24px] md:text-[28px] md:leading-[36px] md:tracking-[0.28px] lg:text-[32px] lg:leading-[40px] lg:tracking-[0.32px]"
               >
                 {headline}
               </Heading>
@@ -42,14 +43,14 @@ export function CTA({
               <IntroText
                 color="white"
                 as="div"
-                className="md:text-[20px] md:leading-[30px] sm:text-[18px] sm:leading-[26px]"
+                className="text-[16px] leading-[24px] tracking-[0.16px] md:text-[18px] md:leading-[26px] md:tracking-[0.18px] lg:text-[20px] lg:leading-[30px] lg:tracking-[0.2px]"
               >
                 <PortableText 
                   value={description}
                   components={{
                     block: {
                       normal: ({children}) => (
-                        <p className="mb-[26px] last:mb-0">
+                        <p className="mb-5 md:mb-[26px] last:mb-0">
                           {children}
                         </p>
                       )
@@ -60,7 +61,7 @@ export function CTA({
             )}
           </header>
           
-          {/* Button */}
+          {/* Button - Already mobile-optimized from Button component */}
           <Button
             variant="primary"
             href={buttonLink}
@@ -68,7 +69,7 @@ export function CTA({
             className="group"
             aria-label={buttonText}
           >
-            <span className="font-normal text-[#333333] text-[18px] tracking-[0.18px] leading-[26px] whitespace-nowrap">
+            <span className="font-normal text-[#333333] text-[16px] md:text-[18px] tracking-[0.16px] md:tracking-[0.18px] leading-[24px] md:leading-[26px] whitespace-nowrap">
               {buttonText}
             </span>
             <svg
