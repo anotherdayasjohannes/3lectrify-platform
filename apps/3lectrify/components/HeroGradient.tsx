@@ -80,8 +80,8 @@ export function HeroGradient({
               gradientDirection === 'left' ? 'gradient-left' : 'gradient-right'
             }`}
           >
-            {/* Text Content - Responsive typography with content-wrapper padding */}
-            <div className="flex flex-col gap-4 md:gap-6 lg:gap-[25px] w-full px-[20px] md:px-[40px] lg:px-[50px]">
+            {/* Text Content - Responsive typography */}
+            <div className="flex flex-col gap-4 md:gap-6 lg:gap-[25px] w-full">
               <h1 
                 className="text-white m-0 text-[28px] leading-[36px] tracking-[0.28px] md:text-[40px] md:leading-[50px] md:tracking-[0.4px] lg:text-[48px] lg:leading-[58px] lg:tracking-[0.48px] font-light"
               >
