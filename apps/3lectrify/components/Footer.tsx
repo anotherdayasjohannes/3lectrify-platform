@@ -167,7 +167,7 @@ export function Footer({
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-normal text-white text-[16px] md:text-[18px] tracking-[0.16px] md:tracking-[0.18px] leading-6 whitespace-nowrap hover:text-[#c5e0d7] transition-colors py-1 min-h-[44px] flex items-center touch-manipulation"
+                  className="font-normal text-white text-[16px] md:text-[18px] tracking-[0.16px] md:tracking-[0.18px] leading-6 whitespace-nowrap hover:text-[#c5e0d7] transition-colors py-1 md:py-0 min-h-[44px] md:min-h-0 flex items-center touch-manipulation"
                 >
                   {link.label}
                 </a>
@@ -175,7 +175,7 @@ export function Footer({
                 <Link
                   key={index}
                   href={link.href}
-                  className="font-normal text-white text-[16px] md:text-[18px] tracking-[0.16px] md:tracking-[0.18px] leading-6 whitespace-nowrap hover:text-[#c5e0d7] transition-colors py-1 min-h-[44px] flex items-center touch-manipulation"
+                  className="font-normal text-white text-[16px] md:text-[18px] tracking-[0.16px] md:tracking-[0.18px] leading-6 whitespace-nowrap hover:text-[#c5e0d7] transition-colors py-1 md:py-0 min-h-[44px] md:min-h-0 flex items-center touch-manipulation"
                 >
                   {link.label}
                 </Link>
