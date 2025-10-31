@@ -113,6 +113,16 @@ export function Footer({
 
       setSubmitSuccess(true);
       reset();
+
+      // Track successful newsletter signup
+      if (typeof window !== 'undefined' && window.dataLayer) {
+        window.dataLayer.push({
+          event: 'sign_up',
+          method: 'Newsletter',
+          location: 'footer',
+        });
+      }
+
       setTimeout(() => setSubmitSuccess(false), 5000);
     } catch (error) {
       console.error('❌ Newsletter subscription error:', error);
@@ -260,6 +270,22 @@ export function Footer({
 
           {/* Legal Links + Copyright - Wrap on mobile */}
           <div className="flex items-center gap-2 md:gap-[15px] flex-wrap text-sm">
+            {/* Cookie Settings Button */}
+            <span className="flex items-center gap-2 md:gap-3">
+              <button
+                onClick={() => {
+                  if (typeof window !== 'undefined' && (window as any).UC_UI) {
+                    (window as any).UC_UI.showSecondLayer();
+                  }
+                }}
+                className="font-normal text-[#c2c2c2] text-[14px] tracking-[0.14px] leading-[22px] hover:text-white transition-colors touch-manipulation cursor-pointer bg-transparent border-none p-0"
+                aria-label="Cookie-Einstellungen ändern"
+              >
+                Cookie-Einstellungen
+              </button>
+              <span className="text-[#c2c2c2]">•</span>
+            </span>
+            
             {legalLinks.map((link, index) => (
               <span key={index} className="flex items-center gap-2 md:gap-3">
                 {link.isExternal ? (

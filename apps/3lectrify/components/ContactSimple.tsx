@@ -120,6 +120,15 @@ export function ContactSimple({
 
       setFormState('success');
 
+      // Track successful form submission
+      if (typeof window !== 'undefined' && window.dataLayer) {
+        window.dataLayer.push({
+          event: 'generate_lead',
+          form_type: 'contact',
+          form_name: 'Kontaktformular',
+        });
+      }
+
       // Reset form after 5 seconds
       setTimeout(() => {
         reset();

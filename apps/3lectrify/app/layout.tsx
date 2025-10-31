@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Lato } from 'next/font/google';
 import { client, siteSettingsQuery } from '@3lectrify/sanity';
-import { Header, Footer } from '@/components';
+import { Header, Footer, Analytics } from '@/components';
 import { AnimationInit } from '../components/AnimationInit';
 import "./globals.css";
 
@@ -93,6 +93,9 @@ export default async function RootLayout({
   return (
     <html lang="de" className={lato.variable}>
       <body className="antialiased">
+        {/* Analytics: GTM, GA4, Usercentrics Consent */}
+        <Analytics />
+        
         {/* Initialize 3lectrify custom animations */}
         <AnimationInit />
         
