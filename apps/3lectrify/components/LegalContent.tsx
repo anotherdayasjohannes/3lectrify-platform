@@ -43,7 +43,39 @@ export function LegalContent({ iframeUrl }: LegalContentProps) {
       <div className="content-wrapper">
         <div
           ref={containerRef}
-          className="[&_.itrk-legaltext]:font-normal [&_.itrk-legaltext]:text-[16px] [&_.itrk-legaltext]:leading-[1.6] [&_.itrk-legaltext]:text-white sm:[&_.itrk-legaltext]:text-[14px] [&_.itrk-legaltext_h2]:font-normal [&_.itrk-legaltext_h2]:text-[24px] [&_.itrk-legaltext_h2]:leading-[1.3] [&_.itrk-legaltext_h2]:text-white [&_.itrk-legaltext_h2]:mt-[40px] [&_.itrk-legaltext_h2]:mb-[20px] [&_.itrk-legaltext_h3]:font-normal [&_.itrk-legaltext_h3]:text-[18px] [&_.itrk-legaltext_h3]:leading-[1.4] [&_.itrk-legaltext_h3]:text-white [&_.itrk-legaltext_h3]:mt-[32px] [&_.itrk-legaltext_h3]:mb-[16px] [&_.itrk-legaltext_p]:mb-[16px] [&_.itrk-legaltext_p]:text-white [&_.itrk-legaltext_ul]:mb-[16px] [&_.itrk-legaltext_ul]:pl-[24px] [&_.itrk-legaltext_ul]:text-white [&_.itrk-legaltext_ol]:mb-[16px] [&_.itrk-legaltext_ol]:pl-[24px] [&_.itrk-legaltext_ol]:text-white [&_.itrk-legaltext_li]:mb-[8px] [&_.itrk-legaltext_li]:text-white [&_.itrk-legaltext_a]:text-[#88c0b1] [&_.itrk-legaltext_a]:underline [&_.itrk-legaltext_a]:transition-colors [&_.itrk-legaltext_a]:duration-300 [&_.itrk-legaltext_a:hover]:text-[#c5e0d7]"
+          className="
+            [&_.itrk-legaltext]:font-normal 
+            [&_.itrk-legaltext]:text-[14px] md:[&_.itrk-legaltext]:text-[16px] 
+            [&_.itrk-legaltext]:leading-[1.6] 
+            [&_.itrk-legaltext]:text-white
+            [&_.itrk-legaltext_h2]:font-normal 
+            [&_.itrk-legaltext_h2]:text-[20px] md:[&_.itrk-legaltext_h2]:text-[24px] lg:[&_.itrk-legaltext_h2]:text-[28px]
+            [&_.itrk-legaltext_h2]:leading-[1.3] 
+            [&_.itrk-legaltext_h2]:text-white 
+            [&_.itrk-legaltext_h2]:mt-[30px] md:[&_.itrk-legaltext_h2]:mt-[40px]
+            [&_.itrk-legaltext_h2]:mb-[15px] md:[&_.itrk-legaltext_h2]:mb-[20px]
+            [&_.itrk-legaltext_h3]:font-normal 
+            [&_.itrk-legaltext_h3]:text-[16px] md:[&_.itrk-legaltext_h3]:text-[18px] lg:[&_.itrk-legaltext_h3]:text-[20px]
+            [&_.itrk-legaltext_h3]:leading-[1.4] 
+            [&_.itrk-legaltext_h3]:text-white 
+            [&_.itrk-legaltext_h3]:mt-[24px] md:[&_.itrk-legaltext_h3]:mt-[32px]
+            [&_.itrk-legaltext_h3]:mb-[12px] md:[&_.itrk-legaltext_h3]:mb-[16px]
+            [&_.itrk-legaltext_p]:mb-[12px] md:[&_.itrk-legaltext_p]:mb-[16px]
+            [&_.itrk-legaltext_p]:text-white
+            [&_.itrk-legaltext_ul]:mb-[12px] md:[&_.itrk-legaltext_ul]:mb-[16px]
+            [&_.itrk-legaltext_ul]:pl-[20px] md:[&_.itrk-legaltext_ul]:pl-[24px]
+            [&_.itrk-legaltext_ul]:text-white
+            [&_.itrk-legaltext_ol]:mb-[12px] md:[&_.itrk-legaltext_ol]:mb-[16px]
+            [&_.itrk-legaltext_ol]:pl-[20px] md:[&_.itrk-legaltext_ol]:pl-[24px]
+            [&_.itrk-legaltext_ol]:text-white
+            [&_.itrk-legaltext_li]:mb-[6px] md:[&_.itrk-legaltext_li]:mb-[8px]
+            [&_.itrk-legaltext_li]:text-white
+            [&_.itrk-legaltext_a]:text-[#88c0b1] 
+            [&_.itrk-legaltext_a]:underline 
+            [&_.itrk-legaltext_a]:transition-colors 
+            [&_.itrk-legaltext_a]:duration-300 
+            [&_.itrk-legaltext_a:hover]:text-[#c5e0d7]
+          "
         />
       </div>
     </section>
