@@ -23,7 +23,7 @@ export function Analytics() {
       <Script
         id="usercentrics-cmp"
         data-eu-mode="true"
-        data-settings-id="e1rgpZv6Cwbg76"
+        data-settings-id="M37yKahNfdYa30"
         src="https://app.eu.usercentrics.eu/browser-ui/latest/loader.js"
         strategy="afterInteractive"
       />
