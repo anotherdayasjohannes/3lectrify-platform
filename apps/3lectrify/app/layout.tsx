@@ -12,6 +12,11 @@ const lato = Lato({
   variable: '--font-lato',
 });
 
+// Revalidate layout every hour (3600 seconds) as a fallback
+// Primary updates come from webhook-based on-demand revalidation
+// This affects site-wide settings (header, footer, navigation)
+export const revalidate = 3600;
+
 export const metadata: Metadata = {
   title: "3lectrify - Wir elektrifizieren die Zukunft des Bauens",
   description: "Unser Antrieb ist es, die Immobilienbranche zu transformieren und eine nachhaltige, elektrifizierte Zukunft zu gestalten.",

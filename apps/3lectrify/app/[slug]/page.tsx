@@ -19,6 +19,10 @@ import {
 import { notFound } from 'next/navigation';
 import type { PortableTextBlock } from '@portabletext/react';
 
+// Revalidate this page every hour (3600 seconds) as a fallback
+// Primary updates come from webhook-based on-demand revalidation
+export const revalidate = 3600;
+
 // Types for Legal Pages
 interface LegalPageData {
   _id: string;

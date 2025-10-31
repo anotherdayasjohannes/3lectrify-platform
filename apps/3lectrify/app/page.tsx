@@ -2,6 +2,10 @@ import { client, pageQuery } from '@3lectrify/sanity';
 import { Hero, FeatureCards, FeatureShowcase, StackedExplainer, TextImage, SimpleTextImage, Stats, CTA, ReferencesGrid, ReferencesMarquee, TeamGrid, LottieAnimationWrapper, VideoAnimation } from '@/components';
 import type { PortableTextBlock } from '@portabletext/react';
 
+// Revalidate this page every hour (3600 seconds) as a fallback
+// Primary updates come from webhook-based on-demand revalidation
+export const revalidate = 3600;
+
 interface SanityBlock {
   _type: string;
   headline?: string;
