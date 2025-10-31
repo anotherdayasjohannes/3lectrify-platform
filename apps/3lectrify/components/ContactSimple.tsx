@@ -100,13 +100,6 @@ export function ContactSimple({
           consent: {
             consentToProcess: true,
             text: labels.privacy,
-            communications: [
-              {
-                value: true,
-                subscriptionTypeId: 999,
-                text: labels.privacy,
-              },
-            ],
           },
         },
       };
