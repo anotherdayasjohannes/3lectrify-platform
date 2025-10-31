@@ -12,12 +12,14 @@
  */
 
 /**
- * Typography Scale
+ * Typography Scale (Desktop/Legacy)
  * 
  * 8 text styles defined in Figma, mapped to exact specifications:
  * - Font family: Lato (already loaded via Next.js in layout.tsx)
  * - Weights: 300 (Light), 400 (Regular)
  * - All sizes, line heights, and letter spacing match Figma exactly
+ * 
+ * @deprecated Use responsiveTypography for new components
  */
 export const typography = {
   /**
@@ -161,6 +163,239 @@ export const typography = {
     fontWeight: 300,
     lineHeight: '36px',
     letterSpacing: '0.28px',
+    fontFamily: 'var(--font-lato), Lato, Helvetica, sans-serif',
+  },
+} as const;
+
+/**
+ * Responsive Typography Scale (Mobile-First)
+ * 
+ * Progressive enhancement from mobile to tablet to desktop
+ * Components should use these for optimal mobile UX
+ * 
+ * Usage Example:
+ * ```tsx
+ * <h1 className="text-[32px] leading-[40px] md:text-[40px] md:leading-[50px] lg:text-[48px] lg:leading-[58px]">
+ * ```
+ */
+export const responsiveTypography = {
+  /**
+   * H1 - Main Page Headlines
+   * Mobile → Tablet → Desktop progressive enhancement
+   */
+  h1: {
+    mobile: {
+      fontSize: '32px',
+      lineHeight: '40px',
+      letterSpacing: '0.32px',
+      fontWeight: 300,
+      fontFamily: 'var(--font-lato), Lato, Helvetica, sans-serif',
+    },
+    tablet: {
+      fontSize: '40px',
+      lineHeight: '50px',
+      letterSpacing: '0.4px',
+      fontWeight: 300,
+      fontFamily: 'var(--font-lato), Lato, Helvetica, sans-serif',
+    },
+    desktop: {
+      fontSize: '48px',
+      lineHeight: '58px',
+      letterSpacing: '0.48px',
+      fontWeight: 300,
+      fontFamily: 'var(--font-lato), Lato, Helvetica, sans-serif',
+    },
+  },
+  
+  /**
+   * H2 - Section Headlines
+   * Mobile → Tablet → Desktop progressive enhancement
+   */
+  h2: {
+    mobile: {
+      fontSize: '24px',
+      lineHeight: '32px',
+      letterSpacing: '0.24px',
+      fontWeight: 300,
+      fontFamily: 'var(--font-lato), Lato, Helvetica, sans-serif',
+    },
+    tablet: {
+      fontSize: '32px',
+      lineHeight: '42px',
+      letterSpacing: '0.32px',
+      fontWeight: 300,
+      fontFamily: 'var(--font-lato), Lato, Helvetica, sans-serif',
+    },
+    desktop: {
+      fontSize: '36px',
+      lineHeight: '46px',
+      letterSpacing: '0.36px',
+      fontWeight: 300,
+      fontFamily: 'var(--font-lato), Lato, Helvetica, sans-serif',
+    },
+  },
+  
+  /**
+   * H3 - Card Titles, Subsection Headlines
+   * Mobile → Desktop progressive enhancement
+   */
+  h3: {
+    mobile: {
+      fontSize: '18px',
+      lineHeight: '28px',
+      letterSpacing: '0.18px',
+      fontWeight: 400,
+      fontFamily: 'var(--font-lato), Lato, Helvetica, sans-serif',
+    },
+    desktop: {
+      fontSize: '20px',
+      lineHeight: '34px',
+      letterSpacing: '0.2px',
+      fontWeight: 400,
+      fontFamily: 'var(--font-lato), Lato, Helvetica, sans-serif',
+    },
+  },
+  
+  /**
+   * Body - Default Body Text
+   * Mobile → Desktop progressive enhancement
+   */
+  body: {
+    mobile: {
+      fontSize: '16px',
+      lineHeight: '24px',
+      letterSpacing: '0.16px',
+      fontWeight: 400,
+      fontFamily: 'var(--font-lato), Lato, Helvetica, sans-serif',
+    },
+    desktop: {
+      fontSize: '18px',
+      lineHeight: '26px',
+      letterSpacing: '0.18px',
+      fontWeight: 400,
+      fontFamily: 'var(--font-lato), Lato, Helvetica, sans-serif',
+    },
+  },
+  
+  /**
+   * Body Small - Small Body Text, Labels
+   * Remains consistent across all viewports
+   */
+  bodySmall: {
+    fontSize: '14px',
+    lineHeight: '22px',
+    letterSpacing: '0.14px',
+    fontWeight: 400,
+    fontFamily: 'var(--font-lato), Lato, Helvetica, sans-serif',
+  },
+  
+  /**
+   * Intro - Lead Text, Section Introductions
+   * Mobile → Desktop progressive enhancement
+   */
+  intro: {
+    mobile: {
+      fontSize: '18px',
+      lineHeight: '28px',
+      letterSpacing: '0.18px',
+      fontWeight: 300,
+      fontFamily: 'var(--font-lato), Lato, Helvetica, sans-serif',
+    },
+    desktop: {
+      fontSize: '24px',
+      lineHeight: '34px',
+      letterSpacing: '0.24px',
+      fontWeight: 300,
+      fontFamily: 'var(--font-lato), Lato, Helvetica, sans-serif',
+    },
+  },
+  
+  /**
+   * Quote - Pull Quotes, Testimonials
+   * Mobile → Desktop progressive enhancement
+   */
+  quote: {
+    mobile: {
+      fontSize: '20px',
+      lineHeight: '30px',
+      letterSpacing: '0.2px',
+      fontWeight: 300,
+      fontFamily: 'var(--font-lato), Lato, Helvetica, sans-serif',
+      fontStyle: 'italic',
+    },
+    desktop: {
+      fontSize: '28px',
+      lineHeight: 'normal',
+      letterSpacing: '0.28px',
+      fontWeight: 300,
+      fontFamily: 'var(--font-lato), Lato, Helvetica, sans-serif',
+      fontStyle: 'italic',
+    },
+  },
+  
+  /**
+   * Numbers - Statistics, Large Numbers
+   * Mobile → Desktop progressive enhancement
+   */
+  numbers: {
+    mobile: {
+      fontSize: '28px',
+      lineHeight: '38px',
+      letterSpacing: '0.28px',
+      fontWeight: 400,
+      fontFamily: 'var(--font-lato), Lato, Helvetica, sans-serif',
+    },
+    desktop: {
+      fontSize: '36px',
+      lineHeight: '46px',
+      letterSpacing: '0.36px',
+      fontWeight: 400,
+      fontFamily: 'var(--font-lato), Lato, Helvetica, sans-serif',
+    },
+  },
+  
+  /**
+   * Card Title - Bento Grid Cards, Medium Headlines
+   * Mobile → Desktop progressive enhancement
+   */
+  cardTitle: {
+    mobile: {
+      fontSize: '20px',
+      lineHeight: '28px',
+      letterSpacing: '0.2px',
+      fontWeight: 300,
+      fontFamily: 'var(--font-lato), Lato, Helvetica, sans-serif',
+    },
+    desktop: {
+      fontSize: '28px',
+      lineHeight: '36px',
+      letterSpacing: '0.28px',
+      fontWeight: 300,
+      fontFamily: 'var(--font-lato), Lato, Helvetica, sans-serif',
+    },
+  },
+  
+  /**
+   * Caption - Very Small Text, Badges, Metadata
+   * Remains consistent across all viewports
+   */
+  caption: {
+    fontSize: '14px',
+    lineHeight: '20px',
+    letterSpacing: '0.14px',
+    fontWeight: 400,
+    fontFamily: 'var(--font-lato), Lato, Helvetica, sans-serif',
+  },
+  
+  /**
+   * Caption Bold - Bold Badges, Emphasized Small Text
+   * Remains consistent across all viewports
+   */
+  captionBold: {
+    fontSize: '14px',
+    lineHeight: '20px',
+    letterSpacing: '0.14px',
+    fontWeight: 700,
     fontFamily: 'var(--font-lato), Lato, Helvetica, sans-serif',
   },
 } as const;
@@ -379,6 +614,103 @@ export const spacing = {
    * Centers content with max-width constraint
    */
   contentMaxWidth: '1165px',
+} as const;
+
+/**
+ * Responsive Spacing (Mobile-First)
+ * 
+ * Progressive enhancement for gaps, padding, and margins
+ * Components should use Tailwind classes with these values
+ */
+export const responsiveSpacing = {
+  /**
+   * Container padding (horizontal)
+   * Mobile → Tablet → Desktop
+   */
+  container: {
+    mobile: '20px',     // px-5
+    tablet: '40px',     // md:px-10
+    desktop: '50px',    // lg:px-[50px]
+  },
+  
+  /**
+   * Gap between elements (flex/grid)
+   * Mobile → Tablet → Desktop
+   */
+  gap: {
+    mobile: '20px',     // gap-5
+    tablet: '25px',     // md:gap-6
+    desktop: '30px',    // lg:gap-[30px]
+  },
+  
+  /**
+   * Section content gap (headline to content)
+   * Mobile → Tablet → Desktop
+   */
+  sectionContent: {
+    mobile: '24px',     // gap-6
+    tablet: '32px',     // md:gap-8
+    desktop: '40px',    // lg:gap-10
+  },
+  
+  /**
+   * Card internal padding
+   * Mobile → Tablet → Desktop
+   */
+  cardPadding: {
+    mobile: '20px',     // p-5
+    tablet: '25px',     // md:p-6
+    desktop: '30px',    // lg:p-[30px]
+  },
+} as const;
+
+/**
+ * Interaction & Touch Targets (Mobile-First)
+ * 
+ * Ensures accessibility standards for mobile devices
+ * iOS: 44pt minimum, Android: 48dp minimum
+ * Using 44px as baseline for cross-platform compatibility
+ */
+export const interaction = {
+  /**
+   * Minimum touch target size
+   * iOS Human Interface Guidelines: 44pt
+   * Android Material Design: 48dp
+   * Using 44px for consistency
+   */
+  minTouchTarget: '44px',
+  
+  /**
+   * Button heights
+   * Mobile: 44px minimum for touch
+   * Desktop: Can be slightly smaller (40px)
+   */
+  buttonHeight: {
+    mobile: '44px',    // h-11
+    desktop: '40px',   // md:h-10
+  },
+  
+  /**
+   * Input heights
+   * Same as buttons for visual consistency
+   */
+  inputHeight: {
+    mobile: '44px',    // h-11
+    desktop: '40px',   // md:h-10
+  },
+  
+  /**
+   * Touch target spacing
+   * Minimum space between interactive elements
+   * WCAG 2.1 Level AAA: 8px minimum
+   */
+  minSpacing: '8px',
+  
+  /**
+   * Comfortable touch target spacing
+   * Recommended for better UX
+   */
+  comfortableSpacing: '12px',
 } as const;
 
 /**

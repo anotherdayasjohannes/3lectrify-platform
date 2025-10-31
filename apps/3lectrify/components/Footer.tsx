@@ -84,29 +84,32 @@ export function Footer({
 
       <footer className="pt-[30px] pb-[50px] bg-[#293645]">
         <div className="content-wrapper">
-        <div className="flex items-start justify-between gap-[100px] w-full xl:gap-[50px]">
-          {/* Left Column: Headline & Newsletter */}
-          <div className="flex flex-col items-start justify-between flex-1 max-w-[700px] gap-10">
-            <h2 className="font-light text-white text-[32px] tracking-[0.36px] leading-[40px] lg:text-[36px] lg:leading-[48px]">
+        {/* Mobile: Stack vertically → md: Two columns side by side */}
+        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-8 md:gap-[50px] lg:gap-[100px] w-full">
+          {/* Left Column: Headline & Newsletter - Full width mobile, flex-1 desktop */}
+          <div className="flex flex-col items-start justify-between w-full md:flex-1 md:max-w-[700px] gap-8 md:gap-10">
+            {/* Responsive headline: mobile → desktop */}
+            <h2 className="font-light text-white text-[24px] leading-[32px] tracking-[0.24px] md:text-[32px] md:leading-[40px] md:tracking-[0.32px] lg:text-[36px] lg:leading-[48px] lg:tracking-[0.36px]">
               {headline}
             </h2>
 
             {newsletter.enabled && (
               <div className="flex flex-col items-start justify-center gap-2.5 w-full">
-                <p className="font-normal text-white text-[16px] tracking-[0.16px] leading-[26px]">
+                <p className="font-normal text-white text-[14px] leading-[22px] tracking-[0.14px] md:text-[16px] md:leading-[26px] md:tracking-[0.16px]">
                   {newsletter.label}
                 </p>
 
+                {/* Newsletter form: Mobile stack → sm: horizontal */}
                 <form
                   onSubmit={handleSubmit(onSubmit)}
-                  className="flex w-full max-w-[543px] items-center gap-2.5 flex-wrap"
+                  className="flex flex-col sm:flex-row w-full max-w-[543px] items-stretch sm:items-center gap-3 sm:gap-2.5"
                 >
-                  <div className="flex-1 min-w-[200px]">
+                  <div className="flex-1 min-w-0">
                     <input
                       {...register('email')}
                       type="email"
                       placeholder={newsletter.placeholder}
-                      className="w-full h-9 px-[15px] py-0 rounded-[5px] border border-solid border-[#c5e0d7] bg-transparent font-normal text-[#c5e0d7] text-[16px] tracking-[0.16px] leading-[26px] placeholder:text-[#c5e0d7] focus:outline-none focus:border-[#88c0b1] transition-colors"
+                      className="w-full h-11 sm:h-10 px-[15px] py-0 rounded-[5px] border border-solid border-[#c5e0d7] bg-transparent font-normal text-[#c5e0d7] text-[16px] tracking-[0.16px] leading-[26px] placeholder:text-[#c5e0d7] focus:outline-none focus:border-[#88c0b1] transition-colors touch-manipulation"
                       aria-label="E-Mail-Adresse für Newsletter"
                       disabled={isSubmitting}
                     />
@@ -119,7 +122,7 @@ export function Footer({
                     type="submit"
                     variant="primary"
                     disabled={isSubmitting || submitSuccess}
-                    className="h-9 px-[15px] py-0"
+                    className="h-11 sm:h-10 px-[15px] py-0 w-full sm:w-auto touch-manipulation"
                     aria-label="Newsletter abonnieren"
                   >
                     <span className="font-normal text-[#333333] text-[16px] tracking-[0.16px] leading-[26px] whitespace-nowrap">
@@ -152,9 +155,9 @@ export function Footer({
             )}
           </div>
 
-          {/* Right Column: Navigation */}
+          {/* Right Column: Navigation - Full width mobile, auto width desktop */}
           <nav
-            className="flex flex-col items-start gap-[15px] flex-shrink-0"
+            className="flex flex-col items-start gap-3 md:gap-[15px] w-full md:w-auto md:flex-shrink-0"
             aria-label="Footer Navigation"
           >
             {footerNavigation.map((link, index) => (
@@ -164,7 +167,7 @@ export function Footer({
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-normal text-white text-[18px] tracking-[0.18px] leading-6 whitespace-nowrap hover:text-[#c5e0d7] transition-colors"
+                  className="font-normal text-white text-[16px] md:text-[18px] tracking-[0.16px] md:tracking-[0.18px] leading-6 whitespace-nowrap hover:text-[#c5e0d7] transition-colors py-1 min-h-[44px] flex items-center touch-manipulation"
                 >
                   {link.label}
                 </a>
@@ -172,7 +175,7 @@ export function Footer({
                 <Link
                   key={index}
                   href={link.href}
-                  className="font-normal text-white text-[18px] tracking-[0.18px] leading-6 whitespace-nowrap hover:text-[#c5e0d7] transition-colors"
+                  className="font-normal text-white text-[16px] md:text-[18px] tracking-[0.16px] md:tracking-[0.18px] leading-6 whitespace-nowrap hover:text-[#c5e0d7] transition-colors py-1 min-h-[44px] flex items-center touch-manipulation"
                 >
                   {link.label}
                 </Link>
@@ -181,15 +184,15 @@ export function Footer({
           </nav>
         </div>
 
-        {/* Bottom Section: Social + Legal Links & Copyright */}
-        <div className="flex items-start justify-between w-full border-t border-[#c2c2c2] mt-10 pt-5">
-          {/* Left: LinkedIn Icon */}
+        {/* Bottom Section: Mobile stack → sm: side by side */}
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between w-full border-t border-[#c2c2c2] mt-8 md:mt-10 pt-5 gap-4 sm:gap-0">
+          {/* LinkedIn Icon - 44px touch target */}
           <a
             href="https://www.linkedin.com/company/3lectrify/"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn"
-            className="hover:opacity-80 transition-opacity"
+            className="hover:opacity-80 transition-opacity w-11 h-11 flex items-center justify-start touch-manipulation"
           >
             <svg 
               width="24" 
@@ -205,23 +208,23 @@ export function Footer({
             </svg>
           </a>
 
-          {/* Right: Legal Links + Copyright */}
-          <div className="flex items-center gap-[15px] flex-wrap">
+          {/* Legal Links + Copyright - Wrap on mobile */}
+          <div className="flex items-center gap-3 md:gap-[15px] flex-wrap text-sm">
             {legalLinks.map((link, index) => (
-              <span key={index} className="flex items-center gap-[15px]">
+              <span key={index} className="flex items-center gap-3 md:gap-[15px]">
                 {link.isExternal ? (
                   <a
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-normal text-[#c2c2c2] text-[14px] tracking-[0.14px] leading-[22px] hover:text-white transition-colors"
+                    className="font-normal text-[#c2c2c2] text-[14px] tracking-[0.14px] leading-[22px] hover:text-white transition-colors touch-manipulation"
                   >
                     {link.label}
                   </a>
                 ) : (
                   <Link 
                     href={link.href} 
-                    className="font-normal text-[#c2c2c2] text-[14px] tracking-[0.14px] leading-[22px] hover:text-white transition-colors"
+                    className="font-normal text-[#c2c2c2] text-[14px] tracking-[0.14px] leading-[22px] hover:text-white transition-colors touch-manipulation"
                   >
                     {link.label}
                   </Link>

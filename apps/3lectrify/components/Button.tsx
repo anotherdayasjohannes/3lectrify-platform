@@ -33,11 +33,11 @@ const variantStyles: Record<ButtonVariant, string> = {
 
 const baseStyles =
   'inline-flex items-center justify-center gap-[10px] ' +
-  'px-[20px] py-[10px] rounded-[5px] ' +
-  'font-normal text-[18px] tracking-[0.18px] leading-[26px] ' +
+  'px-5 py-[10px] min-h-[44px] md:min-h-[40px] rounded-[5px] ' +
+  'font-normal text-[16px] md:text-[18px] tracking-[0.16px] md:tracking-[0.18px] leading-[24px] md:leading-[26px] ' +
   'transition-all duration-300 ' +
   'hover:-translate-y-0.5 ' +
-  'cursor-pointer ' +
+  'cursor-pointer touch-manipulation ' +
   'disabled:opacity-50 disabled:cursor-not-allowed';
 
 export function Button({

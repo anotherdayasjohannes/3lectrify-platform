@@ -53,14 +53,14 @@ export function Hero({
     if (!showImage || !displayImage) return null;
 
     return (
-      <div className="w-full mb-[25px] rounded-[20px] overflow-hidden">
+      <div className="w-full mb-6 md:mb-[25px] rounded-[20px] overflow-hidden">
         <Image
           src={displayImage.url}
           alt={displayImage.alt || ''}
           width={displayImage.width}
           height={displayImage.height}
           priority
-          className="w-full h-[700px] min-h-[500px] object-cover md:h-[600px] sm:h-[500px]"
+          className="w-full h-[350px] sm:h-[450px] md:h-[550px] lg:h-[650px] min-h-[300px] object-cover"
           style={{ objectPosition: getFocalPoint(displayImage.hotspot) }}
           sizes="(max-width: 767px) 100vw, (max-width: 1440px) 90vw, 1440px"
         />
@@ -79,36 +79,36 @@ export function Hero({
         {/* Image Above Layout */}
         {showImage && imagePosition === 'above' && renderImage()}
 
-        {/* Container for side-by-side or text-only */}
+        {/* Container for side-by-side or text-only - Mobile-first gaps */}
         <div className={`
           flex flex-col
           ${isSideLayout ? 'lg:flex-row lg:gap-[50px] lg:items-center' : ''}
-          gap-[25px]
+          gap-6 md:gap-[25px]
         `}>
           {/* Image Side Layout */}
           {showImage && imagePosition === 'side' && (
-            <div className="rounded-[20px] overflow-hidden max-h-[600px] lg:mb-0 lg:w-[645px] lg:h-[430px]">
+            <div className="rounded-[20px] overflow-hidden max-h-[400px] md:max-h-[500px] lg:max-h-[430px] lg:w-[645px] lg:h-[430px]">
               {renderImage()}
             </div>
           )}
 
-          {/* Text Content */}
-          <div className="max-w-[900px] w-full flex flex-col gap-[32px]">
+          {/* Text Content - Mobile-first typography and spacing */}
+          <div className="max-w-[900px] w-full flex flex-col gap-6 md:gap-8">
             {headline && (
-              <h1 className="text-[40px] leading-[50px] tracking-[0.48px] font-light text-white m-0 lg:text-[48px] lg:leading-[58px]"
+              <h1 className="text-[32px] leading-[40px] tracking-[0.32px] md:text-[40px] md:leading-[50px] md:tracking-[0.4px] lg:text-[48px] lg:leading-[58px] lg:tracking-[0.48px] font-light text-white m-0"
               >
                 {headline}
               </h1>
             )}
             {subtext && (
-              <div className="text-body-hero font-normal tracking-[0.24px] text-white"
+              <div className="text-[18px] leading-[28px] tracking-[0.18px] md:text-[20px] md:leading-[30px] md:tracking-[0.2px] lg:text-[24px] lg:leading-[34px] lg:tracking-[0.24px] font-normal text-white"
               >
                 <PortableText 
                   value={subtext}
                   components={{
                     block: {
                       normal: ({children}) => (
-                        <p className="text-body-hero font-normal tracking-[0.24px] text-white mb-[34px] last:mb-0">
+                        <p className="text-[18px] leading-[28px] tracking-[0.18px] md:text-[20px] md:leading-[30px] md:tracking-[0.2px] lg:text-[24px] lg:leading-[34px] lg:tracking-[0.24px] font-normal text-white mb-6 md:mb-8 last:mb-0">
                           {children}
                         </p>
                       )

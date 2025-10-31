@@ -55,16 +55,23 @@ export function Header({ logo, navigation }: HeaderProps) {
         aria-hidden="true"
       />
 
-      <header className={`sticky top-0 z-[1000] bg-[#3c5067] transition-all duration-300 ${scrolled ? 'h-[60px] shadow-[0_4px_20px_rgba(0,0,0,0.15)]' : 'h-20 shadow-md'}`}>
-        <nav className="flex h-full items-center justify-between px-[50px] py-2.5 max-w-[1440px] mx-auto md:px-10 sm:px-6">
-          {/* Logo */}
-          <Link href="/" className={`relative flex-shrink-0 transition-all duration-300 ${scrolled ? 'w-[130px] h-8' : 'w-[162px] h-10'}`}>
+      <header className={`sticky top-0 z-[1000] bg-[#3c5067] transition-all duration-300 ${scrolled ? 'h-[60px] shadow-[0_4px_20px_rgba(0,0,0,0.15)]' : 'h-[72px] md:h-20 shadow-md'}`}>
+        {/* Mobile-first: px-5 (20px) → md:px-10 (40px) → lg:px-[50px] (50px) */}
+        <nav className="flex h-full items-center justify-between px-5 sm:px-6 md:px-10 lg:px-[50px] py-2.5 max-w-[1440px] mx-auto">
+          {/* Logo - Responsive sizing for mobile first */}
+          <Link 
+            href="/" 
+            className={`relative flex-shrink-0 transition-all duration-300 ${
+              scrolled 
+                ? 'w-[110px] h-7 md:w-[130px] md:h-8' 
+                : 'w-[130px] h-8 md:w-[162px] md:h-10'
+            }`}
+          >
             {logo ? (
               <Image
                 src={logo.url}
                 alt={logo.alt || '3lectrify'}
-                width={scrolled ? 130 : 162}
-                height={scrolled ? 32 : 40}
+                fill
                 className="object-contain transition-all duration-300"
                 priority
               />
@@ -72,16 +79,15 @@ export function Header({ logo, navigation }: HeaderProps) {
               <Image
                 src="/logo.svg"
                 alt="3lectrify"
-                width={scrolled ? 130 : 162}
-                height={scrolled ? 32 : 40}
+                fill
                 className="object-contain transition-all duration-300"
                 priority
               />
             )}
           </Link>
 
-          {/* Desktop Navigation */}
-          <ul className="hidden md:inline-flex items-start gap-[30px] pt-1">
+          {/* Desktop Navigation - Hidden on mobile, visible from md breakpoint */}
+          <ul className="hidden md:flex items-start gap-6 lg:gap-[30px] pt-1">
             {navigation.map((item, index) => (
               <li key={index}>
                 {isActive(item.href) ? (
@@ -112,10 +118,10 @@ export function Header({ logo, navigation }: HeaderProps) {
             ))}
           </ul>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Button - 44px touch target for accessibility */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden flex flex-col gap-1.5 w-8 h-8 justify-center items-center"
+            className="md:hidden flex flex-col gap-1.5 w-11 h-11 justify-center items-center touch-manipulation"
             aria-label="Toggle menu"
             aria-expanded={isMobileMenuOpen}
           >
@@ -137,10 +143,10 @@ export function Header({ logo, navigation }: HeaderProps) {
           </button>
         </nav>
 
-        {/* Mobile Menu */}
+        {/* Mobile Menu - Scrollable if content overflows */}
         {isMobileMenuOpen && (
-          <div className="md:hidden bg-[#3c5067] border-t border-[#5f8299]">
-            <ul className="flex flex-col px-6 py-4 gap-4">
+          <div className="md:hidden bg-[#3c5067] border-t border-[#5f8299] max-h-[calc(100vh-72px)] overflow-y-auto">
+            <ul className="flex flex-col px-5 py-4 gap-1">
               {navigation.map((item, index) => (
                 <li key={index}>
                   {item.isExternal ? (
@@ -148,7 +154,7 @@ export function Header({ logo, navigation }: HeaderProps) {
                       href={item.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`block font-normal text-nav tracking-[0.18px] py-2 ${
+                      className={`block font-normal text-nav tracking-[0.18px] py-3 min-h-[44px] flex items-center touch-manipulation ${
                         isActive(item.href)
                           ? 'text-[#88c0b1] border-b-2 border-[#88c0b1]'
                           : 'text-white'
@@ -160,7 +166,7 @@ export function Header({ logo, navigation }: HeaderProps) {
                   ) : (
                     <Link
                       href={item.href}
-                      className={`block font-normal text-nav tracking-[0.18px] py-2 ${
+                      className={`block font-normal text-nav tracking-[0.18px] py-3 min-h-[44px] flex items-center touch-manipulation ${
                         isActive(item.href)
                           ? 'text-[#88c0b1] border-b-2 border-[#88c0b1]'
                           : 'text-white'

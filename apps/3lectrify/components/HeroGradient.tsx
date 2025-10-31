@@ -57,40 +57,40 @@ export function HeroGradient({
     >
       {/* Centered container using content-wrapper */}
       <div className="content-wrapper">
-        {/* Fixed-width image container with rounded right corners */}
-        <div className="relative w-full max-w-[1390px] h-[400px] mx-auto overflow-hidden rounded-br-[20px] rounded-tr-[20px]">
-          {/* Background Image - positioned absolutely within container */}
+        {/* Responsive height container with rounded corners */}
+        <div className="relative w-full max-w-[1390px] h-[300px] sm:h-[350px] md:h-[400px] mx-auto overflow-hidden rounded-[20px] md:rounded-br-[20px] md:rounded-tr-[20px] md:rounded-bl-none md:rounded-tl-none">
+          {/* Background Image - responsive positioning */}
           {backgroundImage?.url && (
-            <div className="absolute left-[191px] top-[-361px] w-[1680px] h-[1121px]">
+            <div className="absolute inset-0 w-full h-full md:left-[191px] md:top-[-361px] md:w-[1680px] md:h-[1121px]">
               <img
                 src={backgroundImage.url}
                 alt={backgroundImage.alt || ''}
-                className="absolute inset-0 w-full h-full object-cover object-center"
-                style={{ objectPosition: getFocalPoint(backgroundImage.hotspot) }}
+                className="absolute inset-0 w-full h-full object-cover"
+                style={{ 
+                  objectPosition: getFocalPoint(backgroundImage.hotspot) 
+                }}
                 loading="eager"
               />
             </div>
           )}
 
-          {/* Gradient Overlay - Figma exact dimensions: 842px */}
+          {/* Gradient Overlay - Full width mobile, constrained desktop */}
           <div
-            className={`relative h-full flex items-end pr-0 py-[50px] z-[2] w-[842px] max-sm:w-full max-sm:p-[30px] gradient-overlay ${
+            className={`relative h-full flex items-end p-6 sm:p-8 md:pr-0 md:py-[50px] z-[2] w-full md:w-[842px] gradient-overlay ${
               gradientDirection === 'left' ? 'gradient-left' : 'gradient-right'
             }`}
           >
-            {/* Text Content */}
-            <div className="flex flex-col gap-[25px] w-full">
+            {/* Text Content - Responsive typography */}
+            <div className="flex flex-col gap-4 md:gap-6 lg:gap-[25px] w-full">
               <h1 
-                className="text-white m-0"
-                style={typography.h1}
+                className="text-white m-0 text-[28px] leading-[36px] tracking-[0.28px] md:text-[40px] md:leading-[50px] md:tracking-[0.4px] lg:text-[48px] lg:leading-[58px] lg:tracking-[0.48px] font-light"
               >
                 {headline}
               </h1>
 
               {subheadline && (
                 <p 
-                  className="text-white m-0"
-                  style={typography.intro}
+                  className="text-white m-0 text-[16px] leading-[24px] tracking-[0.16px] md:text-[20px] md:leading-[30px] md:tracking-[0.2px] lg:text-[24px] lg:leading-[34px] lg:tracking-[0.24px] font-light"
                 >
                   {subheadline}
                 </p>
@@ -102,38 +102,25 @@ export function HeroGradient({
 
       {/* CSS for gradient and mobile overlay */}
       <style jsx>{`
-        /* Desktop gradient - only on screens 768px+ */
+        /* Mobile: Bottom-to-top vertical gradient */
+        @media (max-width: 767px) {
+          .gradient-overlay {
+            background: linear-gradient(
+              180deg,
+              rgba(28, 36, 46, 0) 0%,
+              rgba(28, 36, 46, 0.7) 50%,
+              rgba(28, 36, 46, 1) 100%
+            ) !important;
+          }
+        }
+
+        /* Desktop: Horizontal gradient */
         @media (min-width: 768px) {
           .gradient-left {
             background: ${gradientStyle};
           }
           .gradient-right {
             background: ${gradientStyle};
-          }
-        }
-
-        /* Mobile-only vertical gradient overlay */
-        @media (max-width: 767px) {
-          section::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(
-              180deg,
-              transparent 0%,
-              rgba(28, 36, 46, 0.8) 40%,
-              rgba(28, 36, 46, 1) 80%,
-              rgba(28, 36, 46, 1) 100%
-            );
-            z-index: 1;
-            pointer-events: none;
-          }
-
-          .gradient-overlay {
-            background: none !important;
           }
         }
       `}</style>
