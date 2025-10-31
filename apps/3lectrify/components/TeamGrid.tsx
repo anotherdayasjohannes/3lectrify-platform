@@ -35,29 +35,28 @@ interface TeamGridProps {
 export function TeamGrid({ heading, introText, teamMembers }: TeamGridProps) {
 
   return (
-    <section className="bg-[#293645] pt-[40px] pb-[40px] md:pt-[50px] md:pb-[50px] px-[50px] md:px-[40px] sm:px-[20px]"
-    >
+    <section className="bg-[#293645] pt-[40px] pb-[40px] md:pt-[50px] md:pb-[50px] px-5 md:px-10 lg:px-[50px]">
       {/* Content Wrapper - Centered */}
       <div className="flex flex-col items-center">
-        {/* Intro Section */}
+        {/* Intro Section - Mobile-first */}
         {(heading || introText) && (
-          <div className="w-full max-w-[1165px] mb-[40px] flex flex-col gap-[25px] sm:mb-[30px] pl-[10px]">
+          <div className="w-full max-w-[1165px] mb-8 md:mb-10 lg:mb-[40px] flex flex-col gap-5 md:gap-6 lg:gap-[25px]">
             {heading && (
-              <h2 className="text-[36px] leading-[46px] font-light text-white tracking-[0.36px] m-0">
+              <h2 className="text-[28px] leading-[36px] tracking-[0.28px] md:text-[32px] md:leading-[42px] md:tracking-[0.32px] lg:text-[36px] lg:leading-[46px] lg:tracking-[0.36px] font-light text-white m-0">
                 {heading}
               </h2>
             )}
             {introText && (
-              <div className="text-[18px] leading-[26px] font-normal text-white tracking-[0.18px] [&_p]:m-0 max-w-[900px]">
+              <div className="text-[16px] leading-[24px] tracking-[0.16px] md:text-[18px] md:leading-[26px] md:tracking-[0.18px] font-normal text-white [&_p]:m-0 max-w-[900px]">
                 <PortableText value={introText} />
               </div>
             )}
           </div>
         )}
 
-        {/* Team Grid */}
+        {/* Team Grid - Mobile-first: 1 col → 2 cols → 3 cols */}
         <div 
-          className="w-full max-w-[1165px] flex flex-wrap gap-[25px] md:gap-[20px] sm:gap-[20px] items-start sm:justify-center"
+          className="w-full max-w-[1165px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6 lg:gap-[25px]"
           style={{ perspective: '1500px' }} // Enable 3D perspective
         >
           {teamMembers.map((member, index) => (
@@ -79,13 +78,15 @@ function TeamCard({ member, refCallback }: { member: TeamMember; refCallback?: (
   const handleMouseLeave = () => setIsOverlayVisible(false);
 
   return (
-    <article className="w-[270px] md:w-[calc(50%-10px)] md:max-w-[270px] sm:w-full flex-shrink-0 transition-all duration-500 ease-out hover:scale-[1.02]"
+    <article className="w-full transition-all duration-500 ease-out hover:scale-[1.02]"
       style={{ 
         transformStyle: 'preserve-3d',
         backfaceVisibility: 'visible',
       }}
       onMouseMove={(e) => {
-        // 🎨 3D tilt on hover based on mouse position
+        // 🎨 3D tilt on hover based on mouse position (desktop only)
+        if (window.innerWidth < 768) return; // Skip on mobile
+        
         const card = e.currentTarget;
         const rect = card.getBoundingClientRect();
         const x = e.clientX - rect.left; // Mouse X in card
@@ -102,10 +103,10 @@ function TeamCard({ member, refCallback }: { member: TeamMember; refCallback?: (
         e.currentTarget.style.transform = '';
       }}
     >
-      <div className="flex flex-col gap-[15px]">
-        {/* Photo Wrapper with Overlay */}
+      <div className="flex flex-col gap-3 md:gap-4 lg:gap-[15px]">
+        {/* Photo Wrapper with Overlay - Responsive height */}
         <div
-          className="relative w-full h-[400px] rounded-[20px] overflow-hidden bg-white/5 cursor-pointer group transition-all duration-300 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)]"
+          className="relative w-full h-[350px] sm:h-[380px] md:h-[400px] rounded-[20px] overflow-hidden bg-white/5 cursor-pointer group transition-all duration-300 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)]"
           style={{
             // 🎨 Subtle shadow in rest state
             boxShadow: '0 2px 10px rgba(0,0,0,0.2)',
@@ -125,35 +126,35 @@ function TeamCard({ member, refCallback }: { member: TeamMember; refCallback?: (
               height={member.photo.height}
               className="w-full h-full object-cover transition-transform duration-300 ease-out group-hover:scale-105"
               style={{ objectPosition: getFocalPoint(member.photo.hotspot) }}
-              sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 270px"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             />
           </div>
 
-          {/* Hover Overlay */}
+          {/* Hover Overlay - Mobile-first padding */}
           {member.bio && (
-            <div className={`absolute inset-0 bg-[rgba(41,54,69,0.95)] backdrop-blur-[8px] flex items-center justify-center p-[25px] sm:p-[20px] transition-all duration-300 ease-out ${
+            <div className={`absolute inset-0 bg-[rgba(41,54,69,0.95)] backdrop-blur-[8px] flex items-center justify-center p-5 md:p-6 lg:p-[25px] transition-all duration-300 ease-out ${
                 isOverlayVisible ? 'opacity-100 visible' : 'opacity-0 invisible'
               }`}
             >
               <div
-                className={`flex flex-col gap-[20px] w-full transition-transform duration-300 ease-out ${
+                className={`flex flex-col gap-4 md:gap-5 lg:gap-[20px] w-full transition-transform duration-300 ease-out ${
                   isOverlayVisible ? 'translate-y-0' : 'translate-y-5'
                 }`}
               >
-                {/* Bio Text */}
-                <div className="text-[14px] leading-[20px] font-light text-white text-left overflow-y-auto max-h-[280px]">
+                {/* Bio Text - Responsive */}
+                <div className="text-[13px] leading-[18px] md:text-[14px] md:leading-[20px] font-light text-white text-left overflow-y-auto max-h-[240px] md:max-h-[280px]">
                   {member.bio}
                 </div>
 
-                {/* Social Links */}
+                {/* Social Links - 44px touch targets for mobile */}
                 {(member.linkedinUrl || member.email) && (
-                  <div className="flex gap-[15px] items-center">
+                  <div className="flex gap-3 md:gap-[15px] items-center">
                     {member.linkedinUrl && (
                       <a
                         href={member.linkedinUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center justify-center w-[40px] h-[40px] rounded-full bg-white/10 text-white opacity-80 hover:opacity-100 hover:bg-[#88C0B1] hover:text-[#293645] hover:scale-110 transition-all duration-300 focus-visible:outline-2 focus-visible:outline-[#88C0B1] focus-visible:outline-offset-2"
+                        className="flex items-center justify-center w-11 h-11 md:w-[40px] md:h-[40px] rounded-full bg-white/10 text-white opacity-80 hover:opacity-100 hover:bg-[#88C0B1] hover:text-[#293645] hover:scale-110 transition-all duration-300 focus-visible:outline-2 focus-visible:outline-[#88C0B1] focus-visible:outline-offset-2 touch-manipulation"
                         aria-label={`LinkedIn profile of ${member.name}`}
                       >
                         <svg
@@ -173,7 +174,7 @@ function TeamCard({ member, refCallback }: { member: TeamMember; refCallback?: (
                     {member.email && (
                       <a
                         href={`mailto:${member.email}`}
-                        className="flex items-center justify-center w-[40px] h-[40px] rounded-full bg-white/10 text-white opacity-80 hover:opacity-100 hover:bg-[#88C0B1] hover:text-[#293645] hover:scale-110 transition-all duration-300 focus-visible:outline-2 focus-visible:outline-[#88C0B1] focus-visible:outline-offset-2"
+                        className="flex items-center justify-center w-11 h-11 md:w-[40px] md:h-[40px] rounded-full bg-white/10 text-white opacity-80 hover:opacity-100 hover:bg-[#88C0B1] hover:text-[#293645] hover:scale-110 transition-all duration-300 focus-visible:outline-2 focus-visible:outline-[#88C0B1] focus-visible:outline-offset-2 touch-manipulation"
                         aria-label={`Email ${member.name}`}
                       >
                         <svg
@@ -197,12 +198,12 @@ function TeamCard({ member, refCallback }: { member: TeamMember; refCallback?: (
           )}
         </div>
 
-        {/* Info Section */}
-        <div className="flex flex-col gap-[5px] text-left">
-          <h3 className="text-[18px] leading-[26px] font-normal tracking-[0.18px] text-white m-0">
+        {/* Info Section - Responsive typography */}
+        <div className="flex flex-col gap-1 md:gap-[5px] text-left">
+          <h3 className="text-[16px] leading-[24px] md:text-[18px] md:leading-[26px] font-normal tracking-[0.16px] md:tracking-[0.18px] text-white m-0">
             {member.name}
           </h3>
-          <p className="text-[16px] leading-[26px] font-light tracking-[0.16px] text-white m-0">
+          <p className="text-[14px] leading-[22px] md:text-[16px] md:leading-[26px] font-light tracking-[0.14px] md:tracking-[0.16px] text-white m-0">
             {member.title}
           </p>
         </div>
