@@ -1,4 +1,4 @@
-import { client, pageQuery, legalPageQuery, allPagesQuery, allLegalPagesQuery } from '@3lectrify/sanity';
+import { getClient, pageQuery, legalPageQuery, allPagesQuery, allLegalPagesQuery } from '@3lectrify/sanity';
 import { 
   Hero, 
   HeroGradient, 
@@ -18,6 +18,7 @@ import {
   ContactSimple
 } from '@/components';
 import { notFound } from 'next/navigation';
+import { draftMode } from 'next/headers';
 import type { PortableTextBlock } from '@portabletext/react';
 
 // Revalidate this page every hour (3600 seconds) as a fallback
@@ -347,6 +348,9 @@ type PageData = LegalPageData | ContentPageData | null;
 
 // Unified function to get any page by slug
 async function getPage(slug: string): Promise<PageData> {
+  const { isEnabled: isDraftMode } = await draftMode();
+  const client = getClient(isDraftMode);
+  
   // Try fetching as a content page first
   const contentPage = await client.fetch<ContentPageData | null>(pageQuery, { slug });
   if (contentPage) return contentPage;
@@ -360,6 +364,8 @@ async function getPage(slug: string): Promise<PageData> {
 
 // Generate static params for all pages (content + legal)
 export async function generateStaticParams() {
+  // Always use published client for static generation
+  const client = getClient(false);
   const contentPages = await client.fetch<Array<{ slug: string }>>(allPagesQuery);
   const legalPages = await client.fetch<Array<{ slug: string }>>(allLegalPagesQuery);
   

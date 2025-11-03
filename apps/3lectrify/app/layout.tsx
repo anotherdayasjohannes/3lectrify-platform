@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Lato } from 'next/font/google';
-import { client, siteSettingsQuery } from '@3lectrify/sanity';
-import { Header, Footer, Analytics } from '@/components';
+import { getClient, siteSettingsQuery } from '@3lectrify/sanity';
+import { Header, Footer, Analytics, DraftModeIndicator } from '@/components';
 import { AnimationInit } from '../components/AnimationInit';
+import { draftMode } from 'next/headers';
 import "./globals.css";
 
 const lato = Lato({
@@ -51,6 +52,8 @@ export const metadata: Metadata = {
 
 async function getSiteSettings() {
   try {
+    const { isEnabled: isDraftMode } = await draftMode();
+    const client = getClient(isDraftMode);
     const settings = await client.fetch(siteSettingsQuery);
     return settings;
   } catch (error) {
@@ -65,6 +68,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const settings = await getSiteSettings();
+  const { isEnabled: isDraftMode } = await draftMode();
 
   // Default navigation if Sanity data is not available
   const defaultNav = [
@@ -114,6 +118,9 @@ export default async function RootLayout({
           legalLinks={settings?.legalLinks || defaultLegalLinks}
           copyrightText={settings?.copyrightText}
         />
+        
+        {/* Show draft mode indicator when previewing */}
+        {isDraftMode && <DraftModeIndicator />}
       </body>
     </html>
   );

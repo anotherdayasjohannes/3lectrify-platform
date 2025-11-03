@@ -1,5 +1,5 @@
 // Sanity client and utilities
-export { client } from './lib/client';
+export { client, clientWithToken, getClient } from './lib/client';
 
 // Image utilities
 export { urlForImage, getFocalPoint, getImageProps } from './lib/imageUtils';

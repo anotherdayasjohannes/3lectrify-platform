@@ -1,5 +1,6 @@
-import { client, pageQuery } from '@3lectrify/sanity';
+import { getClient, pageQuery } from '@3lectrify/sanity';
 import { Hero, FeatureCards, FeatureShowcase, StackedExplainer, TextImage, SimpleTextImage, Stats, CTA, ReferencesGrid, ReferencesMarquee, TeamGrid, LottieAnimationWrapper, VideoAnimation } from '@/components';
+import { draftMode } from 'next/headers';
 import type { PortableTextBlock } from '@portabletext/react';
 
 // Revalidate this page every hour (3600 seconds) as a fallback
@@ -254,6 +255,8 @@ interface SanityBlock {
 }
 
 async function getHomePage() {
+  const { isEnabled: isDraftMode } = await draftMode();
+  const client = getClient(isDraftMode);
   const page = await client.fetch(pageQuery, { slug: 'home' });
   return page;
 }
