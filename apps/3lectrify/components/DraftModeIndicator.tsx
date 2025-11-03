@@ -1,5 +1,7 @@
 'use client';
 
+import Link from 'next/link';
+
 /**
  * Draft Mode Indicator
  * 
@@ -28,7 +30,7 @@ export function DraftModeIndicator() {
       <span style={{ margin: '0 8px' }}>•</span>
       <span style={{ opacity: 0.9 }}>Viewing draft content</span>
       <span style={{ margin: '0 8px' }}>•</span>
-      <a
+      <Link
         href="/api/disable-draft"
         style={{
           color: 'white',
@@ -37,7 +39,7 @@ export function DraftModeIndicator() {
         }}
       >
         Exit Preview
-      </a>
+      </Link>
     </div>
   );
 }
